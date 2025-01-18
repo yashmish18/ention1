@@ -1,0 +1,27 @@
+{
+    "user": {
+        "name": "",
+        "email": "",
+        "phone": "",
+        "id": 123
+    },
+    "payment": {
+        "method": "prepaid",
+        "status": "paid",
+        "amount": 10999,
+        "transactionId": "",
+        "currencty": "INR"
+    },
+    "coupon": {
+        "code": "",
+        "discount": 0
+    },
+    "products": [
+        {"slug": "product1", "quantity": 1},
+        {"slug": "product2", "quantity": 2}
+    ],
+    "id": "",
+    "receipt": "",
+    "delivered": false,
+    "success": true
+}

@@ -1,0 +1,234 @@
+import React from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { BsGithub, BsSlack, BsTwitter, BsYoutube } from 'react-icons/bs';
+import logo from 'assets/ention-logo.png';
+
+const Footer = () => {
+  const router = useRouter();
+  return (
+    <div
+      className="w-full lg:h-[515px] flex items-center p-12 min-[480px]:p-20"
+      style={{ backgroundColor: 'rgba(7, 13, 42, 1)' }}
+    >
+      <div className="flex flex-col lg:flex-row items-center lg:items-start lg:h-full w-full gap-10 lg:gap-0 justify-between xl:justify-around">
+        <div className="flex flex-col justify-between items-center h-[160px] lg:h-[280px]">
+          <img
+            src={logo.src}
+            alt="ention-logo"
+            onClick={() => router.push('/')}
+            className="w-[90px] h-auto object-none cursor-pointer"
+          />
+          <div className="flex items-center gap-10">
+            <Link
+              href="https://github.com"
+              target="_blank"
+              rel="noopenner noreferrer"
+              className="select-none "
+            >
+              <BsTwitter color="#FFFFFF" size={16} />
+            </Link>
+
+            <Link
+              href="https://github.com"
+              target="_blank"
+              rel="noopenner noreferrer"
+              className="select-none "
+            >
+              <BsGithub color="#FFFFFF" size={16} />
+            </Link>
+
+            <Link
+              href="https://github.com"
+              target="_blank"
+              rel="noopenner noreferrer"
+              className="select-none "
+            >
+              <BsSlack color="#FFFFFF" size={16} />
+            </Link>
+
+            <Link
+              href="https://github.com"
+              target="_blank"
+              rel="noopenner noreferrer"
+              className="select-none "
+            >
+              <BsYoutube color="#FFFFFF" size={16} />
+            </Link>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:flex gap-16 xl:gap-24">
+          <div className="flex flex-col gap-4">
+            <p className="text-white text-base">Product</p>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Features
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Integrations
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Pricing
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Changelog
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Docs
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Linear Method
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Download
+            </Link>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-white text-base">Company</p>
+            <Link
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+              href={'/about'}
+            >
+              About us
+            </Link>
+            <Link
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+              href="/blogs"
+            >
+              Blog
+            </Link>
+            <Link
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+              href="/career"
+            >
+              Careers
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Brand
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <p className="text-white text-base">Resources</p>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Startup Program
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Community
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Contact
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              DPA
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Terms of service
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Report a vulnerablility
+            </Link>
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="text-white text-base">Developers</p>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              API
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Status
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              Github
+            </Link>
+            <Link
+              href="/"
+              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
+              rel="noopenner noreferrer"
+            >
+              README
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Footer;
