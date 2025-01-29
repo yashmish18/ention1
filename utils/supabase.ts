@@ -7,6 +7,8 @@ export const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ROLE_KEY!
 );
 
+// need to configure this keys 
+
 // BECAUSE WE USED HELPER SUPABASE WE WILL CREATE FROM HELPER
 
 export const supabaseClient = createClientComponentClient();
