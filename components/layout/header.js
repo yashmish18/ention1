@@ -33,7 +33,7 @@ const Header = () => {
   }, [bgColor]);
 
   return (
-    <div className="h-20 bg-[#248ea3] fixed z-50 w-full flex pl-36 xl:pl-0 justify-start xl:justify-center items-center gap-6 xl:gap-10 min-[1320px]:gap-16 top-0 mb-10">
+    <div className="h-20 fixed z-50 w-full flex pl-36 xl:pl-0 justify-start xl:justify-center items-center gap-6 xl:gap-10 min-[1320px]:gap-16 top-0 mb-10">
       <Link
         href="/"
         className="hidden lg:block font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"

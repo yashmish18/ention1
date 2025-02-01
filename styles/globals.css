@@ -13,6 +13,11 @@ html {
   scroll-behavior: smooth;
 }
 
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .full-screen {
   @apply w-[100vw] h-[100vh];
 }
@@ -335,19 +340,5 @@ main {
 .blur-bg-gradient {
   background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, #203D99 0%, rgba(37, 29, 72, 0.64) 50%, #1C1232 100%);
   backdrop-filter: blur(30.9px);
-}
-
-  /* Styling for the custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
