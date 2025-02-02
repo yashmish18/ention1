@@ -3,29 +3,44 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { TypingEffect } from "./generic/TypingEffect";
 import { BlurInText } from "./generic/BlurInText";
 
 export default function TestCarousel() {
   const [middleSlide, setMiddleSlide] = useState(0);
+  const totalSlides = useRef(10);
   useEffect(() => {
     console.log("middleSlide", middleSlide);
   }, [middleSlide]);
   const getStyle = useCallback(
     (index) => {
-      // return {};
+      const previndex =
+        middleSlide - 1 >= 0 ? middleSlide - 1 : totalSlides.current - 1;
+      const nextindex =
+        middleSlide + 1 < totalSlides.current ? middleSlide + 1 : 0;
+      const secondnextindex =
+        nextindex + 1 < totalSlides.current ? nextindex + 1 : 0;
+      const secondprevindex =
+        previndex - 1 >= 0 ? previndex - 1 : totalSlides.current - 1;
+      // if middle slide
       if (middleSlide === index)
         return {
           opacity: "1",
           transform: "scale(2)",
           filter: "none",
         };
-      else
+      else if (previndex === index || nextindex === index)
         return {
           opacity: "0.5",
-          transform: "scale(0.5)",
+          transform: "scale(0.6)",
           filter: "blur(8px)",
+        };
+      else if (secondprevindex === index || secondnextindex === index)
+        return {
+          opacity: "0.4",
+          transform: "scale(0.5)",
+          filter: "blur(16px)",
         };
     },
     [middleSlide]
@@ -43,7 +58,7 @@ export default function TestCarousel() {
         style={{ overflow: "visible" }}
         onSlideChange={(swiper) => setMiddleSlide(swiper.realIndex)}
       >
-        {Array(10)
+        {Array(totalSlides.current)
           .fill(0)
           .map((item, index) => (
             <SwiperSlide key={index}>
