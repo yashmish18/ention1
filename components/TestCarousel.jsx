@@ -19,10 +19,6 @@ export default function TestCarousel() {
         middleSlide - 1 >= 0 ? middleSlide - 1 : totalSlides.current - 1;
       const nextindex =
         middleSlide + 1 < totalSlides.current ? middleSlide + 1 : 0;
-      const secondnextindex =
-        nextindex + 1 < totalSlides.current ? nextindex + 1 : 0;
-      const secondprevindex =
-        previndex - 1 >= 0 ? previndex - 1 : totalSlides.current - 1;
       // if middle slide
       if (middleSlide === index)
         return {
@@ -36,7 +32,7 @@ export default function TestCarousel() {
           transform: "scale(0.6)",
           filter: "blur(8px)",
         };
-      else if (secondprevindex === index || secondnextindex === index)
+      else
         return {
           opacity: "0.4",
           transform: "scale(0.5)",
