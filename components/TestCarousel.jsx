@@ -32,21 +32,6 @@ export default function TestCarousel() {
   );
   return (
     <div className="w-full">
-      <div className="flex flex-col w-full items-center">
-        <div style={{ letterSpacing: "7px" }} className="flex items-center">
-          <div className="text-white text-2xl mr-2">INTRODUCING</div>
-          <div>
-            <TypingEffect
-              className="text-[#01E9FE] font-bold text-2xl"
-              text="MADE IN INDIA"
-            />
-          </div>
-        </div>
-        <BlurInText className="text-white text-[50px] mt-8 text-3xl font-bold">
-          ENTION COMPUTING DEVICE
-        </BlurInText>
-      </div>
-      <div className="h-64"></div>
       <Swiper
         modules={[Autoplay]}
         speed={1000}

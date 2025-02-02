@@ -41,6 +41,8 @@ import {
   Flip,
 } from "react-awesome-reveal";
 import TestCarousel from "components/TestCarousel";
+import { TypingEffect } from "components/generic/TypingEffect";
+import { BlurInText } from "components/generic/BlurInText";
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -92,7 +94,22 @@ export default function Home() {
             backgroundSize: "100% 100%",
           }}
         >
-          <div style={{ height: "300px" }}></div>
+          <div className="h-[130px]"></div>
+          <div className="flex flex-col w-full items-center">
+            <div style={{ letterSpacing: "7px" }} className="flex items-center">
+              <div className="text-white text-2xl mr-4">INTRODUCING</div>
+              <div>
+                <TypingEffect
+                  className="text-[#01E9FE] font-bold text-2xl"
+                  text="MADE IN INDIA"
+                />
+              </div>
+            </div>
+            <BlurInText className="text-white text-[50px] mt-8 text-3xl font-bold">
+              ENTION COMPUTING DEVICE
+            </BlurInText>
+          </div>
+          <div className="h-[200px]"></div>
           <TestCarousel />
           {/* Header Title */}
           <Slide direction="up" cascade>
