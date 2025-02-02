@@ -1,17 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
 import gradientbg1 from "assets/gradient-bg1.png";
 import gradientbg2 from "assets/gradient-bg2.png";
-import ellipsehalf from "assets/ellipse-gradient-half.png";
 import marketpc from "assets/market-pc.png";
-import pcblur1 from "assets/pc-blur-1.png";
-import pcblur4 from "assets/pc-blur-4.png";
-import pcblur6 from "assets/pc-blur-6.png";
 import ellipsemd from "assets/ellipse-gradient-md.png";
-import ellipse from "assets/ellipse.png";
 import intelprocessor from "assets/Intel-Core-X-Series-2-Custom-1000x711-1.png";
 import amdprocessor from "assets/amd-1.png";
 import discussing from "assets/SM1090554.jpg";
@@ -111,102 +102,11 @@ export default function Home() {
           </div>
           <div className="h-[200px]"></div>
           <TestCarousel />
-          {/* Header Title */}
-          <Slide direction="up" cascade>
-            <div className="flex flex-col w-full items-center text-white mt-32 h-fit scroll-reveal">
-              <p className="text-[10px] min-[380px]:text-[12px] min-[500px]:text-[14px] sm:text-xl lg:text-2xl tracking-[4px] min-[500px]:tracking-[7px]">
-                INTRODUCING{" "}
-                <span className="text-[#01E9FE] font-bold">MADE IN INDIA</span>
-              </p>
-              <p className="text-xl min-[380px]:text-2xl min-[500px]:text-3xl sm:text-[40px] lg:text-[50px] font-bold mt-4 lg:mt-8">
-                ENTION COMPUTING DEVICE
-              </p>
-            </div>
-          </Slide>
-
-          {/* Computer Images including blur effect */}
-          <div className="flex relative justify-center z-[1] overflow-hidden">
-            <div
-              className="absolute z-[1] top-10 sm:top-0 left-20 w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px]"
-              style={{
-                backgroundImage: `url(${ellipsemd.src})`,
-                backgroundSize: "100% 100%",
-              }}
-            />
-            <div
-              className="absolute z-[1] top-24 sm:top-28 lg:top-24 left-[50%] w-[60px] h-[60px] sm:w-[90px] sm:h-[90px] lg:w-[100px] lg:h-[100px]"
-              style={{
-                backgroundImage: `url(${ellipse.src})`,
-                backgroundSize: "100% 100%",
-              }}
-            />
-
-            {/* <div
-                style={{
-                  backgroundImage: `url(${marketpc.src})`,
-                  backgroundSize: '100% 100%',
-                }}
-                className="w-[520px] h-[300px] sm:w-[720px] sm:h-[520px] mt-10 lg:mt-0 lg:w-[820px] lg:h-[620px] sm:ml-20 z-[2]"
-              /> */}
-            <div
-              className="flex transition-transform duration-500 ease-in-out z-[2]"
-              style={{
-                transform: `translateX(-${currentImageIndex * 100}%)`, // This moves the image in a carousel-like manner
-              }}
-            >
-              {IMAGES.map((image, index) => (
-                <div
-                  key={index}
-                  className="w-full flex justify-center items-center flex-shrink-0"
-                >
-                  <div
-                    style={{
-                      backgroundImage: `url(${image.src})`,
-                      backgroundSize: "cover", // Use cover to ensure the image covers the container without distortion
-                      backgroundPosition: "center", // Center the image within the container
-                    }}
-                    className="w-full h-[300px] sm:w-[720px] sm:h-[520px] mt-10 lg:mt-0 lg:w-[820px] lg:h-[620px] sm:ml-20"
-                  />
-                </div>
-              ))}
-            </div>
-            <div
-              className="absolute hidden lg:block left-0 top-36 w-[240px] h-[240px] z-[1]"
-              style={{
-                backgroundImage: `url(${pcblur1.src})`,
-                backgroundSize: "100% 100%",
-              }}
-            />
-            <div
-              className="absolute left-[-10%] min-[500px]:left-[-3%] sm:left-[5%] lg:left-[20%] top-28 lg:top-36 w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] z-[1]"
-              style={{
-                backgroundImage: `url(${pcblur4.src})`,
-                backgroundSize: "100% 100%",
-              }}
-            />
-            <div
-              className="absolute left-[75%] lg:left-[70%] top-28 lg:top-36 w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] z-[1]"
-              style={{
-                backgroundImage: `url(${pcblur6.src})`,
-                backgroundSize: "100% 100%",
-              }}
-            />
-            <div
-              className="absolute hidden lg:block left-[93%] top-36 w-[240px] h-[240px] z-[2]"
-              style={{
-                backgroundImage: `url(${pcblur4.src})`,
-                backgroundSize: "100% 100%",
-              }}
-            />
+          <div className="w-full flex  justify-center mt-32">
+            <button className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out">
+              Buy Now
+            </button>
           </div>
-          {/* Buy Now Button  */}
-          <JackInTheBox cascade>
-            <div className="w-full flex  justify-center">
-              <button className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out">
-                Buy Now
-              </button>
-            </div>
-          </JackInTheBox>
 
           {/* CPU Cards  */}
           <div className="w-full flex justify-center">
