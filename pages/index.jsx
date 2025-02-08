@@ -244,7 +244,7 @@ export default function Home() {
                 alt="discussing-image"
                 className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
               />
-              <FadeUpAnimate spaceToMove={400}>
+              <FadeUpAnimate spaceToMove={300}>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
                     ENTION WORKBOOK SERIES
