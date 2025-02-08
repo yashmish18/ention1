@@ -1,7 +1,11 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { BsGithub, BsSlack, BsTwitter, BsYoutube } from "react-icons/bs";
+import {
+  BsInstagram,
+  BsLinkedin,
+  BsTwitter,
+} from "react-icons/bs";
 import logo from "assets/ention-logo.png";
 
 const Footer = () => {
@@ -23,44 +27,35 @@ const Footer = () => {
             <div className="text-white font-bold text-lg">
               Ention Technology and Services Pvt. Ltd.
             </div>
-            <div className="text-white font-bold text-lg">Ention Energy Pvt. Ltd.</div>
+            <div className="text-white font-bold text-lg">
+              Ention Energy Pvt. Ltd.
+            </div>
           </div>
 
           <div className="flex items-center gap-10">
             <Link
-              href="https://github.com"
+              href="https://www.instagram.com/entiontech/"
+              target="_blank"
+              rel="noopenner noreferrer"
+              className="select-none "
+            >
+              <BsInstagram color="#FFFFFF" size={16} />
+            </Link>
+            <Link
+              href="https://x.com/EntionTech"
               target="_blank"
               rel="noopenner noreferrer"
               className="select-none "
             >
               <BsTwitter color="#FFFFFF" size={16} />
             </Link>
-
             <Link
-              href="https://github.com"
+              href="https://www.linkedin.com/company/entiontechnology/"
               target="_blank"
               rel="noopenner noreferrer"
               className="select-none "
             >
-              <BsGithub color="#FFFFFF" size={16} />
-            </Link>
-
-            <Link
-              href="https://github.com"
-              target="_blank"
-              rel="noopenner noreferrer"
-              className="select-none "
-            >
-              <BsSlack color="#FFFFFF" size={16} />
-            </Link>
-
-            <Link
-              href="https://github.com"
-              target="_blank"
-              rel="noopenner noreferrer"
-              className="select-none "
-            >
-              <BsYoutube color="#FFFFFF" size={16} />
+              <BsLinkedin color="#FFFFFF" size={16} />
             </Link>
           </div>
         </div>
