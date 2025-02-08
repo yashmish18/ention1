@@ -5,13 +5,14 @@ import * as React from "react";
 
 export function FadeUpAnimate({
   direction,
+  spaceToMove = 30,
   children,
   className = "",
   staggerChildren = 0.1,
 }) {
   const FADE_DOWN = {
     show: { opacity: 1, y: 0, transition: { type: "tween", duration: '0.5' } },
-    hidden: { opacity: 0, y: direction === "down" ? -30 : 30 },
+    hidden: { opacity: 0, y: direction === "down" ? -spaceToMove : spaceToMove },
   };
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -19,6 +20,8 @@ export function FadeUpAnimate({
     <motion.div
       ref={ref}
       initial="hidden"
+      whileInView={'visible'}
+      viewport={{once: true}}
       animate={isInView ? "show" : ""}
       variants={{
         hidden: {},

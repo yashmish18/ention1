@@ -35,6 +35,7 @@ import TestCarousel from "components/TestCarousel";
 import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
 import { FadeUpAnimate } from "components/generic/FadeUpAnimate";
+import { useRouter } from "next/router";
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -42,12 +43,17 @@ export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [direction, setDirection] = useState(null); // Track direction for smooth transition
   const [isTransitioning, setIsTransitioning] = useState(false); // Track if transition is in progress
+  const router = useRouter();
 
   // Handle next image action
   const nextImage = () => {
     if (isTransitioning) return; // Prevent multiple clicks during transition
     setDirection("next");
     setIsTransitioning(true);
+  };
+
+  const navigateToProductPage = () => {
+    router.push("/product");
   };
 
   // Reset direction state and update current image index after transition is finished
@@ -105,16 +111,21 @@ export default function Home() {
           <FadeUpAnimate>
             <TestCarousel />
           </FadeUpAnimate>
-          <div className="w-full flex  justify-center mt-32">
-            <button className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out">
-              Buy Now
-            </button>
-          </div>
+          <FadeUpAnimate spaceToMove={50}>
+            <div className="w-full flex  justify-center mt-32">
+              <button
+                onClick={navigateToProductPage}
+                className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out"
+              >
+                Buy Now
+              </button>
+            </div>
+          </FadeUpAnimate>
 
           {/* CPU Cards  */}
           <div className="w-full flex justify-center">
             <div className="flex flex-col items-center w-full mt-16">
-              <Slide direction="up" cascade>
+              <FadeUpAnimate spaceToMove={50}>
                 <div className="flex flex-col items-center">
                   <p className="text-white text-2xl md:text-4xl lg:text-[56px] font-bold md:whitespace-nowrap text-center">
                     High Performance Power house
@@ -123,15 +134,15 @@ export default function Home() {
                     Ention™ Laptop equipped with latest generation Processor
                   </p>
                 </div>
-              </Slide>
-              <div className="w-[80%] sm:w-full h-full mt-14 lg:mt-20 relative z-[0]">
+              </FadeUpAnimate>
+              <div className="w-[80%] sm:w-full h-full lg:mt-5 relative z-[0]">
                 <div
                   className="w-full h-full absolute bg-contain opacity-10"
                   style={{ backgroundImage: `url(${board.src})` }}
                 ></div>
 
-                <div className="mt-8 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
-                  <Slide direction="left" cascade>
+                <div className="m-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
+                  <FadeUpAnimate spaceToMove={200}>
                     <ProcessorCard
                       img={intelprocessor}
                       title={
@@ -143,8 +154,8 @@ export default function Home() {
                         "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
                       }
                     />
-                  </Slide>
-                  <Slide direction="right" cascade>
+                  </FadeUpAnimate>
+                  <FadeUpAnimate spaceToMove={50}>
                     <ProcessorCard
                       img={amdprocessor}
                       title={
@@ -156,7 +167,7 @@ export default function Home() {
                         "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
                       }
                     />
-                  </Slide>
+                  </FadeUpAnimate>
                 </div>
               </div>
             </div>
