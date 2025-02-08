@@ -20,10 +20,10 @@ const Footer = () => {
               onClick={() => router.push("/")}
               className="w-[90px] h-auto object-none cursor-pointer"
             />
-            <div className="text-white font-bold">
+            <div className="text-white font-bold text-lg">
               Ention Technology and Services Pvt. Ltd.
             </div>
-            <div className="text-white font-bold">Ention Energy Pvt. Ltd.</div>
+            <div className="text-white font-bold text-lg">Ention Energy Pvt. Ltd.</div>
           </div>
 
           <div className="flex items-center gap-10">
