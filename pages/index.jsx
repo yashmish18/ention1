@@ -22,15 +22,7 @@ import Footer from "components/layout/footer";
 import Header from "components/layout/header";
 
 import SimpleSlider from "./slider";
-import {
-  Zoom,
-  Slide,
-  Fade,
-  Bounce,
-  Roll,
-  JackInTheBox,
-  Flip,
-} from "react-awesome-reveal";
+import { Zoom } from "react-awesome-reveal";
 import TestCarousel from "components/TestCarousel";
 import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
@@ -55,6 +47,8 @@ export default function Home() {
   const navigateToProductPage = () => {
     router.push("/product");
   };
+
+  const [showBookNowForm, setShowBookNowForm] = useState(false);
 
   // Reset direction state and update current image index after transition is finished
   useEffect(() => {
@@ -125,7 +119,7 @@ export default function Home() {
           {/* CPU Cards  */}
           <div className="w-full flex justify-center">
             <div className="flex flex-col items-center w-full mt-16">
-              <FadeUpAnimate spaceToMove={50}>
+              <FadeUpAnimate spaceToMove={50} duration={1}>
                 <div className="flex flex-col items-center">
                   <p className="text-white text-2xl md:text-4xl lg:text-[56px] font-bold md:whitespace-nowrap text-center">
                     High Performance Power house
@@ -155,7 +149,7 @@ export default function Home() {
                       }
                     />
                   </FadeUpAnimate>
-                  <FadeUpAnimate spaceToMove={400}>
+                  <FadeUpAnimate spaceToMove={400} duration={0.7}>
                     <ProcessorCard
                       img={amdprocessor}
                       title={
@@ -233,7 +227,7 @@ export default function Home() {
           </FadeUpAnimate>
 
           {/* Computer List */}
-          <Zoom cascade>
+          <Zoom cascade triggerOnce>
             <div className="w-full hidden sm:flex justify-center">
               <div className="flex flex-col items-center w-[80%] mt-16">
                 <div className="w-[640px] lg:w-full h-auto flex justify-center mt-16">
@@ -245,14 +239,12 @@ export default function Home() {
           {/* Workbook series  */}
           <div className="w-full flex flex-col items-center">
             <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
-              <Bounce cascade>
-                <img
-                  src={discussing.src}
-                  alt="discussing-image"
-                  className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
-                />
-              </Bounce>
-              <Bounce cascade>
+              <img
+                src={discussing.src}
+                alt="discussing-image"
+                className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
+              />
+              <FadeUpAnimate spaceToMove={400}>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
                     ENTION WORKBOOK SERIES
@@ -291,18 +283,15 @@ export default function Home() {
                     Explore More
                   </button>
                 </div>
-              </Bounce>
+              </FadeUpAnimate>
             </div>
-
             <div className="flex flex-col md:flex-row-reverse justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
-              <Bounce cascade>
-                <img
-                  src={swapbook.src}
-                  alt="discussing-image"
-                  className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
-                />
-              </Bounce>
-              <Bounce cascade>
+              <img
+                src={swapbook.src}
+                alt="discussing-image"
+                className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
+              />
+              <FadeUpAnimate>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
                     ENTION SWAPBOOK SERIES
@@ -331,7 +320,7 @@ export default function Home() {
                     Explore More
                   </button>
                 </div>
-              </Bounce>
+              </FadeUpAnimate>
             </div>
           </div>
         </div>
@@ -344,7 +333,7 @@ export default function Home() {
         >
           <div className="w-full flex mt-20 justify-center mb-20">
             <div className="w-[80%] flex flex-col min-[940px]:flex-row items-start min-[940px]:items-center justify-between gap-20 min-[940px]:gap-5">
-              <JackInTheBox cascade>
+              <FadeUpAnimate>
                 <div className="flex flex-col gap-5 ">
                   <p className="text-[28px] min-[540px]:text-[36px] min-[1120px]:text-[48px] xl:text-[54px] leading-tight text-white w-[280px] min-[540px]:w-[360px] min-[1120px]:w-[480px] xl:w-[556px] font-bold">
                     Ention laptop experience program
@@ -369,100 +358,106 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
-                  <button className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out">
+                  <button
+                    onClick={() => setShowBookNowForm(true)}
+                    className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
+                  >
                     Book Now
                   </button>
                 </div>
-              </JackInTheBox>
-              <JackInTheBox cascade>
-                <div
-                  className="w-full min-[940px]:w-[560px] h-auto min-[940px]:h-[540px] xl:h-[620px]  bg-[length:90%]"
-                  style={{
-                    backgroundImage: `url(${lappy.src})`,
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div
-                    className="w-full h-full p-6 min-[450px]:p-8 xl:p-12 rounded-3xl"
-                    style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
-                  >
-                    <div className="flex flex-col gap-5">
-                      <p
-                        className="text-xl min-[380px]:text-2xl min-[540px]:text-3xl xl:text-4xl font-bold"
-                        style={{ color: "rgba(14, 74, 103, 1)" }}
-                      >
-                        Create Your Account
-                      </p>
-                      <div className="flex flex-col gap-2">
+              </FadeUpAnimate>
+
+              <div
+                className="w-full min-[940px]:w-[560px] h-auto min-[940px]:h-[540px] xl:h-[620px]  bg-[length:90%]"
+                style={{
+                  backgroundImage: `url(${lappy.src})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              >
+                {showBookNowForm && (
+                  <BlurInText>
+                    <div
+                      className="w-full h-full p-6 min-[450px]:p-8 xl:p-12 rounded-3xl"
+                      style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
+                    >
+                      <div className="flex flex-col gap-5">
                         <p
-                          className="text-xs ml-2"
+                          className="text-xl min-[380px]:text-2xl min-[540px]:text-3xl xl:text-4xl font-bold"
                           style={{ color: "rgba(14, 74, 103, 1)" }}
                         >
-                          Name
+                          Create Your Account
                         </p>
+                        <div className="flex flex-col gap-2">
+                          <p
+                            className="text-xs ml-2"
+                            style={{ color: "rgba(14, 74, 103, 1)" }}
+                          >
+                            Name
+                          </p>
+                          <input
+                            type="text"
+                            name="name"
+                            className="w-full rounded-md select-none border bg-white h-10 xl:h-14 pl-2"
+                            style={{ borderColor: "rgba(111, 207, 151, 1)" }}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <p
+                            className="text-xs ml-2"
+                            style={{ color: "rgba(14, 74, 103, 1)" }}
+                          >
+                            Company Name
+                          </p>
+                          <input
+                            type="text"
+                            name="company_name"
+                            className="w-full rounded-md select-none border bg-white h-10 xl:h-14 pl-2"
+                            style={{ borderColor: "rgba(111, 207, 151, 1)" }}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <p
+                            className="text-xs ml-2"
+                            style={{ color: "rgba(14, 74, 103, 1)" }}
+                          >
+                            Email
+                          </p>
+                          <input
+                            type="email"
+                            name="email"
+                            className="w-full rounded-md select-none border bg-white h-10 xl:h-14 pl-2"
+                            style={{ borderColor: "rgba(111, 207, 151, 1)" }}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <p
+                            className="text-xs ml-2"
+                            style={{ color: "rgba(14, 74, 103, 1)" }}
+                          >
+                            Message
+                          </p>
+                          <textarea
+                            name="message"
+                            className="w-full rounded-md select-none border bg-white h-10 xl:h-14 p-2"
+                            style={{ borderColor: "rgba(111, 207, 151, 1)" }}
+                          />
+                        </div>
                         <input
-                          type="text"
-                          name="name"
-                          className="w-full rounded-md select-none border bg-white h-10 xl:h-14 pl-2"
-                          style={{ borderColor: "rgba(111, 207, 151, 1)" }}
+                          type="submit"
+                          name="submit"
+                          content="Submit"
+                          className="mt-7 xl:mt-4 cursor-pointer w-full h-10 xl:h-14 flex center rounded-md text-white text-lg min-[540px]:text-xl font-bold hover:scale-105 transition-all duration-300 ease-in-out"
+                          style={{
+                            background:
+                              "linear-gradient(to right, rgba(254, 144, 75, 1), rgba(251, 114, 76, 1))",
+                          }}
                         />
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <p
-                          className="text-xs ml-2"
-                          style={{ color: "rgba(14, 74, 103, 1)" }}
-                        >
-                          Company Name
-                        </p>
-                        <input
-                          type="text"
-                          name="company_name"
-                          className="w-full rounded-md select-none border bg-white h-10 xl:h-14 pl-2"
-                          style={{ borderColor: "rgba(111, 207, 151, 1)" }}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <p
-                          className="text-xs ml-2"
-                          style={{ color: "rgba(14, 74, 103, 1)" }}
-                        >
-                          Email
-                        </p>
-                        <input
-                          type="email"
-                          name="email"
-                          className="w-full rounded-md select-none border bg-white h-10 xl:h-14 pl-2"
-                          style={{ borderColor: "rgba(111, 207, 151, 1)" }}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <p
-                          className="text-xs ml-2"
-                          style={{ color: "rgba(14, 74, 103, 1)" }}
-                        >
-                          Message
-                        </p>
-                        <textarea
-                          name="message"
-                          className="w-full rounded-md select-none border bg-white h-10 xl:h-14 p-2"
-                          style={{ borderColor: "rgba(111, 207, 151, 1)" }}
-                        />
-                      </div>
-                      <input
-                        type="submit"
-                        name="submit"
-                        content="Submit"
-                        className="mt-7 xl:mt-4 cursor-pointer w-full h-10 xl:h-14 flex center rounded-md text-white text-lg min-[540px]:text-xl font-bold hover:scale-105 transition-all duration-300 ease-in-out"
-                        style={{
-                          background:
-                            "linear-gradient(to right, rgba(254, 144, 75, 1), rgba(251, 114, 76, 1))",
-                        }}
-                      />
                     </div>
-                  </div>
-                </div>
-              </JackInTheBox>
+                  </BlurInText>
+                )}
+              </div>
             </div>
           </div>
         </div>

@@ -1,11 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {
-  BsInstagram,
-  BsLinkedin,
-  BsTwitter,
-} from "react-icons/bs";
+import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import logo from "assets/ention-logo.png";
 
 const Footer = () => {
@@ -88,27 +84,6 @@ const Footer = () => {
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
               rel="noopenner noreferrer"
             >
-              Changelog
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Docs
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Linear Method
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
               Download
             </Link>
           </div>
@@ -172,13 +147,6 @@ const Footer = () => {
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
               rel="noopenner noreferrer"
             >
-              DPA
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
               Privacy Policy
             </Link>
             <Link
@@ -187,44 +155,6 @@ const Footer = () => {
               rel="noopenner noreferrer"
             >
               Terms of service
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Report a vulnerablility
-            </Link>
-          </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-white text-base">Developers</p>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              API
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Status
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Github
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              README
             </Link>
           </div>
         </div>

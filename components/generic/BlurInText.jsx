@@ -10,7 +10,7 @@ export const BlurInText = ({ children, className }) => {
       ref={ref}
       initial={{ filter: "blur(20px)", opacity: 0 }}
       animate={isInView ? { filter: "blur(0px)", opacity: 1 } : {}}
-      transition={{ duration: 1 }}
+      whileInView="visible"
       className={className}
     >
       {children}

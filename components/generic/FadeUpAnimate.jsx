@@ -6,12 +6,13 @@ import * as React from "react";
 export function FadeUpAnimate({
   direction,
   spaceToMove = 30,
+  duration = 0.5,
   children,
   className = "",
   staggerChildren = 0.1,
 }) {
   const FADE_DOWN = {
-    show: { opacity: 1, y: 0, transition: { type: "tween", duration: '0.5' } },
+    show: { opacity: 1, y: 0, transition: { type: "tween", duration } },
     hidden: { opacity: 0, y: direction === "down" ? -spaceToMove : spaceToMove },
   };
   const ref = React.useRef(null);
