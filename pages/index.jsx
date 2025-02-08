@@ -34,6 +34,7 @@ import {
 import TestCarousel from "components/TestCarousel";
 import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
+import { FadeUpAnimate } from "components/generic/FadeUpAnimate";
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -101,7 +102,9 @@ export default function Home() {
             </BlurInText>
           </div>
           <div className="h-[200px]"></div>
-          <TestCarousel />
+          <FadeUpAnimate>
+            <TestCarousel />
+          </FadeUpAnimate>
           <div className="w-full flex  justify-center mt-32">
             <button className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out">
               Buy Now
@@ -122,14 +125,12 @@ export default function Home() {
                 </div>
               </Slide>
               <div className="w-[80%] sm:w-full h-full mt-14 lg:mt-20 relative z-[0]">
-                {/* The image with low opacity is behind the processor cards */}
-                <img
-                  src={board.src}
-                  className="absolute w-full h-full object-fill z-[-1] opacity-10"
-                  alt="circuit-board"
-                />
+                <div
+                  className="w-full h-full absolute bg-contain opacity-10"
+                  style={{ backgroundImage: `url(${board.src})` }}
+                ></div>
 
-                <div className="w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
+                <div className="mt-8 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
                   <Slide direction="left" cascade>
                     <ProcessorCard
                       img={intelprocessor}

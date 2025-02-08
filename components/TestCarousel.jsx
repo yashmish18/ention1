@@ -4,8 +4,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { TypingEffect } from "./generic/TypingEffect";
-import { BlurInText } from "./generic/BlurInText";
 
 export default function TestCarousel() {
   const [middleSlide, setMiddleSlide] = useState(0);
@@ -60,7 +58,6 @@ export default function TestCarousel() {
             <SwiperSlide key={index}>
               <div
                 style={{
-                  "--active": middleSlide === index ? 1 : 0,
                   ...getStyle(index),
                   transition: "1s",
                   width: "18vw",
