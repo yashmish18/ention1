@@ -1,24 +1,31 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { BsGithub, BsSlack, BsTwitter, BsYoutube } from 'react-icons/bs';
-import logo from 'assets/ention-logo.png';
+import React from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { BsGithub, BsSlack, BsTwitter, BsYoutube } from "react-icons/bs";
+import logo from "assets/ention-logo.png";
 
 const Footer = () => {
   const router = useRouter();
   return (
     <div
       className="w-full lg:h-[515px] flex items-center p-12 min-[480px]:p-20"
-      style={{ backgroundColor: 'rgba(7, 13, 42, 1)' }}
+      style={{ backgroundColor: "rgba(7, 13, 42, 1)" }}
     >
       <div className="flex flex-col lg:flex-row items-center lg:items-start lg:h-full w-full gap-10 lg:gap-0 justify-between xl:justify-around">
         <div className="flex flex-col justify-between items-center h-[160px] lg:h-[280px]">
-          <img
-            src={logo.src}
-            alt="ention-logo"
-            onClick={() => router.push('/')}
-            className="w-[90px] h-auto object-none cursor-pointer"
-          />
+          <div className="flex flex-col items-center">
+            <img
+              src={logo.src}
+              alt="ention-logo"
+              onClick={() => router.push("/")}
+              className="w-[90px] h-auto object-none cursor-pointer"
+            />
+            <div className="text-white font-bold">
+              Ention Technology and Services Pvt. Ltd.
+            </div>
+            <div className="text-white font-bold">Ention Energy Pvt. Ltd.</div>
+          </div>
+
           <div className="flex items-center gap-10">
             <Link
               href="https://github.com"
@@ -115,7 +122,7 @@ const Footer = () => {
             <Link
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
               rel="noopenner noreferrer"
-              href={'/about'}
+              href={"/about"}
             >
               About us
             </Link>

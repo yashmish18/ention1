@@ -131,7 +131,7 @@ export default function Home() {
                     High Performance Power house
                   </p>
                   <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
-                    Ention™ Laptop equipped with latest generation Processor
+                    Entionᴿᵀ Laptop equipped with latest generation Processor
                   </p>
                 </div>
               </FadeUpAnimate>
@@ -141,7 +141,7 @@ export default function Home() {
                   style={{ backgroundImage: `url(${board.src})` }}
                 ></div>
 
-                <div className="m-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
+                <div className="mt-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
                   <FadeUpAnimate spaceToMove={200}>
                     <ProcessorCard
                       img={intelprocessor}
@@ -155,7 +155,7 @@ export default function Home() {
                       }
                     />
                   </FadeUpAnimate>
-                  <FadeUpAnimate spaceToMove={50}>
+                  <FadeUpAnimate spaceToMove={400}>
                     <ProcessorCard
                       img={amdprocessor}
                       title={
@@ -181,11 +181,11 @@ export default function Home() {
           }}
         >
           {/* Warranty Card */}
-          <Flip cascade>
+          <FadeUpAnimate spaceToMove={100}>
             <div className="w-full flex justify-center">
-              <div className="flex flex-col items-center w-[80%] mt-16">
+              <div className="flex flex-col items-center w-[80%] -mt-5">
                 <div
-                  className="px-8 py-4 mt-16 border rounded-3xl w-full flex flex-col sm:flex-row justify-center sm:justify-between items-center relative"
+                  className="px-8 py-4 border rounded-3xl w-full flex flex-col sm:flex-row justify-center items-center relative"
                   style={{ borderColor: "rgba(34, 209, 238, 1" }}
                 >
                   <img
@@ -214,6 +214,7 @@ export default function Home() {
                       backgroundSize: "100% 100%",
                     }}
                   />
+                  <div className="w-10"></div>
                   <div className="flex flex-col items-center sm:items-start gap-8 lg:gap-16 w-full min-[540px]:w-[360px] text-center sm:text-left sm:w-[320px] lg:w-[360px] xl:w-[480px] ">
                     <p className="text-[16px] min-[360px]:text-lg min-[420px]:text-xl min-[540px]:text-2xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white leading-8 sm:leading-7 md:leading-8 lg:leading-10">
                       On-Site Warranty is Rather a Guaranty of Our Infallible
@@ -229,7 +230,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </Flip>
+          </FadeUpAnimate>
 
           {/* Computer List */}
           <Zoom cascade>
