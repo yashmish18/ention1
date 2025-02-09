@@ -376,7 +376,7 @@ export default function Home() {
                 }}
               >
                 {showBookNowForm && (
-                  <BlurInText>
+                  <BlurInText duration={0.3}>
                     <div
                       className="w-full h-full p-6 min-[450px]:p-8 xl:p-12 rounded-3xl"
                       style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
