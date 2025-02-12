@@ -40,7 +40,7 @@ const ProductDetails = () => {
             <div className="flex flex-col items-center justify-center pt-40 p-2 w-[80%]">
               <Zoom cascade>
                 <div className="text-black text-3xl md:text-4xl lg:text-[50px] font-semibold md:whitespace-nowrap text-center">
-                  Workbook {id} Series laptop
+                  Workbook&reg; {id} Series laptop
                 </div>
               </Zoom>
               <Zoom cascade>

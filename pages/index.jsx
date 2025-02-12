@@ -125,7 +125,7 @@ export default function Home() {
                     High Performance Power house
                   </p>
                   <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
-                    Entionᴿᵀ Laptop equipped with latest generation Processor
+                    Ention&reg; Laptop equipped with latest generation Processor
                   </p>
                 </div>
               </FadeUpAnimate>
@@ -247,7 +247,7 @@ export default function Home() {
               <FadeUpAnimate spaceToMove={300}>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
-                    ENTION WORKBOOK SERIES
+                    ENTION WORKBOOK&reg; SERIES
                   </p>
                   <div className="flex flex-col gap-1 sm:gap-4 md:gap-1 lg:gap-4">
                     <li className="text-white text-lg min-[450px]:text-xl sm:text-2xl md:text-lg lg:text-xl xl:text-2xl ">
