@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
-import logo from 'assets/ention-logo.png';
-import { RiMenuFill } from 'react-icons/ri';
-import { IoMenu } from 'react-icons/io5';
-import { GrClose } from 'react-icons/gr';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import logo from "assets/ention-logo.png";
+import { IoMenu } from "react-icons/io5";
+import { GrClose } from "react-icons/gr";
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -17,23 +17,48 @@ const Header = () => {
   useEffect(() => {
     const updatePosition = () => {
       const position = window.pageYOffset;
-      setBgColor(position > 5 ? 'none' : '#138397');
+      setBgColor(position > 5 ? "none" : "#138397");
     };
 
-    window.addEventListener('scroll', updatePosition);
+    window.addEventListener("scroll", updatePosition);
 
     // Call once to initialize
     updatePosition();
 
-    return () => window.removeEventListener('scroll', updatePosition);
+    return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
   useEffect(() => {
     console.log({ bgColor });
   }, [bgColor]);
 
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollY > 100 && window.scrollY > lastScrollY) {
+        setHidden(true); // Move navbar up on scroll down
+      } else {
+        setHidden(false); // Bring it back on scroll up
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <div className="h-20 fixed z-50 w-full flex pl-36 xl:pl-0 justify-start xl:justify-center items-center gap-6 xl:gap-10 min-[1320px]:gap-16 top-0 mb-10">
+    <motion.div
+      style={{
+        backdropFilter: "blur(10px)",
+      }}
+      initial={{ y: 0 }}
+      animate={{ y: hidden ? "-100%" : "0%" }} // Move up instead of disappearing
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="h-20 fixed z-50 w-full flex pl-36 xl:pl-0 justify-start xl:justify-center items-center gap-6 xl:gap-10 min-[1320px]:gap-16 top-0 mb-10"
+    >
       <Link
         href="/"
         className="hidden lg:block font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
@@ -56,7 +81,7 @@ const Header = () => {
         src={logo.src}
         alt="ention-logo"
         className="w-[90px] h-auto object-none absolute left-10 min-[1420px]:static cursor-pointer"
-        onClick={() => router.push('/')}
+        onClick={() => router.push("/")}
       />
       <Link
         href="/about"
@@ -79,7 +104,7 @@ const Header = () => {
       <div className="absolute hidden lg:flex items-center gap-2 right-10 ">
         <Link
           href={{
-            pathname: '/login',
+            pathname: "/login",
             query: {
               redirect: `/${pathname}?${searchParams?.toString()}`,
             },
@@ -89,7 +114,7 @@ const Header = () => {
             Login
           </button>
         </Link>
-        <Link href={'/signup'}>
+        <Link href={"/signup"}>
           <button className="w-24 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
             Register
           </button>
@@ -108,7 +133,7 @@ const Header = () => {
               {/*content*/}
               <div
                 className="h-full border-0 shadow-lg relative flex flex-col w-full  outline-none focus:outline-none"
-                style={{ backgroundColor: '#0FAFCA' }}
+                style={{ backgroundColor: "#0FAFCA" }}
               >
                 <div className="flex items-start justify-between p-5 ">
                   <img
@@ -136,7 +161,7 @@ const Header = () => {
                   </button>
                   <button
                     className="w-28 h-10 bg-white border rounded-3xl border-white flex center text-black text-lg hover:scale-105  transition-all duration-300 ease-in-out"
-                    onClick={() => router.push('/signup')}
+                    onClick={() => router.push("/signup")}
                   >
                     Register
                   </button>
@@ -144,24 +169,24 @@ const Header = () => {
                 <div className="flex flex-col items-center gap-5 mt-16">
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: '#fff' }}
-                    onClick={() => router.push('/')}
+                    style={{ backgroundColor: "#fff" }}
+                    onClick={() => router.push("/")}
                   >
                     Home
                   </button>
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: '#fff' }}
-                    onClick={() => router.push('/product')}
+                    style={{ backgroundColor: "#fff" }}
+                    onClick={() => router.push("/product")}
                   >
                     Products
                   </button>
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: '#fff' }}
+                    style={{ backgroundColor: "#fff" }}
                     onClick={() =>
                       router.push(
-                        '/service/start-a-business?category=sole-proprietorship'
+                        "/service/start-a-business?category=sole-proprietorship"
                       )
                     }
                   >
@@ -169,22 +194,22 @@ const Header = () => {
                   </button>
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: '#fff' }}
-                    onClick={() => router.push('/about')}
+                    style={{ backgroundColor: "#fff" }}
+                    onClick={() => router.push("/about")}
                   >
                     About Us
                   </button>
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: '#fff' }}
-                    onClick={() => router.push('/technical-support')}
+                    style={{ backgroundColor: "#fff" }}
+                    onClick={() => router.push("/technical-support")}
                   >
                     Support
                   </button>
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: '#fff' }}
-                    onClick={() => router.push('/career')}
+                    style={{ backgroundColor: "#fff" }}
+                    onClick={() => router.push("/career")}
                   >
                     Career
                   </button>
@@ -195,7 +220,7 @@ const Header = () => {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-    </div>
+    </motion.div>
   );
 };
 
