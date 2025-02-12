@@ -98,7 +98,7 @@ export default function Home() {
               </div>
             </div>
             <BlurInText className="text-white text-[50px] mt-8 text-3xl font-bold">
-              ENTION COMPUTING DEVICE
+              ENTION&reg; COMPUTING DEVICE
             </BlurInText>
           </div>
           <div className="h-[200px]"></div>
