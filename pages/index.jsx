@@ -98,7 +98,8 @@ export default function Home() {
               </div>
             </div>
             <BlurInText className="text-white text-[50px] mt-8 text-3xl font-bold">
-              ENTION<span className="font-thin text-[50px]">&reg;</span> COMPUTING DEVICE
+              ENTION<span className="font-thin text-[50px]">&reg;</span>{" "}
+              COMPUTING DEVICE
             </BlurInText>
           </div>
           <div className="h-[200px]"></div>
@@ -286,11 +287,10 @@ export default function Home() {
               </FadeUpAnimate>
             </div>
             <div className="flex flex-col md:flex-row-reverse justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
-              <img
-                src={swapbook.src}
-                alt="discussing-image"
-                className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
-              />
+              <div
+                style={{ backgroundImage: `url(${swapbook.src})` }}
+                className="h-[425px] bg-no-repeat bg-center bg-cover w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
+              ></div>
               <FadeUpAnimate>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
