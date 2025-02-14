@@ -443,16 +443,17 @@ export default function Home() {
                             style={{ borderColor: "rgba(111, 207, 151, 1)" }}
                           />
                         </div>
-                        <input
-                          type="submit"
-                          name="submit"
-                          content="Submit"
-                          className="mt-7 xl:mt-4 cursor-pointer w-full h-10 xl:h-14 flex center rounded-md text-white text-lg min-[540px]:text-xl font-bold hover:scale-105 transition-all duration-300 ease-in-out"
-                          style={{
-                            background:
-                              "linear-gradient(to right, rgba(254, 144, 75, 1), rgba(251, 114, 76, 1))",
-                          }}
-                        />
+                        <div>
+                          <input
+                            type="submit"
+                            name="submit"
+                            content="Submit"
+                            className="mt-7 xl:mt-4 cursor-pointer w-full h-10 xl:h-14 flex center rounded-md text-white text-lg min-[540px]:text-xl font-bold hover:scale-105 transition-all duration-300 ease-in-out"
+                            style={{
+                              backgroundColor: "#1673a2",
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </BlurInText>
