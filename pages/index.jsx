@@ -389,7 +389,9 @@ export default function Home() {
                             fontSize: "30px",
                             fontWeight: "bold",
                             cursor: "pointer",
-                            lineHeight: '20px'
+                            lineHeight: "20px",
+                            marginTop: "-15px",
+                            marginRight: "-15px",
                           }}
                         >
                           &times;
