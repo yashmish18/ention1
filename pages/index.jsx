@@ -381,12 +381,26 @@ export default function Home() {
                       className="w-full h-full p-6 min-[450px]:p-8 xl:p-12 rounded-3xl"
                       style={{ backgroundColor: "rgba(255, 255, 255, 0.6)" }}
                     >
+                      <div className="flex flex-row-reverse">
+                        <div
+                          onClick={() => setShowBookNowForm(false)}
+                          style={{
+                            color: "rgb(14, 74, 103)",
+                            fontSize: "30px",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            lineHeight: '20px'
+                          }}
+                        >
+                          &times;
+                        </div>
+                      </div>
                       <div className="flex flex-col gap-5">
                         <p
                           className="text-xl min-[380px]:text-2xl min-[540px]:text-3xl xl:text-4xl font-bold"
                           style={{ color: "rgba(14, 74, 103, 1)" }}
                         >
-                          Create Your Account
+                          Book Experience Program
                         </p>
                         <div className="flex flex-col gap-2">
                           <p
