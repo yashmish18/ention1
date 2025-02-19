@@ -338,8 +338,27 @@ main {
 }
 
 .blur-bg-gradient {
-  background: radial-gradient(97.57% 210.75% at 0.9% 2.98%, #203D99 0%, rgba(37, 29, 72, 0.64) 50%, #1C1232 100%);
+  background: radial-gradient(
+    97.57% 210.75% at 0.9% 2.98%,
+    #203d99 0%,
+    rgba(37, 29, 72, 0.64) 50%,
+    #1c1232 100%
+  );
   backdrop-filter: blur(30.9px);
 }
 /* change a bit */
 
+.background-image-center {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.front-slide-hover {
+  transform: scale(1);
+  transition: 0.5s;
+}
+
+.front-slide-hover:hover {
+  transform: scale(1.2);
+}

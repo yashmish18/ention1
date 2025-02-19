@@ -28,6 +28,7 @@ import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
 import { FadeUpAnimate } from "components/generic/FadeUpAnimate";
 import { useRouter } from "next/router";
+import IntelCarousel from "components/IntelCarousel";
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -102,10 +103,15 @@ export default function Home() {
               COMPUTING DEVICE
             </BlurInText>
           </div>
-          <div className="h-[200px]"></div>
-          <FadeUpAnimate>
-            <TestCarousel />
-          </FadeUpAnimate>
+          <div className="h-[50px]"></div>
+          <div className="flex justify-center">
+            <div className="w-[80%]">
+              <FadeUpAnimate>
+                {/* <TestCarousel /> */}
+                <IntelCarousel />
+              </FadeUpAnimate>
+            </div>
+          </div>
           <FadeUpAnimate spaceToMove={50}>
             <div className="w-full flex  justify-center mt-32">
               <button
