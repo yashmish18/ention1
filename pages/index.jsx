@@ -87,7 +87,7 @@ export default function Home() {
             backgroundSize: "100% 100%",
           }}
         >
-          <div className="h-[110px]"></div>
+          <div className="h-[130px]"></div>
           <div className="flex flex-col w-full items-center">
             <div style={{ letterSpacing: "7px" }} className="flex items-center">
               <div className="text-white text-2xl mr-4">INTRODUCING</div>
@@ -103,13 +103,10 @@ export default function Home() {
               COMPUTING DEVICE
             </BlurInText>
           </div>
-          <div className="h-[50px]"></div>
+          <div className="h-[100px]"></div>
           <div className="flex justify-center">
             <div className="w-[95%]">
-              <FadeUpAnimate>
-                {/* <TestCarousel /> */}
-                <IntelCarousel />
-              </FadeUpAnimate>
+              <IntelCarousel />
             </div>
           </div>
           <FadeUpAnimate spaceToMove={50}>

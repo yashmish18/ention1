@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 
 export default function IntelCarousel() {
-  const [selectedSlide, setSelectedSlide] = useState(null);
+  const [selectedSlide, setSelectedSlide] = useState(0);
   const getSlideUniqueStyle = useCallback(
     (slideIndex) => {
       switch (slideIndex) {
