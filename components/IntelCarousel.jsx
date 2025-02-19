@@ -57,7 +57,7 @@ export default function IntelCarousel() {
           className="background-image-center front-slide-hover"
           style={{
             height:
-              selectedSlide === 0 ? "30.75rem" : "clamp(18rem,60vh,32rem)",
+              selectedSlide === 0 ? "38.75rem" : "clamp(18rem,60vh,32rem)",
             backgroundImage: `url(https://images.pexels.com/photos/29376745/pexels-photo-29376745.jpeg)`,
           }}
         ></div>
