@@ -62,19 +62,13 @@ export default function IntelCarousel() {
         }}
       >
         <div
+          className="background-image-center front-slide-hover"
           style={{
             height:
-              selectedSlide === 2 ? "38.75rem" : "clamp(18rem,60vh,32rem)",
+              selectedSlide === 0 ? "30.75rem" : "clamp(18rem,60vh,32rem)",
+            backgroundImage: `url(https://images.pexels.com/photos/29376745/pexels-photo-29376745.jpeg)`,
           }}
-        >
-          <div
-            className="background-image-center front-slide-hover"
-            style={{
-              backgroundImage: `url(https://images.pexels.com/photos/29376745/pexels-photo-29376745/free-photo-of-colorful-abstract-3d-striped-geometric-art.jpeg)`,
-              height: "100%",
-            }}
-          ></div>
-        </div>
+        ></div>
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 1 ? null : 1)}
@@ -94,19 +88,13 @@ export default function IntelCarousel() {
         }}
       >
         <div
+          className="background-image-center front-slide-hover"
           style={{
             height:
-              selectedSlide === 2 ? "38.75rem" : "clamp(18rem,60vh,32rem)",
+              selectedSlide === 1 ? "38.75rem" : "clamp(16rem,60vh,28rem)",
+            backgroundImage: `url(https://images.pexels.com/photos/2473183/pexels-photo-2473183.jpeg)`,
           }}
-        >
-          <div
-            className="background-image-center front-slide-hover"
-            style={{
-              backgroundImage: `url(https://images.pexels.com/photos/2473183/pexels-photo-2473183.jpeg)`,
-              height: "100%",
-            }}
-          ></div>
-        </div>
+        ></div>
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 2 ? null : 2)}
@@ -126,19 +114,13 @@ export default function IntelCarousel() {
         }}
       >
         <div
+          className="background-image-center front-slide-hover"
           style={{
             height:
               selectedSlide === 2 ? "38.75rem" : "clamp(18rem,60vh,32rem)",
+            backgroundImage: `url(https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg)`,
           }}
-        >
-          <div
-            className="background-image-center front-slide-hover"
-            style={{
-              backgroundImage: `url(https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)`,
-              height: "100%",
-            }}
-          ></div>
-        </div>
+        ></div>
       </div>
     </div>
   );
