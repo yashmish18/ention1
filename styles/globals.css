@@ -362,3 +362,15 @@ main {
 .front-slide-hover:hover {
   transform: scale(1.2);
 }
+
+.front-page-slider {
+  flex-grow: 0.2;
+  flex-shrink: 1;
+  overflow: hidden;
+  position: relative;
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  backface-visibility: hidden;
+  box-sizing: border-box;
+  display: block;
+  cursor: pointer;
+}

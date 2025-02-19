@@ -49,17 +49,9 @@ export default function IntelCarousel() {
       <div
         onClick={() => setSelectedSlide(selectedSlide === 0 ? null : 0)}
         style={{
-          flexGrow: ".2",
-          flexShrink: "1",
-          overflow: "hidden",
-          position: "relative",
-          transition: "all 800ms cubic-bezier(0.19, 1, 0.22, 1)",
-          backfaceVisibility: "hidden",
-          boxSizing: "border-box",
-          display: "block",
-          cursor: "pointer",
           ...getSlideUniqueStyle(0),
         }}
+        className="front-page-slider"
       >
         <div
           className="background-image-center front-slide-hover"
@@ -73,19 +65,10 @@ export default function IntelCarousel() {
       <div
         onClick={() => setSelectedSlide(selectedSlide === 1 ? null : 1)}
         style={{
-          flexGrow: ".2",
-          flexShrink: "1",
-          overflow: "hidden",
-          position: "relative",
-          transition: "all 800ms cubic-bezier(0.19, 1, 0.22, 1)",
-          backfaceVisibility: "hidden",
-          boxSizing: "border-box",
-          display: "block",
           transform: "translateY(3.8rem)",
-          cursor: "pointer",
-          background: "green",
           ...getSlideUniqueStyle(1),
         }}
+        className="front-page-slider"
       >
         <div
           className="background-image-center front-slide-hover"
@@ -99,19 +82,10 @@ export default function IntelCarousel() {
       <div
         onClick={() => setSelectedSlide(selectedSlide === 2 ? null : 2)}
         style={{
-          flexGrow: ".2",
-          flexShrink: "1",
-          overflow: "hidden",
-          position: "relative",
-          transition: "all 800ms cubic-bezier(0.19, 1, 0.22, 1)",
-          backfaceVisibility: "hidden",
-          boxSizing: "border-box",
-          display: "block",
-          background: "blue",
-          cursor: "pointer",
           transform: "translateY(3.8rem)",
           ...getSlideUniqueStyle(2),
         }}
+        className="front-page-slider"
       >
         <div
           className="background-image-center front-slide-hover"
