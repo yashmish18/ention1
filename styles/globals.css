@@ -397,3 +397,7 @@ main {
 .slide-explore-more-button:hover {
   border: 1px solid white;
 }
+
+.slide-text-cover {
+  background: linear-gradient(to right, #000000, #00000000);
+}

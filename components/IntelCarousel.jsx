@@ -5,7 +5,7 @@ export default function IntelCarousel() {
   const [selectedSlide, setSelectedSlide] = useState(0);
   const slideTextVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3, delay: 0.3 } },
+    visible: { opacity: 1, transition: { duration: 0.4, delay: 0.3 } },
   };
   const getSlideUniqueStyle = useCallback(
     (slideIndex) => {
@@ -31,6 +31,22 @@ export default function IntelCarousel() {
       }
     },
     [selectedSlide]
+  );
+  const expandSvg = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="size-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+      />
+    </svg>
   );
   return (
     <div
@@ -66,9 +82,11 @@ export default function IntelCarousel() {
             backgroundImage: `url(https://images.pexels.com/photos/29376745/pexels-photo-29376745.jpeg)`,
           }}
         ></div>
-        <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
-        <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
-          {selectedSlide === 0 && (
+        {selectedSlide === null && (
+          <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
+        )}
+        {selectedSlide === 0 && (
+          <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
             <motion.div
               variants={slideTextVariants}
               initial="hidden"
@@ -88,8 +106,8 @@ export default function IntelCarousel() {
                 Explore More →
               </div>
             </motion.div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 1 ? null : 1)}
@@ -107,9 +125,11 @@ export default function IntelCarousel() {
             backgroundImage: `url(https://images.pexels.com/photos/2473183/pexels-photo-2473183.jpeg)`,
           }}
         ></div>
-        <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
-        <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
-          {selectedSlide && (
+        {selectedSlide === null && (
+          <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
+        )}
+        {selectedSlide === 1 && (
+          <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
             <motion.div
               variants={slideTextVariants}
               initial="hidden"
@@ -129,8 +149,8 @@ export default function IntelCarousel() {
                 Explore More →
               </div>
             </motion.div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 2 ? null : 2)}
@@ -148,9 +168,11 @@ export default function IntelCarousel() {
             backgroundImage: `url(https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg)`,
           }}
         ></div>
-        <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
-        <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
-          {selectedSlide === 2 && (
+        {selectedSlide === null && (
+          <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
+        )}
+        {selectedSlide === 2 && (
+          <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
             <motion.div
               variants={slideTextVariants}
               initial="hidden"
@@ -170,8 +192,8 @@ export default function IntelCarousel() {
                 Explore More →
               </div>
             </motion.div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
