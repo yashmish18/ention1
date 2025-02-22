@@ -384,3 +384,16 @@ main {
   opacity: 0;
   transition: 0.3s ease-in-out;
 }
+
+.slide-explore-more-button {
+  border: none;
+  transition: 0.3s ease-in-out;
+  border: 1px solid transparent;
+  border-radius: 45px;
+  width: fit-content;
+  padding: 5px 12px;
+}
+
+.slide-explore-more-button:hover {
+  border: 1px solid white;
+}

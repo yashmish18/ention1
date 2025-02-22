@@ -73,7 +73,7 @@ export default function IntelCarousel() {
               with our latest high-performance laptops. Designed for creators,
               gamers, and professionals who demand excellence.
             </div>
-            <div className="mt-6 cursor-pointer font-thin text-[20px]">
+            <div className="mt-6 cursor-pointer font-thin text-[20px] slide-explore-more-button">
               Explore More →
             </div>
           </div>
@@ -107,7 +107,7 @@ export default function IntelCarousel() {
               design ensures you stay productive on the go without compromising
               performance.
             </div>
-            <div className="mt-6 cursor-pointer font-thin text-[20px]">
+            <div className="mt-6 cursor-pointer font-thin text-[20px] slide-explore-more-button">
               Explore More →
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function IntelCarousel() {
               vibrant colors, and ultra-smooth refresh rates. Perfect for
               entertainment, design, and everything in between.
             </div>
-            <div className="mt-6 cursor-pointer font-thin text-[20px]">
+            <div className="mt-6 cursor-pointer font-thin text-[20px] slide-explore-more-button">
               Explore More →
             </div>
           </div>
