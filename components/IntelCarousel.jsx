@@ -62,6 +62,22 @@ export default function IntelCarousel() {
           }}
         ></div>
         <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
+        <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
+          <div className="w-2/5">
+            <div>BLAZING SPEED</div>
+            <div className="text-[50px] font-thin my-4 mt-2">
+              Unleash the Power Within
+            </div>
+            <div className="font-light">
+              Experience next-gen processing speeds and seamless multitasking
+              with our latest high-performance laptops. Designed for creators,
+              gamers, and professionals who demand excellence.
+            </div>
+            <div className="mt-6 cursor-pointer font-thin text-[20px]">
+              Explore More →
+            </div>
+          </div>
+        </div>
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 1 ? null : 1)}
@@ -80,6 +96,22 @@ export default function IntelCarousel() {
           }}
         ></div>
         <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
+        <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
+          <div className="w-2/5">
+            <div>Ultra-Slim. Ultra-Light.</div>
+            <div className="text-[50px] font-thin my-4 mt-2">
+              Go Anywhere, Do Everything
+            </div>
+            <div className="font-light">
+              A perfect blend of style and power. Our ultra-thin, lightweight
+              design ensures you stay productive on the go without compromising
+              performance.
+            </div>
+            <div className="mt-6 cursor-pointer font-thin text-[20px]">
+              Explore More →
+            </div>
+          </div>
+        </div>
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 2 ? null : 2)}
@@ -98,6 +130,22 @@ export default function IntelCarousel() {
           }}
         ></div>
         <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
+        <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
+          <div className="w-2/5">
+            <div>4K Clarity & Beyond</div>
+            <div className="text-[50px] font-thin my-4 mt-2">
+              See Every Detail Like Never Before
+            </div>
+            <div className="font-light">
+              Experience breathtaking visuals with our high-resolution displays,
+              vibrant colors, and ultra-smooth refresh rates. Perfect for
+              entertainment, design, and everything in between.
+            </div>
+            <div className="mt-6 cursor-pointer font-thin text-[20px]">
+              Explore More →
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

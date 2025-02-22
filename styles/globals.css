@@ -375,7 +375,7 @@ main {
   cursor: pointer;
 }
 
-.slide-dark-cover:hover {
+.front-page-slider:hover .slide-dark-cover {
   opacity: 1;
 }
 
