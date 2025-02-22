@@ -61,6 +61,7 @@ export default function IntelCarousel() {
             backgroundImage: `url(https://images.pexels.com/photos/29376745/pexels-photo-29376745.jpeg)`,
           }}
         ></div>
+        <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 1 ? null : 1)}
@@ -78,6 +79,7 @@ export default function IntelCarousel() {
             backgroundImage: `url(https://images.pexels.com/photos/2473183/pexels-photo-2473183.jpeg)`,
           }}
         ></div>
+        <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
       </div>
       <div
         onClick={() => setSelectedSlide(selectedSlide === 2 ? null : 2)}
@@ -85,7 +87,7 @@ export default function IntelCarousel() {
           transform: "translateY(3.8rem)",
           ...getSlideUniqueStyle(2),
         }}
-        className="front-page-slider"
+        className="front-page-slider relative"
       >
         <div
           className="background-image-center front-slide-hover"
@@ -95,6 +97,7 @@ export default function IntelCarousel() {
             backgroundImage: `url(https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg)`,
           }}
         ></div>
+        <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
       </div>
     </div>
   );

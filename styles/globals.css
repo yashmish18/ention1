@@ -359,7 +359,7 @@ main {
   transition: 0.5s;
 }
 
-.front-slide-hover:hover {
+.front-page-slider:hover .front-slide-hover {
   transform: scale(1.2);
 }
 
@@ -373,4 +373,14 @@ main {
   box-sizing: border-box;
   display: block;
   cursor: pointer;
+}
+
+.slide-dark-cover:hover {
+  opacity: 1;
+}
+
+.slide-dark-cover {
+  background: linear-gradient(to bottom, #00000000, #000000);
+  opacity: 0;
+  transition: 0.3s ease-in-out;
 }
