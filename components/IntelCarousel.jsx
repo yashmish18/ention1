@@ -95,7 +95,7 @@ export default function IntelCarousel() {
             backgroundImage: `url(${slide1.src})`,
           }}
         ></div>
-        {selectedSlide === null && (
+        {selectedSlide !== 0 && (
           <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
         )}
         <div className="absolute w-full h-full left-0 top-0 flex flex-col justify-end px-2">
@@ -147,7 +147,7 @@ export default function IntelCarousel() {
             backgroundImage: `url(${slide3.src})`,
           }}
         ></div>
-        {selectedSlide === null && (
+        {selectedSlide !== 1 && (
           <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
         )}
         <div className="absolute w-full h-full left-0 top-0 flex flex-col justify-end px-2">
@@ -199,7 +199,7 @@ export default function IntelCarousel() {
             backgroundImage: `url(${slide4.src})`,
           }}
         ></div>
-        {selectedSlide === null && (
+        {selectedSlide !== 2 && (
           <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
         )}
         <div className="absolute w-full h-full left-0 top-0 flex flex-col justify-end px-2">
