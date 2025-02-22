@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import slide1 from "assets/slide-1.jpg";
-import slide2 from "assets/slide-2.jpg";
 import slide3 from "assets/slide-3.jpg";
+import slide4 from "assets/slide-4.jpg";
+import { useRouter } from "next/router";
 
 export default function IntelCarousel() {
   const [selectedSlide, setSelectedSlide] = useState(0);
@@ -10,6 +11,7 @@ export default function IntelCarousel() {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { duration: 0.4, delay: 0.3 } },
   };
+  const router = useRouter();
   const getSlideUniqueStyle = useCallback(
     (slideIndex) => {
       switch (slideIndex) {
@@ -35,6 +37,9 @@ export default function IntelCarousel() {
     },
     [selectedSlide]
   );
+  const navigateToProductPage = () => {
+    router.push("/product");
+  }
   const playSvg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -116,9 +121,9 @@ export default function IntelCarousel() {
                 with our latest high-performance laptops. Designed for creators,
                 gamers, and professionals who demand excellence.
               </div>
-              <div className="mt-6 cursor-pointer font-thin text-[20px] slide-explore-more-button">
+              <button onClick={() => navigateToProductPage()} className="mt-6 cursor-pointer font-thin text-[20px] slide-explore-more-button">
                 Explore More →
-              </div>
+              </button>
             </motion.div>
           </div>
         )}
@@ -185,7 +190,7 @@ export default function IntelCarousel() {
           style={{
             height:
               selectedSlide === 2 ? "38.75rem" : "clamp(18rem,60vh,32rem)",
-            backgroundImage: `url(https://images.pexels.com/photos/4007744/pexels-photo-4007744.jpeg)`,
+            backgroundImage: `url(${slide4.src})`,
           }}
         ></div>
         {selectedSlide === null && (
