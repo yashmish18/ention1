@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { SessionProvider } from "next-auth/react";
 import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components";
+import Head from "next/head";
 
 export default function App({
   Component,
@@ -88,22 +89,30 @@ export default function App({
   };
 
   return (
-    <div className="App">
-      <ToastContainer />
-      <SessionProvider>
-        {" "}
-        {/* session={session}  */}
-        <Component {...pageProps} />
-        <ThemeProvider theme={theme}>
-          <ChatBot
-            // This appears as the header
-            // text for the chat bot
-            headerTitle="Ention"
-            steps={steps}
-            {...config}
-          />
-        </ThemeProvider>
-      </SessionProvider>
-    </div>
+    <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=1280, maximum-scale=5, user-scalable=yes"
+        />
+      </Head>
+      <div className="App">
+        <ToastContainer />
+        <SessionProvider>
+          {" "}
+          {/* session={session}  */}
+          <Component {...pageProps} />
+          <ThemeProvider theme={theme}>
+            <ChatBot
+              // This appears as the header
+              // text for the chat bot
+              headerTitle="Ention"
+              steps={steps}
+              {...config}
+            />
+          </ThemeProvider>
+        </SessionProvider>
+      </div>
+    </>
   );
 }
