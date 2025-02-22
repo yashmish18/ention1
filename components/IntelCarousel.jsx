@@ -1,5 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { motion } from "framer-motion";
+import slide1 from "assets/slide-1.jpg";
+import slide2 from "assets/slide-2.jpg";
+import slide3 from "assets/slide-3.jpg";
 
 export default function IntelCarousel() {
   const [selectedSlide, setSelectedSlide] = useState(0);
@@ -32,19 +35,24 @@ export default function IntelCarousel() {
     },
     [selectedSlide]
   );
-  const expandSvg = (
+  const playSvg = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      stroke-width="1.5"
+      strokeWidth={1.5}
       stroke="currentColor"
-      class="size-6"
+      className="size-6"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+      />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
       />
     </svg>
   );
@@ -79,12 +87,18 @@ export default function IntelCarousel() {
           style={{
             height:
               selectedSlide === 0 ? "38.75rem" : "clamp(18rem,60vh,32rem)",
-            backgroundImage: `url(https://images.pexels.com/photos/29376745/pexels-photo-29376745.jpeg)`,
+            backgroundImage: `url(${slide1.src})`,
           }}
         ></div>
         {selectedSlide === null && (
           <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
         )}
+        <div className="absolute w-full h-full left-0 top-0 flex flex-col justify-end px-2">
+          <div className="flex items-center text-white font-extralight">
+            <button className="p-2 w-12">{playSvg}</button>
+            {selectedSlide === null && <div>Blazing Speed</div>}
+          </div>
+        </div>
         {selectedSlide === 0 && (
           <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
             <motion.div
@@ -93,7 +107,7 @@ export default function IntelCarousel() {
               animate="visible"
               className="w-2/5"
             >
-              <div>BLAZING SPEED</div>
+              <div>Blazing Speed</div>
               <div className="text-[50px] font-thin my-4 mt-2">
                 Unleash the Power Within
               </div>
@@ -122,12 +136,18 @@ export default function IntelCarousel() {
           style={{
             height:
               selectedSlide === 1 ? "38.75rem" : "clamp(16rem,60vh,28rem)",
-            backgroundImage: `url(https://images.pexels.com/photos/2473183/pexels-photo-2473183.jpeg)`,
+            backgroundImage: `url(${slide3.src})`,
           }}
         ></div>
         {selectedSlide === null && (
           <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
         )}
+        <div className="absolute w-full h-full left-0 top-0 flex flex-col justify-end px-2">
+          <div className="flex items-center text-white font-extralight">
+            <button className="p-2 w-12">{playSvg}</button>
+            {selectedSlide === null && <div>Ultra-Slim. Ultra-Light.</div>}
+          </div>
+        </div>
         {selectedSlide === 1 && (
           <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
             <motion.div
@@ -171,6 +191,12 @@ export default function IntelCarousel() {
         {selectedSlide === null && (
           <div className="absolute w-full h-full top-0 left-0 slide-dark-cover"></div>
         )}
+        <div className="absolute w-full h-full left-0 top-0 flex flex-col justify-end px-2">
+          <div className="flex items-center text-white font-extralight">
+            <button className="p-2 w-12">{playSvg}</button>
+            {selectedSlide === null && <div>4K Clarity & Beyond</div>}
+          </div>
+        </div>
         {selectedSlide === 2 && (
           <div className="slide-text-cover px-24 flex flex-col justify-center text-white absolute h-full w-full top-0 left-0">
             <motion.div
