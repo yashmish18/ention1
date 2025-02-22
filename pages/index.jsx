@@ -135,8 +135,8 @@ export default function Home() {
               </FadeUpAnimate>
               <div className="w-[80%] sm:w-full h-full lg:mt-5 relative z-[0]">
                 <div
-                  className="w-full h-full absolute bg-contain opacity-10"
-                  style={{ backgroundImage: `url(${board.src})` }}
+                  className="w-full h-full absolute opacity-10"
+                  style={{ backgroundImage: `url(${board.src})`, backgroundSize: '35%' }}
                 ></div>
 
                 <div className="mt-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
