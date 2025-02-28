@@ -1,30 +1,25 @@
-import ChatBox from 'components/icons/chat';
-import Header from 'components/layout/header';
-import SmoothScroll from 'components/SmoothScroll';
-import React, { useEffect, useRef, useState } from 'react';
-import ProductCard from './ProductCard';
-import WordBookPCImg from 'assets/wordbook.png';
-import MouseImg from 'assets/mouse.png';
-import AdapterImg from 'assets/adapter.png';
-import WarrantyGreyImg from 'assets/warranty-grey.png';
-import Footer from 'components/layout/footer';
-import ImageModal from 'components/ImageModal';
-import Image1 from 'assets/E1/light-pc.png';
-import Image2 from 'assets/E1/pc-girl.png';
-import Image3 from 'assets/E1/unsplash_LlVwrX92xIQ.png';
-import { Flip, Roll, Slide, Zoom } from 'react-awesome-reveal';
+import ChatBox from "components/icons/chat";
+import Header from "components/layout/header";
+import SmoothScroll from "components/SmoothScroll";
+import React, { useEffect, useRef, useState } from "react";
+import ProductCard from "./ProductCard";
+import WordBookPCImg from "assets/wordbook.png";
+import MouseImg from "assets/mouse.png";
+import AdapterImg from "assets/adapter.png";
+import WarrantyGreyImg from "assets/warranty-grey.png";
+import Footer from "components/layout/footer";
+import ImageModal from "components/ImageModal";
+import Image1 from "assets/E1/light-pc.png";
+import Image2 from "assets/E1/pc-girl.png";
+import Image3 from "assets/E1/unsplash_LlVwrX92xIQ.png";
+import { Flip, Roll, Slide, Zoom } from "react-awesome-reveal";
 
 const IMAGES = [Image1, Image2, Image3];
 
 const Product = () => {
   const [isWordBook, setWordBook] = useState(true);
-  const videoRef = useRef(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [imgs, setImgs] = useState([]);
-
-  useEffect(() => {
-    videoRef.current.play();
-  }, []);
 
   const handleModalClose = () => {
     setModalOpen(false);
@@ -40,22 +35,8 @@ const Product = () => {
       <Header />
       <SmoothScroll>
         <main
-          className={'main overflow-x-hidden relative z-0 w-full !bg-white'}
+          className={"main overflow-x-hidden relative z-0 w-full !bg-white"}
         >
-          <Zoom cascade>
-            <div className="flex items-center justify-center pt-40 p-2 ">
-              <video
-                className="border border-color:blue rounded-md w-[580px] md:w-[720px] lg:w-[70%] h-full"
-                src={'/assets/video1.mp4'}
-                controls
-                autoPlay
-                muted
-                loop
-                playsInline
-                ref={videoRef}
-              />
-            </div>
-          </Zoom>
           <div className="w-full flex justify-center">
             <div className="flex w-[80%] flex-col items-center justify-center pt-20 lg:pt-32 gap-6 lg:gap-10">
               <Slide direction="up" cascade>
@@ -79,8 +60,8 @@ const Product = () => {
                   <button
                     className={`text-black font-bold text-[18px] min-[540px]:text-xl lg:text-2xl p-4 lg:p-6 border-r-0 rounded-l-2xl`}
                     style={{
-                      borderColor: isWordBook ? '#1B9BB7' : '#000',
-                      borderWidth: isWordBook ? '2px' : '1px 0 1px 1px',
+                      borderColor: isWordBook ? "#1B9BB7" : "#000",
+                      borderWidth: isWordBook ? "2px" : "1px 0 1px 1px",
                     }}
                     onClick={() => setWordBook(true)}
                   >
@@ -89,8 +70,8 @@ const Product = () => {
                   <button
                     className={`text-black font-bold text-[18px] min-[540px]:text-xl lg:text-2xl p-4 lg:p-6 border-l-0 rounded-r-2xl`}
                     style={{
-                      borderColor: !isWordBook ? '#1B9BB7' : '#000',
-                      borderWidth: !isWordBook ? '2px' : '1px 1px 1px 0px',
+                      borderColor: !isWordBook ? "#1B9BB7" : "#000",
+                      borderWidth: !isWordBook ? "2px" : "1px 1px 1px 0px",
                     }}
                     onClick={() => setWordBook(false)}
                   >
@@ -105,19 +86,19 @@ const Product = () => {
               <Slide direction="left" cascade>
                 <ProductCard
                   viewClick={() => handleViewClick(IMAGES)}
-                  label={'E1'}
+                  label={"E1"}
                 />
               </Slide>
               <ProductCard
                 viewClick={() => handleViewClick(IMAGES)}
-                label={'E2'}
+                label={"E2"}
                 className="hidden md:flex"
               />
               <Slide direction="right" cascade>
                 <ProductCard
                   viewClick={() => handleViewClick(IMAGES)}
-                  label={'E3'}
-                  className={'hidden xl:flex'}
+                  label={"E3"}
+                  className={"hidden xl:flex"}
                 />
               </Slide>
             </div>
@@ -163,7 +144,7 @@ const Product = () => {
                   </p>
                   <button
                     className="z-[2] w-[200px] h-[45px] sm:w-[180px] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[68px] rounded-3xl flex justify-center items-center text-white text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    style={{ backgroundColor: 'rgba(34, 209, 238, 1)' }}
+                    style={{ backgroundColor: "rgba(34, 209, 238, 1)" }}
                   >
                     Know More
                   </button>

@@ -1,17 +1,17 @@
-import Footer from 'components/layout/footer';
-import Header from 'components/layout/header';
-import SmoothScroll from 'components/SmoothScroll';
-import EntionPCImg from 'assets/Ention-Laptop-E3-Catalogue-design-2.png';
-import AnalogImg from 'assets/E1/analog.png';
-import Win11Img from 'assets/E1/win11.png';
-import BezelsImg from 'assets/E1/bezels.png';
-import FullHDImg from 'assets/E1/full-hd.png';
-import IntelImg from 'assets/E1/intel.png';
-import WifiImg from 'assets/E1/wifi.png';
-import LightPcImg from 'assets/E1/light-pc.png';
-import PcGirlImg from 'assets/E1/pc-girl.png';
-import { useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
+import Footer from "components/layout/footer";
+import Header from "components/layout/header";
+import SmoothScroll from "components/SmoothScroll";
+import EntionPCImg from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
+import AnalogImg from "assets/E1/analog.png";
+import Win11Img from "assets/E1/win11.png";
+import BezelsImg from "assets/E1/bezels.png";
+import FullHDImg from "assets/E1/full-hd.png";
+import IntelImg from "assets/E1/intel.png";
+import WifiImg from "assets/E1/wifi.png";
+import LightPcImg from "assets/E1/light-pc.png";
+import PcGirlImg from "assets/E1/pc-girl.png";
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import {
   Fade,
   JackInTheBox,
@@ -19,14 +19,10 @@ import {
   Rotate,
   Slide,
   Zoom,
-} from 'react-awesome-reveal';
+} from "react-awesome-reveal";
 
 const ProductDetails = () => {
-  const videoRef = useRef(null);
   const router = useRouter();
-  useEffect(() => {
-    videoRef.current.play();
-  }, []);
 
   const { id } = router.query;
   return (
@@ -34,7 +30,7 @@ const ProductDetails = () => {
       <Header />
       <SmoothScroll>
         <main
-          className={'main overflow-x-hidden relative z-0 w-full !bg-white'}
+          className={"main overflow-x-hidden relative z-0 w-full !bg-white"}
         >
           <div className="w-full flex flex-col items-center">
             <div className="flex flex-col items-center justify-center pt-40 p-2 w-[80%]">
@@ -63,35 +59,35 @@ const ProductDetails = () => {
               <div className="grid grid-cols-2 min-[450px]:grid-cols-3 md:flex items-center gap-4 md:gap-8 mt-4 md:mt-10 xl:mt-16">
                 <Roll delay={800} cascade>
                   <img
-                    src={'/assets/Products/E1/e1_2.svg'}
+                    src={"/assets/Products/E1/e1_2.svg"}
                     alt="e1-items"
                     className="w-[120px] xl:w-[180px] h-auto"
                   />
                 </Roll>
                 <Roll delay={600} cascade>
                   <img
-                    src={'/assets/Products/E1/e1_3.svg'}
+                    src={"/assets/Products/E1/e1_3.svg"}
                     alt="e1-items"
                     className="w-[120px] xl:w-[180px] h-auto"
                   />
                 </Roll>
                 <Roll delay={400} cascade>
                   <img
-                    src={'/assets/Products/E1/e1_1.svg'}
+                    src={"/assets/Products/E1/e1_1.svg"}
                     alt="e1-items"
                     className="w-[120px] xl:w-[180px] h-auto"
                   />
                 </Roll>
                 <Roll delay={200} cascade>
                   <img
-                    src={'/assets/Products/E1/e1_4.svg'}
+                    src={"/assets/Products/E1/e1_4.svg"}
                     alt="e1-items"
                     className="w-[120px] xl:w-[180px] h-auto"
                   />
                 </Roll>
                 <Roll cascade>
                   <img
-                    src={'/assets/Products/E1/e1_8.svg'}
+                    src={"/assets/Products/E1/e1_8.svg"}
                     alt="e1-items"
                     className="w-[120px] xl:w-[180px] h-auto"
                   />
@@ -211,7 +207,7 @@ const ProductDetails = () => {
                       img={LightPcImg}
                       label={
                         <p className="absolute font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] bottom-4">
-                          Thin and light{' '}
+                          Thin and light{" "}
                           <span className="text-[16px] xl:text-xl">1.2kg</span>
                         </p>
                       }
@@ -232,20 +228,6 @@ const ProductDetails = () => {
                 </p>
               </div>
             </div>
-            <Zoom cascade>
-              <div className="flex items-center justify-center py-10 md:py-20 p-2 ">
-                <video
-                  className="border border-color:blue rounded-md w-[90%] h-full"
-                  src={'/assets/video1.mp4'}
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  ref={videoRef}
-                />
-              </div>
-            </Zoom>
           </div>
         </main>
         <Footer />
