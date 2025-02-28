@@ -99,8 +99,14 @@ export default function Home() {
               </div>
             </div>
             <BlurInText className="text-white text-[50px] mt-8 text-3xl font-bold">
-              ENTION<span className="font-thin text-[50px]">&reg;</span>{" "}
-              COMPUTING DEVICE
+              <span>ENTION</span>
+              <span
+                style={{ position: "relative", top: "-18px", fontSize: "31px" }}
+                className="font-thin text-[50px]"
+              >
+                &reg;
+              </span>{" "}
+              <span>COMPUTING DEVICE</span>
             </BlurInText>
           </div>
           <div className="h-[100px]"></div>
@@ -129,14 +135,28 @@ export default function Home() {
                     High Performance Power house
                   </p>
                   <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
-                    Ention&reg; Laptop equipped with latest generation Processor
+                    Ention
+                    <span
+                    className="font-thin"
+                      style={{
+                        position: "relative",
+                        top: "-5px",
+                        fontSize: "25px",
+                      }}
+                    >
+                      &reg;
+                    </span>{" "}
+                    Laptop equipped with latest generation Processor
                   </p>
                 </div>
               </FadeUpAnimate>
               <div className="w-[80%] sm:w-full h-full lg:mt-5 relative z-[0]">
                 <div
                   className="w-full h-full absolute opacity-10"
-                  style={{ backgroundImage: `url(${board.src})`, backgroundSize: '35%' }}
+                  style={{
+                    backgroundImage: `url(${board.src})`,
+                    backgroundSize: "35%",
+                  }}
                 ></div>
 
                 <div className="mt-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
@@ -251,7 +271,11 @@ export default function Home() {
               <FadeUpAnimate spaceToMove={300}>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
-                    ENTION WORKBOOK&reg; SERIES
+                    ENTION WORKBOOK
+                    <span className="font-thin" style={{ position: "relative", top: "-5px" }}>
+                      &reg;
+                    </span>{" "}
+                    SERIES
                   </p>
                   <div className="flex flex-col gap-1 sm:gap-4 md:gap-1 lg:gap-4">
                     <li className="text-white text-lg min-[450px]:text-xl sm:text-2xl md:text-lg lg:text-xl xl:text-2xl ">
