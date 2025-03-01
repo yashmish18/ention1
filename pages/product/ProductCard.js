@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import Laptop from 'assets/Ention-Laptop-E3-Catalogue-design-2.png';
-import { TbCirclePlus } from 'react-icons/tb';
-import corei5Img from 'assets/i5.png';
-import corei7Img from 'assets/i7.png';
-import amd5Img from 'assets/amd-ryzen-5-logo.png';
-import amd7Img from 'assets/AMD-Ryzen-7-Category.png';
-import { useRouter } from 'next/router';
+import React, { useState } from "react";
+import Laptop from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
+import { TbCirclePlus } from "react-icons/tb";
+import corei5Img from "assets/i5.png";
+import corei7Img from "assets/i7.png";
+import amd5Img from "assets/amd-ryzen-5-logo.png";
+import amd7Img from "assets/AMD-Ryzen-7-Category.png";
+import { useRouter } from "next/router";
+import CustomDropdown from "components/CustomDropdown";
 
 const ProductCard = (props) => {
   const { label, className, viewClick } = props;
-  const [itemIdx, setItemIdx] = useState(null);
   const router = useRouter();
+  const [processorSelection, setProcessorSelection] = useState("");
+  const [memorySelection, setMemorySelection] = useState("");
+  const [storageSelection, setStorageSelection] = useState("");
+
   return (
     <div className={`w-[360px] flex flex-col items-center ${className}`}>
       <div className="flex flex-col justify-evenly items-center w-[132px] h-[66px] rounded-t-full bg-[#F5F5F7] text-black text-3xl font-bold">
@@ -27,7 +31,7 @@ const ProductCard = (props) => {
             className="text-[#199AB7] text-sm flex items-center gap-2 cursor-pointer"
             onClick={viewClick}
           >
-            View gallery <TbCirclePlus fontSize={'20px'} />
+            View gallery <TbCirclePlus fontSize={"20px"} />
           </a>
         </div>
         <div className="flex items-center gap-4 mt-5">
@@ -41,50 +45,24 @@ const ProductCard = (props) => {
             Core Cpu 16Gb Memory 512Gb SSD Storage
           </h3>
           <p className="font-semibold text-lg mt-6">Processor</p>
-          <div
-            className={`bg-white rounded-md border-2 ${itemIdx === 1 &&
-              ' border-[#4db8ff]'} cursor-pointer w-full font-medium h-[57px] p-5 text-xs text-black`}
-            onClick={() => setItemIdx(1)}
-          >
-            intel
-          </div>
-          <div
-            className={`bg-white rounded-md border-2 ${itemIdx === 2 &&
-              ' border-[#4db8ff]'} cursor-pointer w-full font-medium h-[57px] p-5 text-xs text-black`}
-            onClick={() => setItemIdx(2)}
-          >
-            Rizen
-          </div>
+          <CustomDropdown
+            setValue={setProcessorSelection}
+            value={processorSelection}
+            items={["Intel", "Ryzen"]}
+          ></CustomDropdown>
+
           <p className="font-semibold text-lg mt-6">Memory</p>
-          <div
-            className={`bg-white rounded-md border-2 ${itemIdx === 3 &&
-              ' border-[#4db8ff]'} cursor-pointer w-full font-medium h-[57px] p-5 text-xs text-black`}
-            onClick={() => setItemIdx(3)}
-          >
-            16 GB Unified Memory
-          </div>
-          <div
-            className={`bg-white rounded-md border-2 ${itemIdx === 4 &&
-              ' border-[#4db8ff]'} cursor-pointer w-full font-medium h-[57px] p-5 text-xs text-black`}
-            onClick={() => setItemIdx(4)}
-          >
-            32 GB Unified Memory
-          </div>
+          <CustomDropdown
+            value={memorySelection}
+            setValue={setMemorySelection}
+            items={["16 GB Unified Memory", "32 GB Unified Memory"]}
+          />
           <p className="font-semibold text-lg mt-6">Storage</p>
-          <div
-            className={`bg-white rounded-md border-2 ${itemIdx === 5 &&
-              ' border-[#4db8ff]'} cursor-pointer w-full font-medium h-[57px] p-5 text-xs text-black`}
-            onClick={() => setItemIdx(5)}
-          >
-            512 GB SSD Storage
-          </div>
-          <div
-            className={`bg-white rounded-md border-2 ${itemIdx === 6 &&
-              ' border-[#4db8ff]'} cursor-pointer w-full font-medium h-[57px] p-5 text-xs text-black`}
-            onClick={() => setItemIdx(6)}
-          >
-            1 TB SSD Storage
-          </div>
+          <CustomDropdown
+            value={storageSelection}
+            setValue={setStorageSelection}
+            items={["512 GB SSD Storage", "1 TB SSD Storage"]}
+          />
           <div className="flex flex-col gap-1 mt-5 ">
             <p>
               <b>Material - </b> Metal
@@ -93,43 +71,43 @@ const ProductCard = (props) => {
               <b>Colour - </b>Silver
             </p>
             <Detail
-              title={'Processor frequency'}
+              title={"Processor frequency"}
               content="2.4Ghz to Turbo 4.2Ghz"
             />
             <Detail
-              title={'Graphic Memory'}
+              title={"Graphic Memory"}
               content="Intel Iris Xe Graphics 1GB"
             />
             <Detail
-              title={'Fingerprint reader'}
+              title={"Fingerprint reader"}
               content="Yes, located on touchpad"
             />
             <Detail
-              title={'Operating system'}
+              title={"Operating system"}
               content="Pre-Installed Window 11 Pro"
             />
             <Detail
-              title={'Wi-Fi'}
+              title={"Wi-Fi"}
               content="M.2 interface, 802.11 a/b/g/n/a 2.4G and 5G Dual Band"
             />
-            <Detail title={'Bluetooth	4.2 version'} />
+            <Detail title={"Bluetooth	4.2 version"} />
             <Detail
-              title={'USB	2'}
+              title={"USB	2"}
               content="USB 2.0 and 2 USB 3.0/3.1, Type C"
             />
-            <Detail title={'HDMI'} content="HDMI, Support 4K 24HZ" />
-            <Detail title={'Memory card'} content="Yes, one SD-MMC card Slot" />
+            <Detail title={"HDMI"} content="HDMI, Support 4K 24HZ" />
+            <Detail title={"Memory card"} content="Yes, one SD-MMC card Slot" />
             <Detail
-              title={'Earphone port'}
+              title={"Earphone port"}
               content="3.5mm jack, Mic in/Line Out"
             />
-            <Detail title={'Mic'} content="Bulit-in, Analog microphone" />
-            <Detail title={'Webcam'} content="Yes, 2.0Mmeet" />
-            <Detail title={'Touchpad'} content="Yes, extra Large" />
-            <Detail title={'Product Dimension'} content="360*240*15mm," />
-            <Detail title={'Weight 	1.8KG'} />
+            <Detail title={"Mic"} content="Bulit-in, Analog microphone" />
+            <Detail title={"Webcam"} content="Yes, 2.0Mmeet" />
+            <Detail title={"Touchpad"} content="Yes, extra Large" />
+            <Detail title={"Product Dimension"} content="360*240*15mm," />
+            <Detail title={"Weight 	1.8KG"} />
             <Detail
-              title={'Battery'}
+              title={"Battery"}
               content="5000mah, 57.75Wh/11.4V, 3 Cells Lithium-ion polymer battery"
             />
           </div>
@@ -138,7 +116,7 @@ const ProductCard = (props) => {
           </div>
           <button
             className=" w-[253px] h-[42px] rounded-xl flex justify-center items-center text-white text-lg hover:scale-105  transition-all duration-300 ease-in-out mt-4"
-            style={{ backgroundColor: 'rgba(34, 209, 238, 1)' }}
+            style={{ backgroundColor: "rgba(34, 209, 238, 1)" }}
           >
             Buy Now
           </button>

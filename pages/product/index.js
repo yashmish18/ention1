@@ -13,6 +13,8 @@ import Image1 from "assets/E1/light-pc.png";
 import Image2 from "assets/E1/pc-girl.png";
 import Image3 from "assets/E1/unsplash_LlVwrX92xIQ.png";
 import { Flip, Roll, Slide, Zoom } from "react-awesome-reveal";
+import CustomTab from "components/CustomTab";
+import CustomDropdown from "components/CustomDropdown";
 
 const IMAGES = [Image1, Image2, Image3];
 
@@ -20,6 +22,15 @@ const Product = () => {
   const [isWordBook, setWordBook] = useState(true);
   const [isModalOpen, setModalOpen] = useState(false);
   const [imgs, setImgs] = useState([]);
+  const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    if (activeTab === 0) {
+      setWordBook(true);
+    } else {
+      setWordBook(false);
+    }
+  }, [activeTab]);
 
   const handleModalClose = () => {
     setModalOpen(false);
@@ -50,34 +61,16 @@ const Product = () => {
                   <h6 className="text-xl text-center w-[280px] min-[480px]:w-full lg:text-2xl font-bold text-[#312E2E] mt-8">
                     Have questions about buying E Series
                   </h6>
-                  <a className="outline-none text-[16px] lg:text-xl text-[#1B9DBA] cursor-pointer mt-4">
+                  <a
+                    href="mailto:contact@ention.in"
+                    className="outline-none text-[16px] lg:text-xl text-[#1B9DBA] cursor-pointer mt-4"
+                  >
                     Chat with a Ention Specialist
                   </a>
                 </div>
               </Slide>
               <Slide direction="up" cascade>
-                <div className="flex justify-center items-center">
-                  <button
-                    className={`text-black font-bold text-[18px] min-[540px]:text-xl lg:text-2xl p-4 lg:p-6 border-r-0 rounded-l-2xl`}
-                    style={{
-                      borderColor: isWordBook ? "#1B9BB7" : "#000",
-                      borderWidth: isWordBook ? "2px" : "1px 0 1px 1px",
-                    }}
-                    onClick={() => setWordBook(true)}
-                  >
-                    WordBook
-                  </button>
-                  <button
-                    className={`text-black font-bold text-[18px] min-[540px]:text-xl lg:text-2xl p-4 lg:p-6 border-l-0 rounded-r-2xl`}
-                    style={{
-                      borderColor: !isWordBook ? "#1B9BB7" : "#000",
-                      borderWidth: !isWordBook ? "2px" : "1px 1px 1px 0px",
-                    }}
-                    onClick={() => setWordBook(false)}
-                  >
-                    SwapBook
-                  </button>
-                </div>
+                <CustomTab activeTab={activeTab} setActiveTab={setActiveTab} />
               </Slide>
             </div>
           </div>
