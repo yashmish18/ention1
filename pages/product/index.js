@@ -80,18 +80,23 @@ const Product = () => {
                 <ProductCard
                   viewClick={() => handleViewClick(IMAGES)}
                   label={"E1"}
+                  pdfCatalogLink = '/Ention Laptop E1 Catalogue design.pdf'
                 />
               </Slide>
               <ProductCard
                 viewClick={() => handleViewClick(IMAGES)}
                 label={"E2"}
                 className="hidden md:flex"
+                pdfCatalogLink = '/Ention Laptop E2 Catalogue design.pdf'
+
               />
               <Slide direction="right" cascade>
                 <ProductCard
                   viewClick={() => handleViewClick(IMAGES)}
                   label={"E3"}
                   className={"hidden xl:flex"}
+                  pdfCatalogLink = '/Ention Laptop E3 Catalogue design.pdf'
+
                 />
               </Slide>
             </div>

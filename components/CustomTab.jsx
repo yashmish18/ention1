@@ -9,7 +9,7 @@ export default function CustomTab({ activeTab, setActiveTab }) {
   return (
     <div className="w-full max-w-lg mx-auto">
       {/* Tab Header */}
-      <div className="relative flex space-x-4 border-b border-gray-300 flex justify-center">
+      <div className="relative space-x-4 border-b border-gray-300 flex justify-center">
         {tabs.map((tab, index) => (
           <button
             key={index}

@@ -51,7 +51,7 @@ export default function CustomDropdown({ value, setValue, items }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="absolute w-full mt-2 bg-white shadow-xl rounded-lg overflow-hidden"
+            className="absolute w-full mt-2 bg-white shadow-xl rounded-lg overflow-hidden z-10"
           >
             {items.map((item, index) => (
               <li

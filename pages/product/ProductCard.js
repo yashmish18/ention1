@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import CustomDropdown from "components/CustomDropdown";
 
 const ProductCard = (props) => {
-  const { label, className, viewClick } = props;
+  const { label, className, viewClick, pdfCatalogLink } = props;
   const router = useRouter();
   const [processorSelection, setProcessorSelection] = useState("");
   const [memorySelection, setMemorySelection] = useState("");
@@ -32,6 +32,14 @@ const ProductCard = (props) => {
             onClick={viewClick}
           >
             View gallery <TbCirclePlus fontSize={"20px"} />
+          </a>
+          <a
+            className="text-[#199AB7] text-sm flex items-center gap-2 cursor-pointer"
+            href={pdfCatalogLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Product Catalogue
           </a>
         </div>
         <div className="flex items-center gap-4 mt-5">
