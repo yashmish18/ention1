@@ -94,7 +94,7 @@ const ProductDetails = () => {
                 </Roll>
               </div>
               <div className="text-black text-2xl sm:text-3xl font-semibold mt-4 sm:mt-10">
-                ₹169900.00
+                Coming Soon
               </div>
               <JackInTheBox cascade>
                 <button className="bg-[#1B9DBA] rounded-3xl text-white text-[22px] lg:text-[25px] px-12 lg:px-20 py-2 lg:py-4">
