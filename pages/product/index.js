@@ -105,7 +105,7 @@ const Product = () => {
               Coming Soon...
             </div>
           )}
-          <div className="flex flex-col gap-0 lg:gap-20 mt-10 items-center">
+          {/* <div className="flex flex-col gap-0 lg:gap-20 mt-10 items-center">
             <Slide direction="up" cascade>
               <h1 className="text-[32px] min-[480px]:text-[42px] lg:text-5xl text-black font-bold">
                 What&apos;s in the Box
@@ -126,7 +126,7 @@ const Product = () => {
                 <BoxItem name="Charger" src={AdapterImg.src} transform={0.65} />
               </Roll>
             </div>
-          </div>
+          </div> */}
           <Zoom cascade>
             <div className="flex flex-col items-center w-full mt-16">
               <div className="w-[80%] px-8 py-4 mt-16 border rounded-3xl flex flex-col sm:flex-row justify-center sm:justify-between items-center relative">
