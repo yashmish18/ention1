@@ -22,7 +22,7 @@ const ProductDetails = () => {
       <div
         style={{
           backgroundImage: `url(${gradientbg1.src})`,
-          backgroundSize: "100% 100%"
+          backgroundSize: "100% 100%",
         }}
       >
         <Header />
@@ -43,16 +43,16 @@ const ProductDetails = () => {
                 </div>
               </Zoom>
             </div>
-            <div className="w-full flex justify-center gap-6 mt-20">
+            <div className="w-full flex justify-center gap-6">
               <div className="w-[60%]">
                 <TestCarousel />
               </div>
             </div>
-            <div className="w-full flex flex-col items-center gap-6 mt-40">
+            <div className="w-full flex flex-col items-center gap-6 mt-10">
               <div className="text-white text-2xl sm:text-3xl font-semibold mt-4 sm:mt-10">
                 Coming Soon
               </div>
-              <button className="bg-[#1B9DBA] rounded-3xl text-white text-[22px] lg:text-[25px] px-12 lg:px-20 py-2 lg:py-4">
+              <button className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out">
                 Buy Now
               </button>
             </div>
