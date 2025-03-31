@@ -1,7 +1,5 @@
 import Footer from "components/layout/footer";
 import Header from "components/layout/header";
-import SmoothScroll from "components/SmoothScroll";
-import EntionPCImg from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
 import AnalogImg from "assets/E1/analog.png";
 import Win11Img from "assets/E1/win11.png";
 import BezelsImg from "assets/E1/bezels.png";
@@ -10,16 +8,10 @@ import IntelImg from "assets/E1/intel.png";
 import WifiImg from "assets/E1/wifi.png";
 import LightPcImg from "assets/E1/light-pc.png";
 import PcGirlImg from "assets/E1/pc-girl.png";
-import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import {
-  Fade,
-  JackInTheBox,
-  Roll,
-  Rotate,
-  Slide,
-  Zoom,
-} from "react-awesome-reveal";
+import { Fade, Zoom } from "react-awesome-reveal";
+import TestCarousel from "components/TestCarousel";
+import gradientbg1 from "assets/gradient-bg1.png";
 
 const ProductDetails = () => {
   const router = useRouter();
@@ -27,20 +19,23 @@ const ProductDetails = () => {
   const { id } = router.query;
   return (
     <>
-      <Header />
-      <SmoothScroll>
-        <main
-          className={"main overflow-x-hidden relative z-0 w-full !bg-white"}
-        >
+      <div
+        style={{
+          backgroundImage: `url(${gradientbg1.src})`,
+          backgroundSize: "100% 100%"
+        }}
+      >
+        <Header />
+        <div className="overflow-x-hidden">
           <div className="w-full flex flex-col items-center">
-            <div className="flex flex-col items-center justify-center pt-40 p-2 w-[80%]">
+            <div className="flex flex-col items-center justify-center pt-40 p-2 w-[80%] text-white">
               <Zoom cascade>
-                <div className="text-black text-3xl md:text-4xl lg:text-[50px] font-semibold md:whitespace-nowrap text-center">
+                <div className=" text-3xl md:text-4xl lg:text-[50px] font-semibold md:whitespace-nowrap text-center">
                   Workbook&reg; {id} Series laptop
                 </div>
               </Zoom>
               <Zoom cascade>
-                <div className="text-black py-12 lg:py-16 w-full xl:w-[1025px] text-[18px] sm:text-xl md:text-2xl lg:text-3xl text-center">
+                <div className="py-12 lg:py-16 w-full xl:w-[1025px] text-[18px] sm:text-xl md:text-2xl lg:text-3xl text-center">
                   Computing experience made smarter for learners with
                   lightweight and thin that match with your fast-moving
                   lifestyle. Excellent performance in affordable and adaptable
@@ -48,59 +43,18 @@ const ProductDetails = () => {
                 </div>
               </Zoom>
             </div>
-            <div className="flex flex-col items-center gap-6 sm:gap-12 mt-10">
-              <JackInTheBox cascade>
-                <img
-                  src={EntionPCImg.src}
-                  alt="ention-pc"
-                  className="w-[240px] min-[540px]:w-[360px] md:w-[480px] xl:w-[600px] h-auto "
-                />
-              </JackInTheBox>
-              <div className="grid grid-cols-2 min-[450px]:grid-cols-3 md:flex items-center gap-4 md:gap-8 mt-4 md:mt-10 xl:mt-16">
-                <Roll delay={800} cascade>
-                  <img
-                    src={"/assets/Products/E1/e1_2.svg"}
-                    alt="e1-items"
-                    className="w-[120px] xl:w-[180px] h-auto"
-                  />
-                </Roll>
-                <Roll delay={600} cascade>
-                  <img
-                    src={"/assets/Products/E1/e1_3.svg"}
-                    alt="e1-items"
-                    className="w-[120px] xl:w-[180px] h-auto"
-                  />
-                </Roll>
-                <Roll delay={400} cascade>
-                  <img
-                    src={"/assets/Products/E1/e1_1.svg"}
-                    alt="e1-items"
-                    className="w-[120px] xl:w-[180px] h-auto"
-                  />
-                </Roll>
-                <Roll delay={200} cascade>
-                  <img
-                    src={"/assets/Products/E1/e1_4.svg"}
-                    alt="e1-items"
-                    className="w-[120px] xl:w-[180px] h-auto"
-                  />
-                </Roll>
-                <Roll cascade>
-                  <img
-                    src={"/assets/Products/E1/e1_8.svg"}
-                    alt="e1-items"
-                    className="w-[120px] xl:w-[180px] h-auto"
-                  />
-                </Roll>
+            <div className="w-full flex justify-center gap-6 mt-20">
+              <div className="w-[60%]">
+                <TestCarousel />
               </div>
-              <div className="text-black text-2xl sm:text-3xl font-semibold mt-4 sm:mt-10">
+            </div>
+            <div className="w-full flex flex-col items-center gap-6 mt-40">
+              <div className="text-white text-2xl sm:text-3xl font-semibold mt-4 sm:mt-10">
                 Coming Soon
               </div>
-              <JackInTheBox cascade>
-                <button className="bg-[#1B9DBA] rounded-3xl text-white text-[22px] lg:text-[25px] px-12 lg:px-20 py-2 lg:py-4">
-                  Buy Now
-                </button>
-              </JackInTheBox>
+              <button className="bg-[#1B9DBA] rounded-3xl text-white text-[22px] lg:text-[25px] px-12 lg:px-20 py-2 lg:py-4">
+                Buy Now
+              </button>
             </div>
             <div className="flex justify-center w-[80%] mt-20">
               <div className="flex flex-col md:flex-row justify-center gap-4">
@@ -229,9 +183,9 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
-        </main>
-        <Footer />
-      </SmoothScroll>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 };

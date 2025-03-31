@@ -44,12 +44,12 @@ export default function TestCarousel() {
       <Swiper
         modules={[Autoplay]}
         speed={1000}
-        slidesPerView={5}
+        slidesPerView={3}
         spaceBetween={20}
         autoplay={{ delay: 2500 }}
         loop={true}
         centeredSlides={true}
-        style={{ overflow: "visible" }}
+        style={{ overflowY: "clip" }}
         onSlideChange={(swiper) => setMiddleSlide(swiper.realIndex)}
       >
         {Array(totalSlides.current)
@@ -61,6 +61,8 @@ export default function TestCarousel() {
                   ...getStyle(index),
                   transition: "1s",
                   width: "18vw",
+
+                  height: "60vh",
                 }}
                 className="flex items-center justify-center text-2xl font-bold"
               >
