@@ -2,7 +2,7 @@ import Header from "components/layout/header";
 import gradientbg1 from "assets/gradient-bg1.png";
 import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
-import { Footer } from "components";
+import Footer from "components/layout/footer";
 
 const RegisterForm = () => {
   return (
