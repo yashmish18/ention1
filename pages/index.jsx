@@ -317,7 +317,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col md:flex-row-reverse justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
               <div
-                style={{ backgroundImage: `url(${swapbook.src})` }}
+                style={{ backgroundImage: `url(${marketpc.src})` }}
                 className="h-[425px] bg-no-repeat bg-center bg-cover w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
               ></div>
               <FadeUpAnimate>
