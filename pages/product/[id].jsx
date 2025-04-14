@@ -171,7 +171,7 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="relative max-w-[1440px] w-full h-fit mt-20">
-              <img src={PcGirlImg.src} alt="pc-girl" className="w-full z-10" />
+              <img src={LightPcImg.src} alt="pc-girl" className="w-full z-10" />
               <div className="absolute w-[240px] sm:w-[320px] lg:w-[420px] xl:w-[560px] blur-bg-gradient rounded-[32px] lg:rounded-[60px] p-4 sm:p-8 lg:p-12 xl:p-16 flex flex-col items-center gap-2 sm:gap-4 xl:gap-8 z-20 top-8 sm:top-16 xl:top-32 right-8 sm:right-16 xl:right-32">
                 <p className="text-[24px] sm:text-[32px] lg:text-[48px] xl:text-[66px] font-bold text-white">
                   Heading

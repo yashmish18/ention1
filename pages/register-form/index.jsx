@@ -36,7 +36,6 @@ const RegisterForm = () => {
           className=" flex flex-col -z-10"
           style={{
             backgroundImage: `url(${gradientbg1.src})`,
-            // backgroundSize: "100% 100%",
           }}
         >
           <div className="flex justify-center">
