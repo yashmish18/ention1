@@ -5,7 +5,6 @@ import marketpc from "assets/market-pc.png";
 import ellipsemd from "assets/ellipse-gradient-md.png";
 import intelprocessor from "assets/Intel-Core-X-Series-2-Custom-1000x711-1.png";
 import amdprocessor from "assets/amd-1.png";
-import discussing from "assets/SM109054.jpg";
 import corei5 from "assets/i5.png";
 import corei7 from "assets/i7.png";
 import corei9 from "assets/i9.png";
@@ -264,7 +263,7 @@ export default function Home() {
           <div className="w-full flex flex-col items-center">
             <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
               <img
-                src={discussing.src}
+                src={marketpc.src}
                 alt="discussing-image"
                 className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
               />
