@@ -5,7 +5,7 @@ import marketpc from "assets/market-pc.png";
 import ellipsemd from "assets/ellipse-gradient-md.png";
 import intelprocessor from "assets/Intel-Core-X-Series-2-Custom-1000x711-1.png";
 import amdprocessor from "assets/amd-1.png";
-import discussing from "assets/SM1090554.jpg";
+import discussing from "assets/SM109054.jpg";
 import corei5 from "assets/i5.png";
 import corei7 from "assets/i7.png";
 import corei9 from "assets/i9.png";
@@ -137,7 +137,7 @@ export default function Home() {
                   <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
                     Ention
                     <span
-                    className="font-thin"
+                      className="font-thin"
                       style={{
                         position: "relative",
                         top: "-5px",
@@ -272,7 +272,10 @@ export default function Home() {
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
                     ENTION WORKBOOK
-                    <span className="font-thin" style={{ position: "relative", top: "-5px" }}>
+                    <span
+                      className="font-thin"
+                      style={{ position: "relative", top: "-5px" }}
+                    >
                       &reg;
                     </span>{" "}
                     SERIES
