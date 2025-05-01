@@ -20,7 +20,7 @@ const ProductCard = (props) => {
       <div className="flex flex-col justify-evenly items-center w-[132px] h-[66px] rounded-t-full bg-[#F5F5F7] text-black text-3xl font-bold">
         {label}
       </div>
-      <div className="flex flex-col items-center w-full  px-2 py-3 bg-[#F5F5F7] rounded-3xl gap-4">
+      <div className="flex flex-col items-center w-full  px-2 py-3 bg-[#F5F5F7] rounded-3xl gap-4 pt-4">
         <div className="flex flex-col gap-4 items-center">
           <img
             className="w-[280px] h-full object-cover"
@@ -122,18 +122,15 @@ const ProductCard = (props) => {
           <div className="text-black font-bold text-3xl text-center w-full mt-4">
             Coming soon
           </div>
-          <button
-            className=" w-[253px] h-[42px] rounded-xl flex justify-center items-center text-white text-lg hover:scale-105  transition-all duration-300 ease-in-out mt-4"
-            style={{ backgroundColor: "rgba(34, 209, 238, 1)" }}
-          >
+          <button className=" w-[253px] h-[42px] bg-[rgb(34,209,238)] hover:bg-[hsl(189,61%,50%)] rounded-xl flex justify-center items-center text-white text-lg hover:scale-105  transition-all duration-300 ease-in-out mt-4">
             Buy Now
           </button>
-          <a
-            className="text-[#199AB7] text-sm font-bold cursor-pointer text-center mb-5"
+          <button
+            className="text-[#199AB7] hover:scale-105  transition-all duration-300 ease-in-out border border-blue-400 rounded-xl p-3 text-sm font-bold cursor-pointer text-center mb-5"
             onClick={() => router.push(`/product/${label}`)}
           >
             Know more...
-          </a>
+          </button>
         </div>
       </div>
     </div>

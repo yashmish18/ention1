@@ -56,19 +56,19 @@ const Product = () => {
             <div className="w-full flex justify-center">
               <div className="flex w-[80%] flex-col items-center justify-center pt-20 lg:pt-32 gap-6 lg:gap-10">
                 <Slide direction="up" cascade>
-                  <h3 className="text-[#070D2A] w-[280px] min-[480px]:w-full text-center text-[32px] sm:text-4xl lg:text-5xl font-bold">
+                  <h3 className="text-[#f2f2f2] w-[280px] min-[480px]:w-full text-center text-[32px] sm:text-4xl lg:text-5xl font-bold">
                     Choose your new E Series
                   </h3>
                 </Slide>
                 <Slide direction="up" cascade>
                   <div className="flex flex-col items-center">
                     <ChatBox />
-                    <h6 className="text-xl text-center w-[280px] min-[480px]:w-full lg:text-2xl font-bold text-[#312E2E] mt-8">
+                    <h6 className="text-xl text-center w-[280px] min-[480px]:w-full lg:text-2xl font-bold text-[#d1c6c6] mt-8">
                       Have questions about buying E Series
                     </h6>
                     <a
                       href="mailto:contact@ention.in"
-                      className="outline-none text-[16px] lg:text-xl text-[#1B9DBA] cursor-pointer mt-4"
+                      className="outline-none text-[16px] lg:text-xl text-[rgb(106,216,241)] cursor-pointer mt-4"
                     >
                       Chat with a Ention Specialist
                     </a>
@@ -107,7 +107,7 @@ const Product = () => {
                 </Slide>
               </div>
             ) : (
-              <div className="text-center w-full font-bold text-2xl min-[480px]:text-4xl p-10 min-[480px]:p-20">
+              <div className="text-white text-center w-full font-bold text-2xl min-[480px]:text-4xl p-10 min-[480px]:p-20">
                 Coming Soon...
               </div>
             )}
