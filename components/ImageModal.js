@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const ImageModal = ({ isOpen, onClose, images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -8,14 +8,14 @@ const ImageModal = ({ isOpen, onClose, images }) => {
   // Handle next image action
   const nextImage = () => {
     if (isTransitioning) return; // Prevent multiple clicks during transition
-    setDirection('next');
+    setDirection("next");
     setIsTransitioning(true);
   };
 
   // Handle previous image action
   const prevImage = () => {
     if (isTransitioning) return; // Prevent multiple clicks during transition
-    setDirection('prev');
+    setDirection("prev");
     setIsTransitioning(true);
   };
 
@@ -30,9 +30,9 @@ const ImageModal = ({ isOpen, onClose, images }) => {
 
     const timeout = setTimeout(() => {
       setCurrentImageIndex((prevIndex) => {
-        if (direction === 'next') {
+        if (direction === "next") {
           return (prevIndex + 1) % images.length;
-        } else if (direction === 'prev') {
+        } else if (direction === "prev") {
           return (prevIndex - 1 + images.length) % images.length;
         }
         return prevIndex;
@@ -52,7 +52,7 @@ const ImageModal = ({ isOpen, onClose, images }) => {
       onClick={onClose} // Close modal when clicking on the backdrop
     >
       <div
-        className="bg-white p-4 rounded-lg relative max-w-4xl w-full"
+        className="bg-[rgb(34,121,137)] p-3 rounded-lg relative max-w-3xl w-full"
         onClick={handleModalClick} // Prevent closing the modal when clicking inside
       >
         {/* Close button */}
@@ -64,7 +64,7 @@ const ImageModal = ({ isOpen, onClose, images }) => {
         </button>
 
         {/* Image Slider */}
-        <div className="relative overflow-hidden mt-10 h-[480px]">
+        <div className="relative overflow-hidden mt-10 h-[600px]">
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
@@ -76,7 +76,7 @@ const ImageModal = ({ isOpen, onClose, images }) => {
                 <img
                   src={image.src}
                   alt={`Slider Image ${index}`}
-                  className="w-full h-[420px] rounded-lg object-cover"
+                  className="w-full rounded-lg object-cover"
                 />
               </div>
             ))}
@@ -103,7 +103,7 @@ const ImageModal = ({ isOpen, onClose, images }) => {
             <button
               key={index}
               className={`w-3 h-3 rounded-full ${
-                index === currentImageIndex ? 'bg-blue-500' : 'bg-gray-300'
+                index === currentImageIndex ? "bg-blue-500" : "bg-gray-300"
               }`}
               onClick={() => setCurrentImageIndex(index)}
             ></button>

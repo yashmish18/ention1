@@ -1,22 +1,27 @@
 import ChatBox from "components/icons/chat";
 import Header from "components/layout/header";
 import SmoothScroll from "components/SmoothScroll";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import WordBookPCImg from "assets/wordbook.png";
-import MouseImg from "assets/mouse.png";
-import AdapterImg from "assets/adapter.png";
 import WarrantyGreyImg from "assets/warranty-grey.png";
 import Footer from "components/layout/footer";
 import ImageModal from "components/ImageModal";
 import Image1 from "assets/E1/light-pc.png";
 import Image2 from "assets/E1/pc-girl.png";
 import Image3 from "assets/E1/unsplash_LlVwrX92xIQ.png";
-import { Flip, Roll, Slide, Zoom } from "react-awesome-reveal";
+
+import { Slide, Zoom } from "react-awesome-reveal";
 import CustomTab from "components/CustomTab";
-import CustomDropdown from "components/CustomDropdown";
 import gradientbg1 from "assets/gradient-bg1.png";
+
+// e1
+import e1image1 from "assets/product/e1/image1.jpg";
+import e1image2 from "assets/product/e1/image2.jpg";
+import e1image3 from "assets/product/e1/image3.jpg";
+
 const IMAGES = [Image1, Image2, Image3];
+
+const E1Images = [e1image1, e1image2, e1image3];
 
 const Product = () => {
   const [isWordBook, setWordBook] = useState(true);
@@ -86,7 +91,7 @@ const Product = () => {
               <div className="flex w-full gap-4 justify-center mt-20">
                 <Slide direction="left" cascade>
                   <ProductCard
-                    viewClick={() => handleViewClick(IMAGES)}
+                    viewClick={() => handleViewClick(E1Images)}
                     label={"E1"}
                     pdfCatalogLink="/Ention Laptop E1 Catalogue design.pdf"
                   />
