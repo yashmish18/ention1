@@ -6,9 +6,6 @@ import ProductCard from "./ProductCard";
 import WarrantyGreyImg from "assets/warranty-grey.png";
 import Footer from "components/layout/footer";
 import ImageModal from "components/ImageModal";
-import Image1 from "assets/E1/light-pc.png";
-import Image2 from "assets/E1/pc-girl.png";
-import Image3 from "assets/E1/unsplash_LlVwrX92xIQ.png";
 
 import { Slide, Zoom } from "react-awesome-reveal";
 import CustomTab from "components/CustomTab";
@@ -18,10 +15,18 @@ import gradientbg1 from "assets/gradient-bg1.png";
 import e1image1 from "assets/product/e1/image1.jpg";
 import e1image2 from "assets/product/e1/image2.jpg";
 import e1image3 from "assets/product/e1/image3.jpg";
-
-const IMAGES = [Image1, Image2, Image3];
+// e2
+import e2image1 from "assets/product/e2/image1.jpg";
+import e2image2 from "assets/product/e2/image2.jpg";
+import e2image3 from "assets/product/e2/image3.jpg";
+// e1
+import e3image1 from "assets/product/e3/image1.jpg";
+import e3image2 from "assets/product/e3/image2.jpg";
+import e3image3 from "assets/product/e3/image3.jpg";
 
 const E1Images = [e1image1, e1image2, e1image3];
+const E2Images = [e2image1, e2image2, e2image3];
+const E3Images = [e3image1, e3image2, e3image3];
 
 const Product = () => {
   const [isWordBook, setWordBook] = useState(true);
@@ -97,14 +102,14 @@ const Product = () => {
                   />
                 </Slide>
                 <ProductCard
-                  viewClick={() => handleViewClick(IMAGES)}
+                  viewClick={() => handleViewClick(E2Images)}
                   label={"E2"}
                   className="hidden md:flex"
                   pdfCatalogLink="/Ention Laptop E2 Catalogue design.pdf"
                 />
                 <Slide direction="right" cascade>
                   <ProductCard
-                    viewClick={() => handleViewClick(IMAGES)}
+                    viewClick={() => handleViewClick(E3Images)}
                     label={"E3"}
                     className={"hidden xl:flex"}
                     pdfCatalogLink="/Ention Laptop E3 Catalogue design.pdf"
