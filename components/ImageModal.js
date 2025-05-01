@@ -52,13 +52,13 @@ const ImageModal = ({ isOpen, onClose, images }) => {
       onClick={onClose} // Close modal when clicking on the backdrop
     >
       <div
-        className="bg-[rgb(34,121,137)] p-3 rounded-lg relative max-w-3xl w-full"
+        className="bg-[rgb(34,121,137)] p-3 rounded-lg relative max-w-2xl w-full"
         onClick={handleModalClick} // Prevent closing the modal when clicking inside
       >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-black cursor-pointer rounded-full flex items-center justify-center w-8 h-8 text-4xl "
+          className="absolute top-2 right-2 text-white cursor-pointer rounded-full flex items-center justify-center w-8 h-8 text-4xl "
         >
           &times;
         </button>
@@ -76,7 +76,7 @@ const ImageModal = ({ isOpen, onClose, images }) => {
                 <img
                   src={image.src}
                   alt={`Slider Image ${index}`}
-                  className="w-full rounded-lg object-cover"
+                  className="w-full h-[560px] rounded-lg object-contain"
                 />
               </div>
             ))}
