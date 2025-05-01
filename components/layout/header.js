@@ -115,7 +115,7 @@ const Header = () => {
           </button>
         </Link>
         <Link href={"/signup"}>
-          <button className="w-24 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
+          <button className="px-8 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
             Register
           </button>
         </Link>
@@ -160,7 +160,7 @@ const Header = () => {
                     Login
                   </button>
                   <button
-                    className="w-28 h-10 bg-white border rounded-3xl border-white flex center text-black text-lg hover:scale-105  transition-all duration-300 ease-in-out"
+                    className="w-32 h-10 bg-white border rounded-3xl border-white flex center text-black text-lg hover:scale-105  transition-all duration-300 ease-in-out"
                     onClick={() => router.push("/signup")}
                   >
                     Register

@@ -19,11 +19,11 @@ export default function CustomDropdown({ value, setValue, items }) {
   }, []);
 
   return (
-    <div className="relative w-48" ref={dropdownRef}>
+    <div className="relative w-full" ref={dropdownRef}>
       {/* Dropdown Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full bg-gray-300  px-4 py-2 rounded-lg shadow-lg transition-all hover:bg-gray-200"
+        className="flex items-center justify-between w-full bg-gray-200  px-4 py-2 rounded-lg shadow-lg transition-all hover:bg-gray-200"
       >
         {value || "Select Option"}
         {/* Heroicons SVG (Refactored Rotation) */}
