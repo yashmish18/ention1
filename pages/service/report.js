@@ -1,10 +1,6 @@
 import { Footer, Navbar, Contact } from 'components';
 //import React from 'react';
 import React, { useRef } from 'react'
-import rectangle from 'assets/report1.jpg'
-import rectangle2 from 'assets/report2.jpg'
-import Image from 'next/image';
-import Link from 'next/link'
 
 
 export default function complaince(){
@@ -23,7 +19,7 @@ export default function complaince(){
             </div>
             <div className='w-[85%] flex  gap-2 md:gap-6 flex-col md:flex-row mx-auto mt-20'>
             <div className='w-full md:w-[50%] pt-4 md:pt-0'>
-                    <Image className='h-auto rounded-md' src={rectangle} alt="report"></Image>
+                    {/* <Image className='h-auto rounded-md' src={rectangle} alt="report"></Image> */}
                 </div>
                 <div className='w-full my-auto  flex flex-col text-white md:w-[50%] '>
                     <p className='text-sm md:text-lg text-justify'>An Ention business loan is a type of financing service that is designed specifically for businesses to help them fund their operations, expansions, or other capital needs. Typically, lenders evaluate a company&apos;s creditworthiness, financial history, and future projections before approving a loan.
@@ -38,7 +34,7 @@ export default function complaince(){
                     </p>
                   </div>
                 <div className='w-full md:w-[50%] pt-4 md:pt-0'>
-                    <Image className='h-auto rounded-md' src={rectangle2}  alt="report"w></Image>
+                    {/* <Image className='h-auto rounded-md' src={rectangle2}  alt="report"w></Image> */}
                 </div>
                 
             </div>

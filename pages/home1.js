@@ -8,7 +8,6 @@ import lappy from 'assets/section1bg.png'
 import lappy1 from 'assets/lappy.png'
 import lappy2 from '../public/assets/Products/E1/e1_9.svg'
 
-import dots from 'assets/dots.gif'
 import intelLogo from 'assets/intelcore.png'
 import amdLogo from 'assets/amdimg.png'
 import win11Logo from 'assets/window.png'
@@ -17,10 +16,6 @@ import highEndUser from 'assets/2.svg'
 import general from 'assets/3.svg'
 import student from 'assets/4.svg'
 import service from 'assets/serviceimg.png'
-import incorporation from 'assets/Rectangle 953.png'
-import verticalEmployee from 'assets/Rectangle 954.png'
-import registration from 'assets/Rectangle 955.png'
-import annualCompliance from 'assets/Rectangle 956.png'
 import PopUpForm from "../components/PopUpForm"
 import { IoClose } from "react-icons/io5"
 import Typewriter from 'typewriter-effect';

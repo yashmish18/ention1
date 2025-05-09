@@ -1,5 +1,4 @@
 import { Navbar, Footer } from 'components';
-import rectangle from 'assets/Rectangle 1036 (3).jpg';
 import Slider from 'react-slick';
 import React, { useRef } from 'react';
 import 'slick-carousel/slick/slick.css';
@@ -100,11 +99,11 @@ export default function support() {
     <main className="">
       <Navbar />
       <div className="">
-        <Image
+        {/* <Image
           className="w-[100%] h-auto"
           src={rectangle}
           alt="Techical Support"
-        ></Image>
+        ></Image> */}
       </div>
       <div className="w-full lg:w-[80%] mx-auto  pt-6 md:pt-20 px-8 lg:px-0">
         <h1 className="text-white text-3xl md:text-5xl pl-2 md:pl-6 font-bold ">

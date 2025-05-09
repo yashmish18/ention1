@@ -1,9 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Navbar, Footer } from '../components/index'
-import styles from 'styles/Products.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import hero from 'assets/corporate.jpg'
 
 import cities from 'lib/cities'
 
@@ -36,7 +34,7 @@ const Corporate_Sale = () => {
       <Navbar />
 
       {/* ====================== Header ======================  */}
-      <div className="lg:full-screen max-h-[25vh] lg:min-h-[90vh] flex justify-center items-center " style={{ backgroundImage: `url(${hero.src})`, backgroundSize: '100% 100%' }}>
+      <div className="lg:full-screen max-h-[25vh] lg:min-h-[90vh] flex justify-center items-center " >
         <div className="py-20 md:py-10 lg:py-0">
          <h1 className="w-full  text-center text-white text-3xl md:text-5xl lg:text-6xl font-semibold px-10 mt-10 lg:mt-0">
             Ention Experience Program

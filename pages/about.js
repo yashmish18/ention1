@@ -2,10 +2,6 @@ import React from "react";
 import { Navbar, Footer } from "components";
 import Image from "next/image";
 import Link from "next/link";
-import hero from "assets/aboutus.jpg";
-import about1 from "assets/Rectangle 954 (2).jpg";
-import about2 from "assets/Rectangle 1010.png";
-import contactus from "assets/contactus.jpg";
 
 const About = () => {
   return (
@@ -13,7 +9,7 @@ const About = () => {
       <Navbar />
       {/* ====================== Header ======================  */}
       <div className="header mb-4 lg:mb-14 relative w-full min-h-[25vh] lg:min-h-[90vh]">
-        <Image src={hero} fill alt="Header" />
+        {/* <Image src={hero} fill alt="Header" /> */}
       </div>
 
       {/* ====================== About Us ======================  */}
@@ -32,12 +28,12 @@ const About = () => {
       <div className="pt-0 md:pt-10 text-white mb-10 md:mb-12 w-full md:w-[70%] mx-auto">
         <div className="w-full flex flex-col md:flex-row px-10 md:px-0">
           <div className="">
-            <Image
+            {/* <Image
               src={about2}
               height={1300}
               alt="About Us"
               className="rounded"
-            />
+            /> */}
           </div>
           <div className="center px-0 md:px-5 ml-2 pt-4 md:pt-0">
             <p className="text-sm md:text-xl">
@@ -48,12 +44,12 @@ const About = () => {
             </p>
           </div>
           <div className="mt-10 md:mt-16">
-            <Image
+            {/* <Image
               src={about1}
               height={1300}
               alt="About Us"
               className="rounded"
-            />
+            /> */}
           </div>
         </div>
       </div>
@@ -65,12 +61,12 @@ const About = () => {
           {" "}
           Lorem ipsum dolor sit amet, consectetur adipiscing neque.{" "}
         </p>
-        <Image
+        {/* <Image
           src={contactus}
           alt="Contact Us"
           width="5000"
           className="mt-4 md:mt-12 mb-4 md:mb-16"
-        />
+        /> */}
         <center>
           <Link href="/corporate">
             <button className="w-[134px] h-[45px] text-lg bg-[#007E9E] rounded-full mb-10 transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out">

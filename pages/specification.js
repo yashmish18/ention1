@@ -1,19 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { Navbar, Footer } from '../components/index';
-import styles from 'styles/Products.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import spec from 'assets/Rectangle 1053 (1).png';
-import Products from 'components/products/device';
 import Slider from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import img1 from 'assets/Rectangle 1052.jpg';
-import img6 from '/assets/Rectangle 1054.jpg';
-import img2 from '/assets/Rectangle-1055.jpg';
-import img3 from 'assets/Rectangle 1056.jpg';
-import img4 from 'assets/Rectangle-1057.jpg';
 import img5 from 'assets/image 28.jpg';
 
 // import watchImg1200 from "assets/Rectangle1052_new.jpg";
@@ -167,7 +159,7 @@ const Specification = ({ product }) => {
               </button>
             </Link>
           </div>
-          <Image src={spec} alt="specification" className="w-[40%] h-[80%]" />
+          {/* <Image src={spec} alt="specification" className="w-[40%] h-[80%]" /> */}
         </div>
         <div className="block  w-full flex  px-10 md:px-28 gap-4 md:gap-10 text-lg md:text-3xl text-left mt-10 lg:mt-0">
           <button
@@ -362,46 +354,46 @@ const Specification = ({ product }) => {
         {showModal1 ? (
           <div className="w-full px-10 md:px-28 pt-10">
             <div className="flex flex-col md:flex-row gap-2 items-center justify-center">
-              <Image
+              {/* <Image
                 src={img1}
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
-              />
-              <Image
+              /> */}
+              {/* <Image
                 src={img2}
                 width={500}
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
-              />
-              <Image
+              /> */}
+              {/* <Image
                 src={img3}
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
-              />
+              /> */}
             </div>
             <div className="flex flex-col md:flex-row gap-2 pt-2 items-center justify-center">
-              <Image
+              {/* <Image
                 src={img4}
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
-              />
+              /> */}
               <Image
                 src={img5}
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
               />
-              <Image
+              {/* <Image
                 src={img6}
                 width={500}
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
-              />
+              /> */}
             </div>
 
             <div className="flex items-center justify-center pt-10 md:pt-28">

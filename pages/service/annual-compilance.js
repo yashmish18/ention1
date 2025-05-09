@@ -1,10 +1,6 @@
 import { Footer, Navbar, Contact } from 'components';
 //import React from 'react';
 import React, { useRef } from 'react'
-import rectangle from 'assets/annual1.png'
-import rectangle2 from 'assets/annual2.jpg'
-import Image from 'next/image';
-import Link from 'next/link'
 
 
 export default function complaince(){
@@ -23,7 +19,7 @@ export default function complaince(){
             </div>
             <div className='w-[85%] flex  gap-2 md:gap-6 flex-col md:flex-row mx-auto mt-20'>
             <div className='w-full md:w-[50%] pt-4 md:pt-0'>
-                    <Image className='h-auto rounded-md' src={rectangle} alt="Annual Compilance"></Image>
+                    {/* <Image className='h-auto rounded-md' src={rectangle} alt="Annual Compilance"></Image> */}
                 </div>
                 <div className='w-full my-auto  flex flex-col text-white md:w-[50%] '>
                     <p className='text-sm md:text-lg text-justify'>These company compliances are usually independent of the total turnover or the capital amount involved. The ROC compliance for registered private limited companies is mandatory. Not being able to adhere to the annual compliances for private limited companies may result in serious action on the firm.
@@ -38,7 +34,7 @@ export default function complaince(){
                     </p>
                 </div>
                 <div className='w-full md:w-[50%] pt-4 md:pt-0'>
-                    <Image className='h-auto rounded-md' src={rectangle2}  alt="Annual Compilance"></Image>
+                    {/* <Image className='h-auto rounded-md' src={rectangle2}  alt="Annual Compilance"></Image> */}
                 </div>
                 
             </div>

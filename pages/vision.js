@@ -1,11 +1,7 @@
 import React from 'react';
 import { Navbar, Footer } from 'components';
 import Image from 'next/image';
-import Link from 'next/link';
-import thread from '../assets/Group 223.svg';
-import about1 from 'assets/Rectangle 954 (2).jpg';
 import about2 from '../public/assets/E1/e1_9.svg';
-import contactus from 'assets/contactus.jpg';
 
 const Mission = () => {
   return (

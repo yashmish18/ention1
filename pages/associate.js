@@ -1,12 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { Navbar, Footer } from '../components/index'
-import styles from 'styles/Products.module.css'
-import Image from 'next/image'
-import hero from 'assets/associate.jpg'
-import supplier from 'assets/supplier.jpg'
-import manufacture from 'assets/manufacture.jpg'
-import distribution from 'assets/distribution.jpg'
-import Link from 'next/link'
 import PopUpForm from "../components/PopUpForm"
 import { IoClose } from "react-icons/io5"
 
@@ -17,7 +10,7 @@ const Associate = () => {
       <Navbar />
 
       {/* ====================== Header ======================  */}
-      <div className="lg:full-screen max-h-[25vh] lg:min-h-[90vh] flex justify-center items-center " style={{ backgroundImage: `url(${hero.src})`, backgroundSize: '100% 100%' }}>
+      <div className="lg:full-screen max-h-[25vh] lg:min-h-[90vh] flex justify-center items-center ">
         <div className="py-20 lg:py-0">
           <h1 className="w-full hidden md:block text-center text-white text-3xl md:text-4xl lg:text-6xl font-semibold px-0 md:px-10 pt-0 md:pt-14 lg:pt-0 ">
             Welcome to the Ention™

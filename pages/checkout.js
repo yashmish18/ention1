@@ -1,7 +1,6 @@
 import React, { useState, useEffect, use } from "react";
 import { Navbar, Footer } from "components";
 import Image from "next/image";
-import spec from "assets/Rectangle-1053.png";
 import { Loader } from "components/Utils";
 import { useLocalStorage } from "react-use";
 import { FaMinus, FaPlus } from "react-icons/fa";
@@ -10,14 +9,6 @@ import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { fetchProducts } from "utils/dbFunctions";
 import makePayment from "utils/razorpay";
-
-const product = {
-  image: spec,
-  name: "Thinkpad 12",
-  description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit inte",
-  price: 150000,
-};
 
 const Checkout = () => {
   const { data: sessionData, status: authStatus } = useSession();

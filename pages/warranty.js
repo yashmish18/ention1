@@ -1,9 +1,6 @@
 import React from 'react'
 import { Navbar, Footer } from 'components'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useWindowSize } from 'react-use';
-import hero from 'assets/warranty.png'
 
 
 const Warranty = () => {
@@ -14,7 +11,7 @@ const Warranty = () => {
             <Navbar />
             {/* ====================== Header ======================  */}
             <div className="header mb-8 lg:mb-10 relative w-full min-h-[25vh] md:min-h-[35vh] lg:min-h-[70vh]">
-                <Image src={hero} fill alt="Header" />
+                {/* <Image src={hero} fill alt="Header" /> */}
             </div>
             {/* ====================== Warranty Program ======================  */}
             <div className="pt-0 md:pt-4 text-center text-white mb-10 md:mb-12">
