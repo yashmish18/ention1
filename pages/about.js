@@ -2,7 +2,6 @@ import React from "react";
 import { Navbar, Footer } from "components";
 import Image from "next/image";
 import Link from "next/link";
-import { useWindowSize } from "react-use";
 import hero from "assets/aboutus.jpg";
 import about1 from "assets/Rectangle 954 (2).jpg";
 import about2 from "assets/Rectangle 1010.png";
