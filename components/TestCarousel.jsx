@@ -91,7 +91,7 @@ export default function TestCarousel() {
               key={image}
               onClick={() => {
                 setSelectedImage(index);
-                goToSlide(index + 2);
+                goToSlide(index);
               }}
             >
               <img
