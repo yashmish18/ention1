@@ -12,11 +12,42 @@ import { useRouter } from "next/router";
 import { Fade, Zoom } from "react-awesome-reveal";
 import TestCarousel from "components/TestCarousel";
 import gradientbg1 from "assets/gradient-bg1.png";
+import ImageCaraousel from "components/ImageCaraousel";
+
+// e1
+import e1image1 from "assets/product/e1/image1.jpg";
+import e1image2 from "assets/product/e1/image2.jpg";
+import e1image3 from "assets/product/e1/image3.jpg";
+// e2
+import e2image1 from "assets/product/e2/image1.jpg";
+import e2image2 from "assets/product/e2/image2.jpg";
+import e2image3 from "assets/product/e2/image3.jpg";
+// e1
+import e3image1 from "assets/product/e3/image1.jpg";
+import e3image2 from "assets/product/e3/image2.jpg";
+import e3image3 from "assets/product/e3/image3.jpg";
+
+const E1Images = [e1image1, e1image2, e1image3];
+const E2Images = [e2image1, e2image2, e2image3];
+const E3Images = [e3image1, e3image2, e3image3];
 
 const ProductDetails = () => {
   const router = useRouter();
 
   const { id } = router.query;
+
+  const getImages = (id) => {
+    switch (id) {
+      case "E1":
+        return E1Images;
+      case "E2":
+        return E2Images;
+      case "E3":
+        return E3Images;
+      default:
+        return [];
+    }
+  };
   return (
     <>
       <div
@@ -170,13 +201,13 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="relative max-w-[1440px] w-full h-fit mt-20">
-              <img src={LightPcImg.src} alt="pc-girl" className="w-full z-10" />
-              <div className="absolute w-[240px] sm:w-[320px] lg:w-[420px] xl:w-[560px] blur-bg-gradient rounded-[32px] lg:rounded-[60px] p-4 sm:p-8 lg:p-12 xl:p-16 flex flex-col items-center gap-2 sm:gap-4 xl:gap-8 z-20 top-8 sm:top-16 xl:top-32 right-8 sm:right-16 xl:right-32">
-                <p className="text-[24px] sm:text-[32px] lg:text-[48px] xl:text-[66px] font-bold text-white">
+            <div className="relative w-full h-fit mt-20 max-w-6xl mx-auto">
+              <ImageCaraousel images={getImages(id)} />
+              <div className="absolute w-[240px] sm:w-[320px] lg:w-[420px] xl:w-[560px] blur-bg-gradient rounded-[32px] lg:rounded-[60px] p-4 md:p-8 flex flex-col items-center gap-2 xl:gap-8 z-20 top-4 md:top-16 right-8 md:right-16">
+                <p className="text-[24px] md:text-[32px]  font-bold text-white">
                   Heading
                 </p>
-                <p className="text-[14px] sm:text-[18px] lg:text-[24px] xl:text-[32px] font-normal text-white text-center">
+                <p className="text-[14px] md:text-[18px]  font-normal text-white text-center">
                   Computing experience made smarter for learners with
                   lightweight and thin
                 </p>

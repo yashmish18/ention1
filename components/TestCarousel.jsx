@@ -73,11 +73,8 @@ export default function TestCarousel() {
               style={{
                 ...getStyle(index),
                 transition: "1s",
-                width: "18vw",
-
-                height: "50vh",
               }}
-              className="flex items-center justify-center text-2xl font-bold"
+              className="flex items-center justify-center text-2xl font-bold mt-20 p-10"
             >
               <img src={image} alt="laptop image" />
             </div>
