@@ -91,7 +91,7 @@ const ProductCard = (props) => {
             items={["512 GB SSD Storage", "1 TB SSD Storage"]}
           />
           <div className="flex flex-col gap-1 mt-5 ">
-            {Object.keys(productData).map((key) => {
+            {Object.keys(productData || {}).map((key) => {
               return <Detail title={key} content={productData[key]}></Detail>;
             })}
           </div>
