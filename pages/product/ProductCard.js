@@ -15,6 +15,7 @@ const ProductCard = (props) => {
   const [processorSelection, setProcessorSelection] = useState("");
   const [memorySelection, setMemorySelection] = useState("");
   const [storageSelection, setStorageSelection] = useState("");
+  const [generationSelection, setGenerationSelection] = useState("");
   const productData = newProducts[label];
 
   return (
@@ -59,7 +60,23 @@ const ProductCard = (props) => {
             setValue={setProcessorSelection}
             value={processorSelection}
             items={["Intel", "Ryzen"]}
+            on
           ></CustomDropdown>
+
+          {processorSelection ? (
+            <div>
+              <p className="font-semibold text-lg mt-6">Generation</p>
+              <CustomDropdown
+                value={generationSelection}
+                setValue={setGenerationSelection}
+                items={
+                  processorSelection === "Intel"
+                    ? ["Intel core i4", "Intel core i5", "Intel core i6"]
+                    : ["AMD Ryzen 3", "AMD Ryzen 4", "AMD Ryzen 5"]
+                }
+              ></CustomDropdown>
+            </div>
+          ) : null}
 
           <p className="font-semibold text-lg mt-6">Memory</p>
           <CustomDropdown
