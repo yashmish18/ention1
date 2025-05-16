@@ -7,6 +7,7 @@ import amd5Img from "assets/amd-ryzen-5-logo.png";
 import amd7Img from "assets/AMD-Ryzen-7-Category.png";
 import { useRouter } from "next/router";
 import CustomDropdown from "components/CustomDropdown";
+import newProducts from "lib/newData";
 
 const ProductCard = (props) => {
   const { label, className, viewClick, pdfCatalogLink } = props;
@@ -14,6 +15,7 @@ const ProductCard = (props) => {
   const [processorSelection, setProcessorSelection] = useState("");
   const [memorySelection, setMemorySelection] = useState("");
   const [storageSelection, setStorageSelection] = useState("");
+  const productData = newProducts[label];
 
   return (
     <div className={`w-[360px] flex flex-col items-center ${className}`}>
@@ -72,52 +74,9 @@ const ProductCard = (props) => {
             items={["512 GB SSD Storage", "1 TB SSD Storage"]}
           />
           <div className="flex flex-col gap-1 mt-5 ">
-            <p>
-              <b>Material - </b> Metal
-            </p>
-            <p>
-              <b>Colour - </b>Silver
-            </p>
-            <Detail
-              title={"Processor frequency"}
-              content="2.4Ghz to Turbo 4.2Ghz"
-            />
-            <Detail
-              title={"Graphic Memory"}
-              content="Intel Iris Xe Graphics 1GB"
-            />
-            <Detail
-              title={"Fingerprint reader"}
-              content="Yes, located on touchpad"
-            />
-            <Detail
-              title={"Operating system"}
-              content="Pre-Installed Window 11 Pro"
-            />
-            <Detail
-              title={"Wi-Fi"}
-              content="M.2 interface, 802.11 a/b/g/n/a 2.4G and 5G Dual Band"
-            />
-            <Detail title={"Bluetooth	4.2 version"} />
-            <Detail
-              title={"USB	2"}
-              content="USB 2.0 and 2 USB 3.0/3.1, Type C"
-            />
-            <Detail title={"HDMI"} content="HDMI, Support 4K 24HZ" />
-            <Detail title={"Memory card"} content="Yes, one SD-MMC card Slot" />
-            <Detail
-              title={"Earphone port"}
-              content="3.5mm jack, Mic in/Line Out"
-            />
-            <Detail title={"Mic"} content="Bulit-in, Analog microphone" />
-            <Detail title={"Webcam"} content="Yes, 2.0Mmeet" />
-            <Detail title={"Touchpad"} content="Yes, extra Large" />
-            <Detail title={"Product Dimension"} content="360*240*15mm," />
-            <Detail title={"Weight 	1.8KG"} />
-            <Detail
-              title={"Battery"}
-              content="5000mah, 57.75Wh/11.4V, 3 Cells Lithium-ion polymer battery"
-            />
+            {Object.keys(productData).map((key) => {
+              return <Detail title={key} content={productData[key]}></Detail>;
+            })}
           </div>
           <div className="text-black font-bold text-3xl text-center w-full mt-4">
             Coming soon

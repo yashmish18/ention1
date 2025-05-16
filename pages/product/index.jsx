@@ -97,15 +97,15 @@ const Product = () => {
                 <Slide direction="left" cascade>
                   <ProductCard
                     viewClick={() => handleViewClick(E1Images)}
-                    label={"E1"}
-                    pdfCatalogLink="/Ention Laptop E1 Catalogue design.pdf"
+                    label={"E5"}
+                    pdfCatalogLink="/E5.pdf"
                   />
                 </Slide>
                 <ProductCard
                   viewClick={() => handleViewClick(E2Images)}
-                  label={"E2"}
+                  label={"E4"}
                   className="hidden md:flex"
-                  pdfCatalogLink="/Ention Laptop E2 Catalogue design.pdf"
+                  pdfCatalogLink="/E4.pdf"
                 />
                 <Slide direction="right" cascade>
                   <ProductCard
@@ -152,7 +152,7 @@ const Product = () => {
                     className="w-[320px] sm:w-[240px] md:w-[280px] lg:w-[320px] xl:w-[390px] h-auto z-[2]"
                   />
                   <div className="flex flex-col items-center sm:items-start gap-8 lg:gap-16 w-full min-[540px]:w-[360px] text-center sm:text-left sm:w-[320px] lg:w-[360px] xl:w-[480px] ">
-                    <p className="text-[16px] min-[360px]:text-lg min-[420px]:text-xl min-[540px]:text-2xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-[#555555] leading-8 sm:leading-7 md:leading-8 lg:leading-10">
+                    <p className="text-[16px] min-[360px]:text-lg min-[420px]:text-xl min-[540px]:text-2xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white leading-8 sm:leading-7 md:leading-8 lg:leading-10">
                       On-Site Warranty is Rather a Guaranty of Our Infallible
                       Faith in Our Machine.
                     </p>
