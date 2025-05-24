@@ -38,9 +38,9 @@ const ProductDetails = () => {
 
   const getImages = (id) => {
     switch (id) {
-      case "E1":
+      case "E5":
         return E1Images;
-      case "E2":
+      case "E4":
         return E2Images;
       case "E3":
         return E3Images;
@@ -205,7 +205,7 @@ const ProductDetails = () => {
               <ImageCaraousel images={getImages(id)} />
               <div className="absolute w-[240px] sm:w-[320px] lg:w-[420px] xl:w-[560px] blur-bg-gradient rounded-[32px] lg:rounded-[60px] p-4 md:p-8 flex flex-col items-center gap-2 xl:gap-8 z-20 top-4 md:top-16 right-8 md:right-16">
                 <p className="text-[24px] md:text-[32px]  font-bold text-white">
-                  Heading
+                  {id} Series
                 </p>
                 <p className="text-[14px] md:text-[18px]  font-normal text-white text-center">
                   Computing experience made smarter for learners with

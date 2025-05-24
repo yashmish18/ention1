@@ -22,7 +22,7 @@ export default function ImageCaraousel({ images }) {
             <img
               src={image.src}
               alt={`Slider Image ${index}`}
-              className="w-full  aspect-auto rounded-lg object-fill"
+              className="w-full aspect-auto rounded-lg object-fill"
             />
           </SwiperSlide>
         ))}
