@@ -4,7 +4,7 @@ import BezelsImg from "assets/E1/bezels.png";
 import FullHDImg from "assets/E1/full-hd.png";
 import IntelImg from "assets/E1/intel.png";
 import WifiImg from "assets/E1/wifi.png";
-import LightPcImg from "assets/E1/light-pc.png";
+import LightPcImg from "assets/E1/light-pc.jpg";
 import { Fade } from "react-awesome-reveal";
 import { ItemImage } from "./ItemImage";
 
