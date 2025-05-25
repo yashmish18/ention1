@@ -1,15 +1,7 @@
 import Footer from "components/layout/footer";
 import Header from "components/layout/header";
-import AnalogImg from "assets/E1/analog.png";
-import Win11Img from "assets/E1/win11.png";
-import BezelsImg from "assets/E1/bezels.png";
-import FullHDImg from "assets/E1/full-hd.png";
-import IntelImg from "assets/E1/intel.png";
-import WifiImg from "assets/E1/wifi.png";
-import LightPcImg from "assets/E1/light-pc.png";
-import PcGirlImg from "assets/E1/pc-girl.png";
 import { useRouter } from "next/router";
-import { Fade, Zoom } from "react-awesome-reveal";
+import { Zoom } from "react-awesome-reveal";
 import TestCarousel from "components/TestCarousel";
 import gradientbg1 from "assets/gradient-bg1.png";
 import ImageCaraousel from "components/ImageCaraousel";
@@ -26,6 +18,9 @@ import e2image3 from "assets/product/e2/image3.jpg";
 import e3image1 from "assets/product/e3/image1.jpg";
 import e3image2 from "assets/product/e3/image2.jpg";
 import e3image3 from "assets/product/e3/image3.jpg";
+import E5Feature from "./features/E5Feature";
+import E3Feature from "./features/E3Feature";
+import E4Feature from "./features/E4Feature";
 
 const E1Images = [e1image1, e1image2, e1image3];
 const E2Images = [e2image1, e2image2, e2image3];
@@ -46,6 +41,19 @@ const ProductDetails = () => {
         return E3Images;
       default:
         return [];
+    }
+  };
+
+  const getFeatureComponent = (id) => {
+    switch (id) {
+      case "E5":
+        return <E5Feature />;
+      case "E4":
+        return <E4Feature />;
+      case "E3":
+        return <E3Feature />;
+      default:
+        return null;
     }
   };
   return (
@@ -88,118 +96,7 @@ const ProductDetails = () => {
               </button>
             </div>
             <div className="flex justify-center w-[80%] mt-20">
-              <div className="flex flex-col md:flex-row justify-center gap-4">
-                <div className="flex flex-col gap-4">
-                  <Fade direction="left">
-                    <ItemImage
-                      img={AnalogImg}
-                      label={
-                        <p
-                          className={`absolute text-center text-[32px] min-[450px]:text-[42px] lg:text-[52px] xl:text-[60px] font-bold`}
-                        >
-                          2 Analog microphone
-                        </p>
-                      }
-                    />
-                  </Fade>
-                  <Fade direction="left">
-                    <ItemImage
-                      img={BezelsImg}
-                      label={
-                        <p
-                          className={`absolute text-center text-[32px] min-[450px]:text-[36px] lg:text-[50px] font-bold`}
-                        >
-                          2-sided narrow bezels
-                        </p>
-                      }
-                    />
-                  </Fade>
-                  <Fade direction="left">
-                    <ItemImage
-                      img={FullHDImg}
-                      label={
-                        <p
-                          className={`absolute text-center font-bold text-[32px] min-[450px]:text-[36px] lg:text-[50px] bottom-4`}
-                        >
-                          14inch, full HD 1920x1080
-                        </p>
-                      }
-                    />
-                  </Fade>
-                  <Fade direction="left">
-                    <ItemImage
-                      img={IntelImg}
-                      label={
-                        <div
-                          className={`absolute text-center left-8 flex flex-col`}
-                        >
-                          <p className="text-[42px] lg:text-[66px] font-bold">
-                            Intel
-                          </p>
-                          <p className="text-[24px] lg:text-4xl font-bold">
-                            J4105
-                          </p>
-                        </div>
-                      }
-                    />
-                  </Fade>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <Fade direction="right">
-                    <ItemImage
-                      img={Win11Img}
-                      label={
-                        <p
-                          className={`absolute text-center text-[42px] lg:text-[60px] font-medium`}
-                        >
-                          Windows 11
-                        </p>
-                      }
-                    />
-                  </Fade>
-                  <Fade direction="right">
-                    <ItemImage
-                      img={FullHDImg}
-                      label={
-                        <div
-                          className={`absolute text-center bottom-4 flex flex-col`}
-                        >
-                          <p className="font-bold text-[32px] min-[450px]:text-[42px] lg:text-[66px]">
-                            4500mah
-                          </p>
-                          <p className="font-bold text-[18px] min-[450px]:text-[24px] lg:text-[31px]">
-                            Lathium-ion polymer battery
-                          </p>
-                        </div>
-                      }
-                    />
-                  </Fade>
-                  <Fade direction="right">
-                    <ItemImage
-                      img={WifiImg}
-                      label={
-                        <div
-                          className={`absolute left-8 flex flex-col text-[24px] min-[450px]:text-[28px] xl:text-[40px]`}
-                        >
-                          <p className="font-bold">Dual band wifi</p>
-                          <p className="font-medium">2.4GHz and 5GHz</p>
-                        </div>
-                      }
-                    />
-                  </Fade>
-                  <Fade direction="right">
-                    <ItemImage
-                      img={LightPcImg}
-                      label={
-                        <p className="absolute font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] bottom-4">
-                          Thin and light{" "}
-                          <span className="text-[16px] xl:text-xl">1.2kg</span>
-                        </p>
-                      }
-                    />
-                  </Fade>
-                </div>
-              </div>
+              {getFeatureComponent(id)}
             </div>
             <div className="relative w-full h-fit mt-20 max-w-6xl mx-auto">
               <ImageCaraousel images={getImages(id)} />
@@ -218,17 +115,6 @@ const ProductDetails = () => {
       </div>
       <Footer />
     </>
-  );
-};
-
-const ItemImage = (props) => {
-  const { img, text, label } = props;
-  return (
-    <div className="flex items-center justify-center relative text-white">
-      <img src={img.src} alt="analog-img" className="w-[560px] h-auto" />
-      {label}
-      {/* <p className={`absolute text-center ${cn}`}>{text}</p> */}
-    </div>
   );
 };
 
