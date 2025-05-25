@@ -109,7 +109,7 @@ const E5Feature = () => {
           <ItemImage
             img={LightPcImg}
             label={
-              <p className="absolute font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] bottom-4">
+              <p className="absolute text-white font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] top-3">
                 Thin and light{" "}
                 <span className="text-[16px] xl:text-xl">1.68Kg</span>
               </p>
