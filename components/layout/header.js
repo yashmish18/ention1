@@ -28,10 +28,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
-  useEffect(() => {
-    console.log({ bgColor });
-  }, [bgColor]);
-
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 

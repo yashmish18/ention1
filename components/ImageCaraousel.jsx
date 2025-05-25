@@ -3,8 +3,6 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 export default function ImageCaraousel({ images }) {
-  console.log(images);
-
   return (
     <div className="relative bg-blue-600 rounded-2xl overflow-hidden">
       <Swiper
