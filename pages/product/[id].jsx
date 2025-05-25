@@ -98,15 +98,15 @@ const ProductDetails = () => {
             <div className="flex justify-center w-[80%] mt-20">
               {getFeatureComponent(id)}
             </div>
-            <div className="relative w-full h-fit mt-20 max-w-6xl mx-auto">
+            <div className="relative w-full h-fit mt-20 max-w-6xl mx-auto mb-6">
               <ImageCaraousel images={getImages(id)} />
               <div className="absolute w-[240px] sm:w-[320px] lg:w-[420px] xl:w-[560px] blur-bg-gradient rounded-[32px] lg:rounded-[60px] p-4 md:p-8 flex flex-col items-center gap-2 xl:gap-8 z-20 top-4 md:top-16 right-8 md:right-16">
                 <p className="text-[24px] md:text-[32px]  font-bold text-white">
                   {id} Series
                 </p>
                 <p className="text-[14px] md:text-[18px]  font-normal text-white text-center">
-                  Computing experience made smarter for learners with
-                  lightweight and thin
+                  Computing experience made smarter for learners, lightweight
+                  and thin that match with your fast-moving lifestyle.
                 </p>
               </div>
             </div>
