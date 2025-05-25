@@ -6,7 +6,7 @@ export default function ImageCaraousel({ images }) {
   console.log(images);
 
   return (
-    <div className="relative bg-blue-600 rounded-lg">
+    <div className="relative bg-blue-600 rounded-2xl overflow-hidden">
       <Swiper
         autoplay={{
           delay: 2000,
@@ -22,7 +22,7 @@ export default function ImageCaraousel({ images }) {
             <img
               src={image.src}
               alt={`Slider Image ${index}`}
-              className="w-full aspect-auto rounded-lg object-fill"
+              className="w-full aspect-auto rounded-2xl object-fill"
             />
           </SwiperSlide>
         ))}

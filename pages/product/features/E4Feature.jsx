@@ -17,9 +17,9 @@ const E4Feature = () => {
             img={AnalogImg}
             label={
               <p
-                className={`absolute text-center text-[32px] min-[450px]:text-[42px] lg:text-[52px] xl:text-[60px] font-bold`}
+                className={`absolute text-center text-[24px] min-[450px]:text-[42px] lg:text-[40px] xl:text-[50px] font-bold`}
               >
-                2 Analog microphone
+                Mic Bulit-in, Analog microphone
               </p>
             }
           />
@@ -28,11 +28,14 @@ const E4Feature = () => {
           <ItemImage
             img={BezelsImg}
             label={
-              <p
-                className={`absolute text-center text-[32px] min-[450px]:text-[36px] lg:text-[50px] font-bold`}
-              >
-                2-sided narrow bezels
-              </p>
+              <div className={`absolute text-center flex flex-col`}>
+                <p className="text-[42px] lg:text-[66px] font-bold">
+                  Narrow Bezel
+                </p>
+                <p className="text-[24px] lg:text-4xl font-bold">
+                  Anti-glare display
+                </p>
+              </div>
             }
           />
         </Fade>
@@ -43,7 +46,7 @@ const E4Feature = () => {
               <p
                 className={`absolute text-center font-bold text-[32px] min-[450px]:text-[36px] lg:text-[50px] bottom-4`}
               >
-                14inch, full HD 1920x1080
+                15.6inch, full HD 1920*1080
               </p>
             }
           />
@@ -52,9 +55,22 @@ const E4Feature = () => {
           <ItemImage
             img={IntelImg}
             label={
-              <div className={`absolute text-center left-8 flex flex-col`}>
-                <p className="text-[42px] lg:text-[66px] font-bold">Intel</p>
-                <p className="text-[24px] lg:text-4xl font-bold">J4105</p>
+              <div
+                className={`absolute text-center flex flex-row items-center justify-between gap-4`}
+              >
+                <div>
+                  <p className="text-[42px] lg:text-[50px] font-bold">
+                    Intel i7
+                  </p>
+                  <p className="text-[24px] lg:text-3xl font-bold">13620</p>
+                </div>
+                <p className="text-[24px] lg:text-3xl font-bold">or</p>
+                <div>
+                  <p className="text-[42px] lg:text-[50px] font-bold">
+                    Intel i5
+                  </p>
+                  <p className="text-[24px] lg:text-3xl font-bold">1235U</p>
+                </div>
               </div>
             }
           />
@@ -68,7 +84,7 @@ const E4Feature = () => {
               <p
                 className={`absolute text-center text-[42px] lg:text-[60px] font-medium`}
               >
-                Windows 11
+                Windows 11 Pro
               </p>
             }
           />
@@ -79,7 +95,7 @@ const E4Feature = () => {
             label={
               <div className={`absolute text-center bottom-4 flex flex-col`}>
                 <p className="font-bold text-[32px] min-[450px]:text-[42px] lg:text-[66px]">
-                  4500mah
+                  5000mah -19V, 65W
                 </p>
                 <p className="font-bold text-[18px] min-[450px]:text-[24px] lg:text-[31px]">
                   Lathium-ion polymer battery
@@ -107,7 +123,7 @@ const E4Feature = () => {
             label={
               <p className="absolute font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] bottom-4">
                 Thin and light{" "}
-                <span className="text-[16px] xl:text-xl">1.2kg</span>
+                <span className="text-[16px] xl:text-xl">1.67kg</span>
               </p>
             }
           />
