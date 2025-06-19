@@ -1,79 +1,180 @@
 import React from "react";
+import Header from "components/layout/header";
 import { Navbar, Footer } from "components";
 import Image from "next/image";
 import Link from "next/link";
 
+// Import images
+import storyImage from "assets/0N1A1389.png";
+import peopleImage from "assets/market-pc.png";
+import productImage from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
+import consultancyImage from "assets/serviceimg.png";
+import ellipseBg from "assets/ellipse-gradient-half.png";
+
 const About = () => {
   return (
-    <main>
-      <Navbar />
-      {/* ====================== Header ======================  */}
-      <div className="header mb-4 lg:mb-14 relative w-full min-h-[25vh] lg:min-h-[90vh]">
-        {/* <Image src={hero} fill alt="Header" /> */}
+    <main className="min-h-screen  relative overflow-hidden">
+      <Header />
+       {/*} <Image
+          src={ellipseBg}
+          alt="Background Decoration"
+          className="absolute top-0 left-1/2 -translate-x-1/2 z-0 w-[500px] h-auto pointer-events-none"
+        /> */}
+
+      {/* Hero Section */}
+      <div className="pt-32 pb-20 text-center text-white relative z-10 bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA]">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 uppercase">
+            Ention Is Not a Brand.<br />
+            <span className="opacity-0 animate-fadeIn">It's Your Working Companion.</span>
+          </h1>
+          <p className="text-lg md:text-xl max-w-4xl mx-auto mt-12">
+            The name Ention is more than a label; it's a philosophy. Inspired by the humble phrase "mention not", 
+            Ention was thoughtfully crafted to represent our core values, each letter in Ention represents a value we live and build by:
+            <b> Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</b>
+          </p>
+        </div>
       </div>
 
-      {/* ====================== About Us ======================  */}
-      <div className="pt-0 md:pt-10 text-center text-white mb-10 md:mb-12">
-        <h2 className="text-3xl md:text-5xl font-semibold"> About Us</h2>
-        <p className="mx-auto w-[70%] mt-2 md:mt-4 text-sm md:text-xl">
-          Ention was incorporated on 28th Jan,2022 in India to provide laptop
-          products with features that give users the ability to remain in touch
-          with the latest trend of technology. Intending to fill in the market
-          need for a professional, customer-focused computer company. The
-          company emphasizes service and support to differentiate itself from
-          more price-oriented computer companies.
-        </p>
-      </div>
-
-      <div className="pt-0 md:pt-10 text-white mb-10 md:mb-12 w-full md:w-[70%] mx-auto">
-        <div className="w-full flex flex-col md:flex-row px-10 md:px-0">
-          <div className="">
-            {/* <Image
-              src={about2}
-              height={1300}
-              alt="About Us"
-              className="rounded"
-            /> */}
-          </div>
-          <div className="center px-0 md:px-5 ml-2 pt-4 md:pt-0">
-            <p className="text-sm md:text-xl">
-              We are on the brink of penetrating a lucrative market in a rapidly
-              growing industry. The current trend towards an increase in the
-              number of entrepreneurs and competition amongst existing companies
-              presents an opportunity for company to penetrate this market.
-            </p>
-          </div>
-          <div className="mt-10 md:mt-16">
-            {/* <Image
-              src={about1}
-              height={1300}
-              alt="About Us"
-              className="rounded"
-            /> */}
+      {/* Video Section */}
+      <div className="bg-[#0FAFCA] py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="relative w-full aspect-video">
+            <iframe
+              src="https://www.youtube.com/embed/wdNiEeuIEr0?autoplay=1&loop=1&playlist=wdNiEeuIEr0&controls=0&mute=1"
+              title="YouTube video player"
+              className="absolute top-0 left-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </div>
 
-      {/* ====================== COntact Us ======================  */}
-      <div className="pt-0 md:pt-10 text-center text-white mb-0 md:mb-12">
-        <h2 className="text-3xl md:text-5xl font-semibold"> Contact Us </h2>
-        <p className="mx-auto w-[70%] mt-4">
-          {" "}
-          Lorem ipsum dolor sit amet, consectetur adipiscing neque.{" "}
-        </p>
-        {/* <Image
-          src={contactus}
-          alt="Contact Us"
-          width="5000"
-          className="mt-4 md:mt-12 mb-4 md:mb-16"
-        /> */}
-        <center>
-          <Link href="/corporate">
-            <button className="w-[134px] h-[45px] text-lg bg-[#007E9E] rounded-full mb-10 transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out">
-              Contact Us
-            </button>
-          </Link>
-        </center>
+      {/* Story Section */}
+      <div className="bg-[#0FAFCA] py-20 text-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 uppercase underline underline-offset-8">
+            The Story Behind Ention
+          </h2>
+          <div className="flex flex-col md:flex-row gap-10 items-center mb-20">
+            <div className="w-full md:w-1/2">
+              <div className="rounded-lg overflow-hidden aspect-[4/5]">
+                <Image
+                  src={storyImage}
+                  alt="Story"
+                  width={400}
+                  height={500}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+            <div className="w-full md:w-1/2">
+              <p className="text-lg leading-relaxed">
+                The name Ention is more than a label it's a philosophy. Inspired by the humble phrase <b>"mention not"</b>, 
+                Ention was thoughtfully crafted to represent our core values, each letter in Ention represents a value we live and build by:
+                <b>Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</b><br /><br />
+                At Ention, we're not just building a brand—we're creating your working companion. As a pioneering force in the computing industry, 
+                we proudly stand at the intersection of manufacturing excellence, customer-centric marketing, and strategic technology consultancy.
+              </p>
+            </div>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 uppercase underline underline-offset-8">
+            Who We Are
+          </h2>
+          <div className="flex flex-col md:flex-row-reverse gap-10 items-center">
+            <div className="w-full md:w-1/2">
+              <div className="rounded-lg overflow-hidden">
+                <Image
+                  src={peopleImage}
+                  alt="Who We Are"
+                  width={400}
+                  height={500}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+            <div className="w-full md:w-1/2">
+              <p className="text-lg leading-relaxed">
+                Ention is an Indian startup, founded on January 28, 2022, in Delhi, with one dream: To become India's leading 
+                <b> Made-in-India</b> brand for laptops and computer devices, built for everyday professionals, creators, students, 
+                and gamers. We're driven by a deep commitment to quality, affordability, and innovation—delivering world-class devices 
+                designed to meet the unique demands of Indian consumers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* What We Offer Section */}
+      <div className="bg-[#0FAFCA] py-20 text-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 uppercase underline underline-offset-8">
+            What We Offer
+          </h2>
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* Products Card */}
+            <div className="flex flex-col h-full">
+              <h3 className="text-2xl font-bold mb-6 text-center">Products</h3>
+              <div className="rounded-lg overflow-hidden mb-6 pb-14">
+                <Image
+                  src={productImage}
+                  alt="Laptop"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 flex-grow">
+                <div className="text-lg mb-6">
+                  Ention manufactures and direct to consumer distribution of high performance laptops designed to meet the diverse needs of today's users. 
+                  Whether you're a student, gamer, working professional, or business leader we have a solution for you. Our laptops are available across 
+                  major e-commerce platforms and through our official website, offering nationwide access and fast doorstep delivery.
+                  <br /><br />
+                  <b>Core Features:</b>
+                  <ul className="list-disc pl-6 mt-2">
+                    <li>Customization: Tailor your laptop to your needs.</li>
+                    <li>Processors: Choose from Intel® Core™N95, i5, i7, i9 and AMD Ryzen™ R5, R7 chipsets.</li>
+                    <li>Affordability: Premium performance at an unmatched price point</li>
+                    <li>18 months onsite warranty: at your door step.</li>
+                  </ul>
+                </div>
+                <button className="w-full bg-white text-black font-semibold py-4 rounded-lg hover:bg-gray-100 transition-colors">
+                  Know More
+                </button>
+              </div>
+            </div>
+
+            {/* Consultancy Card */}
+            <div className="flex flex-col h-full">
+              <h3 className="text-2xl font-bold mb-6 text-center">Consultancy & Platform Services</h3>
+              <div className="rounded-lg overflow-hidden mb-6">
+                <Image
+                  src={consultancyImage}
+                  alt="Consultancy"
+                  width={400}
+                  height={300}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6 flex-grow space-y-14">
+                <div className="text-lg mb-6">
+                  At Ention, we don't just offer technology products—we serve as a trusted Technology and Professional Service Consultant 
+                  for startups, small businesses, and institutions. Our goal is to help businesses make informed, strategic decisions that 
+                  drive growth and ensure compliance. We provide end-to-end support in areas such as regulatory compliance, business certifications, 
+                  and licensing. Ention offers reliable, expert guidance. Our consultancy services are designed to simplify operations, reduce risks, 
+                  and help businesses stay ahead in an ever-changing regulatory environment—making Ention a one-stop solution for your technology 
+                  and compliance needs.
+                </div>
+                <button className="w-full bg-white text-black font-semibold py-4 rounded-lg hover:bg-gray-100 transition-colors">
+                  Know More
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Footer />

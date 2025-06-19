@@ -1,410 +1,300 @@
 import { Navbar, Footer } from 'components';
-import Slider from 'react-slick';
-import React, { useRef } from 'react';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
-//import MacBook from 'assets/Introducing the new MacBook Air.mp4'
+import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FiDownload, FiHeadphones, FiPhone, FiTool, FiChevronRight, FiSearch, FiMonitor, FiSettings, FiShield, FiWifi, FiBatteryCharging, FiCheckCircle, FiAlertTriangle, FiBookOpen, FiArrowRight, FiMessageCircle } from 'react-icons/fi';
 
-const Macbook = 'assets/Introducing the new MacBook Air.mp4';
+const resourceLinks = [
+  { title: 'Troubleshooting', desc: 'Guides and solutions for common issues', href: '#' },
+  { title: 'Drivers & Downloads', desc: 'Get the latest drivers and software', href: '#' },
+  { title: 'Warranty Services', desc: 'Check and manage your warranty', href: '#' },
+  { title: 'User Manuals', desc: 'Find and download user manuals', href: '#' },
+  { title: 'Product Registration', desc: 'Register your Ention product', href: '#' },
+  { title: 'Order Parts', desc: 'Order replacement parts and accessories', href: '#' },
+  { title: 'FAQs', desc: 'Frequently asked questions', href: '#' },
+  { title: 'Community Forums', desc: 'Join the Ention community', href: '#' },
+  { title: 'Contact Support', desc: 'Get in touch with our support team', href: '#' },
+];
 
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  autoPlay: true,
-  focusOnSelect: true,
-  arrows: false,
-  initialSlide: 0,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true,
-      },
-    },
-    {
-      breakpoint: 820,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
-        initialSlide: 2,
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
+const articleData = [
+  {
+    title: 'How to Optimize Battery Life',
+    desc: "Learn tips to extend your laptop's battery performance",
+    views: '15,234 views',
+    icon: FiBatteryCharging,
+    img: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80',
+    link: '#',
+  },
+  {
+    title: 'WiFi Connection Issues',
+    desc: 'Troubleshoot wireless connectivity problems',
+    views: '12,891 views',
+    icon: FiWifi,
+    img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80',
+    link: '#',
+  },
+  {
+    title: 'Installing Latest Drivers',
+    desc: 'Step-by-step guide to update your drivers',
+    views: '18,567 views',
+    icon: FiDownload,
+    img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80',
+    link: '#',
+  },
+  {
+    title: 'Laptop Overheating Solutions',
+    desc: 'Fix overheating issues and improve cooling',
+    views: '9,432 views',
+    icon: FiAlertTriangle,
+    img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
+    link: '#',
+  },
+  {
+    title: 'Keyboard Not Working Fix',
+    desc: 'Resolve keyboard and key responsiveness issues',
+    views: '11,765 views',
+    icon: FiTool,
+    img: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80',
+    link: '#',
+  },
+  {
+    title: 'Screen Flickering Solutions',
+    desc: 'Fix display issues and screen problems',
+    views: '7,891 views',
+    icon: FiMonitor,
+    img: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80',
+    link: '#',
+  },
+];
 
-const ProductCard = ({ product }) => (
-  <div
-    className={`w-full lg:w-[80%] px-4 mx-auto h-36  mb-6  group cursor-pointer hover:shadow-lg md:px-10 lg:px-0`}
-  >
-    <div
-      className={`w-full mt-6 md:mt-20 gap-10 transition duration-150 ease-in-out hover:scale-105 `}
-    >
-      <video
-        className="border border-color:blue rounded-md"
-        src={Macbook}
-        width="600"
-        height="300"
-        controls="controls"
-        autoPlay="true"
-      />
-      <div className="border-teal-600  cursor-pointer">
-        <div className="py-2 md:py-4 text-3xl text-white font-semibold">
-          <h2 className="text-2xl"> {product.title} </h2>
-        </div>
-        <div className={`py-2 text-sm md:text-lg text-white`}>
-          {product.description}
-        </div>
-        {/* <hr className="w-[full border-1 border-gray-500" /> */}
-      </div>
-    </div>
-  </div>
-);
+const categoryData = [
+  {
+    key: 'hardware',
+    icon: FiMonitor,
+    title: 'Hardware Support',
+    items: [
+      'Battery Issues',
+      'Display Problems',
+      'Keyboard & Touchpad',
+      'Audio Issues',
+      'Overheating',
+    ],
+  },
+  {
+    key: 'software',
+    icon: FiSettings,
+    title: 'Software Support',
+    items: [
+      'Driver Updates',
+      'BIOS Updates',
+      'Windows Issues',
+      'Performance Optimization',
+      'Security Updates',
+    ],
+  },
+  {
+    key: 'warranty',
+    icon: FiShield,
+    title: 'Warranty & Service',
+    items: [
+      'Check Warranty Status',
+      'Extended Warranty',
+      'Repair Services',
+      'Parts Replacement',
+      'Service Centers',
+    ],
+  },
+];
 
-const ProductsCarousel = ({ products }) => {
-  const [slider1] = [useRef()];
+const IconWrapper = ({ icon: Icon, size = 24 }) => <Icon size={size} />;
 
+export default function TechnicalSupport() {
   return (
-    <div className="mb-8 md:mb-10 pb-4 w-full">
-      <div className="w-full">
-        <Slider {...settings} ref={slider1} className="pb-4 md:pb-8">
-          {products?.map((product, i) => (
-            <div key={`product-${product.category}-${i}`} className="pb-4">
-              {' '}
-              <ProductCard product={product} />{' '}
+    <main className="bg-[#070D2A] min-h-screen">
+      <Navbar />
+      {/* Header Section */}
+      <header className="text-center py-20">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3">Ention Support</h1>
+        <p className="text-lg md:text-xl text-white mb-8 font-medium">Get help with your Ention laptop. Find drivers, manuals, troubleshooting guides and more.</p>
+        <form className="flex justify-center items-center mx-auto max-w-xl border border-gray-200 rounded-lg overflow-hidden">
+          <div className="relative w-full">
+            <input className="w-full py-3 px-4 pr-12 bg-gray-100 border-none rounded-l-lg text-base focus:outline-none" placeholder="Search for support articles, drivers, or product guides..." aria-label="Search" />
+            <button type="submit" aria-label="Search" className="absolute right-0 top-0 bottom-0 px-3 text-gray-600 hover:text-blue-600 flex items-center justify-center text-xl">
+              <FiSearch />
+            </button>
+          </div>
+        </form>
+      </header>
+
+      {/* Quick Support Options */}
+      <section className="py-12 w-full">
+        <h2 className="text-center text-2xl font-extrabold mb-10 text-gray-900">Quick Support Options</h2>
+        <div className="flex flex-wrap justify-center gap-8 mb-8">
+          {/* Card 1 */}
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+            <Image src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Drivers & Downloads" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
+            <div className="flex flex-col items-center p-4 w-full flex-1">
+              <div className="text-3xl text-gray-800 mb-2"><FiDownload /></div>
+              <div className="font-bold text-lg mb-1">Drivers & Downloads</div>
+              <div className="text-gray-600 text-base mb-2">Get the latest drivers and software</div>
+              <div className="flex-1" />
+              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Download Now</a>
+            </div>
+          </div>
+          {/* Card 2 */}
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+            <Image src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Live Chat" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
+            <div className="flex flex-col items-center p-4 w-full flex-1">
+              <div className="text-3xl text-gray-800 mb-2"><FiHeadphones /></div>
+              <div className="font-bold text-lg mb-1">Live Chat</div>
+              <div className="text-gray-600 text-base mb-2">Chat with our support team</div>
+              <div className="flex-1" />
+              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Start Chat</a>
+            </div>
+          </div>
+          {/* Card 3 */}
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+            <Image src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Phone Support" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
+            <div className="flex flex-col items-center p-4 w-full flex-1">
+              <div className="text-3xl text-gray-800 mb-2"><FiPhone /></div>
+              <div className="font-bold text-lg mb-1">Phone Support</div>
+              <div className="text-gray-600 text-base mb-2">Call our technical support</div>
+              <div className="flex-1" />
+              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Get Number</a>
+            </div>
+          </div>
+          {/* Card 4 */}
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+            <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Service Request" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
+            <div className="flex flex-col items-center p-4 w-full flex-1">
+              <div className="text-3xl text-gray-800 mb-2"><FiTool /></div>
+              <div className="font-bold text-lg mb-1">Service Request</div>
+              <div className="text-gray-600 text-base mb-2">Book a repair or maintenance service for your device</div>
+              <div className="flex-1" />
+              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Book Service</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Support Downloads & Resources */}
+      <section className="py-12 w-full">
+        <h2 className="text-center text-2xl font-extrabold mb-10 text-gray-900">Support Downloads & Resources</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {resourceLinks.map(link => (
+            <a href={link.href} key={link.title} tabIndex={0} aria-label={link.title} className="bg-white rounded-xl shadow-md p-8 flex flex-col hover:shadow-lg transition-all cursor-pointer">
+              <div className="font-bold text-lg text-sky-700 mb-2">{link.title}</div>
+              <div className="text-gray-600 text-base">{link.desc}</div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* Browse Support by Category */}
+      <section className="py-12 w-full">
+        <h2 className="text-center text-2xl font-extrabold mb-10 text-gray-900">Browse Support by Category</h2>
+        <div className="flex flex-wrap justify-center gap-8 mb-8">
+          {categoryData.map((cat) => (
+            <div key={cat.key} className="bg-white rounded-xl shadow-md p-8 min-w-[240px] max-w-xs flex-1 flex flex-col">
+              <div className="flex items-center text-sky-700 font-bold text-lg mb-4 gap-2">
+                <IconWrapper icon={cat.icon} /> {cat.title}
+              </div>
+              <ul className="text-gray-800 text-base space-y-2">
+                {cat.items.map((item, index) => (
+                  <li key={index}>
+                    <Link href={`/support/${cat.key}/${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-sky-600 font-medium transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
-        </Slider>
-      </div>
-    </div>
-  );
-};
-
-export default function support() {
-  return (
-    <main className="">
-      <Navbar />
-      <div className="">
-        {/* <Image
-          className="w-[100%] h-auto"
-          src={rectangle}
-          alt="Techical Support"
-        ></Image> */}
-      </div>
-      <div className="w-full lg:w-[80%] mx-auto  pt-6 md:pt-20 px-8 lg:px-0">
-        <h1 className="text-white text-3xl md:text-5xl pl-2 md:pl-6 font-bold ">
-          Support help center
-        </h1>
-
-        <ProductsCarousel
-          products={[
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-          ]}
-        />
-      </div>
-      <div className="w-full lg:w-[80%] mx-auto pt-10 md:pt-20 px-10 lg:px-0">
-        <h1 className="text-white text-3xl md:text-5xl pl-2 md:pl-6 font-bold ">
-          Description
-        </h1>
-
-        <ProductsCarousel
-          products={[
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-            {
-              title: 'Lorem ipsum',
-              description:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia iste temporibus officiis placeat minima earum tenetur velit deleniti, totam ut facere nisi incidunt autem maiores accusamus beatae, fugiat nobis molestias!',
-            },
-          ]}
-        />
-      </div>
-      <div className="w-full lg:w-[80%] mx-auto pt-10 lg:pt-20 px-10 lg:px-0">
-        <h1 className="text-white text-xl md:text-4xl pl-0 md:pl-6 font-bold ">
-          Step By Step Process Of Issue Resolving System
-        </h1>
-      </div>
-
-      <div className="pt-4 md:pt-10  w-full text-white w-full md:w-[80%] mx-auto ">
-        <div className="mb-4 md:mb-10  lg:flex  text-lg  px-10 md:px-0 lg:px-6">
-          <p className="pt-4 text-sm md:text-lg">
-            1. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
-          <div className="flex pt-4 lg:pt-0">
-            <a href="/assets/e3 11gen.pdf" type="application/pdf">
-              {' '}
-              <button
-                className={`bg-[#007E9E] flex gap-2 text-sm md:text-xl cursor-pointer mr-10 ml-2 px-4 md:px-6 py-2 rounded-md transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out`}
-              >
-                {' '}
-                Pdf
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  id="IconChangeColor"
-                  height="20"
-                  width="20"
-                >
-                  {' '}
-                  <g>
-                    {' '}
-                    <path
-                      fill="none"
-                      d="M0 0h24v24H0z"
-                      id="mainIconPathAttribute"
-                      stroke="#ffffff"
-                      filter="url(#shadow)"
-                      stroke-width="0"
-                    ></path>{' '}
-                    <path
-                      d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zM14 9h5l-7 7-7-7h5V3h4v6z"
-                      id="mainIconPathAttribute"
-                      stroke="#ffffff"
-                      fill="#ffffff"
-                    ></path>{' '}
-                  </g>{' '}
-                </svg>{' '}
-              </button>
-            </a>
-
-            {/*}  <button className={`bg-[#007E9E] text-sm md:text-xl flex gap-2 cursor-pointer mr-10 px-2 md:px-6 py-2 rounded-md`}> Upload <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="IconChangeColor" height="20" width="20"> <g> <path fill="none" d="M0 0h24v24H0z" id="mainIconPathAttribute" stroke="#ffffff" filter="url(#shadow)" stroke-width="0"/> <path d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zm9-10v7h-2V9H6l6-6 6 6h-5z" id="mainIconPathAttribute" stroke="#ffffff" fill="#ffffff"/> </g> </svg></button>*/}
-          </div>
         </div>
-        <div className="mb-4 md:mb-10  lg:flex  text-lg  px-10 md:px-0 lg:px-6">
-          <p className="pt-2 md:pt-4 text-sm md:text-lg">
-            2. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
-          <div className="flex pt-4 lg:pt-0">
-            <a href="/assets/e3 11gen.pdf" type="application/pdf">
-              {' '}
-              <button
-                className={`bg-[#007E9E] flex gap-2 text-sm md:text-xl cursor-pointer mr-10 ml-2 px-4 md:px-6 py-2 rounded-md transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out`}
-              >
-                {' '}
-                Pdf
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  id="IconChangeColor"
-                  height="20"
-                  width="20"
-                >
-                  {' '}
-                  <g>
-                    {' '}
-                    <path
-                      fill="none"
-                      d="M0 0h24v24H0z"
-                      id="mainIconPathAttribute"
-                      stroke="#ffffff"
-                      filter="url(#shadow)"
-                      stroke-width="0"
-                    ></path>{' '}
-                    <path
-                      d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zM14 9h5l-7 7-7-7h5V3h4v6z"
-                      id="mainIconPathAttribute"
-                      stroke="#ffffff"
-                      fill="#ffffff"
-                    ></path>{' '}
-                  </g>{' '}
-                </svg>{' '}
-              </button>
-            </a>
+      </section>
 
-            {/*}   <button className={`bg-[#007E9E] text-sm md:text-xl flex gap-2 cursor-pointer mr-10 px-2 md:px-6 py-2 rounded-md`}> Upload <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="IconChangeColor" height="20" width="20"> <g> <path fill="none" d="M0 0h24v24H0z" id="mainIconPathAttribute" stroke="#ffffff" filter="url(#shadow)" stroke-width="0"/> <path d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zm9-10v7h-2V9H6l6-6 6 6h-5z" id="mainIconPathAttribute" stroke="#ffffff" fill="#ffffff"/> </g> </svg></button>*/}
-          </div>
-        </div>
-        <div className="mb-4 md:mb-10  lg:flex  text-lg  px-10 md:px-0 lg:px-6">
-          <p className="pt-2 md:pt-4 text-sm md:text-lg">
-            3. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
-          <div className="flex pt-4 lg:pt-0">
-            <a href="/assets/e3 11gen.pdf" type="application/pdf">
-              {' '}
-              <button
-                className={`bg-[#007E9E] flex gap-2 text-sm md:text-xl cursor-pointer mr-10 ml-2 px-4 md:px-6 py-2 rounded-md transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out`}
-              >
-                {' '}
-                Pdf
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  id="IconChangeColor"
-                  height="20"
-                  width="20"
-                >
-                  {' '}
-                  <g>
-                    {' '}
-                    <path
-                      fill="none"
-                      d="M0 0h24v24H0z"
-                      id="mainIconPathAttribute"
-                      stroke="#ffffff"
-                      filter="url(#shadow)"
-                      stroke-width="0"
-                    ></path>{' '}
-                    <path
-                      d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zM14 9h5l-7 7-7-7h5V3h4v6z"
-                      id="mainIconPathAttribute"
-                      stroke="#ffffff"
-                      fill="#ffffff"
-                    ></path>{' '}
-                  </g>{' '}
-                </svg>{' '}
-              </button>
-            </a>
-
-            {/*}   <button className={`bg-[#007E9E] text-sm md:text-xl flex gap-2 cursor-pointer mr-10 px-2 md:px-6 py-2 rounded-md`}> Upload <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="IconChangeColor" height="20" width="20"> <g> <path fill="none" d="M0 0h24v24H0z" id="mainIconPathAttribute" stroke="#ffffff" filter="url(#shadow)" stroke-width="0"/> <path d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zm9-10v7h-2V9H6l6-6 6 6h-5z" id="mainIconPathAttribute" stroke="#ffffff" fill="#ffffff"/> </g> </svg></button>*/}
-          </div>
-        </div>
-      </div>
-
-      <div className="w-full lg:w-[80%] mx-auto pt-6 lg:pt-20 px-10 lg:px-0">
-        <h1 className="text-white text-3xl md:text-4xl pl-0 md:pl-6 font-bold ">
-          Request Call Back For Technical Support
-        </h1>
-        <p className="text-white  mt-4 md:mt-10 w-[90%] mb-10 pl-0 md:pl-6 text-sm md:text-lg">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nesciunt
-          asperiores quos dolorum assumenda quasi. Cumque quasi blanditiis eaque
-          quidem facere, saepe est ullam maxime, quaerat dicta alias vero vitae
-          iste.
-        </p>
-        <form className=" pl-0 md:pl-6 w-full text-white mb-10 md:mb-20 w-[100%]">
-          <div className="flex flex-col md:flex-row">
-            <input
-              className=" bg-transparent text-white border-2 border-[#007E9E] text-md p-4 mr-10 w-full md:w-[30%]"
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your name"
-            />
-            <input
-              className="bg-transparent text-white  border-2 border-[#007E9E] text-md p-4 w-full md:w-[30%] mt-4 md:mt-0"
-              type="text"
-              id="mobile"
-              name="mobile"
-              placeholder="Phone number"
-            />
-          </div>
-
-          <input
-            className="bg-transparent text-white  border-2 border-[#007E9E] text-md p-4 mt-10 w-full md:w-[63%]"
-            type="text"
-            name="other"
-            id="other"
-            placeholder="write something..."
-          />
-          <button className="mt-5 center bg-[#007E9E] text-xl cursor-pointer py-3  px-10 inline rounded-md block transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out">
-            Submit
-          </button>
+      {/* Find Your Product */}
+      <section className="py-12 w-full bg-gray-50">
+        <h3 className="text-center text-xl font-extrabold mb-2 text-gray-900">Find Your Product</h3>
+        <p className="text-center text-gray-700 mb-6">Enter your service tag or product model to get personalized support</p>
+        <form className="flex flex-col items-center gap-3 bg-white rounded-xl shadow-md p-8 max-w-md mx-auto">
+          <input className="w-full border border-gray-200 rounded-md py-3 px-4 text-base" placeholder="e.g., ENTION-XPS-13-2024" aria-label="Service Tag or Product Model" />
+          <button type="submit" className="w-full bg-gray-900 text-white font-bold py-3 rounded-md hover:bg-black transition">Find My Product</button>
         </form>
-      </div>
+        <div className="text-center text-sky-600 mt-2 text-base">Don't know your service tag? <a href="#" className="underline">Learn how to find it</a></div>
+      </section>
 
-      <div className="w-full lg:w-[80%] mx-auto  px-10 md:px-16 lg:px-6">
-        <h1 className="text-white text-3xl md:text-4xl font-bold mt-4 lg:mt-20">
-          Warranty With Pick And Drop Facility
-        </h1>
-        <p className="text-white mt-4 md:mt-10 text-sm md:text-lg">
-          Warranty with pick and drop facility is a service offered by Ention to
-          provide their customers with an added layer of convenience and peace
-          of mind. Under this type of warranty, customers who experience issues
-          with their products can have them picked up by the Ention or retailer,
-          repaired or replaced, and then returned to their doorstep, all at no
-          extra cost.
-        </p>
-      </div>
-
-      <div className="w-full lg:w-[80%] mx-auto px-10 md:px-16 lg:px-6">
-        <h1 className="text-white text-3xl md:text-4xl  font-bold mt-10 lg:mt-20">
-          Book For Pickup Facility
-        </h1>
-        <p className="text-white  mt-4 md:mt-10 text-sm md:text-lg">
-          Customers should check whether this service is available in their
-          area, what the turnaround time is for repairs or replacements, and
-          whether there are any limitations or exclusions on the warranty
-          coverage. This type of warranty is particularly beneficial for those
-          who do not have the time or means to transport their products to a
-          service center.
-        </p>
-        <form className="  w-full text-white mb-10">
-          <div className="w-full flex flex-col lg:flex-row mt-10">
-            <h2 className="w-full lg:w-[30%] text-2xl md:text-3xl mr-10 mb-4 md:mb-10">
-              Warranty Validation
-            </h2>
-            <div className="w-full lg:w-[40%] flex flex-col px-0 md:px-20 lg:px-0">
-              <input
-                className="w-full bg-transparent text-white border-2 border-[#007E9E] text-md px-6 py-4"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Seriel number"
-              />
-              <br />
-              <p className="center text-xl ">OR</p>
-              <input
-                className="w-full mt-2 md:mt-5 bg-transparent text-white border-2 border-[#007E9E] text-md px-6 py-4"
-                type="text"
-                id="mobile"
-                name="mobile"
-                placeholder="Invoice number"
-              />
-              <div className="center">
-                <button className="  mt-6  bg-[#007E9E] text-white text-xl cursor-pointer py-3 px-6 inline rounded-md block transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out">
-                  Submit
-                </button>
+      {/* Popular Support Articles */}
+      <section className="py-12 w-full">
+        <h2 className="text-center text-2xl font-extrabold mb-10 text-gray-900">Popular Support Articles</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {articleData.map((a, i) => (
+            <div key={i} className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden">
+              <Image src={a.img} alt={a.title} width={400} height={140} className="w-full h-[140px] object-cover" />
+              <div className="flex flex-col flex-1 p-4">
+                <div className="flex items-center gap-2 font-bold text-lg mb-2 text-gray-800"><IconWrapper icon={a.icon} /> {a.title}</div>
+                <div className="text-gray-600 text-base mb-2">{a.desc}</div>
+                <div className="flex-1" />
+                <a href={a.link} className="text-sky-600 font-bold text-base hover:underline mt-2">Read More</a>
               </div>
             </div>
-          </div>
-        </form>
-      </div>
+          ))}
+        </div>
+      </section>
 
+      {/* Service Tools & Features */}
+      <section className="py-12 w-full">
+        <h2 className="text-center text-2xl font-extrabold mb-10 text-gray-900">Service Tools & Features</h2>
+        <div className="flex flex-wrap justify-center gap-8 mb-8">
+          <div className="bg-green-50 rounded-2xl shadow-md p-8 min-w-[320px] max-w-md flex-1 flex flex-col items-start">
+            <div className="flex items-center text-green-700 font-bold text-lg mb-4 gap-2"><FiBookOpen /> Track Service Status</div>
+            <div className="text-gray-800 text-base mb-6">Monitor your repair progress in real-time and get updates on your service request.</div>
+            <button className="w-full bg-green-700 text-white font-bold py-3 rounded-md hover:bg-green-800 transition">Track Your Service</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Knowledge Base Articles */}
+      <section className="py-12 w-full bg-gray-50">
+        <h3 className="text-center text-xl font-extrabold mb-10 text-gray-900">Knowledge Base Articles</h3>
+        <div className="flex flex-wrap justify-center gap-8 mb-8">
+          <div className="min-w-[260px] max-w-xs flex-1">
+            <div className="bg-gray-100 rounded-xl shadow p-6 mb-6">
+              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">First Time Setup Guide <FiChevronRight /></a>
+              <div className="text-gray-500 text-sm mb-2">Complete setup instructions for new Ention laptops</div>
+              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">System Recovery Options <FiChevronRight /></a>
+              <div className="text-gray-500 text-sm mb-2">How to restore your system to factory settings</div>
+              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">BIOS Settings Guide <FiChevronRight /></a>
+              <div className="text-gray-500 text-sm">Navigate and configure BIOS settings</div>
+            </div>
+          </div>
+          <div className="min-w-[260px] max-w-xs flex-1">
+            <div className="bg-gray-100 rounded-xl shadow p-6 mb-6">
+              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">Boot Issues Resolution <FiChevronRight /></a>
+              <div className="text-gray-500 text-sm mb-2">Fix startup and boot-related problems</div>
+              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">Performance Optimization <FiChevronRight /></a>
+              <div className="text-gray-500 text-sm mb-2">Speed up your laptop and improve performance</div>
+              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">Audio & Video Issues <FiChevronRight /></a>
+              <div className="text-gray-500 text-sm">Resolve multimedia and device problems</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Help Footer */}
+      <footer className="bg-white text-center py-12 mt-12">
+        <h3 className="text-2xl font-extrabold mb-2 text-gray-900">Still Need Help?</h3>
+        <p className="text-lg text-gray-700 mb-6">Our support team is here to assist you 24/7</p>
+        <div className="flex justify-center gap-4">
+          <button className="bg-white border border-sky-600 text-sky-600 font-bold py-3 px-8 rounded-md hover:bg-sky-50 transition">Contact Support</button>
+          <button className="bg-sky-600 text-white font-bold py-3 px-8 rounded-md hover:bg-sky-700 transition">Schedule Callback</button>
+        </div>
+      </footer>
+
+      {/* Floating Chat Button */}
+      <button aria-label="Chat with support" className="fixed right-8 bottom-8 z-50 bg-sky-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-lg hover:bg-sky-700 transition">
+        <FiMessageCircle />
+      </button>
       <Footer />
     </main>
   );

@@ -9,6 +9,7 @@ const nextConfig = {
       "rukminim1.flixcart.com",
       "media.graphassets.com",
       "efdwsxatehjhvmlqjcyc.supabase.co",
+      'images.unsplash.com',
     ],
   },
   env,
