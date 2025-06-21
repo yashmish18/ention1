@@ -1,22 +1,31 @@
 import React, { useState, useRef, useEffect } from "react";
 import { IconArrowNarrowLeft, IconArrowNarrowRight, IconCircle, IconCircleDot } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
+// Import background images
+import slide1Bg from "assets/slide-1.jpg";
+import slide2Bg from "assets/slide-2.jpg";
 
 const slides = [
   {
     key: 0,
     heading: "Ention Is Not a Brand.",
     subheading: "It's your working companion.",
+    background: slide1Bg,
   },
   {
     key: 1,
     description: (
       <>
-        <p className="text-xl md:text-2xl text-slate-800 max-w-2xl mx-auto text-center font-medium">
-          Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b>"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-[#007E9E]">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
-        </p>
+        <div className=" backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
+          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed">
+            Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b className="text-gray-200">"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-white bg-white/10 px-2 py-1 rounded">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
+          </p>
+        </div>
       </>
     ),
+    background: slide2Bg,
   },
 ];
 
@@ -69,7 +78,20 @@ export default function AboutHeroCarousel() {
   };
 
   return (
-    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-white/5">
+    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-black">
+      {/* Background Image with Blur */}
+      <div className="absolute inset-0 w-full h-full">
+        <Image
+          src={slides[active].background}
+          alt="Background"
+          fill
+          className="object-cover blur-sm scale-110"
+          priority
+        />
+        {/* Darker overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
+      
       {/* Slide content */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none" style={{zIndex:0}} />
       <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center z-10 px-4 py-24">
@@ -93,7 +115,7 @@ export default function AboutHeroCarousel() {
                   initial={{ textAlign: "center", scale: 1 }}
                   animate={headingLeft ? { textAlign: "left", scale: 1.1 } : { textAlign: "center", scale: 1 }}
                   transition={{ duration: 0.8, type: "spring" }}
-                  className={`text-4xl md:text-6xl font-extrabold text-slate-900 mb-0 w-full ${headingLeft ? "text-left" : "text-center"}`}
+                  className={`text-5xl md:text-7xl font-black text-white mb-4 w-full tracking-tight ${headingLeft ? "text-left" : "text-center"} drop-shadow-2xl`}
                 >
                   Ention Is Not a Brand.
                 </motion.h1>
@@ -101,7 +123,7 @@ export default function AboutHeroCarousel() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={headingLeft ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className={`text-3xl md:text-5xl font-bold text-[#007E9E] mt-3 w-full ${headingLeft ? "text-left" : "text-center"}`}
+                  className={`text-2xl md:text-4xl font-light text-gray-200 mt-2 w-full tracking-wide ${headingLeft ? "text-left" : "text-center"} drop-shadow-lg`}
                   style={{ minHeight: 40 }}
                 >
                   It's your working companion.
@@ -122,32 +144,33 @@ export default function AboutHeroCarousel() {
           )}
         </AnimatePresence>
       </div>
+      
       {/* Carousel controls bottom right */}
       <div className="absolute bottom-8 right-8 z-20 flex items-center gap-6">
         <button
           aria-label="Previous slide"
           onClick={prev}
-          className="rounded-full bg-white/80 hover:bg-white shadow p-2 transition disabled:opacity-50"
+          className="rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={active === 0}
         >
-          <IconArrowNarrowLeft size={32} stroke={2} className="text-[#007E9E]" />
+          <IconArrowNarrowLeft size={24} stroke={2} className="text-white" />
         </button>
         <div className="flex gap-2">
           {slides.map((_, idx) =>
             active === idx ? (
-              <IconCircleDot key={idx} size={18} className="text-[#007E9E]" />
+              <IconCircleDot key={idx} size={16} className="text-white" />
             ) : (
-              <IconCircle key={idx} size={18} className="text-[#007E9E] opacity-60" />
+              <IconCircle key={idx} size={16} className="text-white/60 hover:text-white/80 transition-colors cursor-pointer" onClick={() => setActive(idx)} />
             )
           )}
         </div>
         <button
           aria-label="Next slide"
           onClick={next}
-          className="rounded-full bg-white/80 hover:bg-white shadow p-2 transition disabled:opacity-50"
+          className="rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={active === slides.length - 1}
         >
-          <IconArrowNarrowRight size={32} stroke={2} className="text-[#007E9E]" />
+          <IconArrowNarrowRight size={24} stroke={2} className="text-white" />
         </button>
       </div>
     </section>
