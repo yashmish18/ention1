@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export const ItemImage = (props) => {
+const ItemImage = (props) => {
   const { img, text, label } = props;
   return (
     <div className="flex items-center justify-center relative text-white font-normal rounded-3xl overflow-hidden">
@@ -10,3 +10,4 @@ export const ItemImage = (props) => {
     </div>
   );
 };
+export default ItemImage;

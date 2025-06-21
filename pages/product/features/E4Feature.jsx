@@ -6,7 +6,7 @@ import IntelImg from "assets/E1/intel.png";
 import WifiImg from "assets/E1/wifi.png";
 import LightPcImg from "assets/E1/light-pc.jpg";
 import { Fade } from "react-awesome-reveal";
-import { ItemImage } from "./ItemImage";
+import ItemImage from "./ItemImage";
 
 const E4Feature = () => {
   return (

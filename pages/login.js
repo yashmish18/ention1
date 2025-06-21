@@ -21,6 +21,8 @@ const Login = () => {
     const [passVisible, togglePass] = useState(false) 
     const [errors, setErrors] = useState({})
     const [formValues, setFormValues] = useState({ email: '', password: '' })
+    const emailInputRef = React.useRef(null);
+    const [isEmailFocused, setIsEmailFocused] = useState(false);
 
     if(status === 'loading' || status === 'unauthenticated'){
          
@@ -93,11 +95,14 @@ const Login = () => {
                                     value={formValues.email}
                                     onChange={handleInputChange}
                                     autoComplete="off"
+                                    ref={emailInputRef}
+                                    onFocus={() => setIsEmailFocused(true)}
+                                    onBlur={() => setIsEmailFocused(false)}
                                 />
                                 <label
                                     className={
                                         `absolute left-3 top-3 text-gray-500 text-md pointer-events-none transition-all duration-200 bg-white px-1 ` +
-                                        ((formValues.email || document.activeElement === emailInputRef.current) ? 'not-empty-label' : '')
+                                        ((formValues.email || isEmailFocused) ? 'not-empty-label' : '')
                                     }
                                     style={{zIndex:2}}
                                 >
