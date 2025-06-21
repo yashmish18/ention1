@@ -8,6 +8,7 @@ import amd7Img from "assets/AMD-Ryzen-7-Category.png";
 import { useRouter } from "next/router";
 import CustomDropdown from "components/CustomDropdown";
 import newProducts from "lib/newData";
+import Image from 'next/image';
 
 const ProductCard = (props) => {
   const { label, className, viewClick, pdfCatalogLink } = props;
@@ -25,10 +26,12 @@ const ProductCard = (props) => {
       </div>
       <div className="flex flex-col items-center w-full  px-2 py-3 bg-[#F5F5F7] rounded-3xl gap-4 pt-4">
         <div className="flex flex-col gap-4 items-center">
-          <img
+          <Image
             className="w-[280px] h-full object-cover"
-            src={Laptop.src}
+            src={Laptop}
             alt="product-image"
+            width={280}
+            height={180}
           />
           <a
             className="text-[#199AB7] text-sm flex items-center gap-2 cursor-pointer"
@@ -46,10 +49,10 @@ const ProductCard = (props) => {
           </a>
         </div>
         <div className="flex items-center gap-4 mt-5">
-          <img src={corei5Img.src} alt="cpu-img" className="w-[52px] h-full" />
-          <img src={corei7Img.src} alt="cpu-img" className="w-[52px] h-full" />
-          <img src={amd5Img.src} alt="cpu-img" className="w-[52px] h-full" />
-          <img src={amd7Img.src} alt="cpu-img" className="w-[52px] h-full" />
+          <Image src={corei5Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
+          <Image src={corei7Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
+          <Image src={amd5Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
+          <Image src={amd7Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
         </div>
         <div className="w-[250px] flex flex-col gap-6 mt-10">
           <h3 className="text-2xl text-black font-semibold">

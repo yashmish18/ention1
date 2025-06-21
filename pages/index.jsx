@@ -22,14 +22,16 @@ import Header from "components/layout/header";
 
 import SimpleSlider from "./slider";
 import { Zoom } from "react-awesome-reveal";
-import TestCarousel from "components/TestCarousel";
 import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
 import { FadeUpAnimate } from "components/generic/FadeUpAnimate";
 import { useRouter } from "next/router";
 import IntelCarousel from "components/IntelCarousel";
+import dynamic from 'next/dynamic';
 
 const IMAGES = [marketpc, marketpc, marketpc];
+
+const TestCarousel = dynamic(() => import('components/TestCarousel'), { ssr: false });
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

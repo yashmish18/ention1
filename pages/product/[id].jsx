@@ -2,7 +2,7 @@ import Footer from "components/layout/footer";
 import Header from "components/layout/header";
 import { useRouter } from "next/router";
 import { Zoom } from "react-awesome-reveal";
-import TestCarousel from "components/TestCarousel";
+import dynamic from 'next/dynamic';
 import gradientbg1 from "assets/gradient-bg1.png";
 import ImageCaraousel from "components/ImageCaraousel";
 
@@ -25,6 +25,8 @@ import E4Feature from "./features/E4Feature";
 const E1Images = [e1image1, e1image2, e1image3];
 const E2Images = [e2image1, e2image2, e2image3];
 const E3Images = [e3image1, e3image2, e3image3];
+
+const TestCarousel = dynamic(() => import('components/TestCarousel'), { ssr: false });
 
 const ProductDetails = () => {
   const router = useRouter();

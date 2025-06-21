@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from 'next/image';
 
 export default function TestCarousel() {
   const [middleSlide, setMiddleSlide] = useState(null);
@@ -76,7 +77,7 @@ export default function TestCarousel() {
               }}
               className="flex items-center justify-center text-2xl font-bold mt-20 p-10"
             >
-              <img src={image} alt="laptop image" />
+              <Image src={image} alt="laptop image" width={200} height={200} />
             </div>
           </SwiperSlide>
         ))}
@@ -91,12 +92,14 @@ export default function TestCarousel() {
                 goToSlide(index);
               }}
             >
-              <img
+              <Image
                 src={image}
                 alt="laptop image"
                 className={`w-16 h-16 object-cover border-gray-300 rounded m-3 cursor-pointer ${
                   selectedImage === index ? "border-2" : "border"
                 }`}
+                width={64}
+                height={64}
               />
             </div>
           );
