@@ -19,7 +19,7 @@ const slides = [
     description: (
       <>
         <div className=" backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
-          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed">
+          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed font-inter">
             Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b className="text-gray-200">"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-white bg-white/10 px-2 py-1 rounded">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function AboutHeroCarousel() {
       
       {/* Slide content */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none" style={{zIndex:0}} />
-      <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center z-10 px-4 py-24">
+      <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center z-10 px-4 py-24 overflow-visible">
         <AnimatePresence mode="wait">
           {active === 0 && (
             <motion.div
@@ -102,32 +102,79 @@ export default function AboutHeroCarousel() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="w-full flex flex-col items-center"
+              className="w-full flex flex-col items-center overflow-visible"
             >
               <motion.div
-                initial={{ x: 0, alignItems: "center" }}
-                animate={headingLeft ? { x: "-30%", alignItems: "flex-start" } : { x: 0, alignItems: "center" }}
-                transition={{ duration: 0.8, type: "spring" }}
-                className={`flex flex-col ${headingLeft ? "items-start" : "items-center"} w-full`}
-                style={{ maxWidth: 700 }}
+                initial={{ x: 0, opacity: 1 }}
+                animate={{ 
+                  x: headingLeft ? "-15%" : 0,
+                  opacity: 1
+                }}
+                transition={{ 
+                  duration: 2,
+                  ease: [0.16, 1, 0.3, 1],
+                  opacity: {
+                    duration: 0.8,
+                    ease: [0.33, 1, 0.68, 1]
+                  }
+                }}
+                className="flex flex-col w-full overflow-visible"
+                style={{ maxWidth: 1200 }}
               >
-                <motion.h1
-                  initial={{ textAlign: "center", scale: 1 }}
-                  animate={headingLeft ? { textAlign: "left", scale: 1.1 } : { textAlign: "center", scale: 1 }}
-                  transition={{ duration: 0.8, type: "spring" }}
-                  className={`text-5xl md:text-7xl font-black text-white mb-4 w-full tracking-tight ${headingLeft ? "text-left" : "text-center"} drop-shadow-2xl`}
+                <motion.div
+                  className="flex flex-col items-center w-full overflow-visible"
+                  initial={{ alignItems: "center" }}
+                  animate={{ 
+                    alignItems: headingLeft ? "flex-start" : "center"
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
                 >
-                  Ention Is Not a Brand.
-                </motion.h1>
-                <motion.h2
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={headingLeft ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                  transition={{ duration: 0.8, delay: 0.3 }}
-                  className={`text-2xl md:text-4xl font-light text-gray-200 mt-2 w-full tracking-wide ${headingLeft ? "text-left" : "text-center"} drop-shadow-lg`}
-                  style={{ minHeight: 40 }}
-                >
-                  It's your working companion.
-                </motion.h2>
+                  <motion.div
+                    initial={{ width: "100%", textAlign: "center" }}
+                    animate={{ 
+                      width: "100%",
+                      textAlign: headingLeft ? "left" : "center"
+                    }}
+                    transition={{ 
+                      duration: 2,
+                      ease: [0.16, 1, 0.3, 1]
+                    }}
+                  >
+                    <motion.h1
+                      initial={{ opacity: 1 }}
+                      animate={{ opacity: 1 }}
+                      className="text-6xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-2xl font-inter whitespace-nowrap"
+                    >
+                      Ention Is Not a Brand.
+                    </motion.h1>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20, x: 0 }}
+                    animate={{ 
+                      opacity: headingLeft ? 1 : 0,
+                      y: headingLeft ? 0 : 20,
+                      x: headingLeft ? 4 : 0
+                    }}
+                    transition={{ 
+                      duration: 1.2,
+                      delay: 0.6,
+                      ease: [0.16, 1, 0.3, 1],
+                      opacity: { 
+                        duration: 1.4,
+                        ease: [0.33, 1, 0.68, 1]
+                      }
+                    }}
+                  >
+                    <motion.h2
+                      className="text-2xl md:text-4xl font-semibold text-gray-200 tracking-wide drop-shadow-lg font-inter"
+                    >
+                      It's your working companion.
+                    </motion.h2>
+                  </motion.div>
+                </motion.div>
               </motion.div>
             </motion.div>
           )}
