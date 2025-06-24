@@ -1,198 +1,124 @@
-import ChatBox from "components/icons/chat";
-import Header from "components/layout/header";
-import SmoothScroll from "components/SmoothScroll";
-import { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
-import WarrantyGreyImg from "assets/warranty-grey.png";
-import Footer from "components/layout/footer";
-import ImageModal from "components/ImageModal";
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
-import { Slide, Zoom } from "react-awesome-reveal";
-import CustomTab from "components/CustomTab";
-import gradientbg1 from "assets/gradient-bg1.png";
+// Hero carousel: 5 slides, all with the same background image
+const heroSlides = Array(5).fill("/assets/slide-1.jpg");
 
-// e1
-import e1image1 from "assets/product/e1/image1.jpg";
-import e1image2 from "assets/product/e1/image2.jpg";
-import e1image3 from "assets/product/e1/image3.jpg";
-// e2
-import e2image1 from "assets/product/e2/image1.jpg";
-import e2image2 from "assets/product/e2/image2.jpg";
-import e2image3 from "assets/product/e2/image3.jpg";
-// e1
-import e3image1 from "assets/product/e3/image1.jpg";
-import e3image2 from "assets/product/e3/image2.jpg";
-import e3image3 from "assets/product/e3/image3.jpg";
+const categories = [
+  { name: "Laptops", image: "/assets/laptop.png" },
+  { name: "Accessories", image: "/assets/mouse.png" },
+  { name: "Desktops", image: "/assets/market-pc.png" },
+  { name: "Monitors", image: "/assets/board.png" },
+];
 
-const E1Images = [e1image1, e1image2, e1image3];
-const E2Images = [e2image1, e2image2, e2image3];
-const E3Images = [e3image1, e3image2, e3image3];
+const products = [
+  { id: 1, name: "Ention E1 Laptop", price: "₹29,999", image: "/assets/product/e1/image1.jpg" },
+  { id: 2, name: "Ention E2 Laptop", price: "₹39,999", image: "/assets/product/e2/image1.jpg" },
+  { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product/e3/image1.jpg" },
+];
 
-const Product = () => {
-  const [isWordBook, setWordBook] = useState(true);
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [imgs, setImgs] = useState([]);
-  const [activeTab, setActiveTab] = useState(0);
+function HeroCarousel() {
+  const [active, setActive] = useState(0);
+  const autoScrollTimeout = useRef();
 
   useEffect(() => {
-    if (activeTab === 0) {
-      setWordBook(true);
-    } else {
-      setWordBook(false);
-    }
-  }, [activeTab]);
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
-
-  const handleViewClick = (images) => {
-    setImgs(images);
-    setModalOpen(true);
-  };
+    autoScrollTimeout.current = setTimeout(() => {
+      setActive((a) => (a + 1) % heroSlides.length);
+    }, 3500);
+    return () => clearTimeout(autoScrollTimeout.current);
+  }, [active]);
 
   return (
-    <>
-      <Header />
-      <SmoothScroll>
-        <main className={"main overflow-x-hidden relative z-0 w-full "}>
-          <div
-            className=" flex flex-col -z-10"
-            style={{
-              backgroundImage: `url(${gradientbg1.src})`,
-              backgroundSize: "100% 100%",
-            }}
-          >
-            <div className="w-full flex justify-center">
-              <div className="flex w-[80%] flex-col items-center justify-center pt-20 lg:pt-32 gap-6 lg:gap-10">
-                <Slide direction="up" cascade>
-                  <h3 className="text-[#f2f2f2] w-[280px] min-[480px]:w-full text-center text-[32px] sm:text-4xl lg:text-5xl font-bold">
-                    Choose your new E Series
-                  </h3>
-                </Slide>
-                <Slide direction="up" cascade>
-                  <div className="flex flex-col items-center">
-                    <ChatBox />
-                    <h6 className="text-xl text-center w-[280px] min-[480px]:w-full lg:text-2xl font-bold text-[#d1c6c6] mt-8">
-                      Have questions about buying E Series
-                    </h6>
-                    <a
-                      href="mailto:contact@ention.in"
-                      className="outline-none text-[16px] lg:text-xl text-[rgb(106,216,241)] cursor-pointer mt-4"
-                    >
-                      Chat with a Ention Specialist
-                    </a>
-                  </div>
-                </Slide>
-                <Slide direction="up" cascade>
-                  <CustomTab
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
-                  />
-                </Slide>
-              </div>
-            </div>
-            {isWordBook ? (
-              <div className="flex w-full gap-4 justify-center mt-20">
-                <Slide direction="left" cascade>
-                  <ProductCard
-                    viewClick={() => handleViewClick(E1Images)}
-                    label={"E5"}
-                    pdfCatalogLink="/E5.pdf"
-                  />
-                </Slide>
-                <ProductCard
-                  viewClick={() => handleViewClick(E2Images)}
-                  label={"E4"}
-                  className="hidden md:flex"
-                  pdfCatalogLink="/E4.pdf"
-                />
-                <Slide direction="right" cascade>
-                  <ProductCard
-                    viewClick={() => handleViewClick(E3Images)}
-                    label={"E3"}
-                    className={"hidden xl:flex"}
-                    pdfCatalogLink="/Ention Laptop E3 Catalogue design.pdf"
-                  />
-                </Slide>
-              </div>
-            ) : (
-              <div className="text-white text-center w-full font-bold text-2xl min-[480px]:text-4xl p-10 min-[480px]:p-20">
-                Coming Soon...
-              </div>
-            )}
-            {/* <div className="flex flex-col gap-0 lg:gap-20 mt-10 items-center">
-            <Slide direction="up" cascade>
-            <h1 className="text-[32px] min-[480px]:text-[42px] lg:text-5xl text-black font-bold">
-            What&apos;s in the Box
-            </h1>
-            </Slide>
-            <div className="flex flex-col md:flex-row items-center gap-4">
-            <Roll cascade delay={400}>
-            <BoxItem
-            name="Wordbook"
-            src={WordBookPCImg.src}
-            transform={1}
-            />
-            </Roll>
-            <Roll cascade delay={200}>
-            <BoxItem name="Mouse" src={MouseImg.src} transform={0.6} />
-            </Roll>
-            <Roll cascade>
-            <BoxItem name="Charger" src={AdapterImg.src} transform={0.65} />
-            </Roll>
-            </div>
-            </div> */}
-            <Zoom cascade>
-              <div className="flex flex-col items-center w-full mt-16">
-                <div className="w-[80%] px-8 py-4 mt-16 border rounded-3xl flex flex-col sm:flex-row justify-center sm:justify-between items-center relative">
-                  <img
-                    src={WarrantyGreyImg.src}
-                    alt="warranty-img"
-                    className="w-[320px] sm:w-[240px] md:w-[280px] lg:w-[320px] xl:w-[390px] h-auto z-[2]"
-                  />
-                  <div className="flex flex-col items-center sm:items-start gap-8 lg:gap-16 w-full min-[540px]:w-[360px] text-center sm:text-left sm:w-[320px] lg:w-[360px] xl:w-[480px] ">
-                    <p className="text-[16px] min-[360px]:text-lg min-[420px]:text-xl min-[540px]:text-2xl sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white leading-8 sm:leading-7 md:leading-8 lg:leading-10">
-                      On-Site Warranty is Rather a Guaranty of Our Infallible
-                      Faith in Our Machine.
-                    </p>
-                    <button
-                      className="z-[2] w-[200px] h-[45px] sm:w-[180px] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[68px] rounded-3xl flex justify-center items-center text-white text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                      style={{ backgroundColor: "rgba(34, 209, 238, 1)" }}
-                    >
-                      Know More
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </Zoom>
-
-            <Footer />
-          </div>
-        </main>
-      </SmoothScroll>
-      <ImageModal
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        images={imgs}
-      />
-    </>
-  );
-};
-
-const BoxItem = (props) => {
-  return (
-    <div className="flex flex-col gap-4 items-center">
-      <div className="w-[240px] h-[240px] min-[480px]:w-[320px] min-[480px]:h-[320px] md:w-[240px] md:h-[240px] lg:w-[320px] lg:h-[320px] xl:w-[400px] x:h-[400px] flex items-center justify-center">
+    <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#000f29]">
+      {/* Slide image */}
+      <div className="absolute inset-0 w-full h-full flex items-center justify-center">
         <img
-          src={props.src}
-          alt="boxitem-img"
-          className={`w-full object-center scale-[${props.transform}]`}
+          src={heroSlides[active]}
+          alt="Hero Slide"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#222', display: 'block' }}
+          onError={e => { e.target.style.background = '#222'; e.target.src = ''; }}
         />
+        <div className="absolute inset-0 bg-black/70 z-0" />
       </div>
-      <p className="text-base text-black text-center">{props.name}</p>
+      {/* Carousel controls */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+        {heroSlides.map((_, i) => (
+          <button
+            key={i}
+            className={`w-3 h-3 rounded-full border-2 ${active === i ? 'bg-[#007e9e] border-white' : 'bg-white/30 border-white/50'} transition`}
+            onClick={() => setActive(i)}
+            aria-label={`Go to slide ${i+1}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+const CategoryCard = ({ category }) => (
+  <div className="flex flex-col items-center bg-white rounded-xl shadow p-6 hover:scale-105 transition border border-[#e5e7eb]">
+    <Image src={category.image} alt={category.name} width={80} height={80} className="mb-2 object-contain" />
+    <span className="font-semibold text-[#000f29] mt-2">{category.name}</span>
+  </div>
+);
+
+const ProductCard = ({ product }) => (
+  <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-200 border border-[#e5e7eb]">
+    <Image src={product.image} alt={product.name} width={400} height={192} className="w-full h-48 object-cover" />
+    <div className="p-4 flex flex-col flex-1">
+      <h3 className="text-lg font-semibold mb-2 text-[#000f29]">{product.name}</h3>
+      <p className="text-[#007e9e] text-xl font-bold mb-4">{product.price}</p>
+      <a href={`/product/${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</a>
+    </div>
+  </div>
+);
+
+const PromoBanner = () => (
+  <section className="w-full bg-white py-10 flex flex-col items-center justify-center text-center border-t border-b border-[#e5e7eb]">
+    <div className="flex flex-col md:flex-row items-center gap-6 justify-center">
+      <Image src="/assets/annual-compliance.png" alt="Promo" width={120} height={120} className="rounded-lg" />
+      <div>
+        <h3 className="text-2xl font-bold text-[#007e9e] mb-2">Special Offer: Free Shipping on Orders Over ₹10,000!</h3>
+        <p className="text-lg text-[#000f29]">Limited time only. Shop your favorites now.</p>
+      </div>
+    </div>
+  </section>
+);
+
+export default function ProductLandingPage() {
+  return (
+    <div className="min-h-screen bg-[#000f29]">
+      {/* Hero Section */}
+      <HeroCarousel />
+
+      {/* Categories Section */}
+      <section className="max-w-7xl mx-auto py-12 px-4">
+        <h2 className="text-2xl font-bold text-[#000f29] mb-6 text-center">Shop by Category</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          {categories.map((cat) => <CategoryCard key={cat.name} category={cat} />)}
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className="max-w-7xl mx-auto py-12 px-4">
+        <h2 className="text-2xl font-bold text-[#000f29] mb-6 text-center">Featured Products</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {products.map((product) => <ProductCard key={product.id} product={product} />)}
+        </div>
+      </section>
+
+      {/* Promotional Banner */}
+      <PromoBanner />
+
+      {/* Newsletter Signup */}
+      <section className="w-full bg-white py-12 flex flex-col items-center justify-center text-center border-t border-[#e5e7eb]">
+        <Image src="/assets/news.png" alt="Newsletter" width={80} height={80} className="mb-4" />
+        <h2 className="text-2xl font-bold text-[#000f29] mb-4">Subscribe to Our Newsletter</h2>
+        <form className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+          <input type="email" placeholder="Enter your email" className="rounded-3xl px-6 py-3 flex-1 outline-none border border-[#007e9e]" />
+          <button type="submit" className="bg-[#007e9e] text-white font-bold rounded-3xl px-8 py-3 hover:bg-[#01E9FE] hover:text-[#000f29] transition">Subscribe</button>
+        </form>
+      </section>
     </div>
   );
-};
-
-export default Product;
+}

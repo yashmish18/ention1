@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -55,6 +56,9 @@ const Header = () => {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="h-20 fixed z-50 w-full flex pl-36 xl:pl-0 justify-start xl:justify-center items-center gap-6 xl:gap-10 min-[1320px]:gap-16 top-0 mb-10"
     >
+      <Link href="/cart" className="flex items-center mr-4">
+        <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+      </Link>
       <Link
         href="/"
         className="hidden lg:block font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
@@ -235,11 +239,11 @@ const Header = () => {
 //                 {/*body*/}
 //                 <div className="relative p-6 flex-auto">
 //                   <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-//                     I always felt like I could do anything. That’s the main
+//                     I always felt like I could do anything. That's the main
 //                     thing people are controlled by! Thoughts- their perception
 //                     of themselves! They're slowed down by their perception of
-//                     themselves. If you're taught you can’t do anything, you
-//                     won’t do anything. I was taught I could do everything.
+//                     themselves. If you're taught you can't do anything, you
+//                     won't do anything. I was taught I could do everything.
 //                   </p>
 //                 </div>
 //                 {/*footer*/}
