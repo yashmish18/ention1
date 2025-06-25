@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { motion } from "framer-motion";
-import slide1 from "assets/slide-1.jpg";
-import slide3 from "assets/slide-3.jpg";
-import slide4 from "assets/slide-4.jpg";
+import slide1 from "assets/landingpage_carsouel/1.svg";
+import slide3 from "assets/landingpage_carsouel/2.svg";
+import slide4 from "assets/landingpage_carsouel/3.svg";
 import { useRouter } from "next/router";
 
 export default function IntelCarousel() {

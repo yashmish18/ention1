@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // Import background images
-import slide1Bg from "assets/slide-1.jpg";
-import slide2Bg from "assets/slide-2.jpg";
+import slide1Bg from "assets/aboutus_page/4.svg";
+import slide2Bg from "assets//aboutus_page/5.svg";
+import slide3Bg from "assets/aboutus_page/6.svg";
 
 const slides = [
   {
@@ -18,7 +19,7 @@ const slides = [
     key: 1,
     description: (
       <>
-        <div className=" backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
+        <div className="backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
           <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed font-inter">
             Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b className="text-gray-200">"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-white bg-white/10 px-2 py-1 rounded">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
           </p>
@@ -27,9 +28,17 @@ const slides = [
     ),
     background: slide2Bg,
   },
+  {
+    key: 2,
+    description: (
+      <>
+      </>
+    ),
+    background: slide3Bg,
+  },
 ];
 
-export default function AboutHeroCarousel() {
+export default function AboutHeroCarousel({ showText = true }) {
   const [active, setActive] = useState(0);
   const [headingLeft, setHeadingLeft] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -39,7 +48,9 @@ export default function AboutHeroCarousel() {
   useEffect(() => {
     if (active === 0) {
       setHeadingLeft(false);
-      headingTimeout.current = setTimeout(() => setHeadingLeft(true), 1200);
+      headingTimeout.current = setTimeout(() => setHeadingLeft(true), 5); // 5ms delay before animating
+    } else {
+      setHeadingLeft(false); // Reset animation state for other slides
     }
     return () => clearTimeout(headingTimeout.current);
   }, [active]);
@@ -78,25 +89,25 @@ export default function AboutHeroCarousel() {
   };
 
   return (
-    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Blur */}
       <div className="absolute inset-0 w-full h-full">
         <Image
           src={slides[active].background}
           alt="Background"
           fill
-          className="object-cover blur-sm scale-110"
+          className="object-cover scale-100"
           priority
         />
         {/* Darker overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
       </div>
       
       {/* Slide content */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none" style={{zIndex:0}} />
       <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center z-10 px-4 py-24 overflow-visible">
         <AnimatePresence mode="wait">
-          {active === 0 && (
+          {active === 0 && showText && (
             <motion.div
               key="slide1"
               initial={{ opacity: 0 }}
@@ -148,7 +159,7 @@ export default function AboutHeroCarousel() {
                       animate={{ opacity: 1 }}
                       className="text-6xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-2xl font-inter whitespace-nowrap"
                     >
-                      Ention Is Not a Brand.
+                      {slides[0].heading}
                     </motion.h1>
                   </motion.div>
                   <motion.div
@@ -171,14 +182,14 @@ export default function AboutHeroCarousel() {
                     <motion.h2
                       className="text-2xl md:text-4xl font-semibold text-gray-200 tracking-wide drop-shadow-lg font-inter"
                     >
-                      It's your working companion.
+                      {slides[0].subheading}
                     </motion.h2>
                   </motion.div>
                 </motion.div>
               </motion.div>
             </motion.div>
           )}
-          {active === 1 && (
+          {active === 1 && showText && (
             <motion.div
               key="slide2"
               initial={{ opacity: 0, y: 40 }}
@@ -187,6 +198,17 @@ export default function AboutHeroCarousel() {
               className="w-full flex flex-col items-center"
             >
               {slides[1].description}
+            </motion.div>
+          )}
+          {active === 2 && showText && (
+            <motion.div
+              key="slide3"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -40 }}
+              className="w-full flex flex-col items-center"
+            >
+              {slides[2].description}
             </motion.div>
           )}
         </AnimatePresence>

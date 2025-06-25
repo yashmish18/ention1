@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Footer from "../../components/layout/footer";
+import AboutHeroCarousel from "../../components/generic/AboutHeroCarousel";
 
 // Hero carousel: 5 slides, all with the same background image
 const heroSlides = Array(5).fill("/assets/slide-1.jpg");
@@ -15,6 +17,8 @@ const products = [
   { id: 1, name: "Ention E1 Laptop", price: "₹29,999", image: "/assets/product/e1/image1.jpg" },
   { id: 2, name: "Ention E2 Laptop", price: "₹39,999", image: "/assets/product/e2/image1.jpg" },
   { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product/e3/image1.jpg" },
+  { id: 4, name: "Ention E4 Laptop", price: "₹59,999", image: "/assets/product/e3/image2.jpg" },
+  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product/e3/image3.jpg" },
 ];
 
 function HeroCarousel() {
@@ -86,39 +90,88 @@ const PromoBanner = () => (
 );
 
 export default function ProductLandingPage() {
+  const [activeTab, setActiveTab] = useState("home");
   return (
-    <div className="min-h-screen bg-[#000f29]">
+    <div className="min-h-screen bg-[#fff]">
       {/* Hero Section */}
-      <HeroCarousel />
+      <AboutHeroCarousel showText={false} />
 
-      {/* Categories Section */}
+      {/* Home, Workbook & Swapbook Tabs */}
+      <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-col md:flex-row gap-8 justify-center items-center">
+        <button
+          onClick={() => setActiveTab("home")}
+          className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "home" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
+          style={{ background: "none", outline: "none" }}
+        >
+          Home
+        </button>
+        <button
+          onClick={() => setActiveTab("workbook")}
+          className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "workbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
+          style={{ background: "none", outline: "none" }}
+        >
+          Workbook Series
+        </button>
+        <button
+          onClick={() => setActiveTab("swapbook")}
+          className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "swapbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
+          style={{ background: "none", outline: "none" }}
+        >
+          Swapbook Series
+          
+        </button>
+      </section>
+
+      {/* Tab Content */}
       <section className="max-w-7xl mx-auto py-12 px-4">
-        <h2 className="text-2xl font-bold text-[#000f29] mb-6 text-center">Shop by Category</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
-          {categories.map((cat) => <CategoryCard key={cat.name} category={cat} />)}
-        </div>
+        {activeTab === "home" && (
+          <>
+            {/* Temporarily commented out Browse by Category section
+            <h2 className="text-2xl font-bold text-[#000] mb-6 text-center">Browse by Category</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
+              {categories.map((cat) => <CategoryCard key={cat.name} category={cat} />)}
+            </div>
+            */}
+            <h2 className="text-2xl font-bold text-[#000] mb-6 text-center">Featured Products</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {products.map((product) => <ProductCard key={product.id} product={product} />)}
+            </div>
+          </>
+        )}
+        {activeTab === "workbook" && (
+          <>
+            <h2 className="text-2xl font-bold text-[#fff] mb-6 text-center">Workbook Series</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {products.map((product) => <ProductCard key={product.id} product={product} />)}
+            </div>
+          </>
+        )}
+        {activeTab === "swapbook" && (
+          <div className="flex flex-col items-center justify-center min-h-[200px]">
+            <h2 className="text-2xl font-bold text-[#fff] mb-6 text-center">Swapbook Series</h2>
+            <span className="text-2xl font-bold text-[#01E9FE]">Coming Soon.</span>
+          </div>
+        )}
       </section>
 
-      {/* Featured Products Section */}
-      <section className="max-w-7xl mx-auto py-12 px-4">
-        <h2 className="text-2xl font-bold text-[#000f29] mb-6 text-center">Featured Products</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products.map((product) => <ProductCard key={product.id} product={product} />)}
-        </div>
-      </section>
+      {/* Promotional Banner and Newsletter Signup only for Home tab */}
+      {activeTab === "home" && (
+        <>
+          <PromoBanner />
+          {/* Newsletter Signup */}
+          <section className="w-full bg-white py-12 flex flex-col items-center justify-center text-center border-t border-[#e5e7eb]">
+            <Image src="/assets/news.png" alt="Newsletter" width={80} height={80} className="mb-4" />
+            <h2 className="text-2xl font-bold text-[#000f29] mb-4">Subscribe to Our Newsletter</h2>
+            <form className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+              <input type="email" placeholder="Enter your email" className="rounded-3xl px-6 py-3 flex-1 outline-none border border-[#007e9e]" />
+              <button type="submit" className="bg-[#007e9e] text-white font-bold rounded-3xl px-8 py-3 hover:bg-[#01E9FE] hover:text-[#000f29] transition">Subscribe</button>
+            </form>
+          </section>
+        </>
+      )}
 
-      {/* Promotional Banner */}
-      <PromoBanner />
-
-      {/* Newsletter Signup */}
-      <section className="w-full bg-white py-12 flex flex-col items-center justify-center text-center border-t border-[#e5e7eb]">
-        <Image src="/assets/news.png" alt="Newsletter" width={80} height={80} className="mb-4" />
-        <h2 className="text-2xl font-bold text-[#000f29] mb-4">Subscribe to Our Newsletter</h2>
-        <form className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-          <input type="email" placeholder="Enter your email" className="rounded-3xl px-6 py-3 flex-1 outline-none border border-[#007e9e]" />
-          <button type="submit" className="bg-[#007e9e] text-white font-bold rounded-3xl px-8 py-3 hover:bg-[#01E9FE] hover:text-[#000f29] transition">Subscribe</button>
-        </form>
-      </section>
+      {/* Footer should show below all tab content */}
+      <Footer />
     </div>
   );
 }

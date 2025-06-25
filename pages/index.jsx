@@ -28,10 +28,31 @@ import { FadeUpAnimate } from "components/generic/FadeUpAnimate";
 import { useRouter } from "next/router";
 import IntelCarousel from "components/IntelCarousel";
 import dynamic from 'next/dynamic';
+import { motion } from "framer-motion";
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
 const TestCarousel = dynamic(() => import('components/TestCarousel'), { ssr: false });
+
+// FloatingBlob component for floating/parallax effect
+const FloatingBlob = ({ className = '', style = {}, children }) => (
+  <motion.div
+    className={className}
+    style={style}
+    animate={{
+      y: [0, -20, 0, 20, 0],
+      x: [0, 10, 0, -10, 0],
+      rotate: [0, 2, 0, -2, 0],
+    }}
+    transition={{
+      duration: 10,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  >
+    {children}
+  </motion.div>
+);
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -89,6 +110,32 @@ export default function Home() {
           }}
         >
           <div className="h-[130px]"></div>
+          {/* Offers Bar Start */}
+          <div className="w-full flex justify-center">
+            <div className="w-[100%] bg-[#007E9E] text-white py-2 rounded-ls shadow-lg overflow-hidden relative z-40">
+              <div className="whitespace-nowrap animate-marquee flex items-center gap-12 text-lg font-semibold">
+                <span> Summer Sale: Up to 20% off on select laptops!</span>
+                <span> Free shipping on orders above ₹50,000</span>
+                <span> Buy 1 Get 1 Free on Accessories</span>
+                <span> No Cost EMI Available</span>
+                <span> 2 Years Extended Warranty on E3 Series</span>
+              </div>
+            </div>
+          </div>
+          <div className="h-[20px]"></div>
+          <style jsx global>{`
+            @keyframes marquee {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+              display: inline-flex;
+              min-width: 200%;
+              animation: marquee 25s linear infinite;
+            }
+          `}</style>
+          {/* Offers Bar End */}
+          <div className="h-[110px]"></div>
           <div className="flex flex-col w-full items-center">
             <div style={{ letterSpacing: "7px" }} className="flex items-center">
               <div className="text-white text-2xl mr-4">INTRODUCING</div>
@@ -212,26 +259,17 @@ export default function Home() {
                     alt="warranty-img"
                     className="w-[320px] sm:w-[240px] md:w-[280px] lg:w-[320px] xl:w-[390px] h-auto z-[2]"
                   />
-                  <div
+                  <FloatingBlob
                     className="absolute z-[1] top-10 sm:top-[150px] left-16 w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px]"
-                    style={{
-                      backgroundImage: `url(${ellipsemd.src})`,
-                      backgroundSize: "100% 100%",
-                    }}
+                    style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }}
                   />
-                  <div
+                  <FloatingBlob
                     className="absolute z-[1] top-10 sm:top-[100px] left-[38%] xl:left-[42%] w-[20px] h-[20px] lg:w-[30px] lg:h-[30px]"
-                    style={{
-                      backgroundImage: `url(${ellipsemd.src})`,
-                      backgroundSize: "100% 100%",
-                    }}
+                    style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }}
                   />
-                  <div
+                  <FloatingBlob
                     className="absolute z-[1] bottom-4 xl:bottom-10 right-12 xl:right-16 w-[60px] h-[60px] sm:w-[60px] sm:h-[60px] lg:w-[80px] lg:h-[80px] xl:w-[100px] xl:h-[100px]"
-                    style={{
-                      backgroundImage: `url(${ellipsemd.src})`,
-                      backgroundSize: "100% 100%",
-                    }}
+                    style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }}
                   />
                   <div className="w-10"></div>
                   <div className="flex flex-col items-center sm:items-start gap-8 lg:gap-16 w-full min-[540px]:w-[360px] text-center sm:text-left sm:w-[320px] lg:w-[360px] xl:w-[480px] ">
@@ -242,6 +280,7 @@ export default function Home() {
                     <button
                       className="z-[2] w-[200px] h-[45px] sm:w-[180px] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
                       style={{ backgroundColor: "rgba(34, 209, 238, 1)" }}
+                      onClick={() => router.push('/technical-support')}
                     >
                       Know More
                     </button>
@@ -262,8 +301,21 @@ export default function Home() {
             </div>
           </Zoom>
           {/* Workbook series  */}
-          <div className="w-full flex flex-col items-center">
-            <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
+          <div className="w-full flex flex-col items-center relative">
+            <motion.h2
+              className="font-extrabold text-white text-4xl md:text-6xl text-center mb-8 mt-40 drop-shadow-lg"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Classroom to Boardroom
+            </motion.h2>
+            {/* Floating blobs in whitespace */}
+            <FloatingBlob className="hidden md:block absolute left-0 top-10 w-40 h-40 opacity-40 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
+            <FloatingBlob className="hidden md:block absolute right-10 bottom-0 w-32 h-32 opacity-30 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
+            <FloatingBlob className="hidden md:block absolute left-1/3 top-1/2 w-24 h-24 opacity-20 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
+            <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-8 min-[876px]:mt-24 xl:mt-32 relative z-10">
               <img
                 src={marketpc.src}
                 alt="discussing-image"
@@ -311,17 +363,31 @@ export default function Home() {
                       className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
                     />
                   </div>
-                  <button className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out">
+                  <button
+                    className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
+                    onClick={() => router.push('/product')}
+                  >
                     Explore More
                   </button>
                 </div>
               </FadeUpAnimate>
             </div>
             <div className="flex flex-col md:flex-row-reverse justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
-              <div
-                style={{ backgroundImage: `url(${marketpc.src})` }}
-                className="h-[425px] bg-no-repeat bg-center bg-cover w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
-              ></div>
+              <div className="relative h-[425px] w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px] flex items-center justify-center">
+                {/* Blurred/partial laptop image */}
+                <img
+                  src={marketpc.src}
+                  alt="swapbook-coming-soon"
+                  className="w-full h-full object-cover rounded-lg filter blur-sm brightness-75"
+                  style={{ objectPosition: 'right' }}
+                />
+                {/* Overlay text */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-extrabold text-white text-4xl md:text-5xl lg:text-6xl text-center drop-shadow-lg">
+                    Coming Soon.
+                  </span>
+                </div>
+              </div>
               <FadeUpAnimate>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
@@ -347,7 +413,10 @@ export default function Home() {
                       className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
                     />
                   </div>
-                  <button className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out">
+                  <button
+                    className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
+                    onClick={() => router.push('/product')}
+                  >
                     Explore More
                   </button>
                 </div>
