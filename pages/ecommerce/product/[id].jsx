@@ -207,3 +207,18 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { id: '5' } },
+      { params: { id: '4' } },
+      { params: { id: '3' } },
+    ],
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  return { props: {} };
+}
