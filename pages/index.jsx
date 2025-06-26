@@ -113,12 +113,20 @@ export default function Home() {
           {/* Offers Bar Start */}
           <div className="w-full flex justify-center">
             <div className="w-[100%] bg-[#007E9E] text-white py-2 rounded-ls shadow-lg overflow-hidden relative z-40">
-              <div className="whitespace-nowrap animate-marquee flex items-center gap-12 text-lg font-semibold">
-                <span> Summer Sale: Up to 20% off on select laptops!</span>
-                <span> Free shipping on orders above ₹50,000</span>
-                <span> Buy 1 Get 1 Free on Accessories</span>
-                <span> No Cost EMI Available</span>
-                <span> 2 Years Extended Warranty on E3 Series</span>
+              <div className="whitespace-nowrap overflow-hidden w-full">
+                <div className="animate-marquee flex items-center gap-12 text-lg font-semibold">
+                  <span> Summer Sale: Up to 20% off on select laptops!</span>
+                  <span> Free shipping on orders above ₹50,000</span>
+                  <span> Buy 1 Get 1 Free on Accessories</span>
+                  <span> No Cost EMI Available</span>
+                  <span> 2 Years Extended Warranty on E3 Series</span>
+                  {/* Duplicate for seamless infinite scroll */}
+                  <span> Summer Sale: Up to 20% off on select laptops!</span>
+                  <span> Free shipping on orders above ₹50,000</span>
+                  <span> Buy 1 Get 1 Free on Accessories</span>
+                  <span> No Cost EMI Available</span>
+                  <span> 2 Years Extended Warranty on E3 Series</span>
+                </div>
               </div>
             </div>
           </div>
@@ -135,7 +143,7 @@ export default function Home() {
             }
           `}</style>
           {/* Offers Bar End */}
-          <div className="h-[110px]"></div>
+          <div className="h-[50px]"></div>
           <div className="flex flex-col w-full items-center">
             <div style={{ letterSpacing: "7px" }} className="flex items-center">
               <div className="text-white text-2xl mr-4">INTRODUCING</div>
@@ -316,9 +324,13 @@ export default function Home() {
             <FloatingBlob className="hidden md:block absolute right-10 bottom-0 w-32 h-32 opacity-30 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
             <FloatingBlob className="hidden md:block absolute left-1/3 top-1/2 w-24 h-24 opacity-20 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
             <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-8 min-[876px]:mt-24 xl:mt-32 relative z-10">
-              <img
+              <motion.img
                 src={marketpc.src}
                 alt="discussing-image"
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1 }}
                 className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
               />
               <FadeUpAnimate spaceToMove={300}>
@@ -415,7 +427,7 @@ export default function Home() {
                   </div>
                   <button
                     className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
-                    onClick={() => router.push('/product')}
+                    onClick={() => router.push('ecommerce/product')}
                   >
                     Explore More
                   </button>
@@ -467,13 +479,17 @@ export default function Home() {
                 </div>
               </FadeUpAnimate>
 
-              <div
-                className="w-full min-[940px]:w-[560px] h-auto min-[940px]:h-[540px] xl:h-[620px]  bg-[length:90%]"
+              <motion.div
+                className="w-full min-[940px]:w-[560px] h-auto min-[940px]:h-[540px] xl:h-[620px] bg-[length:90%] mx-auto"
                 style={{
                   backgroundImage: `url(${lappy.src})`,
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                 }}
+                initial={{ opacity: 0, x: 100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1 }}
               >
                 {showBookNowForm && (
                   <BlurInText duration={0.3}>
@@ -574,7 +590,7 @@ export default function Home() {
                     </div>
                   </BlurInText>
                 )}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>

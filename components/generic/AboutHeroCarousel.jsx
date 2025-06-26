@@ -4,36 +4,36 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // Import background images
-import slide1Bg from "assets/aboutus_page/4.svg";
-import slide2Bg from "assets//aboutus_page/5.svg";
-import slide3Bg from "assets/aboutus_page/6.svg";
+import slide1Bg from "assets/aboutus_page/1.svg";
+import slide2Bg from "assets/aboutus_page/2.svg";
+import slide3Bg from "assets/aboutus_page/3.svg";
 
 const slides = [
   {
     key: 0,
-    heading: "Ention Is Not a Brand.",
-    subheading: "It's your working companion.",
+    // heading: "Ention Is Not a Brand.",
+    // subheading: "It's your working companion.",
     background: slide1Bg,
   },
   {
     key: 1,
-    description: (
-      <>
-        <div className="backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
-          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed font-inter">
-            Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b className="text-gray-200">"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-white bg-white/10 px-2 py-1 rounded">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
-          </p>
-        </div>
-      </>
-    ),
+    // description: (
+    //   <>
+    //     <div className="backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
+    //       <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed font-inter">
+    //         Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b className="text-gray-200">"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-white bg-white/10 px-2 py-1 rounded">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
+    //       </p>
+    //     </div>
+    //   </>
+    // ),
     background: slide2Bg,
   },
   {
     key: 2,
-    description: (
-      <>
-      </>
-    ),
+    // description: (
+    //   <>
+    //   </>
+    // ),
     background: slide3Bg,
   },
 ];
@@ -102,118 +102,23 @@ export default function AboutHeroCarousel({ showText = true }) {
         {/* Darker overlay for better text readability */}
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
-      
-      {/* Slide content */}
+      {/* Slide content - commented out */}
+      {/*
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none" style={{zIndex:0}} />
       <div className="relative w-full max-w-5xl mx-auto flex flex-col items-center justify-center z-10 px-4 py-24 overflow-visible">
         <AnimatePresence mode="wait">
           {active === 0 && showText && (
-            <motion.div
-              key="slide1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="w-full flex flex-col items-center overflow-visible"
-            >
-              <motion.div
-                initial={{ x: 0, opacity: 1 }}
-                animate={{ 
-                  x: headingLeft ? "-15%" : 0,
-                  opacity: 1
-                }}
-                transition={{ 
-                  duration: 2,
-                  ease: [0.16, 1, 0.3, 1],
-                  opacity: {
-                    duration: 0.8,
-                    ease: [0.33, 1, 0.68, 1]
-                  }
-                }}
-                className="flex flex-col w-full overflow-visible"
-                style={{ maxWidth: 1200 }}
-              >
-                <motion.div
-                  className="flex flex-col items-center w-full overflow-visible"
-                  initial={{ alignItems: "center" }}
-                  animate={{ 
-                    alignItems: headingLeft ? "flex-start" : "center"
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    ease: [0.16, 1, 0.3, 1]
-                  }}
-                >
-                  <motion.div
-                    initial={{ width: "100%", textAlign: "center" }}
-                    animate={{ 
-                      width: "100%",
-                      textAlign: headingLeft ? "left" : "center"
-                    }}
-                    transition={{ 
-                      duration: 2,
-                      ease: [0.16, 1, 0.3, 1]
-                    }}
-                  >
-                    <motion.h1
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: 1 }}
-                      className="text-6xl md:text-7xl font-black text-white mb-6 tracking-tight drop-shadow-2xl font-inter whitespace-nowrap"
-                    >
-                      {slides[0].heading}
-                    </motion.h1>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20, x: 0 }}
-                    animate={{ 
-                      opacity: headingLeft ? 1 : 0,
-                      y: headingLeft ? 0 : 20,
-                      x: headingLeft ? 4 : 0
-                    }}
-                    transition={{ 
-                      duration: 1.2,
-                      delay: 0.6,
-                      ease: [0.16, 1, 0.3, 1],
-                      opacity: { 
-                        duration: 1.4,
-                        ease: [0.33, 1, 0.68, 1]
-                      }
-                    }}
-                  >
-                    <motion.h2
-                      className="text-2xl md:text-4xl font-semibold text-gray-200 tracking-wide drop-shadow-lg font-inter"
-                    >
-                      {slides[0].subheading}
-                    </motion.h2>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-            </motion.div>
+            <motion.div key="slide1" ...> ... </motion.div>
           )}
           {active === 1 && showText && (
-            <motion.div
-              key="slide2"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              className="w-full flex flex-col items-center"
-            >
-              {slides[1].description}
-            </motion.div>
+            <motion.div key="slide2" ...> ... </motion.div>
           )}
           {active === 2 && showText && (
-            <motion.div
-              key="slide3"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -40 }}
-              className="w-full flex flex-col items-center"
-            >
-              {slides[2].description}
-            </motion.div>
+            <motion.div key="slide3" ...> ... </motion.div>
           )}
         </AnimatePresence>
       </div>
-      
+      */}
       {/* Carousel controls bottom right */}
       <div className="absolute bottom-8 right-8 z-20 flex items-center gap-6">
         <button

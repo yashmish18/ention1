@@ -48,7 +48,7 @@ export default function CartPage() {
             </div>
             <button
               className="w-full bg-[#007e9e] text-white rounded-3xl py-3 px-8 text-lg font-bold hover:bg-[#01E9FE] hover:text-[#000f29] transition"
-              onClick={() => router.push('/checkout')}
+              onClick={() => router.push('/ecommerce/checkout')}
             >
               Checkout
             </button>

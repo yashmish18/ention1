@@ -38,27 +38,61 @@ const E3Images = [e3image1, e3image2, e3image3];
 const TestCarousel = dynamic(() => import('components/TestCarousel'), { ssr: false });
 
 const allProducts = [
-  { id: 1, name: "Ention E1 Laptop", price: 29999, description: "A lightweight, powerful laptop perfect for everyday use. 8GB RAM, 512GB SSD, Intel i5.", image: "/assets/product/e1/image1.jpg", reviews: [ { name: "Amit Kumar", rating: 5, text: "Amazing performance!" }, { name: "Priya Singh", rating: 4, text: "Great value for money." } ] },
-  { id: 2, name: "Ention E2 Laptop", price: 39999, description: "Performance meets portability for professionals. 16GB RAM, 1TB SSD, Intel i7.", image: "/assets/product/e2/image1.jpg", reviews: [ { name: "Rahul Verma", rating: 5, text: "Super fast!" } ] },
-  { id: 3, name: "Ention E3 Laptop", price: 49999, description: "Ultimate power for creators and gamers. 32GB RAM, 2TB SSD, Intel i9.", image: "/assets/product/e3/image1.jpg", reviews: [ { name: "Sneha Patel", rating: 5, text: "Handles everything!" } ] },
+  { id: 5, name: "Ention E5 Laptop", price: 69999, description: "Ultimate business powerhouse. 64GB RAM, 4TB SSD, Intel i9.", image: "/assets/product/e3/image3.jpg", reviews: [ { name: "Business User", rating: 5, text: "Handles all my business needs!" } ] },
+  { id: 4, name: "Ention E4 Laptop", price: 59999, description: "Professional performance for demanding tasks. 32GB RAM, 2TB SSD, Intel i7.", image: "/assets/product/e3/image2.jpg", reviews: [ { name: "Pro User", rating: 5, text: "Perfect for my workflow!" } ] },
+  { id: 3, name: "Ention E3 Laptop", price: 49999, description: "High performance for creators and gamers. 16GB RAM, 1TB SSD, Intel i5.", image: "/assets/product/e3/image1.jpg", reviews: [ { name: "Creator", rating: 5, text: "Great for design and gaming!" } ] },
 ];
+
+const productSpecs = {
+  5: {
+    model: 'E5 Series',
+    processor: 'Intel i9',
+    display: '17" 4K UHD',
+    battery: '12 hours',
+    warranty: '3 Years Onsite',
+    ramOptions: ['32GB', '64GB'],
+    storageOptions: ['2TB SSD', '4TB SSD'],
+    colorOptions: ['Silver', 'Black'],
+  },
+  4: {
+    model: 'E4 Series',
+    processor: 'Intel i7',
+    display: '15.6" QHD',
+    battery: '10 hours',
+    warranty: '2 Years Onsite',
+    ramOptions: ['16GB', '32GB'],
+    storageOptions: ['1TB SSD', '2TB SSD'],
+    colorOptions: ['Silver', 'Black', 'Blue'],
+  },
+  3: {
+    model: 'E3 Series',
+    processor: 'Intel i5',
+    display: '15.6" Full HD',
+    battery: '8 hours',
+    warranty: '1 Year Onsite',
+    ramOptions: ['8GB', '16GB'],
+    storageOptions: ['512GB SSD', '1TB SSD'],
+    colorOptions: ['Silver', 'Blue'],
+  },
+};
 
 const ProductDetails = () => {
   const router = useRouter();
   const { id } = router.query;
   const product = allProducts.find(p => p.id === Number(id));
   const related = allProducts.filter(p => p.id !== Number(id));
+  const specs = productSpecs[product.id];
 
   if (!product) return <div className="min-h-screen flex items-center justify-center text-2xl text-gray-500">Product not found.</div>;
 
   const getImages = (id) => {
     switch (id) {
-      case "E5":
-        return E1Images;
-      case "E4":
-        return E2Images;
-      case "E3":
-        return E3Images;
+      case "5":
+        return [e3image3];
+      case "4":
+        return [e3image2];
+      case "3":
+        return [e3image1];
       default:
         return [];
     }
@@ -66,11 +100,11 @@ const ProductDetails = () => {
 
   const getFeatureComponent = (id) => {
     switch (id) {
-      case "E5":
+      case "5":
         return <E5Feature />;
-      case "E4":
+      case "4":
         return <E4Feature />;
-      case "E3":
+      case "3":
         return <E3Feature />;
       default:
         return null;
@@ -81,7 +115,7 @@ const ProductDetails = () => {
     <div className="min-h-screen bg-[#f7fafc] py-10 px-4">
       {/* Cart Button Top Right */}
       <div className="max-w-4xl mx-auto flex justify-end mb-4">
-        <a href="/cart" className="text-[#007e9e] text-3xl hover:text-[#01E9FE] transition" title="Go to cart">
+        <a href="/ecommerce/cart" className="text-[#007e9e] text-3xl hover:text-[#01E9FE] transition" title="Go to cart">
           <FaShoppingCart />
         </a>
       </div>
@@ -120,23 +154,17 @@ const ProductDetails = () => {
             <div className="flex flex-col gap-2">
               <label className="font-medium">RAM:
                 <select className="ml-2 border rounded px-2 py-1">
-                  <option>8GB</option>
-                  <option>16GB</option>
-                  <option>32GB</option>
+                  {specs.ramOptions.map(opt => <option key={opt}>{opt}</option>)}
                 </select>
               </label>
               <label className="font-medium">Storage:
                 <select className="ml-2 border rounded px-2 py-1">
-                  <option>512GB SSD</option>
-                  <option>1TB SSD</option>
-                  <option>2TB SSD</option>
+                  {specs.storageOptions.map(opt => <option key={opt}>{opt}</option>)}
                 </select>
               </label>
               <label className="font-medium">Color:
                 <select className="ml-2 border rounded px-2 py-1">
-                  <option>Silver</option>
-                  <option>Black</option>
-                  <option>Blue</option>
+                  {specs.colorOptions.map(opt => <option key={opt}>{opt}</option>)}
                 </select>
               </label>
             </div>
@@ -150,11 +178,11 @@ const ProductDetails = () => {
         <table className="w-full text-left border-collapse">
           <tbody>
             <tr className="border-b"><th className="py-2 pr-4 font-semibold">Brand</th><td className="py-2">Ention</td></tr>
-            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Model</th><td className="py-2">E1 Series</td></tr>
-            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Processor</th><td className="py-2">Intel i5</td></tr>
-            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Display</th><td className="py-2">15.6" Full HD</td></tr>
-            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Battery</th><td className="py-2">8 hours</td></tr>
-            <tr><th className="py-2 pr-4 font-semibold">Warranty</th><td className="py-2">1 Year Onsite</td></tr>
+            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Model</th><td className="py-2">{specs.model}</td></tr>
+            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Processor</th><td className="py-2">{specs.processor}</td></tr>
+            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Display</th><td className="py-2">{specs.display}</td></tr>
+            <tr className="border-b"><th className="py-2 pr-4 font-semibold">Battery</th><td className="py-2">{specs.battery}</td></tr>
+            <tr><th className="py-2 pr-4 font-semibold">Warranty</th><td className="py-2">{specs.warranty}</td></tr>
           </tbody>
         </table>
       </div>

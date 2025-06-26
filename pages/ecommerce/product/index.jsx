@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import Footer from "../../components/layout/footer";
-import AboutHeroCarousel from "../../components/generic/AboutHeroCarousel";
+import Footer from "components/layout/footer";
+import Link from "next/link";
 
 // Hero carousel: 5 slides, all with the same background image
 const heroSlides = Array(5).fill("/assets/slide-1.jpg");
@@ -14,11 +14,31 @@ const categories = [
 ];
 
 const products = [
-  { id: 1, name: "Ention E1 Laptop", price: "₹29,999", image: "/assets/product/e1/image1.jpg" },
-  { id: 2, name: "Ention E2 Laptop", price: "₹39,999", image: "/assets/product/e2/image1.jpg" },
-  { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product/e3/image1.jpg" },
-  { id: 4, name: "Ention E4 Laptop", price: "₹59,999", image: "/assets/product/e3/image2.jpg" },
-  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product/e3/image3.jpg" },
+  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product/e3/image3.jpg", type: "business" },
+  { id: 4, name: "Ention E4 Laptop", price: "₹59,999", image: "/assets/product/e3/image2.jpg", type: "professional" },
+  { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product/e3/image1.jpg", type: "business" },
+];
+
+// Minimal, modern carousel for the product homepage
+const showcaseSlides = [
+  {
+    key: 0,
+    image: require("assets/aboutus_page/1.svg"),
+    headline: "Ention E-Series: Power Meets Elegance",
+    sub: "Your next laptop, reimagined."
+  },
+  {
+    key: 1,
+    image: require("assets/aboutus_page/2.svg"),
+    headline: "Empowering Innovation",
+    sub: "Built for students, professionals, and businesses."
+  },
+  {
+    key: 2,
+    image: require("assets/aboutus_page/3.svg"),
+    headline: "Minimal. Modern. Made for You.",
+    sub: "Experience the Ention difference."
+  }
 ];
 
 function HeroCarousel() {
@@ -59,6 +79,56 @@ function HeroCarousel() {
   );
 }
 
+function ProductShowcaseCarousel() {
+  const [active, setActive] = useState(0);
+  const next = () => setActive((a) => (a + 1) % showcaseSlides.length);
+  const prev = () => setActive((a) => (a - 1 + showcaseSlides.length) % showcaseSlides.length);
+
+  return (
+    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center bg-[#f7fafc] overflow-hidden">
+      {/* Slide image only, no text, no rounded borders, edge-to-edge */}
+      <div className="absolute inset-0 w-full h-full flex items-center justify-center">
+        <div className="relative w-full h-full mx-auto shadow-2xl overflow-hidden">
+          <Image
+            src={showcaseSlides[active].image}
+            alt=""
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        </div>
+      </div>
+      {/* Controls */}
+      <div className="absolute bottom-8 right-8 z-20 flex items-center gap-6">
+        <button
+          aria-label="Previous slide"
+          onClick={prev}
+          className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
+        >
+          <span className="text-white text-2xl">&#8592;</span>
+        </button>
+        <div className="flex gap-2">
+          {showcaseSlides.map((_, idx) => (
+            <span
+              key={idx}
+              className={`w-3 h-3 rounded-full border-2 ${active === idx ? "bg-[#01E9FE] border-white" : "bg-white/30 border-white/40"}`}
+              onClick={() => setActive(idx)}
+              style={{ cursor: "pointer" }}
+            />
+          ))}
+        </div>
+        <button
+          aria-label="Next slide"
+          onClick={next}
+          className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
+        >
+          <span className="text-white text-2xl">&#8594;</span>
+        </button>
+      </div>
+    </section>
+  );
+}
+
 const CategoryCard = ({ category }) => (
   <div className="flex flex-col items-center bg-white rounded-xl shadow p-6 hover:scale-105 transition border border-[#e5e7eb]">
     <Image src={category.image} alt={category.name} width={80} height={80} className="mb-2 object-contain" />
@@ -72,7 +142,7 @@ const ProductCard = ({ product }) => (
     <div className="p-4 flex flex-col flex-1">
       <h3 className="text-lg font-semibold mb-2 text-[#000f29]">{product.name}</h3>
       <p className="text-[#007e9e] text-xl font-bold mb-4">{product.price}</p>
-      <a href={`/product/${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</a>
+      <Link href={`/ecommerce/product/${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</Link>
     </div>
   </div>
 );
@@ -90,21 +160,24 @@ const PromoBanner = () => (
 );
 
 export default function ProductLandingPage() {
-  const [activeTab, setActiveTab] = useState("home");
-  return (
-    <div className="min-h-screen bg-[#fff]">
-      {/* Hero Section */}
-      <AboutHeroCarousel showText={false} />
+  const [activeTab, setActiveTab] = useState("workbook");
+  const [filter, setFilter] = useState("all");
 
-      {/* Home, Workbook & Swapbook Tabs */}
+  const filteredProducts = filter === "all"
+    ? products
+    : products.filter((p) => p.type === filter);
+
+  return (
+    <div className="min-h-screen bg-[#f7fafc]">
+      {/* New Product Showcase Carousel */}
+      <ProductShowcaseCarousel />
+      {/* Headline */}
+      <div className="w-full py-8 bg-white border-b border-[#e5e7eb]">
+        <h1 className="text-3xl md:text-5xl font-extrabold text-[#000f29] text-center">Ention E-Series Laptops</h1>
+      </div>
+
+      {/* Workbook & Swapbook Tabs */}
       <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-col md:flex-row gap-8 justify-center items-center">
-        <button
-          onClick={() => setActiveTab("home")}
-          className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "home" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
-          style={{ background: "none", outline: "none" }}
-        >
-          Home
-        </button>
         <button
           onClick={() => setActiveTab("workbook")}
           className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "workbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
@@ -118,37 +191,28 @@ export default function ProductLandingPage() {
           style={{ background: "none", outline: "none" }}
         >
           Swapbook Series
-          
         </button>
       </section>
 
-      {/* Tab Content */}
+      {/* Filter and Tab Content */}
       <section className="max-w-7xl mx-auto py-12 px-4">
-        {activeTab === "home" && (
-          <>
-            {/* Temporarily commented out Browse by Category section
-            <h2 className="text-2xl font-bold text-[#000] mb-6 text-center">Browse by Category</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
-              {categories.map((cat) => <CategoryCard key={cat.name} category={cat} />)}
-            </div>
-            */}
-            <h2 className="text-2xl font-bold text-[#000] mb-6 text-center">Featured Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {products.map((product) => <ProductCard key={product.id} product={product} />)}
-            </div>
-          </>
-        )}
         {activeTab === "workbook" && (
           <>
-            <h2 className="text-2xl font-bold text-[#fff] mb-6 text-center">Workbook Series</h2>
+            {/* Filter Buttons */}
+            <div className="flex justify-center gap-4 mb-8">
+              <button onClick={() => setFilter("all")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "all" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>All</button>
+              <button onClick={() => setFilter("student")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "student" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Students</button>
+              <button onClick={() => setFilter("professional")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "professional" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Professionals</button>
+              <button onClick={() => setFilter("business")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "business" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Businesses</button>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {products.map((product) => <ProductCard key={product.id} product={product} />)}
+              {filteredProducts.map((product) => <ProductCard key={product.id} product={product} />)}
             </div>
           </>
         )}
         {activeTab === "swapbook" && (
           <div className="flex flex-col items-center justify-center min-h-[200px]">
-            <h2 className="text-2xl font-bold text-[#fff] mb-6 text-center">Swapbook Series</h2>
+            <h2 className="text-2xl font-bold text-[#000] mb-6 text-center">Swapbook Series</h2>
             <span className="text-2xl font-bold text-[#01E9FE]">Coming Soon.</span>
           </div>
         )}

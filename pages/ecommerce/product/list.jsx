@@ -3,12 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const allProducts = [
-  { id: 1, name: "Ention E1 Laptop", price: 29999, brand: "Ention", category: "Laptops", image: "/assets/product/e1/image1.jpg" },
-  { id: 2, name: "Ention E2 Laptop", price: 39999, brand: "Ention", category: "Laptops", image: "/assets/product/e2/image1.jpg" },
+  { id: 5, name: "Ention E5 Laptop", price: 69999, brand: "Ention", category: "Laptops", image: "/assets/product/e3/image3.jpg" },
+  { id: 4, name: "Ention E4 Laptop", price: 59999, brand: "Ention", category: "Laptops", image: "/assets/product/e3/image2.jpg" },
   { id: 3, name: "Ention E3 Laptop", price: 49999, brand: "Ention", category: "Laptops", image: "/assets/product/e3/image1.jpg" },
-  { id: 4, name: "Ention Mouse", price: 999, brand: "Ention", category: "Accessories", image: "/assets/mouse.png" },
-  { id: 5, name: "Ention Monitor", price: 7999, brand: "Ention", category: "Monitors", image: "/assets/board.png" },
-  { id: 6, name: "Ention Desktop", price: 25999, brand: "Ention", category: "Desktops", image: "/assets/market-pc.png" },
 ];
 
 const categories = ["All", "Laptops", "Accessories", "Desktops", "Monitors"];

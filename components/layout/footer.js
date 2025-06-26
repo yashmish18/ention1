@@ -8,7 +8,7 @@ const Footer = () => {
   const router = useRouter();
   return (
     <div
-      className="w-full lg:h-[515px] flex items-center p-12 min-[480px]:p-20"
+      className="w-full lg:h-[350px] flex items-center p-6 min-[480px]:p-10"
       style={{ backgroundColor: "rgba(7, 13, 42, 1)" }}
     >
       <div className="flex flex-col lg:flex-row items-center lg:items-start lg:h-full w-full gap-10 lg:gap-0 justify-between xl:justify-around">
@@ -92,7 +92,7 @@ const Footer = () => {
             <Link
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
               rel="noopenner noreferrer"
-              href={"/about"}
+              href="/about"
             >
               About us
             </Link>
@@ -105,10 +105,9 @@ const Footer = () => {
             </Link>
             <Link
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-              href="/career"
+              href="/collaborate"
             >
-              Careers
+              Collaborate
             </Link>
             <Link
               href="/"

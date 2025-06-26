@@ -56,7 +56,7 @@ const Header = () => {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="h-20 fixed z-50 w-full flex pl-36 xl:pl-0 justify-start xl:justify-center items-center gap-6 xl:gap-10 min-[1320px]:gap-16 top-0 mb-10 pr-[120px]"
     >
-      <Link href="/cart" className="flex items-center mr-4">
+      <Link href="/ecommerce/cart" className="flex items-center mr-4">
         <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
       </Link>
       <Link
@@ -66,7 +66,7 @@ const Header = () => {
         Home
       </Link>
       <Link
-        href="/product"
+        href="/ecommerce/product"
         className="hidden lg:block font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
       >
         Products
@@ -177,7 +177,7 @@ const Header = () => {
                   <button
                     className="z-[2] w-[220px] h-[48px] rounded-3xl flex justify-center items-center text-black text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
                     style={{ backgroundColor: "#fff" }}
-                    onClick={() => router.push("/product")}
+                    onClick={() => router.push("/ecommerce/product")}
                   >
                     Products
                   </button>
