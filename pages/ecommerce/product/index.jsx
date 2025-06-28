@@ -14,9 +14,9 @@ const categories = [
 ];
 
 const products = [
-  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product/e3/image3.jpg", type: "business" },
-  { id: 4, name: "Ention E4 Laptop", price: "₹59,999", image: "/assets/product/e3/image2.jpg", type: "professional" },
-  { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product/e3/image1.jpg", type: "business" },
+  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product_/e5/IMG_1122.JPG", type: "business" },
+  { id: 4, name: "Ention E4 Laptop", price: "₹59,999", image: "/assets/product_/e4/IMG_1107.JPG", type: "professional" },
+  { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product_/e3/IMG_9931.jpg", type: "business" },
 ];
 
 // Minimal, modern carousel for the product homepage
@@ -138,7 +138,13 @@ const CategoryCard = ({ category }) => (
 
 const ProductCard = ({ product }) => (
   <div className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-200 border border-[#e5e7eb]">
-    <Image src={product.image} alt={product.name} width={400} height={192} className="w-full h-48 object-cover" />
+    <Image
+      src={product.image}
+      alt={product.name}
+      width={400}
+      height={227}
+      className="w-full h-56 object-contain rounded-t-xl bg-[#f7fafc]"
+    />
     <div className="p-4 flex flex-col flex-1">
       <h3 className="text-lg font-semibold mb-2 text-[#000f29]">{product.name}</h3>
       <p className="text-[#007e9e] text-xl font-bold mb-4">{product.price}</p>
@@ -177,17 +183,17 @@ export default function ProductLandingPage() {
       </div>
 
       {/* Workbook & Swapbook Tabs */}
-      <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-col md:flex-row gap-8 justify-center items-center">
+      <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-row gap-4 justify-center items-center">
         <button
           onClick={() => setActiveTab("workbook")}
-          className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "workbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
+          className={`font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "workbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
           style={{ background: "none", outline: "none" }}
         >
           Workbook Series
         </button>
         <button
           onClick={() => setActiveTab("swapbook")}
-          className={`flex-1 font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "swapbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
+          className={`font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "swapbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
           style={{ background: "none", outline: "none" }}
         >
           Swapbook Series
@@ -195,17 +201,17 @@ export default function ProductLandingPage() {
       </section>
 
       {/* Filter and Tab Content */}
-      <section className="max-w-7xl mx-auto py-12 px-4">
+      <section className="max-w-7xl mx-auto py-12 px-2 sm:px-4">
         {activeTab === "workbook" && (
           <>
             {/* Filter Buttons */}
-            <div className="flex justify-center gap-4 mb-8">
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
               <button onClick={() => setFilter("all")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "all" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>All</button>
               <button onClick={() => setFilter("student")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "student" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Students</button>
               <button onClick={() => setFilter("professional")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "professional" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Professionals</button>
               <button onClick={() => setFilter("business")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "business" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Businesses</button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {filteredProducts.map((product) => <ProductCard key={product.id} product={product} />)}
             </div>
           </>

@@ -93,7 +93,7 @@ export default function App({
       <Head>
         <meta
           name="viewport"
-          content="width=1280, maximum-scale=5, user-scalable=yes"
+          content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"
         />
       </Head>
       <div className="App">

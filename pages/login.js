@@ -23,6 +23,8 @@ const Login = () => {
     const [formValues, setFormValues] = useState({ email: '', password: '' })
     const emailInputRef = React.useRef(null);
     const [isEmailFocused, setIsEmailFocused] = useState(false);
+    const passwordInputRef = React.useRef(null);
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
     if(status === 'loading' || status === 'unauthenticated'){
          
@@ -88,7 +90,7 @@ const Login = () => {
                         <div className="flex flex-col gap-5 mt-4">
                             <div className="relative">
                                 <input
-                                    className={`peer w-full h-12 px-3 pt-4 text-md rounded-lg border-2 border-gray-300 bg-transparent focus:outline-none focus:border-[#007E9E] transition ${errors.email ? 'border-red-400' : ''} ${formValues.email ? 'not-empty' : ''}`}
+                                    className={`peer w-full h-12 px-3 pt-4 text-md rounded-lg border-2 border-gray-300 bg-transparent focus:outline-none focus:border-[#007E9E] transition ${formValues.email ? 'not-empty' : ''}`}
                                     type="email"
                                     placeholder=" "
                                     name="email"
@@ -101,8 +103,10 @@ const Login = () => {
                                 />
                                 <label
                                     className={
-                                        `absolute left-3 top-3 text-gray-500 text-md pointer-events-none transition-all duration-200 bg-white px-1 ` +
-                                        ((formValues.email || isEmailFocused) ? 'not-empty-label' : '')
+                                        `absolute left-3 top-3 text-gray-500 text-md pointer-events-none transition-all duration-200 bg-white px-1 \
+                                        peer-placeholder-shown:top-3 peer-placeholder-shown:text-md \
+                                        peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#007E9E] peer-focus:bg-white peer-focus:px-1 peer-focus:py-0.5 peer-focus:rounded \
+                                        not-empty:-top-3 not-empty:text-xs not-empty:text-[#007E9E] not-empty:bg-white not-empty:px-1 not-empty:py-0.5 not-empty:rounded`
                                     }
                                     style={{zIndex:2}}
                                 >
@@ -112,15 +116,28 @@ const Login = () => {
                             </div>
                             <div className="relative">
                                 <input
-                                    className={`peer w-full h-12 px-3 pt-4 text-md rounded-lg border-2 border-gray-300 bg-transparent focus:outline-none focus:border-[#007E9E] transition ${errors.password ? 'border-red-400' : ''} ${formValues.password ? 'not-empty' : ''}`}
+                                    className={`peer w-full h-12 px-3 pt-4 text-md rounded-lg border-2 border-gray-300 bg-transparent focus:outline-none focus:border-[#007E9E] transition ${formValues.password ? 'not-empty' : ''}`}
                                     type={passVisible ? "text" : "password"}
                                     placeholder=" "
                                     name="password"
                                     value={formValues.password}
                                     onChange={handleInputChange}
                                     autoComplete="off"
+                                    ref={passwordInputRef}
+                                    onFocus={() => setIsPasswordFocused(true)}
+                                    onBlur={() => setIsPasswordFocused(false)}
                                 />
-                                <label className='absolute left-3 top-3 text-gray-500 text-md pointer-events-none transition-all duration-200 peer-placeholder-shown:top-3 peer-placeholder-shown:text-md peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#007E9E] peer-focus:bg-white peer-focus:px-1 peer-focus:py-0.5 peer-focus:rounded bg-white px-1 not-empty:-top-3 not-empty:text-xs not-empty:text-[#007E9E] not-empty:bg-white not-empty:px-1 not-empty:py-0.5 not-empty:rounded' style={{zIndex:2}}>Password</label>
+                                <label
+                                    className={
+                                        `absolute left-3 top-3 text-gray-500 text-md pointer-events-none transition-all duration-200 bg-white px-1 \
+                                        peer-placeholder-shown:top-3 peer-placeholder-shown:text-md \
+                                        peer-focus:-top-3 peer-focus:text-xs peer-focus:text-[#007E9E] peer-focus:bg-white peer-focus:px-1 peer-focus:py-0.5 peer-focus:rounded \
+                                        not-empty:-top-3 not-empty:text-xs not-empty:text-[#007E9E] not-empty:bg-white not-empty:px-1 not-empty:py-0.5 not-empty:rounded`
+                                    }
+                                    style={{zIndex:2}}
+                                >
+                                    Password
+                                </label>
                                 <span className='absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer text-2xl text-gray-400 hover:text-[#007E9E]' onClick={() => togglePass(!passVisible)}>{passVisible ? <FiEyeOff /> : <FiEye />}</span>
                                 {errors.password && <div className="text-red-500 text-xs mt-1 ml-1">{errors.password}</div>}
                             </div>

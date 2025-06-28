@@ -145,7 +145,27 @@ export default function Home() {
           {/* Offers Bar End */}
           <div className="h-[50px]"></div>
           <div className="flex flex-col w-full items-center">
-            <div style={{ letterSpacing: "7px" }} className="flex items-center">
+            {/* Mobile: INTRODUCING + TypingEffect in one line, ENTION® COMPUTING DEVICE with TypingEffect in next line */}
+            <div className="w-full flex-col items-center justify-center md:hidden">
+              <div
+                className="flex items-center justify-center w-full whitespace-nowrap overflow-x-auto"
+                style={{ letterSpacing: "7px" }}
+              >
+                <span className="text-white text-lg font-semibold mr-2">INTRODUCING</span>
+                <TypingEffect
+                  className="text-[#01E9FE] font-bold text-lg"
+                  text="MADE IN INDIA"
+                />
+              </div>
+              <div className="flex items-center justify-center w-full mt-3 whitespace-nowrap overflow-x-auto">
+                <TypingEffect
+                  className="text-white text-xl font-bold"
+                  text={"ENTION\u00A0\u00AE COMPUTING DEVICE"}
+                />
+              </div>
+            </div>
+            {/* Desktop: keep existing layout */}
+            <div style={{ letterSpacing: "7px" }} className="hidden md:flex items-center">
               <div className="text-white text-2xl mr-4">INTRODUCING</div>
               <div>
                 <TypingEffect
@@ -154,7 +174,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <BlurInText className="text-white text-[50px] mt-8 text-3xl font-bold">
+            <BlurInText className="hidden md:block text-white text-[50px] mt-8 text-3xl font-bold">
               <span>ENTION</span>
               <span
                 style={{ position: "relative", top: "-18px", fontSize: "31px" }}
@@ -390,7 +410,7 @@ export default function Home() {
                 <img
                   src={marketpc.src}
                   alt="swapbook-coming-soon"
-                  className="w-full h-full object-cover rounded-lg filter blur-sm brightness-75"
+                  className="w-full h-[200px] object-cover rounded-lg md:h-full md:rounded-lg blur-sm"
                   style={{ objectPosition: 'right' }}
                 />
                 {/* Overlay text */}

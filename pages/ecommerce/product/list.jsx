@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const allProducts = [
-  { id: 5, name: "Ention E5 Laptop", price: 69999, brand: "Ention", category: "Laptops", image: "/assets/product/e3/image3.jpg" },
+  { id: 5, name: "Ention E5 Laptop", price: 69999, brand: "Ention", category: "Laptops", image: "public//assets/product/e5/IMG_112.jpg" },
   { id: 4, name: "Ention E4 Laptop", price: 59999, brand: "Ention", category: "Laptops", image: "/assets/product/e3/image2.jpg" },
   { id: 3, name: "Ention E3 Laptop", price: 49999, brand: "Ention", category: "Laptops", image: "/assets/product/e3/image1.jpg" },
 ];

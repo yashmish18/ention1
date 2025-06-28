@@ -33,7 +33,47 @@ import E4Feature from "./features/E4Feature";
 
 const E1Images = [e1image1, e1image2, e1image3];
 const E2Images = [e2image1, e2image2, e2image3];
-const E3Images = [e3image1, e3image2, e3image3];
+const E3Images = [
+  "/assets/product_/e3/IMG_9931.jpg",
+  "/assets/product_/e3/IMG_9945.jpg",
+  "/assets/product_/e3/IMG_9944.jpg",
+  "/assets/product_/e3/IMG_9943.jpg",
+  "/assets/product_/e3/IMG_9939.jpg",
+  "/assets/product_/e3/IMG_9928.jpg",
+  "/assets/product_/e3/IMG_1102.JPG",
+  "/assets/product_/e3/IMG_1101.JPG",
+  "/assets/product_/e3/IMG_1097.JPG",
+];
+
+const E5Images = [
+  "/assets/product_/e5/IMG_1122.JPG",
+  "/assets/product_/e5/IMG_9893.jpg",
+  "/assets/product_/e5/IMG_9879.jpg",
+  "/assets/product_/e5/IMG_9878.jpg",
+  "/assets/product_/e5/IMG_9877.jpg",
+  "/assets/product_/e5/IMG_9873.jpg",
+  "/assets/product_/e5/IMG_9872.jpg",
+  "/assets/product_/e5/IMG_9867.jpg",
+  "/assets/product_/e5/IMG_9860.jpg",
+  "/assets/product_/e5/IMG_1125.JPG",
+  "/assets/product_/e5/IMG_1124.JPG",
+  "/assets/product_/e5/IMG_1123.JPG",
+];
+
+const E4Images = [
+  "/assets/product_/e4/IMG_1107.JPG",
+  "/assets/product_/e4/IMG_9919.jpg",
+  "/assets/product_/e4/IMG_9918.jpg",
+  "/assets/product_/e4/IMG_9917.jpg",
+  "/assets/product_/e4/IMG_9916.jpg",
+  "/assets/product_/e4/IMG_9915.jpg",
+  "/assets/product_/e4/IMG_9911.jpg",
+  "/assets/product_/e4/IMG_9907.jpg",
+  "/assets/product_/e4/IMG_9906.jpg",
+  "/assets/product_/e4/IMG_9897.jpg",
+  "/assets/product_/e4/IMG_1118.JPG",
+  "/assets/product_/e4/IMG_1108.JPG",
+];
 
 const TestCarousel = dynamic(() => import('components/TestCarousel'), { ssr: false });
 
@@ -88,11 +128,11 @@ const ProductDetails = () => {
   const getImages = (id) => {
     switch (id) {
       case "5":
-        return [e3image3];
+        return E5Images;
       case "4":
-        return [e3image2];
+        return E4Images;
       case "3":
-        return [e3image1];
+        return E3Images;
       default:
         return [];
     }
@@ -131,7 +171,7 @@ const ProductDetails = () => {
               style={{ width: '100%', height: '100%' }}
               className="product-swiper"
             >
-              {Array(5).fill('/assets/slide-1.jpg').map((src, idx) => (
+              {getImages(String(product.id)).map((src, idx) => (
                 <SwiperSlide key={idx}>
                   <img
                     src={src}
