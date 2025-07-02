@@ -1,6 +1,4 @@
 import React from "react";
-import Header from "components/layout/header";
-import Footer from "components/layout/footer";
 import Image from "next/image";
 import Link from "next/link";
 import AboutHeroCarousel from "components/generic/AboutHeroCarousel";
@@ -16,8 +14,6 @@ import consultancyImage from "assets/serviceimg.png";
 const About = () => {
   return (
     <main className=" min-h-screen  relative overflow-hidden">
-      <Header />
-
       {/* Hero Section */}
       <div className="bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA] pt-32 pb-20 text-center text-white relative z-10 ">
         <Image
@@ -172,8 +168,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </main>
   );
 };

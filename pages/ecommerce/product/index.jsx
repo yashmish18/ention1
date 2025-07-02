@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import Footer from "components/layout/footer";
+
 import Link from "next/link";
+import { cn } from '../../../lib/utils';
 
 // Hero carousel: 5 slides, all with the same background image
 const heroSlides = Array(5).fill("/assets/slide-1.jpg");
@@ -14,7 +15,7 @@ const categories = [
 ];
 
 const products = [
-  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product_/e5/IMG_1122.JPG", type: "business" },
+  { id: 5, name: "Ention E5 Laptop", price: "₹69,999", image: "/assets/product_/e5/20.png", type: "business" },
   { id: 4, name: "Ention E4 Laptop", price: "₹59,999", image: "/assets/product_/e4/IMG_1107.JPG", type: "professional" },
   { id: 3, name: "Ention E3 Laptop", price: "₹49,999", image: "/assets/product_/e3/IMG_9931.jpg", type: "business" },
 ];
@@ -55,7 +56,7 @@ const workbookSeries = [
     ],
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 40000),
-    image: '/assets/product_/e5/IMG_1122.JPG',
+    image: '/assets/product_/e5/15.png',
   },
   {
     key: 'E4',
@@ -85,7 +86,22 @@ const workbookSeries = [
     ],
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 30000),
-    image: '/assets/product_/e3/IMG_9931.jpg',
+    image: '/assets/product_/e3/1.png',
+  },
+  {
+    key: 'E3',
+    name: 'Workbook series E3',
+    features: [
+      'Made for rough use',
+      'dual heating system',
+      'With a full-metal body,',
+      'Intel i5-13500H has 18 MB of L3 cache 2.6 boost up to 4.7 GHz',
+      'Window 11',
+      'Display 15.6inch, full HD IPS',
+    ],
+    bag: 'Laptop bag worth 1500',
+    price: '₹' + (Math.floor(Math.random() * 10000) + 30000),
+    image: '/assets/product_/e3/1.png',
   },
 ];
 
@@ -133,45 +149,40 @@ function ProductShowcaseCarousel() {
   const prev = () => setActive((a) => (a - 1 + showcaseSlides.length) % showcaseSlides.length);
 
   return (
-    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center bg-[#f7fafc] overflow-hidden">
-      {/* Slide image only, no text, no rounded borders, edge-to-edge */}
-      <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-        <div className="relative w-full h-full mx-auto shadow-2xl overflow-hidden">
-          <Image
-            src={showcaseSlides[active].image}
-            alt=""
-            fill
-            className="object-cover object-center"
-            priority
-          />
+    <section className="relative w-full mt-20 mb-10 overflow-hidden bg-black">
+      <div className="relative w-full h-[400px] md:h-[340px] flex items-center justify-center ">
+        <img
+          src={showcaseSlides[active].image}
+          alt="Product Slide"
+          className="object-cover w-full h-full"
+        />
+        {/* Carousel controls */}
+        <div className="absolute bottom-4 right-6 flex gap-2 z-30">
+          <button
+            aria-label="Previous slide"
+            onClick={prev}
+            className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
+          >
+            <span className="text-white text-2xl">&#8592;</span>
+          </button>
+          <div className="flex gap-2">
+            {showcaseSlides.map((_, idx) => (
+              <span
+                key={idx}
+                className={`w-3 h-3 rounded-full border-2 ${active === idx ? "bg-[#01E9FE] border-white" : "bg-white/30 border-white/40"}`}
+                onClick={() => setActive(idx)}
+                style={{ cursor: "pointer" }}
+              />
+            ))}
+          </div>
+          <button
+            aria-label="Next slide"
+            onClick={next}
+            className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
+          >
+            <span className="text-white text-2xl">&#8594;</span>
+          </button>
         </div>
-      </div>
-      {/* Controls */}
-      <div className="absolute bottom-8 right-8 z-20 flex items-center gap-6">
-        <button
-          aria-label="Previous slide"
-          onClick={prev}
-          className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
-        >
-          <span className="text-white text-2xl">&#8592;</span>
-        </button>
-        <div className="flex gap-2">
-          {showcaseSlides.map((_, idx) => (
-            <span
-              key={idx}
-              className={`w-3 h-3 rounded-full border-2 ${active === idx ? "bg-[#01E9FE] border-white" : "bg-white/30 border-white/40"}`}
-              onClick={() => setActive(idx)}
-              style={{ cursor: "pointer" }}
-            />
-          ))}
-        </div>
-        <button
-          aria-label="Next slide"
-          onClick={next}
-          className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
-        >
-          <span className="text-white text-2xl">&#8594;</span>
-        </button>
       </div>
     </section>
   );
@@ -218,42 +229,76 @@ function WorkbookCard({ series }) {
   const idMap = { E5: 5, E4: 4, E3: 3 };
   const productId = idMap[series.key];
   return (
-    <div className="border border-black rounded-xl mb-8 bg-white flex flex-col md:flex-row w-full min-h-[320px] overflow-hidden">
+    <div className="bg-[#b9d2df] shadow-2xl flex flex-col md:flex-row overflow-hidden border-0 h-[380px] my-6">
       {/* Left: Details */}
-      <div className="flex-1 flex flex-col justify-between min-w-[260px] p-6">
+      <div className="flex-1 flex flex-col justify-between p-4 relative z">
         <div>
-          <h2 className="text-xl font-semibold mb-2">{series.name}</h2>
-          <ul className="list-disc pl-5 mb-2 text-sm">
+          <h2 className="text-2xl font-bold mb-4 text-[#0d223a]">{series.name}</h2>
+          <ul className="list-disc pl-6 mb-4 text-base text-[#222] space-y-1">
             {series.features.map((f, i) => (
               <li key={i}>{f}</li>
             ))}
           </ul>
-          <div className="text-xs mb-2">{series.bag}</div>
+          <div className="text-sm text-[#007e9e] mb-2">{series.bag}</div>
         </div>
-        {/* Bottom row: 2 columns, buttons grouped */}
-        <div className="grid grid-cols-2 gap-0 border-t mt-6 pt-4 items-center text-base font-medium bg-white">
-          <div className="text-left">Starting from... <span className="font-bold">{series.price}</span></div>
-          <div className="flex justify-end gap-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between border-t pt-2 mt-2">
+          <div className="text-lg font-semibold text-[#0d223a]">
+            Starting from... <span className="text-2xl font-bold text-[#007e9e]">{series.price}</span>
+          </div>
+          <div className="mt-4 md:mt-0 flex gap-4 justifycenter mr-[150px]">
             <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
-              <a className="text-black">Learn more</a>
+              <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
             </Link>
-            <button className="text-black">Shop Now</button>
           </div>
         </div>
       </div>
-      {/* Right: 3:4 aspect ratio image, always fully visible, centered */}
-      <div className="flex-1 flex items-center justify-center bg-white md:max-w-[400px] w-full aspect-[3/4] md:aspect-auto">
-        <div className="relative w-full h-0 pb-[133.33%] md:pb-0 md:h-[400px] md:w-[300px] flex items-center justify-center">
-          <img 
-            src={series.image} 
-            alt="Creative Laptop" 
-            className="absolute top-0 left-0 w-full h-full object-contain" 
-          />
-        </div>
+      {/* Right: Image */}
+      <div className="md:w-1/2 w-full h-full flex items-center justify-center">
+        <img
+          src={series.image}
+          alt={series.name}
+          className="w-full h-[980%] object-cover  shadow-lg"
+          style={{ background: 'transparent' }}
+        />
       </div>
     </div>
   );
 }
+
+export const BentoGrid = ({ className, children }) => {
+  return (
+    <div
+      className={cn(
+        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[18rem] md:grid-cols-3",
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+export const BentoGridItem = ({ className, title, description, header, icon }) => {
+  return (
+    <div
+      className={cn(
+        "group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4  border border-neutral-200 bg-white p-4 transition duration-200 hover:shadow-xl dark:border-white/[0.2] dark:bg-black dark:shadow-none",
+        className
+      )}
+    >
+      {header}
+      <div className="transition duration-200 group-hover/bento:translate-x-2">
+        {icon}
+        <div className="mt-2 mb-2 font-sans font-bold text-neutral-600 dark:text-neutral-200">
+          {title}
+        </div>
+        <div className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300">
+          {description}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function ProductLandingPage() {
   const [activeTab, setActiveTab] = useState("workbook");
@@ -264,43 +309,13 @@ export default function ProductLandingPage() {
     : products.filter((p) => p.type === filter);
 
   return (
-    <div className="min-h-screen bg-[#f7fafc]">
+    <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA]">
       {/* New Product Showcase Carousel */}
       <ProductShowcaseCarousel />
-      {/* Headline */}
-      <div className="w-full py-8 bg-white border-b border-[#e5e7eb]">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-[#000f29] text-center">Ention E-Series Laptops</h1>
-      </div>
-
-      {/* Workbook & Swapbook Tabs */}
-      <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-row gap-24 justify-center items-center">
-        <button
-          onClick={() => setActiveTab("workbook")}
-          className={`font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "workbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
-          style={{ background: "none", outline: "none" }}
-        >
-          Workbook Series
-        </button>
-        <button
-          onClick={() => setActiveTab("swapbook")}
-          className={`font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "swapbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
-          style={{ background: "none", outline: "none" }}
-        >
-          Swapbook Series
-        </button>
-      </section>
-
       {/* Filter and Tab Content */}
       <section className="max-w-7xl mx-auto py-12 px-2 sm:px-4">
         {activeTab === "workbook" && (
           <>
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
-              <button onClick={() => setFilter("all")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "all" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>All</button>
-              <button onClick={() => setFilter("student")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "student" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Students</button>
-              <button onClick={() => setFilter("professional")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "professional" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Professionals</button>
-              <button onClick={() => setFilter("business")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "business" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Businesses</button>
-            </div>
             <div className="flex flex-col gap-8">
               {workbookSeries.map((series) => (
                 <WorkbookCard key={series.key} series={series} />
@@ -332,8 +347,7 @@ export default function ProductLandingPage() {
         </>
       )}
 
-      {/* Footer should show below all tab content */}
-      <Footer />
+     
     </div>
   );
 }

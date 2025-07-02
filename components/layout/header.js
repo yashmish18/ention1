@@ -79,9 +79,12 @@ const Header = () => {
       </div>
 
       {/* DESKTOP HEADER: Only visible on lg and above */}
-      <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-16 mr-[90px]">
-        <Link href="/ecommerce/cart" className="flex items-center">
-          <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+      <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-10 mr-[90px] ">
+        <Link
+          href="/collaborate"
+          className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
+        >
+          Collaborate
         </Link>
         <Link
           href="/"
@@ -113,6 +116,11 @@ const Header = () => {
         >
           Support
         </Link>
+        
+        <Link href="/ecommerce/cart" className="flex items-center">
+          <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+        </Link>
+       
       </div>
 
       {/* Dashboard nav link absolute left (desktop only) */}

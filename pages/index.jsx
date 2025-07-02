@@ -17,9 +17,6 @@ import board from "assets/board.png";
 import warrantyimg from "assets/ds.png";
 import ProcessorCard from "components/ProcessorCard";
 import CheckIcon from "components/icons/check";
-import Footer from "components/layout/footer";
-import Header from "components/layout/header";
-
 import SimpleSlider from "./slider";
 import { Zoom } from "react-awesome-reveal";
 import { TypingEffect } from "components/generic/TypingEffect";
@@ -100,7 +97,6 @@ export default function Home() {
 
   return (
     <>
-      <Header />
       <main className={"main overflow-x-hidden relative z-0 w-full"}>
         <div
           className=" flex flex-col -z-10"
@@ -614,7 +610,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Footer />
       </main>
     </>
   );

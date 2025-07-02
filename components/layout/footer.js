@@ -107,7 +107,7 @@ const Footer = () => {
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
               href="/collaborate"
             >
-              Collaborate
+              Career
             </Link>
             <Link
               href="/"

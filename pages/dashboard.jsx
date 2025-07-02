@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { getSession, useSession } from "next-auth/react";
 import { FaUserCircle, FaEdit, FaSignOutAlt, FaBoxOpen, FaHeart, FaTicketAlt, FaCog, FaEnvelope, FaPlus, FaShoppingCart, FaFileInvoiceDollar, FaMapMarkerAlt, FaHistory } from "react-icons/fa";
 
 const mockUser = {
@@ -29,7 +30,7 @@ const mockActivity = [
   { id: 4, action: "Submitted a support ticket", date: "2024-05-08 11:10" },
 ];
 
-export default function Dashboard() {
+export default function Dashboard({ session }) {
   const [wishlist, setWishlist] = useState(mockWishlist);
   const [tickets, setTickets] = useState(mockTickets);
   const [newTicket, setNewTicket] = useState("");
@@ -48,15 +49,18 @@ export default function Dashboard() {
   const handleTrackOrder = (id) => setTrackOrderId(trackOrderId === id ? null : id);
   const handleDownloadInvoice = (id) => alert("Invoice downloaded for order #" + id);
 
+  // Use session user if available
+  const user = session?.user || mockUser;
+
   return (
     <div className="min-h-screen bg-[#f7fafc] pb-10">
       {/* Topbar */}
       <div className="w-full bg-white shadow flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8">
         <div className="flex items-center gap-4">
-          <img src={mockUser.avatar} alt="avatar" className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
+          <img src={user.image || user.avatar} alt="avatar" className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
           <div>
-            <div className="text-2xl font-bold text-[#000f29]">Welcome, {mockUser.name}!</div>
-            <div className="text-gray-500">{mockUser.email}</div>
+            <div className="text-2xl font-bold text-[#000f29]">Welcome, {user.name}!</div>
+            <div className="text-gray-500">{user.email}</div>
           </div>
         </div>
         <div className="flex gap-4 mt-4 md:mt-0">
@@ -148,4 +152,20 @@ export default function Dashboard() {
       </div>
     </div>
   );
+}
+
+// Auth protection for dashboard
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
 } 

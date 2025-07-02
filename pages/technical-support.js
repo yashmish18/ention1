@@ -1,4 +1,4 @@
-import { Navbar, Footer } from 'components';
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -111,7 +111,7 @@ const IconWrapper = ({ icon: Icon, size = 24 }) => <Icon size={size} />;
 export default function TechnicalSupport() {
   return (
     <main className="bg-[#070D2A] min-h-screen">
-      <Navbar />
+      
       {/* Header Section */}
       <header className="text-center py-20">
         <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3">Ention Support</h1>
@@ -295,7 +295,7 @@ export default function TechnicalSupport() {
       <button aria-label="Chat with support" className="fixed right-8 bottom-8 z-50 bg-sky-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-3xl shadow-lg hover:bg-sky-700 transition">
         <FiMessageCircle />
       </button>
-      <Footer />
+      
     </main>
   );
 }

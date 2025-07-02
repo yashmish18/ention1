@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Navbar, Footer } from '../components/index'
+
 import { signIn, useSession, } from "next-auth/react";
 // import styles from 'styles/Products.module.css'
 import Image from 'next/image'
@@ -72,7 +72,7 @@ const Login = () => {
 
     return (
         <main className={'main overflow-x-hidden relative'}>
-            <Navbar />
+            
             <div className='w-full lg:w-[90%] h-full mx-auto md:flex items-center justify-center pt-0 md:pt-20 px-6 md:px-10 md:px-0'>
                 <div className='hidden md:block w-[30%] '>
                     <Image src={hero1} alt="/">
@@ -165,7 +165,7 @@ const Login = () => {
             <hr className="w-[80%] text-[#D9D9D9] mx-auto  mt-2 mb-20"></hr>
 
 
-            <Footer />
+            
         </main>
     )
 }
