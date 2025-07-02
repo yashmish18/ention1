@@ -41,6 +41,54 @@ const showcaseSlides = [
   }
 ];
 
+const workbookSeries = [
+  {
+    key: 'E5',
+    name: 'Workbook series E5',
+    features: [
+      'Made for Everyday Hustlers,',
+      'Powerful yet Budget Friendly,',
+      'Control at your fingertips,',
+      'Intel N95 processor upto 3.4Ghz (6Mb cache, 4 core, 4thread)',
+      'Window 11',
+      'Display 15.6inch, full HD IPS',
+    ],
+    bag: 'Laptop bag worth 1500',
+    price: '₹' + (Math.floor(Math.random() * 10000) + 40000),
+    image: '/assets/product_/e5/IMG_1122.JPG',
+  },
+  {
+    key: 'E4',
+    name: 'Workbook series E4',
+    features: [
+      'Made for techy and Professional',
+      'Powerful yet Budget Friendly,',
+      'Dual RAM and Dual SSD slots give you the freedom to expand',
+      'Intel i7 13th gen processor13620H 24M Cache, up to 4.90 GHz',
+      'Window 11',
+      'Display 15.6inch, full HD IPS',
+    ],
+    bag: 'Laptop bag worth 1500',
+    price: '₹' + (Math.floor(Math.random() * 10000) + 50000),
+    image: '/assets/product_/e4/IMG_1107.JPG',
+  },
+  {
+    key: 'E3',
+    name: 'Workbook series E3',
+    features: [
+      'Made for rough use',
+      'dual heating system',
+      'With a full-metal body,',
+      'Intel i5-13500H has 18 MB of L3 cache 2.6 boost up to 4.7 GHz',
+      'Window 11',
+      'Display 15.6inch, full HD IPS',
+    ],
+    bag: 'Laptop bag worth 1500',
+    price: '₹' + (Math.floor(Math.random() * 10000) + 30000),
+    image: '/assets/product_/e3/IMG_9931.jpg',
+  },
+];
+
 function HeroCarousel() {
   const [active, setActive] = useState(0);
   const autoScrollTimeout = useRef();
@@ -165,6 +213,48 @@ const PromoBanner = () => (
   </section>
 );
 
+function WorkbookCard({ series }) {
+  // Map series.key to product id
+  const idMap = { E5: 5, E4: 4, E3: 3 };
+  const productId = idMap[series.key];
+  return (
+    <div className="border border-black rounded-xl mb-8 bg-white flex flex-col md:flex-row w-full min-h-[320px] overflow-hidden">
+      {/* Left: Details */}
+      <div className="flex-1 flex flex-col justify-between min-w-[260px] p-6">
+        <div>
+          <h2 className="text-xl font-semibold mb-2">{series.name}</h2>
+          <ul className="list-disc pl-5 mb-2 text-sm">
+            {series.features.map((f, i) => (
+              <li key={i}>{f}</li>
+            ))}
+          </ul>
+          <div className="text-xs mb-2">{series.bag}</div>
+        </div>
+        {/* Bottom row: 2 columns, buttons grouped */}
+        <div className="grid grid-cols-2 gap-0 border-t mt-6 pt-4 items-center text-base font-medium bg-white">
+          <div className="text-left">Starting from... <span className="font-bold">{series.price}</span></div>
+          <div className="flex justify-end gap-6">
+            <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+              <a className="text-black">Learn more</a>
+            </Link>
+            <button className="text-black">Shop Now</button>
+          </div>
+        </div>
+      </div>
+      {/* Right: 3:4 aspect ratio image, always fully visible, centered */}
+      <div className="flex-1 flex items-center justify-center bg-white md:max-w-[400px] w-full aspect-[3/4] md:aspect-auto">
+        <div className="relative w-full h-0 pb-[133.33%] md:pb-0 md:h-[400px] md:w-[300px] flex items-center justify-center">
+          <img 
+            src={series.image} 
+            alt="Creative Laptop" 
+            className="absolute top-0 left-0 w-full h-full object-contain" 
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ProductLandingPage() {
   const [activeTab, setActiveTab] = useState("workbook");
   const [filter, setFilter] = useState("all");
@@ -211,8 +301,10 @@ export default function ProductLandingPage() {
               <button onClick={() => setFilter("professional")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "professional" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Professionals</button>
               <button onClick={() => setFilter("business")} className={`px-6 py-2 rounded-3xl font-bold border ${filter === "business" ? "bg-[#007e9e] text-white" : "bg-white text-[#007e9e] border-[#007e9e]"}`}>For Businesses</button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {filteredProducts.map((product) => <ProductCard key={product.id} product={product} />)}
+            <div className="flex flex-col gap-8">
+              {workbookSeries.map((series) => (
+                <WorkbookCard key={series.key} series={series} />
+              ))}
             </div>
           </>
         )}
