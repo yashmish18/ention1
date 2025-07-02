@@ -6,7 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -79,7 +79,7 @@ const Header = () => {
       </div>
 
       {/* DESKTOP HEADER: Only visible on lg and above */}
-      <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-16">
+      <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-16 mr-[90px]">
         <Link href="/ecommerce/cart" className="flex items-center">
           <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
         </Link>
@@ -114,6 +114,16 @@ const Header = () => {
           Support
         </Link>
       </div>
+
+      {/* Dashboard nav link absolute left (desktop only) */}
+      <Link
+        href="/dashboard"
+        className="hidden lg:block absolute left-10 text-white hover:text-[#01E9FE] transition"
+        style={{ zIndex: 60 }}
+        title="Dashboard"
+      >
+        <FaUserCircle className="text-3xl" />
+      </Link>
 
       {/* Desktop auth buttons - positioned absolutely on right */}
       <div className="absolute hidden lg:flex items-center gap-2 right-10">

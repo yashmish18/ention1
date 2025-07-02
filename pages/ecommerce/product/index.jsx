@@ -273,7 +273,7 @@ export default function ProductLandingPage() {
       </div>
 
       {/* Workbook & Swapbook Tabs */}
-      <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-row gap-4 justify-center items-center">
+      <section className="max-w-4xl mx-auto py-8 px-4 text-center flex flex-row gap-24 justify-center items-center">
         <button
           onClick={() => setActiveTab("workbook")}
           className={`font-extrabold text-xl md:text-2xl lg:text-3xl flex flex-col items-center justify-center transition py-2 border-b-4 ${activeTab === "workbook" ? "text-black border-[#000]" : "text-[#000] border-transparent"}`}
