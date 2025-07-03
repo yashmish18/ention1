@@ -27,6 +27,8 @@ import IntelCarousel from "components/IntelCarousel";
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { FiSettings, FiDollarSign, FiShield, FiZap } from 'react-icons/fi';
+import { BsFlag } from 'react-icons/bs';
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -182,6 +184,74 @@ export default function Home() {
               <IntelCarousel />
             </div>
           </div>
+          <div className="w-full flex justify-center mt-24">
+            <BlurInText>
+              <p className="text-white text-2xl md:text-4xl lg:text-[32px] font-bold text-center max-w-4xl leading-snug">
+                Get ready to experience a mesmerizing journey of performance and style with the Ention Workbook series<br />
+                <span className="text-[#01E9FE] font-bold">proudly Made in India to empower.</span>
+              </p>
+            </BlurInText>
+          </div>
+
+          {/* For You Section */}
+          <div className="w-full flex flex-col items-center mt-24">
+            <h2 className="text-white text-3xl md:text-4xl font-extrabold mb-12 text-center">
+              Find Your Perfect Device
+            </h2>
+            <div className="flex flex-col md:flex-row gap-8 w-full justify-center">
+              {/* Card 1: For Students */}
+              <div className="bg-[#1A2233] flex flex-col justify-between w-full max-w-xl p-4 shadow-lg border border-[#2d3748] py-8">
+                <div className="text-white text-xl font-bold mb-2 text-left">For Students</div>
+                <div className="flex flex-row gap-4 items-center flex-1">
+                  <img src="/assets/0N1A1389.png" alt="For Students" className="w-52 h-48 object-contain" />
+                  <div className="text-white text-xl text-left opacity-90 flex-1">Affordable, Lightweight, durable, and built to support your learning on the go.</div>
+                </div>
+                <button className="bg-[#01E9FE] hover:bg-[#00bcd4] text-black font-semibold py-1 px-4 rounded transition-all duration-300 text-sm w-fit mt-4 self-start">
+                  Shop Now →
+                </button>
+              </div>
+              {/* Card 2: For Professionals & Techies */}
+              <div className="bg-[#1A2233] flex flex-col items-center w-full max-w-sm p-4 shadow-lg border border-[#2d3748]">
+                <div className="text-white text-xl font-bold mb-2 text-center">For Professionals & Techies</div>
+                <img src="/assets/0N1A1389.png" alt="For Professionals & Techies" className="w-52 h-48 object-contain mb-3" />
+                <div className="text-white text-lg mb-3 text-center opacity-90">Customizable, seamlessly switch from work tasks to meetings with reliable performance. A powerful and customizable machine ready to take on your code, design, or research.</div>
+                <button className="w-full bg-[#01E9FE] hover:bg-[#00bcd4] text-black font-semibold py-1 rounded transition-all duration-300 text-sm">
+                  Shop Now →
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Why Choose Ention Workbook Series Section */}
+          <div className="w-full flex flex-col items-center mt-16 py-12">
+            <div className="w-full max-w-6xl px-4">
+              <h2 className="text-white text-3xl md:text-4xl font-extrabold mb-2 text-center">Why Choose Ention Workbook Series?</h2>
+              <p className="text-white text-lg opacity-80 mb-8 text-center">From customization to performance, discover what makes Ention Workbook Series the right choice for you.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
+                  <FiSettings className="text-cyan-400 mb-3" size={36} />
+                  <span className="text-white text-base font-semibold text-center">Customizable</span>
+                </div>
+                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
+                  <FiDollarSign className="text-cyan-400 mb-3" size={36} />
+                  <span className="text-white text-base font-semibold text-center">Affordable Without Compromise</span>
+                </div>
+                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
+                  <FiShield className="text-cyan-400 mb-3" size={36} />
+                  <span className="text-white text-base font-semibold text-center">18-Month On-Site Warranty</span>
+                </div>
+                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
+                  <BsFlag className="text-cyan-400 mb-3" size={36} />
+                  <span className="text-white text-base font-semibold text-center">Made in India. Made for You.</span>
+                </div>
+                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
+                  <FiZap className="text-cyan-400 mb-3" size={36} />
+                  <span className="text-white text-base font-semibold text-center">Performance That Powers You</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <FadeUpAnimate spaceToMove={50}>
             <div className="w-full flex  justify-center mt-32">
               <button
@@ -193,70 +263,72 @@ export default function Home() {
             </div>
           </FadeUpAnimate>
 
-          {/* CPU Cards  */}
-          <div className="w-full flex justify-center">
-            <div className="flex flex-col items-center w-full mt-16">
-              <FadeUpAnimate spaceToMove={50} duration={1}>
-                <div className="flex flex-col items-center">
-                  <p className="text-white text-2xl md:text-4xl lg:text-[56px] font-bold md:whitespace-nowrap text-center">
-                    High Performance Power house
-                  </p>
-                  <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
-                    Ention
-                    <span
-                      className="font-thin"
-                      style={{
-                        position: "relative",
-                        top: "-5px",
-                        fontSize: "25px",
-                      }}
-                    >
-                      &reg;
-                    </span>{" "}
-                    Laptop equipped with latest generation Processor
-                  </p>
-                </div>
-              </FadeUpAnimate>
-              <div className="w-[80%] sm:w-full h-full lg:mt-5 relative z-[0]">
-                <div
-                  className="w-full h-full absolute opacity-10"
-                  style={{
-                    backgroundImage: `url(${board.src})`,
-                    backgroundSize: "35%",
-                  }}
-                ></div>
+          {/*
+            CPU Cards Section (High Performance Power house with Intel/AMD cards) commented out for future use
+            <div className="w-full flex justify-center">
+              <div className="flex flex-col items-center w-full mt-16">
+                <FadeUpAnimate spaceToMove={50} duration={1}>
+                  <div className="flex flex-col items-center">
+                    <p className="text-white text-2xl md:text-4xl lg:text-[56px] font-bold md:whitespace-nowrap text-center">
+                      High Performance Power house
+                    </p>
+                    <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
+                      Ention
+                      <span
+                        className="font-thin"
+                        style={{
+                          position: "relative",
+                          top: "-5px",
+                          fontSize: "25px",
+                        }}
+                      >
+                        &reg;
+                      </span>{" "}
+                      Laptop equipped with latest generation Processor
+                    </p>
+                  </div>
+                </FadeUpAnimate>
+                <div className="w-[80%] sm:w-full h-full lg:mt-5 relative z-[0]">
+                  <div
+                    className="w-full h-full absolute opacity-10"
+                    style={{
+                      backgroundImage: `url(${board.src})`,
+                      backgroundSize: "35%",
+                    }}
+                  ></div>
 
-                <div className="mt-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
-                  <FadeUpAnimate spaceToMove={200}>
-                    <ProcessorCard
-                      img={intelprocessor}
-                      title={
-                        <>
-                          <b>Intel</b> Family Processor
-                        </>
-                      }
-                      content={
-                        "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
-                      }
-                    />
-                  </FadeUpAnimate>
-                  <FadeUpAnimate spaceToMove={400} duration={0.7}>
-                    <ProcessorCard
-                      img={amdprocessor}
-                      title={
-                        <>
-                          <b>AMD</b> Series Processor
-                        </>
-                      }
-                      content={
-                        "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
-                      }
-                    />
-                  </FadeUpAnimate>
+                  <div className="mt-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
+                    <FadeUpAnimate spaceToMove={200}>
+                      <ProcessorCard
+                        img={intelprocessor}
+                        title={
+                          <>
+                            <b>Intel</b> Family Processor
+                          </>
+                        }
+                        content={
+                          "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
+                        }
+                      />
+                    </FadeUpAnimate>
+                    <FadeUpAnimate spaceToMove={400} duration={0.7}>
+                      <ProcessorCard
+                        img={amdprocessor}
+                        title={
+                          <>
+                            <b>AMD</b> Series Processor
+                          </>
+                        }
+                        content={
+                          "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
+                        }
+                      />
+                    </FadeUpAnimate>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          */}
         </div>
         <div
           className=" flex flex-col -z-10"

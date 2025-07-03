@@ -407,3 +407,14 @@ main {
   animation: fadeIn 1.5s ease-in-out forwards;
   animation-delay: 0.5s;
 }
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+input[type="password"]::-webkit-input-decoration-container {
+  display: none !important;
+}
