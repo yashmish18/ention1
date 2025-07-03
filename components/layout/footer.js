@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 import logo from "assets/ention-logo.png";
+import Image from "next/image";
 
 const Footer = () => {
   const router = useRouter();
@@ -14,9 +15,11 @@ const Footer = () => {
       <div className="flex flex-col lg:flex-row items-center lg:items-start lg:h-full w-full gap-10 lg:gap-0 justify-between xl:justify-around">
         <div className="flex flex-col justify-between items-center h-[160px] lg:h-[280px]">
           <div className="flex flex-col items-center">
-            <img
-              src={logo.src}
+            <Image
+              src={logo}
               alt="ention-logo"
+              width={90}
+              height={40}
               onClick={() => router.push("/")}
               className="w-[90px] h-auto object-none cursor-pointer"
             />
@@ -105,7 +108,7 @@ const Footer = () => {
             </Link>
             <Link
               className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              href="/collaborate"
+              href="/career"
             >
               Career
             </Link>

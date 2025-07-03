@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 import IntelCarousel from "components/IntelCarousel";
 import dynamic from 'next/dynamic';
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -278,11 +279,7 @@ export default function Home() {
                   className="px-8 py-4 border rounded-3xl w-full flex flex-col sm:flex-row justify-center items-center relative"
                   style={{ borderColor: "rgba(34, 209, 238, 1" }}
                 >
-                  <img
-                    src={warrantyimg.src}
-                    alt="warranty-img"
-                    className="w-[320px] sm:w-[240px] md:w-[280px] lg:w-[320px] xl:w-[390px] h-auto z-[2]"
-                  />
+                  <Image src={warrantyimg} alt="warranty-img" width={390} height={240} className="w-[320px] sm:w-[240px] md:w-[280px] lg:w-[320px] xl:w-[390px] h-auto z-[2]" />
                   <FloatingBlob
                     className="absolute z-[1] top-10 sm:top-[150px] left-16 w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px]"
                     style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }}
@@ -340,15 +337,9 @@ export default function Home() {
             <FloatingBlob className="hidden md:block absolute right-10 bottom-0 w-32 h-32 opacity-30 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
             <FloatingBlob className="hidden md:block absolute left-1/3 top-1/2 w-24 h-24 opacity-20 z-0" style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }} />
             <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-8 min-[876px]:mt-24 xl:mt-32 relative z-10">
-              <motion.img
-                src={marketpc.src}
-                alt="discussing-image"
-                initial={{ opacity: 0, x: 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1 }}
-                className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]"
-              />
+              <motion.div initial={{ opacity: 0, x: 100 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1 }} className="w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px]">
+                <Image src={marketpc} alt="discussing-image" width={640} height={480} className="w-full h-auto" />
+              </motion.div>
               <FadeUpAnimate spaceToMove={300}>
                 <div className="flex flex-col gap-4 sm:gap-8 md:gap-4 lg:gap-6 xl:gap-10">
                   <p className="text-[28px] min-[540px]:text-[36px]  md:text-xl lg:text-[24px] xl:text-3xl text-white font-bold">
@@ -370,26 +361,10 @@ export default function Home() {
                     </li>
                   </div>
                   <div className="flex gap-5 mt-5">
-                    <img
-                      src={corei5.src}
-                      alt="cpu-image"
-                      className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
-                    />
-                    <img
-                      src={corei7.src}
-                      alt="cpu-image"
-                      className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
-                    />
-                    <img
-                      src={amd5.src}
-                      alt="cpu-image"
-                      className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
-                    />
-                    <img
-                      src={amd7.src}
-                      alt="cpu-image"
-                      className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
-                    />
+                    <Image src={corei5} alt="cpu-image" width={80} height={80} className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto" />
+                    <Image src={corei7} alt="cpu-image" width={80} height={80} className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto" />
+                    <Image src={amd5} alt="cpu-image" width={80} height={80} className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto" />
+                    <Image src={amd7} alt="cpu-image" width={80} height={80} className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto" />
                   </div>
                   <button
                     className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"
@@ -403,12 +378,7 @@ export default function Home() {
             <div className="flex flex-col md:flex-row-reverse justify-center items-start md:items-center gap-6 md:gap-12 lg:gap-24 w-[80%] md:w-full mt-16 min-[876px]:mt-24 xl:mt-32">
               <div className="relative h-[425px] w-full md:w-[360px] lg:w-[480px] min-[1240px]:w-[540px] xl:w-[640px] flex items-center justify-center">
                 {/* Blurred/partial laptop image */}
-                <img
-                  src={marketpc.src}
-                  alt="swapbook-coming-soon"
-                  className="w-full h-[200px] object-cover rounded-lg md:h-full md:rounded-lg blur-sm"
-                  style={{ objectPosition: 'right' }}
-                />
+                <Image src={marketpc} alt="swapbook-coming-soon" width={640} height={200} className="w-full h-[200px] object-cover rounded-lg md:h-full md:rounded-lg blur-sm" style={{ objectPosition: 'right' }} />
                 {/* Overlay text */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="font-extrabold text-white text-4xl md:text-5xl lg:text-6xl text-center drop-shadow-lg">
@@ -430,16 +400,8 @@ export default function Home() {
                     </li>
                   </div>
                   <div className="flex gap-5 mt-5">
-                    <img
-                      src={corei9.src}
-                      alt="cpu-image"
-                      className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
-                    />
-                    <img
-                      src={nvidia.src}
-                      alt="cpu-image"
-                      className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto"
-                    />
+                    <Image src={corei9} alt="cpu-image" width={80} height={80} className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto" />
+                    <Image src={nvidia} alt="cpu-image" width={80} height={80} className="w-12 min-[450px]:w-16 sm:w-20 md:w-16 lg:w-20 h-auto" />
                   </div>
                   <button
                     className="bg-white mt-4 xl:mt-8 z-[2] w-[160px] h-[36px] min-[450px]:w-[200px] min-[450px]:h-[45px] sm:w-[Cpx] md:w-[200px] sm:h-[38px] md:h-[42px] xl:w-[248px] xl:h-[58px] rounded-3xl flex justify-center items-center text-black text-base min-[450px]:text-lg md:text-xl xl:text-2xl hover:scale-105  transition-all duration-300 ease-in-out"

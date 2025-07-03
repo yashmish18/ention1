@@ -20,7 +20,6 @@ import {
   Comments,
   SideCategories,
 } from "../../../components";
-import { getPostDetails } from "../../../services";
 
 const PostDetails = ({ post }) => {
   const router = useRouter();
@@ -100,7 +99,15 @@ const PostDetails = ({ post }) => {
 };
 export default PostDetails;
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  const { getPosts } = await import('../../../services');
+  const posts = await getPosts();
+  const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const { getPostDetails } = await import('../../../services');
   const data = await getPostDetails(params.slug);
   if (!data) {
     return {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { getSession, useSession } from "next-auth/react";
 import { FaUserCircle, FaEdit, FaSignOutAlt, FaBoxOpen, FaHeart, FaTicketAlt, FaCog, FaEnvelope, FaPlus, FaShoppingCart, FaFileInvoiceDollar, FaMapMarkerAlt, FaHistory } from "react-icons/fa";
+import Image from "next/image";
 
 const mockUser = {
   name: "John Doe",
@@ -57,7 +58,7 @@ export default function Dashboard({ session }) {
       {/* Topbar */}
       <div className="w-full bg-white shadow flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8">
         <div className="flex items-center gap-4">
-          <img src={user.image || user.avatar} alt="avatar" className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
+          <Image src={user.image || user.avatar} alt="avatar" width={64} height={64} className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
           <div>
             <div className="text-2xl font-bold text-[#000f29]">Welcome, {user.name}!</div>
             <div className="text-gray-500">{user.email}</div>
@@ -75,7 +76,7 @@ export default function Dashboard({ session }) {
           {mockOrders.map(order => (
             <div key={order.id} className="flex flex-col gap-2 border-b py-3 last:border-b-0">
               <div className="flex items-center gap-4">
-                <img src={order.image} alt={order.product} className="w-16 h-16 rounded-lg object-cover" />
+                <Image src={order.image} alt={order.product} width={64} height={64} className="w-16 h-16 rounded-lg object-cover" />
                 <div className="flex-1">
                   <div className="font-semibold">{order.product}</div>
                   <div className="text-xs text-gray-500">{order.status} • {order.date}</div>
@@ -99,7 +100,7 @@ export default function Dashboard({ session }) {
           {wishlist.length === 0 && <div className="text-gray-400">No saved products.</div>}
           {wishlist.map(item => (
             <div key={item.id} className="flex items-center gap-4 border-b py-3 last:border-b-0">
-              <img src={item.image} alt={item.product} className="w-16 h-16 rounded-lg object-cover" />
+              <Image src={item.image} alt={item.product} width={64} height={64} className="w-16 h-16 rounded-lg object-cover" />
               <div className="flex-1 font-semibold">{item.product}</div>
               <button onClick={() => handleAddToCart(item.id)} className="text-[#007e9e] hover:underline flex items-center gap-1"><FaShoppingCart /> Add</button>
               <button onClick={() => handleRemoveWishlist(item.id)} className="text-red-500 hover:underline ml-2">Remove</button>

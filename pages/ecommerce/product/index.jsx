@@ -120,9 +120,11 @@ function HeroCarousel() {
     <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#000f29]">
       {/* Slide image */}
       <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-        <img
+        <Image
           src={heroSlides[active]}
           alt="Hero Slide"
+          width={1200}
+          height={600}
           style={{ width: '100%', height: '100%', objectFit: 'cover', background: '#222', display: 'block' }}
           onError={e => { e.target.style.background = '#222'; e.target.src = ''; }}
         />
@@ -151,9 +153,11 @@ function ProductShowcaseCarousel() {
   return (
     <section className="relative w-full mt-20 mb-10 overflow-hidden bg-black">
       <div className="relative w-full h-[400px] md:h-[340px] flex items-center justify-center ">
-        <img
+        <Image
           src={showcaseSlides[active].image}
           alt="Product Slide"
+          width={1200}
+          height={400}
           className="object-cover w-full h-full"
         />
         {/* Carousel controls */}
@@ -254,10 +258,12 @@ function WorkbookCard({ series }) {
       </div>
       {/* Right: Image */}
       <div className="md:w-1/2 w-full h-full flex items-center justify-center">
-        <img
+        <Image
           src={series.image}
           alt={series.name}
-          className="w-full h-[980%] object-cover  shadow-lg"
+          width={400}
+          height={380}
+          className="w-full h-[980%] object-cover shadow-lg"
           style={{ background: 'transparent' }}
         />
       </div>

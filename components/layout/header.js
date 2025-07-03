@@ -7,6 +7,7 @@ import { GrClose } from "react-icons/gr";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import Image from "next/image";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -46,6 +47,17 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const handleOpenMenu = () => {
+    setShowModal(true);
+    // Prefetch important routes for instant navigation
+    router.prefetch("/");
+    router.prefetch("/ecommerce/product");
+    router.prefetch("/about");
+    router.prefetch("/technical-support");
+    router.prefetch("/login");
+    router.prefetch("/signup");
+  };
+
   return (
     <motion.div
       style={{
@@ -61,14 +73,16 @@ const Header = () => {
         {/* Hamburger menu on left */}
         <button
           className="text-white text-3xl"
-          onClick={() => setShowModal(true)}
+          onClick={handleOpenMenu}
         >
           <IoMenu />
         </button>
         {/* Centered logo */}
-        <img
-          src={logo.src}
+        <Image
+          src={logo}
           alt="ention-logo-mobile"
+          width={90}
+          height={40}
           className="w-[90px] h-auto object-none cursor-pointer"
           onClick={() => router.push("/")}
         />
@@ -98,9 +112,11 @@ const Header = () => {
         >
           Products
         </Link>
-        <img
-          src={logo.src}
+        <Image
+          src={logo}
           alt="ention-logo-desktop"
+          width={90}
+          height={40}
           className="w-[90px] h-auto object-none cursor-pointer"
           onClick={() => router.push("/")}
         />
@@ -165,9 +181,11 @@ const Header = () => {
           <div className="fixed left-0 top-0 h-full min-h-screen w-[80vw] max-w-[340px] bg-white z-50 flex flex-col shadow-2xl rounded-r-2xl border-r border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out lg:hidden">
             {/* Header with logo and close button */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-              <img
-                src={logo.src}
+              <Image
+                src={logo}
                 alt="ention-logo"
+                width={60}
+                height={40}
                 className="w-[60px] h-auto object-contain cursor-pointer"
                 onClick={() => { setShowModal(false); router.push("/"); }}
               />
@@ -181,10 +199,18 @@ const Header = () => {
             </div>
             {/* Navigation links */}
             <nav className="flex flex-col gap-1 flex-1 px-4 py-6">
-              <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => { setShowModal(false); router.push("/"); }}>Home</button>
-              <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => { setShowModal(false); router.push("/ecommerce/product"); }}>Products</button>
-              <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => { setShowModal(false); router.push("/about"); }}>About Us</button>
-              <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => { setShowModal(false); router.push("/technical-support"); }}>Support</button>
+              <Link href="/" passHref legacyBehavior>
+                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Home</button>
+              </Link>
+              <Link href="/ecommerce/product" passHref legacyBehavior>
+                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Products</button>
+              </Link>
+              <Link href="/about" passHref legacyBehavior>
+                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>About Us</button>
+              </Link>
+              <Link href="/technical-support" passHref legacyBehavior>
+                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Support</button>
+              </Link>
             </nav>
             {/* Auth buttons at bottom */}
             <div className="flex flex-col gap-2 px-4 pb-6">

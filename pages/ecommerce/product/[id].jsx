@@ -243,11 +243,7 @@ const ProductDetails = () => {
                   >
                     {getImages(String(product.id)).map((src, idx) => (
                       <SwiperSlide key={idx}>
-                        <img
-                          src={src}
-                          alt={`Product Slide ${idx + 1}`}
-                          style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '1.5rem', background: '#fff',}}
-                        />
+                        <Image src={src} alt={`Product Slide ${idx + 1}`} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '1.5rem', background: '#fff' }} />
                       </SwiperSlide>
                     ))}
                   </Swiper>

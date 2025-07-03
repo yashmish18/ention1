@@ -43,10 +43,17 @@ const CategoryPost = ({ categoryPost, posts }) => {
 };
 export default CategoryPost;
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+  const { getCategories } = await import('../../../services');
+  const categories = await getCategories();
+  const paths = categories.map((cat) => ({ params: { slug: cat.slug } }));
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const { getSingleCategory, getCategoryPost } = await import('../../../services');
   const categoryPost = await getSingleCategory(params.slug);
   const posts = await getCategoryPost(params.slug);
-
   return {
     props: { categoryPost, posts },
   };
