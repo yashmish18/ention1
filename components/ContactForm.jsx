@@ -1,4 +1,3 @@
-// components/ContactForm.jsx
 import React, { useState } from 'react';
 
 export default function ContactForm() {
@@ -42,4 +41,4 @@ export default function ContactForm() {
       {status && <p className="text-sm mt-2 text-gray-700">{status}</p>}
     </form>
   );
-}
+} 
