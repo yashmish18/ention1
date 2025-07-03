@@ -52,7 +52,9 @@ export default CategoryPost;
 //   return { paths, fallback: false };
 // }
 
-export async function getStaticProps({ params }) {
+// Switched to SSR: getServerSideProps is used instead of getStaticProps so that getStaticPaths is not required.
+// If you want to use SSG in the future, restore getStaticProps and getStaticPaths, and ensure your API endpoint is available.
+export async function getServerSideProps({ params }) {
   const { getSingleCategory, getCategoryPost } = await import('../../../services');
   const categoryPost = await getSingleCategory(params.slug);
   const posts = await getCategoryPost(params.slug);
