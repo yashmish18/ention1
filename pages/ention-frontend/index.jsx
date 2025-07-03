@@ -1,11 +1,12 @@
 import React from 'react';
-import ContactForm from './components/ContactForm';
-import './index.css';
+import ContactForm from './src/components/ContactForm.jsx';
+import Link from 'next/link';
+
 import {
   FaChartLine, FaUsers, FaTools, FaUniversity, FaMoneyBillWave, FaLeaf, FaLightbulb, FaBlog
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-function App() {
+
+function EntionFrontendPage() {
   // Hero background image
   const heroBg = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80';
 
@@ -18,7 +19,9 @@ function App() {
           <h1 className="text-5xl md:text-6xl font-extrabold text-white drop-shadow mb-4 animate-fade-in">Welcome to ENTION</h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-cyan-200 mb-4 animate-fade-in delay-100">Empowering Innovation, Affordability & Sustainability</h2>
           <p className="text-lg md:text-xl text-white/90 mb-6 max-w-2xl animate-fade-in delay-200">We design state-of-the-art laptops for startups, academia, and professionals.</p>
-          <Link to="/about" className="inline-block bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition animate-fade-in delay-300">Associate With Us</Link>
+          <Link href="/ention-frontend/about" legacyBehavior>
+            <a className="inline-block bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition animate-fade-in delay-300">Associate With Us</a>
+          </Link>
         </div>
       </section>
       {/* Our Offers Section */}
@@ -193,4 +196,4 @@ function App() {
   );
 }
 
-export default App;
+export default EntionFrontendPage; 

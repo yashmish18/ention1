@@ -104,7 +104,7 @@ const Header = () => {
       {/* DESKTOP HEADER: Only visible on lg and above */}
       <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-10 mr-[90px] ">
         <Link
-          href="/collaborate"
+          href="/ention-frontend"
           className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
         >
           Collaborate
