@@ -43,12 +43,14 @@ const CategoryPost = ({ categoryPost, posts }) => {
 };
 export default CategoryPost;
 
-export async function getStaticPaths() {
-  const { getCategories } = await import('../../../services');
-  const categories = await getCategories();
-  const paths = categories.map((cat) => ({ params: { slug: cat.slug } }));
-  return { paths, fallback: false };
-}
+// getStaticPaths is used by Next.js to pre-render dynamic category pages at build time based on available categories from the CMS.
+// By commenting this out, category pages will not be statically generated and may not be accessible unless you implement fallback logic or use SSR.
+// export async function getStaticPaths() {
+//   const { getCategories } = await import('../../../services');
+//   const categories = await getCategories();
+//   const paths = categories.map((cat) => ({ params: { slug: cat.slug } }));
+//   return { paths, fallback: false };
+// }
 
 export async function getStaticProps({ params }) {
   const { getSingleCategory, getCategoryPost } = await import('../../../services');
