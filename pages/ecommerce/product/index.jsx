@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import Link from "next/link";
 import { cn } from '../../../lib/utils';
+import TestCarousel from '../../../components/TestCarousel';
 
 // Hero carousel: 5 slides, all with the same background image
 const heroSlides = Array(5).fill("/assets/slide-1.jpg");
@@ -117,7 +118,7 @@ function HeroCarousel() {
   }, [active]);
 
   return (
-    <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#000f29]">
+    <section className="bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA] relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
       {/* Slide image */}
       <div className="absolute inset-0 w-full h-full flex items-center justify-center">
         <Image
@@ -135,58 +136,11 @@ function HeroCarousel() {
         {heroSlides.map((_, i) => (
           <button
             key={i}
-            className={`w-3 h-3 rounded-full border-2 ${active === i ? 'bg-[#007e9e] border-white' : 'bg-white/30 border-white/50'} transition`}
+            className={`w-3 h-3 rounded-full border-2 ${active === i ? 'bg-[#007e9e] border-white' : 'bg-transparent border-white/50'} transition`}
             onClick={() => setActive(i)}
             aria-label={`Go to slide ${i+1}`}
           />
         ))}
-      </div>
-    </section>
-  );
-}
-
-function ProductShowcaseCarousel() {
-  const [active, setActive] = useState(0);
-  const next = () => setActive((a) => (a + 1) % showcaseSlides.length);
-  const prev = () => setActive((a) => (a - 1 + showcaseSlides.length) % showcaseSlides.length);
-
-  return (
-    <section className="relative w-full mt-20 mb-10 overflow-hidden bg-black">
-      <div className="relative w-full h-[400px] md:h-[340px] flex items-center justify-center ">
-        <Image
-          src={showcaseSlides[active].image}
-          alt="Product Slide"
-          width={1200}
-          height={400}
-          className="object-cover w-full h-full"
-        />
-        {/* Carousel controls */}
-        <div className="absolute bottom-4 right-6 flex gap-2 z-30">
-          <button
-            aria-label="Previous slide"
-            onClick={prev}
-            className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
-          >
-            <span className="text-white text-2xl">&#8592;</span>
-          </button>
-          <div className="flex gap-2">
-            {showcaseSlides.map((_, idx) => (
-              <span
-                key={idx}
-                className={`w-3 h-3 rounded-full border-2 ${active === idx ? "bg-[#01E9FE] border-white" : "bg-white/30 border-white/40"}`}
-                onClick={() => setActive(idx)}
-                style={{ cursor: "pointer" }}
-              />
-            ))}
-          </div>
-          <button
-            aria-label="Next slide"
-            onClick={next}
-            className="rounded-full bg-white/30 hover:bg-white/50 backdrop-blur-sm border border-white/30 shadow-lg p-3 transition-all duration-300"
-          >
-            <span className="text-white text-2xl">&#8594;</span>
-          </button>
-        </div>
       </div>
     </section>
   );
@@ -271,6 +225,45 @@ function WorkbookCard({ series }) {
   );
 }
 
+function WorkbookCardMobile({ series }) {
+  // Map series.key to product id
+  const idMap = { E5: 5, E4: 4, E3: 3 };
+  const productId = idMap[series.key];
+  return (
+    <div className="bg-[#b9d2df] shadow flex flex-col p-2 my-6 w-full max-w-[80vw] justify-content-center mr-14">
+      {/* Image at the very top, full width, no rounded corners, larger height */}
+      <div className="w-full">
+        <Image
+          src={series.image}
+          alt={series.name}
+          width={600}
+          height={360}
+          className="object-cover w-full h-80"
+          style={{ background: 'transparent' }}
+        />
+      </div>
+      {/* All text content below the image */}
+      <h2 className="text-lg font-bold text-[#0d223a] mb-1 mt-4">{series.name}</h2>
+      <ul className="list-disc pl-4 text-sm text-[#222] mb-1">
+        {series.features.map((f, i) => (
+          <li key={i}>{f}</li>
+        ))}
+      </ul>
+      <div className="text-xs text-[#007e9e] mb-1">{series.bag}</div>
+      <div className="flex flex-col gap-1 border-t pt-1 mt-1 text-xs">
+        <div className="font-semibold text-[#0d223a]">
+          Starting from... <span className="font-bold text-[#007e9e]">{series.price}</span>
+        </div>
+        <div>
+          <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+            <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const BentoGrid = ({ className, children }) => {
   return (
     <div
@@ -316,15 +309,22 @@ export default function ProductLandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA]">
-      {/* New Product Showcase Carousel */}
-      <ProductShowcaseCarousel />
+      {/* Super smooth transparent carousel */}
+      <div className="w-full flex justify-center items-center pb-4 py-[150px]">
+        <TestCarousel />
+      </div>
       {/* Filter and Tab Content */}
       <section className="max-w-7xl mx-auto py-12 px-2 sm:px-4">
         {activeTab === "workbook" && (
           <>
-            <div className="flex flex-col gap-8">
+            <div className="hidden md:flex flex-col gap-8">
               {workbookSeries.map((series) => (
                 <WorkbookCard key={series.key} series={series} />
+              ))}
+            </div>
+            <div className="block md:hidden w-full flex flex-col items-center justify-center">
+              {workbookSeries.map((series) => (
+                <WorkbookCardMobile key={series.key} series={series} />
               ))}
             </div>
           </>
@@ -336,7 +336,7 @@ export default function ProductLandingPage() {
           </div>
         )}
       </section>
-
+    
       {/* Promotional Banner and Newsletter Signup only for Home tab */}
       {activeTab === "home" && (
         <>
@@ -352,8 +352,6 @@ export default function ProductLandingPage() {
           </section>
         </>
       )}
-
-     
     </div>
   );
 }
