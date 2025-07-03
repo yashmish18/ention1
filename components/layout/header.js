@@ -47,6 +47,15 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  useEffect(() => {
+    if (router && router.prefetch) {
+      router.prefetch("/about");
+      // Optionally prefetch other important pages:
+      // router.prefetch("/ecommerce/product");
+      // router.prefetch("/technical-support");
+    }
+  }, [router]);
+
   const handleOpenMenu = () => {
     setShowModal(true);
     // Prefetch important routes for instant navigation
@@ -82,8 +91,8 @@ const Header = () => {
           src={logo}
           alt="ention-logo-mobile"
           width={90}
-          height={40}
-          className="w-[90px] h-auto object-none cursor-pointer"
+          height={90}
+          className="w-[90px] h-auto object-contain cursor-pointer"
           onClick={() => router.push("/")}
         />
         {/* Cart icon on right */}
@@ -116,8 +125,8 @@ const Header = () => {
           src={logo}
           alt="ention-logo-desktop"
           width={90}
-          height={40}
-          className="w-[90px] h-auto object-none cursor-pointer"
+          height={90}
+          className="object-contain cursor-pointer"
           onClick={() => router.push("/")}
         />
         <Link
@@ -186,7 +195,7 @@ const Header = () => {
                 alt="ention-logo"
                 width={60}
                 height={40}
-                className="w-[60px] h-auto object-contain cursor-pointer"
+                className="w-[60px] h-auto object-contain cursor-pointer text-black" style={{color: "black"}}
                 onClick={() => { setShowModal(false); router.push("/"); }}
               />
               <button
@@ -198,22 +207,28 @@ const Header = () => {
               </button>
             </div>
             {/* Navigation links */}
-            <nav className="flex flex-col gap-1 flex-1 px-4 py-6">
+            <nav className="flex flex-col gap-1 flex-1 px-4 py-2 mt-2">
+              <Link href="/collaborate" passHref legacyBehavior>
+                <a className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Collaborate</a>
+              </Link>
               <Link href="/" passHref legacyBehavior>
-                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Home</button>
+                <a className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Home</a>
               </Link>
               <Link href="/ecommerce/product" passHref legacyBehavior>
-                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Products</button>
+                <a className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Products</a>
               </Link>
               <Link href="/about" passHref legacyBehavior>
-                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>About Us</button>
+                <a className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>About Us</a>
               </Link>
               <Link href="/technical-support" passHref legacyBehavior>
-                <button className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Support</button>
+                <a className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Support</a>
+              </Link>
+              <Link href="/dashboard" passHref legacyBehavior>
+                <a className="text-gray-900 text-base font-semibold text-left py-3 px-2 rounded hover:bg-gray-100 transition" onClick={() => setShowModal(false)}>Dashboard</a>
               </Link>
             </nav>
             {/* Auth buttons at bottom */}
-            <div className="flex flex-col gap-2 px-4 pb-6">
+            <div className="flex flex-col gap-2 px-4 pb-6 mb-8">
               <button
                 className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
                 onClick={() => { setShowModal(false); router.push("/login"); }}

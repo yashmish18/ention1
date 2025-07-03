@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import AboutHeroCarousel from "components/generic/AboutHeroCarousel";
+import dynamic from "next/dynamic";
 
 // Import images
 import storyImage from "assets/0N1A1389.png";
@@ -10,6 +10,10 @@ import productImage from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
 import ellipseBg from "assets/ellipse-gradient-half.png";
 import consultancyImage from "assets/serviceimg.png";
 
+const AboutHeroCarousel = dynamic(() => import("components/generic/AboutHeroCarousel"), {
+  loading: () => <div className="w-full text-center py-8">Loading...</div>,
+  ssr: false,
+});
 
 const About = () => {
   return (
@@ -35,9 +39,9 @@ const About = () => {
           <div className="relative w-full  h-full flex justify-center">
             <video
               src="/assets/E1_video.mp4"
-              autoPlay
-              loop
               controls
+              loading="lazy"
+              poster="/assets/about-video-poster.jpg"
               className="w-full max-w-6xl rounded-lg shadow-lg"
             ></video>
           </div>

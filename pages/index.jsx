@@ -148,17 +148,11 @@ export default function Home() {
                 className="flex items-center justify-center w-full whitespace-nowrap overflow-x-auto"
                 style={{ letterSpacing: "7px" }}
               >
-                <span className="text-white text-lg font-semibold mr-2">INTRODUCING</span>
-                <TypingEffect
-                  className="text-[#01E9FE] font-bold text-lg"
-                  text="MADE IN INDIA"
-                />
+                <span className="text-white text-base md:text-lg font-semibold mr-2">INTRODUCING</span>
+                <TypingEffect className="text-[#01E9FE] font-bold text-base md:text-lg" text="MADE IN INDIA" />
               </div>
               <div className="flex items-center justify-center w-full mt-3 whitespace-nowrap overflow-x-auto">
-                <TypingEffect
-                  className="text-white text-xl font-bold"
-                  text={"ENTION\u00A0\u00AE COMPUTING DEVICE"}
-                />
+                <TypingEffect className="text-white text-lg md:text-xl font-bold" text={"ENTION\u00A0\u00AE COMPUTING DEVICE"} />
               </div>
             </div>
             {/* Desktop: keep existing layout */}
