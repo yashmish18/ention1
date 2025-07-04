@@ -418,3 +418,10 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 input[type="password"]::-webkit-input-decoration-container {
   display: none !important;
 }
+
+/* Prevent any blur on carousel images and their containers */
+.carousel-no-blur,
+.carousel-no-blur * {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
