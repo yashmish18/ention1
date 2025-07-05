@@ -232,7 +232,7 @@ const ProductDetails = () => {
           <div ref={overviewRef} id="overview" className="mb-10">
             <div className="bg-white shadow-2xl p-0 md:p-4 flex flex-col md:flex-row gap-0 md:gap-8 items-stretch border-0">
               {/* Left: Image Carousel */}
-              <div className="flex-1 flex items-center justify-center p-0 md:p-8 bg-white ">
+              <div className="order-1 md:order-1 flex-1 flex items-center justify-center p-0 md:p-8 bg-white ">
                 <div className="w-full max-w-md">
                   <Swiper
                     modules={[Navigation, Pagination]}
@@ -250,7 +250,7 @@ const ProductDetails = () => {
                 </div>
               </div>
               {/* Right: Product Info Card */}
-              <div className="flex-1 flex flex-col justify-center gap-6 p-6 md:p-10 bg-white shadow-xl border-0 min-w-[320px] max-w-xl mx-auto">
+              <div className="order-2 md:order-2 flex-1 flex flex-col justify-center gap-6 p-6 md:p-10 bg-white shadow-xl border-0 min-w-[320px] max-w-xl mx-auto">
                 <h1 className="text-3xl md:text-4xl font-extrabold text-[#007e9e] mb-2 leading-tight">{product.name}</h1>
                 <div className="text-lg text-gray-700 font-medium mb-2">{product.description}</div>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -402,13 +402,33 @@ export async function getStaticProps({ params }) {
 
 // AddReviewSection component
 function AddReviewSection({ product }) {
-  const [reviews, setReviews] = React.useState(product.reviews || []);
+  const [reviews, setReviews] = React.useState([]);
   const [name, setName] = React.useState("");
   const [rating, setRating] = React.useState(5);
   const [text, setText] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
   const [images, setImages] = React.useState([]);
   const [videos, setVideos] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+
+  // Fetch reviews from database
+  React.useEffect(() => {
+    fetchReviews();
+  }, [product.id]);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch(`/api/reviews?productId=${product.id}`);
+      const data = await response.json();
+      if (data.success) {
+        setReviews(data.reviews);
+      }
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleImageChange = (e) => {
     setImages(Array.from(e.target.files));
@@ -417,20 +437,40 @@ function AddReviewSection({ product }) {
     setVideos(Array.from(e.target.files));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim() || !text.trim()) return;
-    setReviews([
-      { name, rating, text, images, videos },
-      ...reviews,
-    ]);
-    setName("");
-    setRating(5);
-    setText("");
-    setImages([]);
-    setVideos([]);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2000);
+    
+    try {
+      const response = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          rating,
+          text,
+          productId: product.id,
+          images: images.map(img => img.name), // Just store file names for now
+          videos: videos.map(vid => vid.name), // Just store file names for now
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setReviews([data.review, ...reviews]);
+        setName("");
+        setRating(5);
+        setText("");
+        setImages([]);
+        setVideos([]);
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 2000);
+      }
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
   };
 
   return (
@@ -471,30 +511,35 @@ function AddReviewSection({ product }) {
         {submitted && <div className="text-green-600 font-semibold">Thank you for your review!</div>}
       </form>
       <div className="flex flex-col gap-4">
-        {reviews.length > 0 ? (
-          reviews.map((review, idx) => (
-            <div key={idx} className="border rounded-lg p-4 bg-gray-50">
+        {loading ? (
+          <div className="text-gray-500">Loading reviews...</div>
+        ) : reviews.length > 0 ? (
+          reviews.map((review) => (
+            <div key={review._id} className="border rounded-lg p-4 bg-gray-50">
               <div className="font-bold text-[#007e9e]">{review.name}</div>
               <div className="text-yellow-500">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</div>
               <div className="text-gray-700 mt-2">{review.text}</div>
+              <div className="text-xs text-gray-500 mt-2">
+                {new Date(review.createdAt).toLocaleDateString()}
+              </div>
               {/* Show images if any */}
               {review.images && review.images.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {review.images.map((img, i) => {
-                    const url = typeof img === 'string' ? img : URL.createObjectURL(img);
-                    return <img key={i} src={url} alt="review-img" className="w-24 h-24 object-cover rounded" />;
-                  })}
+                  {review.images.map((img, i) => (
+                    <div key={i} className="text-sm text-gray-600 bg-gray-200 px-2 py-1 rounded">
+                      {img}
+                    </div>
+                  ))}
                 </div>
               )}
               {/* Show videos if any */}
               {review.videos && review.videos.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
-                  {review.videos.map((vid, i) => {
-                    const url = typeof vid === 'string' ? vid : URL.createObjectURL(vid);
-                    return (
-                      <video key={i} src={url} controls className="w-32 h-24 rounded" />
-                    );
-                  })}
+                  {review.videos.map((vid, i) => (
+                    <div key={i} className="text-sm text-gray-600 bg-gray-200 px-2 py-1 rounded">
+                      {vid}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

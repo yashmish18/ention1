@@ -148,15 +148,16 @@ const Header = () => {
        
       </div>
 
-      {/* Dashboard nav link absolute left (desktop only) */}
-      <Link
-        href="/dashboard"
-        className="hidden lg:block absolute left-10 text-white hover:text-[#01E9FE] transition"
-        style={{ zIndex: 60 }}
-        title="Dashboard"
-      >
-        <FaUserCircle className="text-3xl" />
-      </Link>
+      {/* Dashboard and Admin nav links absolute left (desktop only) */}
+      <div className="hidden lg:flex absolute left-10 items-center gap-4" style={{ zIndex: 60 }}>
+        <Link
+          href="/dashboard"
+          className="text-white hover:text-[#01E9FE] transition"
+          title="Dashboard"
+        >
+          <FaUserCircle className="text-3xl" />
+        </Link>
+      </div>
 
       {/* Desktop auth buttons - positioned absolutely on right */}
       <div className="absolute hidden lg:flex items-center gap-2 right-10">

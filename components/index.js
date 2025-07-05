@@ -18,3 +18,6 @@ export { default as FeaturedPostCard } from './FeaturedPostCard';
 export { default as PopularPostCard } from './PopularPostCard';
 export { default as CategoriesPostCard } from './CategoriesPostCard';
 export { default as Comments } from './Comments';
+
+// Admin Components
+export * from './admin';
