@@ -312,33 +312,49 @@ const ProductDetails = () => {
             <h2 className="text-2xl font-bold mb-4 text-[#000f29]">Technical Specifications</h2>
             <div className="border border-gray-300 rounded-lg overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="p-4 border-b md:border-b-0 md:border-r border-gray-300 text-sm">
-                  <div><span className="font-semibold">Colour</span> &nbsp;&nbsp;&nbsp;&nbsp;sliver</div>
-                  <div><span className="font-semibold">Display</span> &nbsp;&nbsp;&nbsp;&nbsp;15.6inch, Full HD 1920*1080 IPS 16:9 ratio</div>
-                  <div><span className="font-semibold">Processor :</span> &nbsp;intel N95 up to 3.4GHz with Turbo boost</div>
-                  <div><span className="font-semibold">Core, threads, Cache:</span> 4core, 4 threads, 6MB cache</div>
-                  <div><span className="font-semibold">Graphic :</span> intel UHD graphics 1.20Ghz</div>
-                  <div><span className="font-semibold">Fingerprint reader:</span> yes, on touch pad</div>
-                  <div><span className="font-semibold">Operating system:</span> window 11</div>
-                  <div><span className="font-semibold">MS office:</span> yes, 365</div>
-                  <div><span className="font-semibold">USB:</span> 3 port of USB 3.0, type C(Data+DP)</div>
-                  <div><span className="font-semibold">HDMI:</span> HDMI A type</div>
-                  <div><span className="font-semibold">Product Dimension and weight:</span> 357.4*228*19 mm, 1.68kg</div>
-                  <div><span className="font-semibold">Covered in warranty:</span> Manufacturing Defects, Physical Damage not covered.</div>
+                {/* First column */}
+                <div className="p-4 border-b md:border-b-0 md:border-r border-black text-sm">
+                  {[
+                    { label: 'Colour', value: 'sliver' },
+                    { label: 'Display', value: '15.6inch, Full HD 1920*1080 IPS 16:9 ratio' },
+                    { label: 'Processor', value: 'intel N95 up to 3.4GHz with Turbo boost' },
+                    { label: 'Core, threads, Cache', value: '4core, 4 threads, 6MB cache' },
+                    { label: 'Graphic', value: 'intel UHD graphics 1.20Ghz' },
+                    { label: 'Fingerprint reader', value: 'yes, on touch pad' },
+                    { label: 'Operating system', value: 'window 11' },
+                    { label: 'MS office', value: 'yes, 365' },
+                    { label: 'USB', value: '3 port of USB 3.0, type C(Data+DP)' },
+                    { label: 'HDMI', value: 'HDMI A type' },
+                    { label: 'Product Dimension and weight', value: '357.4*228*19 mm, 1.68kg' },
+                    { label: 'Covered in warranty', value: 'Manufacturing Defects, Physical Damage not covered.' },
+                  ].map((item, idx, arr) => (
+                    <div key={idx} className={`flex w-full ${idx !== arr.length - 1 ? 'border-b border-gray-200' : ''}`}>
+                      <div className="py-1 font-semibold min-w-[140px] w-1/2 border-r border-gray-300 pr-4">{item.label}</div>
+                      <div className="py-1 w-1/2 pl-4">{item.value}</div>
+                    </div>
+                  ))}
                 </div>
+                {/* Second column */}
                 <div className="p-4 text-sm">
-                  <div><span className="font-semibold">Power:</span> DC 12V</div>
-                  <div><span className="font-semibold">Battery:</span> 5000mah</div>
-                  <div><span className="font-semibold">RJ45:</span> yes</div>
-                  <div><span className="font-semibold">Memory card reader:</span> yes, SD card upto 128Gb</div>
-                  <div><span className="font-semibold">Earphone port:</span> 3.5mm standard headphone jack</div>
-                  <div><span className="font-semibold">Mic:</span> Built in Analog microphone</div>
-                  <div><span className="font-semibold">Speaker:</span> front facing Built in stereo speaker 1.0W*2</div>
-                  <div><span className="font-semibold">Webcam:</span> 2.0Mega+DMIC, with Privcay sutter</div>
-                  <div><span className="font-semibold">Touchpad:</span> Yes, extra large</div>
-                  <div><span className="font-semibold">Keyboard:</span> US, Round with Backlight & Square with Backlight</div>
-                  <div><span className="font-semibold">Included in Box:</span> Laptop, Power Cord, Adapter, User Manual</div>
-                  <div><span className="font-semibold">Manufactured by:</span> Ention, Made in India.</div>
+                  {[
+                    { label: 'Power', value: 'DC 12V' },
+                    { label: 'Battery', value: '5000mah' },
+                    { label: 'RJ45', value: 'yes' },
+                    { label: 'Memory card reader', value: 'yes, SD card upto 128Gb' },
+                    { label: 'Earphone port', value: '3.5mm standard headphone jack' },
+                    { label: 'Mic', value: 'Built in Analog microphone' },
+                    { label: 'Speaker', value: 'front facing Built in stereo speaker 1.0W*2' },
+                    { label: 'Webcam', value: '2.0Mega+DMIC, with Privcay sutter' },
+                    { label: 'Touchpad', value: 'Yes, extra large' },
+                    { label: 'Keyboard', value: 'US, Round with Backlight & Square with Backlight' },
+                    { label: 'Included in Box', value: 'Laptop, Power Cord, Adapter, User Manual' },
+                    { label: 'Manufactured by', value: 'Ention, Made in India.' },
+                  ].map((item, idx, arr) => (
+                    <div key={idx} className={`flex w-full ${idx !== arr.length - 1 ? 'border-b border-gray-200' : ''}`}>
+                      <div className="py-1 font-semibold min-w-[140px] w-1/2 border-r border-gray-300 pr-4">{item.label}</div>
+                      <div className="py-1 w-1/2 pl-4">{item.value}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -391,17 +407,28 @@ function AddReviewSection({ product }) {
   const [rating, setRating] = React.useState(5);
   const [text, setText] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+  const [images, setImages] = React.useState([]);
+  const [videos, setVideos] = React.useState([]);
+
+  const handleImageChange = (e) => {
+    setImages(Array.from(e.target.files));
+  };
+  const handleVideoChange = (e) => {
+    setVideos(Array.from(e.target.files));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name.trim() || !text.trim()) return;
     setReviews([
-      { name, rating, text },
+      { name, rating, text, images, videos },
       ...reviews,
     ]);
     setName("");
     setRating(5);
     setText("");
+    setImages([]);
+    setVideos([]);
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 2000);
   };
@@ -427,6 +454,16 @@ function AddReviewSection({ product }) {
           onChange={e => setText(e.target.value)}
           required
         />
+        <div className="flex flex-col md:flex-row gap-4">
+          <label className="flex flex-col gap-1 text-sm font-medium">
+            Add Photo(s):
+            <input type="file" accept="image/*" multiple onChange={handleImageChange} />
+          </label>
+          <label className="flex flex-col gap-1 text-sm font-medium">
+            Add Video(s):
+            <input type="file" accept="video/*" multiple onChange={handleVideoChange} />
+          </label>
+        </div>
         <button
           type="submit"
           className="bg-[#007e9e] text-white rounded px-6 py-2 font-semibold hover:bg-[#01E9FE] hover:text-[#000f29] transition w-fit"
@@ -440,6 +477,26 @@ function AddReviewSection({ product }) {
               <div className="font-bold text-[#007e9e]">{review.name}</div>
               <div className="text-yellow-500">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</div>
               <div className="text-gray-700 mt-2">{review.text}</div>
+              {/* Show images if any */}
+              {review.images && review.images.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {review.images.map((img, i) => {
+                    const url = typeof img === 'string' ? img : URL.createObjectURL(img);
+                    return <img key={i} src={url} alt="review-img" className="w-24 h-24 object-cover rounded" />;
+                  })}
+                </div>
+              )}
+              {/* Show videos if any */}
+              {review.videos && review.videos.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {review.videos.map((vid, i) => {
+                    const url = typeof vid === 'string' ? vid : URL.createObjectURL(vid);
+                    return (
+                      <video key={i} src={url} controls className="w-32 h-24 rounded" />
+                    );
+                  })}
+                </div>
+              )}
             </div>
           ))
         ) : (
@@ -474,53 +531,165 @@ function StarRating({ rating, setRating }) {
 function FeatureBentoGrid() {
   return (
     <section className="w-full max-w-6xl mx-auto my-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Row 1 */}
-      <div className="bento-card bg-gradient-to-br from-[#e0f7fa] to-[#fff] p-8 flex flex-col justify-center shadow-xl border border-[#b2ebf2]">
-        <h3 className="font-extrabold text-2xl text-[#007e9e] mb-3 leading-tight">Experience high-quality computing<br className='hidden md:block'/> without compromise.</h3>
-        <p className="text-base md:text-lg text-gray-700 font-medium">
-          The Ention Workbook Series Laptop blends <span className="font-semibold text-[#007e9e]">power</span>, <span className="font-semibold text-[#007e9e]">design</span>, and <span className="font-semibold text-[#007e9e]">affordability</span> to deliver outstanding performance on a smart budget.<br /><br />
-          <span className="font-bold text-[#0d223a]">Powered by the Intel N95 processor</span> with a maximum turbo frequency of up to <span className="font-bold">3.4GHz</span> and <span className="font-bold">6MB cache</span>, it's built to keep up with your everyday tasks seamlessly.
+      {/* Row 1: Merged Text + Image Card */}
+      <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#e0f7fa] to-[#fff] p-8 shadow-xl border border-[#b2ebf2]">
+        {/* Text Section */}
+        <div className="flex-1 flex flex-col justify-center items-start">
+          <h3 className="font-extrabold text-2xl text-[#007e9e] mb-3 leading-tight">Experience high-quality computing<br className='hidden md:block'/> without compromise.</h3>
+          <p className="text-base md:text-lg text-gray-700 font-medium">
+            The Ention Workbook Series Laptop blends <span className="font-semibold text-[#007e9e]">power</span>, <span className="font-semibold text-[#007e9e]">design</span>, and <span className="font-semibold text-[#007e9e]">affordability</span> to deliver outstanding performance on a smart budget.<br /><br />
+            <span className="font-bold text-[#0d223a]">Powered by the Intel N95 processor</span> with a maximum turbo frequency of up to <span className="font-bold">3.4GHz</span> and <span className="font-bold">6MB cache</span>, it's built to keep up with your everyday tasks seamlessly.
+          </p>
+        </div>
+        {/* Image Section */}
+        <div className="flex-1 flex items-center justify-center mt-6 md:mt-0">
+          <div className="relative w-full flex justify-center md:justify-end">
+            <Image 
+              src="/assets/product_/e5/20.png" 
+              alt="Ention E5" 
+              width={420} 
+              height={260} 
+              className="object-contain drop-shadow-xl -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-mr-12" 
+              style={{ zIndex: 2 }}
+            />
+          </div>
+        </div>
+      </div>
+      {/* Row 2: Merged Image + Text Card */}
+      <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#f3e5f5] to-[#fff] shadow-xl border border-[#ce93d8] p-8">
+        {/* Image Section */}
+        <div className="flex-1 flex items-center justify-center md:justify-start">
+          <div className="relative w-full flex justify-center md:justify-start">
+            <Image 
+              src="/assets/product_/e5/15.png" 
+              alt="Control at Your Fingertips" 
+              width={350} 
+              height={220} 
+              className="object-contain drop-shadow-xl -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-ml-12" 
+              style={{ zIndex: 2 }}
+            />
+          </div>
+        </div>
+        {/* Text Section */}
+        <div className="flex-1 flex flex-col justify-center items-start mt-6 md:mt-0 md:ml-8">
+          <h3 className="font-extrabold text-2xl text-[#7b1fa2] mb-3 leading-tight">Control at Your Fingertips</h3>
+          <p className="text-base md:text-lg text-gray-700 font-medium">
+            Experience a smarter way to interact with your device. Easily manage <span className="font-bold text-[#7b1fa2]">volume</span> and <span className="font-bold text-[#7b1fa2]">brightness</span> with intuitive <span className="font-bold text-[#7b1fa2]">finger gestures</span>—no buttons, no hassle.
+          </p>
+        </div>
+      </div>
+      {/* Row 3: Merged Image + Text Card */}
+      <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#fffde7] to-[#fff] shadow-xl border border-[#fff9c4] p-8">
+        {/* Text Section */}
+        <div className="flex-1 flex flex-col justify-center items-start mb-6 md:mb-0 md:mr-8">
+          <h3 className="font-extrabold text-2xl text-[#fbc02d] mb-3 leading-tight">Made for Power Users & Everyday Hustlers</h3>
+          <p className="text-base md:text-lg text-gray-700 font-medium">
+            A compact companion that blends <span className="font-semibold text-[#fbc02d]">performance</span> with <span className="font-semibold text-[#fbc02d]">mobility</span>, ideal for students and professionals on the go.
+          </p>
+          <p className="mt-2 text-base md:text-lg text-gray-700 font-medium">
+            Enjoy <span className="font-bold text-[#fbc02d]">smooth performance</span> at an <span className="font-bold text-[#fbc02d]">affordable price</span>, making high-quality computing accessible to everyone.
+          </p>
+        </div>
+        {/* Image Section */}
+        <div className="flex-1 flex items-center justify-center md:justify-end">
+          <div className="relative w-full flex justify-center md:justify-end">
+            <Image 
+              src="/assets/product_/e3/IMG_9931.jpg" 
+              alt="Powerful Yet Budget-Friendly" 
+              width={350} 
+              height={220} 
+              className="object-contain drop-shadow-xl -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-mr-12" 
+              style={{ zIndex: 2 }}
+            />
+          </div>
+        </div>
+      </div>
+      {/* Row 4: Merged Image + Stacked Features Card (Bento Style) */}
+      <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8">
+        {/* Image Section */}
+        <div className="flex-1 flex items-center justify-center md:justify-start mb-6 md:mb-0">
+          <div className="relative w-full flex justify-center md:justify-start">
+            <Image 
+              src="/assets/product_/e4/IMG_1107.JPG" 
+              alt="Ention Workbook Series" 
+              width={350} 
+              height={220} 
+              className="object-contain drop-shadow-xl -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-ml-12" 
+              style={{ zIndex: 2 }}
+            />
+          </div>
+        </div>
+        {/* Stacked Features Section */}
+        <div className="flex-1 flex flex-col justify-center md:ml-8 gap-4">
+          <div>
+            <span className="text-[#1976d2] text-lg font-semibold mb-2 block">Camera Privacy Shutter</span>
+            <img src="/assets/product_/e4/IMG_1108.JPG" alt="Camera Privacy Shutter" className="object-contain w-full max-w-[220px] h-[80px] md:h-[100px] mb-2" />
+          </div>
+          <span className="text-[#1976d2] text-base md:text-lg font-medium block">
+            Enjoy smooth performance at an affordable price, making high-quality computing accessible to everyone.
+          </span>
+        </div>
+      </div>
+      {/* Row 5: Ports and Slots Image Only, Bento Style */}
+      <div className="bento-card col-span-2 flex items-center justify-center bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8 relative">
+        <div className="relative w-full flex justify-center md:justify-start">
+          <img 
+            src="/assets/market-pc.png" 
+            alt="Ports and slots" 
+            className="object-contain w-full max-w-4xl h-auto -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-ml-12" 
+            style={{ zIndex: 2 }}
+          />
+        </div>
+        {/* Vertical label */}
+        <div className="absolute right-0 top-0 h-full flex items-center pr-2 z-20">
+          <span className="text-[#1976d2] text-2xl font-bold" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Ports and slots</span>
+        </div>
+      </div>
+      {/* Row 6: Windows, Battery, TouchPad Feature Row (Bento Style) */}
+      <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8 gap-8" style={{ paddingBottom: '2rem' }}>
+        {/* Left: Merged Feature Card with Highlighted Text */}
+        <div className="flex-1 flex flex-col justify-center gap-6 min-w-[220px]">
+          <div className="p-0 text-[#1976d2] text-lg md:text-xl font-medium flex flex-col items-start w-full gap-6">
+            <div>
+              <span className="font-extrabold text-2xl md:text-3xl text-[#1976d2]">Windows 11 Pro</span><br/>
+              <span className="text-[#1976d2]">Do the Great thingh</span>
+            </div>
+            <div className="flex items-center gap-3 mt-2">
+              {/* Battery Icon SVG */}
+              <svg width="32" height="20" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="8" width="40" height="16" rx="3" fill="#0ff" stroke="#1976d2" strokeWidth="2"/><rect x="42" y="13" width="4" height="6" rx="1" fill="#1976d2"/></svg>
+              <span className="text-[#1976d2] font-semibold">5000Mah Longer Battery</span>
+            </div>
+          </div>
+        </div>
+        {/* Right: Offset Image */}
+        <div className="flex-1 flex items-center justify-center md:justify-end w-full">
+          <div className="relative w-full flex justify-center md:justify-end">
+            <img src="/assets/market-pc.png" alt="Laptop" className="object-contain w-full max-w-2xl h-auto -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-mr-12" style={{ zIndex: 2 }} />
+          </div>
+        </div>
+      </div>
+      {/* Row 7: Immersive Audio Feature Row (Bento Style) */}
+      <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8 gap-8">
+        {/* Left: Offset Image */}
+        <div className="flex-1 flex items-center justify-center md:justify-start w-full">
+          <div className="relative w-full flex justify-center md:justify-start">
+            <img src="/assets/market-pc.png" alt="Immersive Audio" className="object-contain w-full max-w-2xl h-auto -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-ml-12" style={{ zIndex: 2 }} />
+          </div>
+        </div>
+        {/* Right: Text Content */}
+        <div className="flex-1 flex flex-col justify-center items-start w-full">
+          <span className="text-[#1976d2] text-2xl font-extrabold mb-2">Immersive Audio with Front-Facing Speakers</span>
+          <span className="text-[#1976d2] text-base md:text-lg font-medium text-left">
+            Experience crystal clear sound that's directed towards you, not away.
+          </span>
+        </div>
+      </div>
+      {/* Row 8: Product Compliance Certification (Bento Style) */}
+      <div className="bento-card col-span-2 w-full bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] py-12 px-4 flex flex-col items-center justify-center">
+        <h2 className="text-[#1976d2] text-2xl font-extrabold text-center mb-6">Product compliance certification</h2>
+        <p className="text-[#1976d2] text-base md:text-lg font-medium text-center max-w-5xl">
+          Ention ensures all its products comply with Indian regulatory standards. Devices are certified under BIS CRS for electrical safety and WPC–ETA for wireless communication compliance. Ention also follows global benchmarks for product safety, electromagnetic compatibility, ergonomics, and environmental responsibility. Every product is developed through certified processes to guarantee quality, legal distribution, and user safety.
         </p>
-      </div>
-      <div className="bento-card flex items-center justify-center bg-white shadow-xl border border-[#e0e0e0] p-4">
-        <Image src="/assets/product_/e5/20.png" alt="Ention E5" width={350} height={220} className="object-contain drop-shadow-xl" />
-      </div>
-      {/* Row 2 */}
-      <div className="bento-card flex items-center justify-center bg-gradient-to-br from-[#f3e5f5] to-[#fff] shadow-xl border border-[#ce93d8] p-4">
-        <Image src="/assets/product_/e5/15.png" alt="Control at Your Fingertips" width={350} height={220} className="object-contain drop-shadow-xl" />
-      </div>
-      <div className="bento-card bg-white p-8 flex flex-col justify-center shadow-xl border border-[#e0e0e0]">
-        <h3 className="font-extrabold text-2xl text-[#7b1fa2] mb-3 leading-tight">Control at Your Fingertips</h3>
-        <p className="text-base md:text-lg text-gray-700 font-medium">
-          Experience a smarter way to interact with your device. Easily manage <span className="font-bold text-[#7b1fa2]">volume</span> and <span className="font-bold text-[#7b1fa2]">brightness</span> with intuitive <span className="font-bold text-[#7b1fa2]">finger gestures</span>—no buttons, no hassle.
-        </p>
-      </div>
-      {/* Row 3 */}
-      <div className="bento-card bg-gradient-to-br from-[#fffde7] to-[#fff] p-8 flex flex-col justify-center shadow-xl border border-[#fff9c4]">
-        <h3 className="font-extrabold text-2xl text-[#fbc02d] mb-3 leading-tight">Made for Power Users & Everyday Hustlers</h3>
-        <p className="text-base md:text-lg text-gray-700 font-medium">
-          A compact companion that blends <span className="font-semibold text-[#fbc02d]">performance</span> with <span className="font-semibold text-[#fbc02d]">mobility</span>, ideal for students and professionals on the go.
-        </p>
-        <p className="mt-2 text-base md:text-lg text-gray-700 font-medium">
-          Enjoy <span className="font-bold text-[#fbc02d]">smooth performance</span> at an <span className="font-bold text-[#fbc02d]">affordable price</span>, making high-quality computing accessible to everyone.
-        </p>
-      </div>
-      <div className="bento-card flex items-center justify-center bg-white shadow-xl border border-[#e0e0e0] p-4">
-        <Image src="/assets/product_/e3/IMG_9931.jpg" alt="Powerful Yet Budget-Friendly" width={350} height={220} className="object-contain drop-shadow-xl" />
-      </div>
-      {/* Row 4 */}
-      <div className="bento-card flex items-center justify-center bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-4">
-        <Image src="/assets/product_/e4/IMG_1107.JPG" alt="Stunning Display" width={350} height={220} className="object-contain drop-shadow-xl" />
-      </div>
-      <div className="bento-card bg-white p-8 flex flex-col justify-center shadow-xl border border-[#e0e0e0]">
-        <h3 className="font-extrabold text-2xl text-[#1976d2] mb-3 leading-tight">Stunning 15.6-Inch Colour-Rich Display</h3>
-        <p className="text-base md:text-lg text-gray-700 font-medium">
-          Enjoy sharp visuals and vibrant colours on a compact <span className="font-bold text-[#1976d2]">15.6inch full HD IPS screen</span>, perfect for immersive viewing and clear presentations.
-        </p>
-      </div>
-      {/* Row 5: Ports */}
-      <div className="col-span-2 flex items-center justify-center bg-gradient-to-br from-[#f1f8e9] to-[#fff] shadow-xl border border-[#aed581] p-4">
-        <Image src="/assets/product_/e5/IMG_1122.JPG" alt="Ports" width={700} height={220} className="object-contain drop-shadow-xl" />
       </div>
     </section>
   );

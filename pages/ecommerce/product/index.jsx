@@ -203,9 +203,12 @@ function WorkbookCard({ series }) {
           <div className="text-lg font-semibold text-[#0d223a]">
             Starting from... <span className="text-2xl font-bold text-[#007e9e]">{series.price}</span>
           </div>
-          <div className="mt-4 md:mt-0 flex gap-4 justifycenter mr-[150px]">
+          <div className="mt-4 md:mt-0 flex gap-8 justifycenter mr-[70px]">
             <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
               <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
+            </Link>
+            <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+              <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Shop Now</a>
             </Link>
           </div>
         </div>
@@ -254,9 +257,12 @@ function WorkbookCardMobile({ series }) {
         <div className="font-semibold text-[#0d223a]">
           Starting from... <span className="font-bold text-[#007e9e]">{series.price}</span>
         </div>
-        <div>
+        <div className="flex gap-2 mt-1">
           <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
             <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
+          </Link>
+          <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+            <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Shop Now</a>
           </Link>
         </div>
       </div>
@@ -308,7 +314,7 @@ export default function ProductLandingPage() {
     : products.filter((p) => p.type === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA]">
+    <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA] overflow-x-hidden">
       {/* Super smooth transparent carousel */}
       <div className="w-full flex justify-center items-center pb-4 py-[150px]">
         <TestCarousel />
