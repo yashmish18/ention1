@@ -4,9 +4,10 @@ import logo from "../public/assets/log2.png";
 import Image from "next/image";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { useSession, signOut } from "next-auth/react";
+
 import { usePathname, useSearchParams } from "next/navigation";
 import { IoIosArrowDown } from "react-icons/io";
+import { getUserFromToken, logout } from "utils/auth";
 const Products = ({ className }) => {
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
@@ -609,17 +610,69 @@ const Business = ({ className }) => {
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [desktopNav, setDesktopNav] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const toggleDesktopnav = () => setDesktopNav(() => !desktopNav);
-  const auth = useSession();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+      let name = localStorage.getItem('userName');
+      if (!name && token) {
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          if (payload.name) name = payload.name;
+        } catch (e) {}
+      }
+      setUserName(name || "");
+    };
+
+    checkAuth();
+    window.addEventListener('storage', checkAuth);
+    window.addEventListener('focus', checkAuth);
+    window.addEventListener('authChanged', checkAuth);
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener('focus', checkAuth);
+      window.removeEventListener('authChanged', checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <nav className="bg-transparent py-2 px-7 flex justify-between z-0">
-      <Link href="/">
-        <Image src={logo} width={80} height={80} alt="Logo" />
-      </Link>
-
+      <div className="flex items-center gap-2">
+        <Link href="/">
+          <Image src={logo} width={80} height={80} alt="Logo" />
+        </Link>
+        {/* User icon and welcome message */}
+        <div className="flex items-center ml-4">
+          <span className="inline-block w-8 h-8 rounded-full bg-white flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#000F29]">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118A7.5 7.5 0 0112 15.75a7.5 7.5 0 017.5 4.368" />
+            </svg>
+          </span>
+          {userName && (
+            <span className="ml-2 text-white font-semibold text-lg">Welcome, {userName}</span>
+          )}
+        </div>
+      </div>
+      <div className="flex items-center gap-4">
+        {isLoggedIn ? (
+          <button onClick={handleLogout} className="px-4 py-1 rounded-full border border-white text-white bg-transparent hover:bg-white hover:text-[#000F29] font-semibold transition">Logout</button>
+        ) : (
+          <>
+            <Link href="/login" className="px-4 py-1 rounded-full border border-white text-white bg-transparent hover:bg-white hover:text-[#000F29] font-semibold transition">Login</Link>
+            <Link href="/signup" className="px-4 py-1 rounded-full border border-white text-[#000F29] bg-white hover:bg-[#007E9E] hover:text-white font-semibold transition">Register</Link>
+          </>
+        )}
+      </div>
       <div
         className={`${
           visible ? "" : "hidden"
@@ -718,10 +771,10 @@ const Navbar = () => {
                 News & Events{" "}
               </Link>
 
-              {auth.status === "authenticated" ? (
+              {isLoggedIn ? (
                 <p
                   className="px-4 py-1 hover:bg-[#000F29]/70 hover:text-white cursor-pointer"
-                  onClick={() => signOut({ redirect: false })}
+                  onClick={handleLogout}
                 >
                   {" "}
                   Logout{" "}

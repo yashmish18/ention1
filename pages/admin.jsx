@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
 import { 
   FaChartLine, 
   FaShoppingCart, 
@@ -10,7 +9,8 @@ import { DashboardTab, ReviewsTab, OrdersTab } from 'components/admin';
 
 const AdminPanel = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [stats, setStats] = useState({
     totalOrders: 0,
     totalRevenue: 0,
@@ -24,17 +24,33 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  // Check authentication - DISABLED FOR TESTING
+  // Check authentication on mount
   useEffect(() => {
-    // if (status === 'loading') return;
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push('/login?redirect=/admin');
+        return;
+      }
+      
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setUser({
+          name: payload.name,
+          email: payload.email
+        });
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        localStorage.removeItem('token');
+        router.push('/login?redirect=/admin');
+        return;
+      }
+      setAuthLoading(false);
+    };
     
-    // if (!session) {
-    //   router.push('/login?redirect=/admin');
-    //   return;
-    // }
-    
+    checkAuth();
     fetchDashboardData();
-  }, []);
+  }, [router]);
 
   // Sample data for charts
   const revenueData = [
@@ -126,8 +142,8 @@ const AdminPanel = () => {
     }
   };
 
-  // Show loading while checking authentication - DISABLED FOR TESTING
-  if (loading) {
+  // Show loading while checking authentication
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-2xl text-gray-600">Loading Admin Panel...</div>
@@ -135,14 +151,14 @@ const AdminPanel = () => {
     );
   }
 
-  // Show unauthorized message if not authenticated - DISABLED FOR TESTING
-  // if (!session) {
-  //   return (
-  //     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-  //       <div className="text-2xl text-gray-600">Please log in to access the admin panel.</div>
-  //     </div>
-  //   );
-  // }
+  // Show unauthorized message if not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-2xl text-gray-600">Please log in to access the admin panel.</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA] pt-24">

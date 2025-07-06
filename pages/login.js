@@ -57,16 +57,36 @@ const Login = () => {
         if (Object.keys(validationErrors).length > 0) return;
         const {email, password} = formValues;
         const id = toast.loading('Processing', {type: 'info', theme: 'colored'})
-        await new Promise(res => setTimeout(res, 2000))
-        signIn('credentials', {redirect: false, email, password})
-        .then(({err, status, ok, url}) => {
-            if(ok) {
+        
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    accept: 'application/json'
+                },
+                body: JSON.stringify({email, password})
+            });
+            
+            if(res.status === 200) {
+                const data = await res.json();
+                // Store token in localStorage or sessionStorage
+                localStorage.setItem('token', data.token);
+                // Decode JWT and store userName for Navbar
+                try {
+                  const payload = JSON.parse(atob(data.token.split('.')[1]));
+                  if (payload.name) localStorage.setItem('userName', payload.name);
+                } catch (e) {}
+                window.dispatchEvent(new Event('authChanged'));
+                toast.update(id, {render: 'Login successful!', type: 'success', isLoading: false, autoClose: 2000});
                 router.push(searchParams.get('redirect') || '/')
-                toast.dismiss()
-            }else {
-                toast.update(id, {render: 'Invalid username or password', type: 'error', isLoading: false, autoClose: 3000});
+            } else {
+                const data = await res.json();
+                toast.update(id, {render: data.message || 'Invalid credentials', type: 'error', isLoading: false, autoClose: 3000});
             }
-        })
+        } catch (error) {
+            toast.update(id, {render: 'Login failed. Please try again.', type: 'error', isLoading: false, autoClose: 3000});
+        }
     }
 
 

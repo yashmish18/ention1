@@ -44,10 +44,13 @@ const Signup = () => {
                     'Content-Type': 'application/json',
                     accept: 'application/json'
                 },
-                body: JSON.stringify({name: name.value, email: email.value, password: password.value})
+                body: JSON.stringify({name: name.value, email: email.value, phone: phone.value, password: password.value})
             })
             
             if(res.status === 200) {
+                const data = await res.json();
+                // Store token in localStorage
+                localStorage.setItem('token', data.token);
                 toast.update(id, {render: 'Your account has been created successfully. Please log in now to proceed.', type: 'success', isLoading: false, autoClose: 3000});
                 router.push('/login')
             }else{

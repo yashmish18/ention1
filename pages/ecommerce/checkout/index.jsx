@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Footer } from "components";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useLocalStorage } from "react-use";
 import { toast } from "react-toastify";
@@ -15,7 +14,6 @@ const steps = [
 ];
 
 const CheckoutPage = () => {
-  const { data: sessionData, status: authStatus } = useSession();
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(1);
   const [cart, setCart] = useLocalStorage("cart", []);
@@ -23,17 +21,57 @@ const CheckoutPage = () => {
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
   const [coupon, setCoupon] = useState({ status: "pending" });
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push("/login?redirect=/ecommerce/checkout");
+        return;
+      }
+      
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setUser({
+          name: payload.name,
+          email: payload.email
+        });
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        localStorage.removeItem('token');
+        router.push("/login?redirect=/ecommerce/checkout");
+        return;
+      }
+      setAuthLoading(false);
+    };
+    
+    checkAuth();
+  }, [router]);
   
   // Shipping Information
   const [shippingInfo, setShippingInfo] = useState({
-    fullName: sessionData?.user?.name || "",
-    email: sessionData?.user?.email || "",
+    fullName: "",
+    email: "",
     phone: "",
     address: "",
     city: "",
     state: "",
     pincode: "",
   });
+
+  // Update shipping info when user is loaded
+  useEffect(() => {
+    if (user) {
+      setShippingInfo(prev => ({
+        ...prev,
+        fullName: user.name || "",
+        email: user.email || "",
+      }));
+    }
+  }, [user]);
 
   // Payment Information
   const [paymentMethod, setPaymentMethod] = useState("prepaid");
@@ -66,7 +104,7 @@ const CheckoutPage = () => {
   }, [loading, cart.length]);
 
   // Auth check
-  if (authStatus === "loading") {
+  if (authLoading) {
     return (
       <main className="h-screen w-screen center">
         <Loader />
@@ -74,8 +112,7 @@ const CheckoutPage = () => {
     );
   }
 
-  if (authStatus === "unauthenticated") {
-    router.push("/login?redirect=/checkout");
+  if (!user) {
     return (
       <main className="h-screen w-screen center">
         <h1 className="text-5xl text-white">Unauthenticated</h1>
@@ -85,7 +122,7 @@ const CheckoutPage = () => {
 
   // Empty cart check
   if (!loading && (!cart.length || !products.length)) {
-    router.push("/cart");
+    router.push("/ecommerce/cart");
     return (
       <main className="h-screen w-screen center">
         <h1 className="text-5xl text-white">Your cart is empty</h1>

@@ -5,6 +5,11 @@ const connectDB = require('./config/db');
 dotenv.config();
 const app = express();
 app.use(express.json());
+const cors = require('cors');
+app.use(cors({
+  origin: 'http://localhost:3000', // your frontend URL
+  credentials: true
+}));
 
 // Connect MongoDB
 connectDB();

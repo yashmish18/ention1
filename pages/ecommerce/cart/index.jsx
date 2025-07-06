@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -9,13 +9,32 @@ const initialCart = [
 
 export default function CartPage() {
   const [cart, setCart] = useState(initialCart);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+    
+    checkAuth();
+  }, []);
 
   const updateQty = (id, delta) => {
     setCart(cart => cart.map(item => item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item));
   };
   const removeItem = id => setCart(cart => cart.filter(item => item.id !== id));
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleCheckout = () => {
+    if (!isLoggedIn) {
+      router.push('/login?redirect=/ecommerce/cart');
+      return;
+    }
+    router.push('/ecommerce/checkout');
+  };
 
   return (
     <div className="min-h-screen bg-[#f7fafc] py-10 px-4">
@@ -48,9 +67,9 @@ export default function CartPage() {
             </div>
             <button
               className="w-full bg-[#007e9e] text-white rounded-3xl py-3 px-8 text-lg font-bold hover:bg-[#01E9FE] hover:text-[#000f29] transition"
-              onClick={() => router.push('/ecommerce/checkout')}
+              onClick={handleCheckout}
             >
-              Checkout
+              {isLoggedIn ? 'Checkout' : 'Login to Checkout'}
             </button>
           </>
         )}

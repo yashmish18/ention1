@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
 import Image from "next/image";
+import { getUserFromToken, logout } from "utils/auth";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -15,6 +16,31 @@ const Header = () => {
   const searchParams = useSearchParams();
   const [bgColor, setBgColor] = useState();
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check authentication state
+  useEffect(() => {
+    const checkAuth = () => {
+      const userFromToken = getUserFromToken();
+      setIsLoggedIn(!!userFromToken);
+      setUser(userFromToken);
+    };
+
+    checkAuth();
+    window.addEventListener('storage', checkAuth);
+    window.addEventListener('focus', checkAuth);
+    window.addEventListener('authChanged', checkAuth);
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener('focus', checkAuth);
+      window.removeEventListener('authChanged', checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   useEffect(() => {
     const updatePosition = () => {
@@ -152,32 +178,48 @@ const Header = () => {
       <div className="hidden lg:flex absolute left-10 items-center gap-4" style={{ zIndex: 60 }}>
         <Link
           href="/dashboard"
-          className="text-white hover:text-[#01E9FE] transition"
+          className="text-white hover:text-[#01E9FE] transition flex items-center gap-2"
           title="Dashboard"
         >
           <FaUserCircle className="text-3xl" />
+          {isLoggedIn && user?.name && (
+            <span className="text-white text-base font-semibold ml-2">Welcome, {user.name}</span>
+          )}
         </Link>
       </div>
 
       {/* Desktop auth buttons - positioned absolutely on right */}
       <div className="absolute hidden lg:flex items-center gap-2 right-10">
-        <Link
-          href={{
-            pathname: "/login",
-            query: {
-              redirect: `/${pathname}?${searchParams?.toString()}`,
-            },
-          }}
-        >
-          <button className="w-24 h-8 bg-transparent border rounded-3xl border-white flex center text-white text-sm hover:scale-105  transition-all duration-300 ease-in-out">
-            Login
-          </button>
-        </Link>
-        <Link href={"/signup"}>
-          <button className="px-8 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
-            Register
-          </button>
-        </Link>
+        {isLoggedIn ? (
+          <>
+            <button 
+              onClick={handleLogout}
+              className="w-24 h-8 bg-red-600 border-none rounded-3xl flex center text-white text-sm font-semibold hover:bg-red-700 transition-all duration-300 ease-in-out mr-20"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              href={{
+                pathname: "/login",
+                query: {
+                  redirect: `/${pathname}?${searchParams?.toString()}`,
+                },
+              }}
+            >
+              <button className="w-24 h-8 bg-transparent border rounded-3xl border-white flex center text-white text-sm hover:scale-105  transition-all duration-300 ease-in-out">
+                Login
+              </button>
+            </Link>
+            <Link href={"/signup"}>
+              <button className="px-8 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
+                Register
+              </button>
+            </Link>
+          </>
+        )}
       </div>
 
       {isShowModal ? (
@@ -230,18 +272,34 @@ const Header = () => {
             </nav>
             {/* Auth buttons at bottom */}
             <div className="flex flex-col gap-2 px-4 pb-6 mb-8">
-              <button
-                className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
-                onClick={() => { setShowModal(false); router.push("/login"); }}
-              >
-                Login
-              </button>
-              <button
-                className="w-full bg-black text-white rounded-3xl py-2 font-semibold text-base hover:bg-gray-900 transition"
-                onClick={() => { setShowModal(false); router.push("/signup"); }}
-              >
-                Register
-              </button>
+              {isLoggedIn ? (
+                <>
+                  <div className="text-center text-gray-700 font-medium mb-2">
+                    Welcome, {user?.name}
+                  </div>
+                  <button
+                    className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
+                    onClick={() => { setShowModal(false); handleLogout(); }}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
+                    onClick={() => { setShowModal(false); router.push("/login"); }}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="w-full bg-black text-white rounded-3xl py-2 font-semibold text-base hover:bg-gray-900 transition"
+                    onClick={() => { setShowModal(false); router.push("/signup"); }}
+                  >
+                    Register
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { FaUserCircle, FaEdit, FaSignOutAlt, FaBoxOpen, FaHeart, FaTicketAlt, FaCog, FaEnvelope, FaPlus, FaShoppingCart, FaFileInvoiceDollar, FaMapMarkerAlt, FaHistory } from "react-icons/fa";
 import Image from "next/image";
+import { getUserFromToken, logout } from "utils/auth";
 
 const mockUser = {
   name: "John Doe",
@@ -31,12 +32,30 @@ const mockActivity = [
   { id: 4, action: "Submitted a support ticket", date: "2024-05-08 11:10" },
 ];
 
-export default function Dashboard({ session }) {
+export default function Dashboard() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [wishlist, setWishlist] = useState(mockWishlist);
   const [tickets, setTickets] = useState(mockTickets);
   const [newTicket, setNewTicket] = useState("");
   const [newsletter, setNewsletter] = useState(true);
   const [trackOrderId, setTrackOrderId] = useState(null);
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const userFromToken = getUserFromToken();
+      if (!userFromToken) {
+        router.push('/login?redirect=/dashboard');
+        return;
+      }
+      setUser(userFromToken);
+      setAuthLoading(false);
+    };
+    
+    checkAuth();
+  }, [router]);
 
   const handleRemoveWishlist = (id) => setWishlist(wishlist.filter(w => w.id !== id));
   const handleAddToCart = (id) => alert("Added to cart!");
@@ -50,22 +69,40 @@ export default function Dashboard({ session }) {
   const handleTrackOrder = (id) => setTrackOrderId(trackOrderId === id ? null : id);
   const handleDownloadInvoice = (id) => alert("Invoice downloaded for order #" + id);
 
-  // Use session user if available
-  const user = session?.user || mockUser;
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-2xl text-gray-600">Loading Dashboard...</div>
+      </div>
+    );
+  }
+
+  // Show unauthorized message if not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-2xl text-gray-600">Please log in to access the dashboard.</div>
+      </div>
+    );
+  }
+
+  // Use user from JWT token
+  const userData = user || mockUser;
 
   return (
     <div className="min-h-screen bg-[#f7fafc] pb-10">
       {/* Topbar */}
       <div className="w-full bg-white shadow flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8">
         <div className="flex items-center gap-4">
-          <Image src={user.image || user.avatar} alt="avatar" width={64} height={64} className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
+          <Image src={userData.image || userData.avatar} alt="avatar" width={64} height={64} className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
           <div>
-            <div className="text-2xl font-bold text-[#000f29]">Welcome, {user.name}!</div>
-            <div className="text-gray-500">{user.email}</div>
+            <div className="text-2xl font-bold text-[#000f29]">Welcome, {userData.name}!</div>
+            <div className="text-gray-500">{userData.email}</div>
           </div>
         </div>
         <div className="flex gap-4 mt-4 md:mt-0">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-3xl border border-red-500 text-red-500 font-semibold hover:bg-red-500 hover:text-white transition"><FaSignOutAlt /> Logout</button>
+          <button onClick={logout} className="flex items-center gap-2 px-4 py-2 rounded-3xl border border-red-500 text-red-500 font-semibold hover:bg-red-500 hover:text-white transition"><FaSignOutAlt /> Logout</button>
         </div>
       </div>
       {/* Main grid */}
@@ -153,20 +190,4 @@ export default function Dashboard({ session }) {
       </div>
     </div>
   );
-}
-
-// Auth protection for dashboard
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { session },
-  };
 } 
