@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -64,17 +64,36 @@ const E5Images = [
 
 const E4Images = [
   "/assets/product_/e4/IMG_1107.JPG",
-  "/assets/product_/e4/IMG_9919.jpg",
-  "/assets/product_/e4/IMG_9918.jpg",
-  "/assets/product_/e4/IMG_9917.jpg",
-  "/assets/product_/e4/IMG_9916.jpg",
-  "/assets/product_/e4/IMG_9915.jpg",
-  "/assets/product_/e4/IMG_9911.jpg",
-  "/assets/product_/e4/IMG_9907.jpg",
-  "/assets/product_/e4/IMG_9906.jpg",
-  "/assets/product_/e4/IMG_9897.jpg",
-  "/assets/product_/e4/IMG_1118.JPG",
   "/assets/product_/e4/IMG_1108.JPG",
+  "/assets/product_/e4/IMG_1118.JPG",
+  "/assets/product_/e4/IMG_9897.jpg",
+  "/assets/product_/e4/IMG_9906.jpg",
+  "/assets/product_/e4/IMG_9907.jpg",
+  "/assets/product_/e4/IMG_9911.jpg",
+  "/assets/product_/e4/IMG_9915.jpg",
+  "/assets/product_/e4/IMG_9916.jpg",
+  "/assets/product_/e4/IMG_9917.jpg",
+  "/assets/product_/e4/IMG_9918.jpg",
+  "/assets/product_/e4/IMG_9919.jpg",
+];
+
+const E4FeatureImages = [
+  "/assets/product_/e4/feature_images/1.png",
+  "/assets/product_/e4/feature_images/2.png",
+  "/assets/product_/e4/feature_images/3.png",
+  "/assets/product_/e4/feature_images/4.png",
+  "/assets/product_/e4/feature_images/5.png",
+  "/assets/product_/e4/feature_images/6.png",
+  "/assets/product_/e4/feature_images/7.png",
+  "/assets/product_/e4/feature_images/8.png",
+];
+
+const E5FeatureImages = [
+  "/assets/product_/e5/feature_images/1.png",
+  "/assets/product_/e5/feature_images/Copy of Copy of 28,000 (1).png",
+  "/assets/product_/e5/feature_images/Copy of Copy of 28,000 (2).png",
+  "/assets/product_/e5/feature_images/copy uncut (4).png",
+  "/assets/product_/e5/feature_images/copy uncut (5).png",
 ];
 
 const TestCarousel = dynamic(() => import('components/TestCarousel'), { ssr: false });
@@ -127,53 +146,57 @@ const scrollTabs = [
   { key: 'reviews', label: 'Customer review' },
 ];
 
-const ProductDetails = () => {
+const productImages = [
+  "/assets/product/E1/unsplash_LlVwrX92xIQ.png",
+  "/assets/product/E1/pc-girl.png",
+  "/assets/product/E1/light-pc.jpg",
+  "/assets/product/E1/win11.png",
+  "/assets/product/E1/intel.png",
+  "/assets/product/E1/full-hd.png",
+];
+
+const ramOptions = ["8GB", "16GB"];
+const ssdOptions = ["512GB", "1TB"];
+const warrantyOptions = ["18 Months (Default)", "+6 Months", "+1 Year"];
+
+export default function ProductDetails() {
   const router = useRouter();
   const { id } = router.query;
   const product = allProducts.find(p => p.id === Number(id));
   const related = allProducts.filter(p => p.id !== Number(id));
   const specs = productSpecs[product.id];
 
-  // Refs for scroll-to-section
-  const overviewRef = useRef(null);
-  const techRef = useRef(null);
-  const videoRef = useRef(null);
-  const featuresRef = useRef(null);
-  const reviewsRef = useRef(null);
-
-  const sectionRefs = {
-    overview: overviewRef,
-    tech: techRef,
-    video: videoRef,
-    features: featuresRef,
-    reviews: reviewsRef,
-  };
-
-  const handleTabClick = (key) => {
-    const ref = sectionRefs[key];
-    if (ref && ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  // Customization state
-  const [selectedRam, setSelectedRam] = useState(specs.ramOptions[0]);
-  const [selectedStorage, setSelectedStorage] = useState(specs.storageOptions[0]);
-  const [selectedWarranty, setSelectedWarranty] = useState('No additional warranty');
-  const [coupon, setCoupon] = useState('');
-  const [offerPrice, setOfferPrice] = useState(product.price);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [selectedRam, setSelectedRam] = useState(ramOptions[0]);
+  const [selectedSSD, setSelectedSSD] = useState(ssdOptions[0]);
+  const [selectedWarranty, setSelectedWarranty] = useState(warrantyOptions[0]);
+  // Coupon state
+  const [coupon, setCoupon] = useState("");
   const [couponApplied, setCouponApplied] = useState(false);
+  const [couponError, setCouponError] = useState("");
+  const [offerPrice, setOfferPrice] = useState(null);
 
+  const originalPrice = 28000;
   const handleApplyCoupon = () => {
-    // Dummy coupon logic: if coupon is 'SAVE10', give 10% off
-    if (coupon.trim().toUpperCase() === 'SAVE10') {
-      setOfferPrice(Math.round(product.price * 0.9));
+    if (coupon.trim().toUpperCase() === "SAVE10") {
+      setOfferPrice(Math.round(originalPrice * 0.9));
       setCouponApplied(true);
+      setCouponError("");
     } else {
-      setOfferPrice(product.price);
       setCouponApplied(false);
+      setOfferPrice(null);
+      setCouponError("Invalid coupon code");
     }
   };
+
+  const changeImage = (dir) => {
+    setCurrentImage((prev) => {
+      const images = getImages(id);
+      return (prev + dir + images.length) % images.length;
+    });
+  };
+
+  const setImage = (idx) => setCurrentImage(idx);
 
   if (!product) return <div className="min-h-screen flex items-center justify-center text-2xl text-gray-500">Product not found.</div>;
 
@@ -204,186 +227,399 @@ const ProductDetails = () => {
   };
 
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] py-10 px-4">
-        {/* Cart Button Top Right */}
-        <div className="max-w-6xl mx-auto flex justify-end mb-4">
-          <a href="/ecommerce/cart" className="text-[#007e9e] text-3xl hover:text-[#01E9FE] transition" title="Go to cart">
-            <FaShoppingCart />
-          </a>
-        </div>
-        {/* Scrollable Tab Navigation */}
-        <div className="max-w-6xl mx-auto mb-4">
-          <div className="flex flex-wrap gap-2 border-b border-gray-200 text-white font-medium pt-20">
-            {scrollTabs.map(tab => (
-              <button
-                key={tab.key}
-                onClick={() => handleTabClick(tab.key)}
-                className="px-3 py-2 hover:text-[#007e9e] focus:text-[#007e9e] focus:outline-none"
-                style={{ background: 'none', border: 'none' }}
+    <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] text-white pt-24 md:pt-32 pb-24">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 py-12 px-4">
+        {/* Left: Carousel */}
+        <div className="flex-1 flex flex-col items-end ml-auto">
+          <div className="relative w-full mx-auto mt-24 flex items-center justify-center w-full">
+            {/* Left Arrow */}
+            <button
+              className="absolute left-[-32px] top-1/2 -translate-y-1/2 text-3xl text-white hover:text-[#0FAFCA] z-10 bg-transparent border-none shadow-none p-0 m-0"
+              onClick={() => changeImage(-1)}
+              aria-label="Previous image"
+            >
+              &#8249;
+            </button>
+            <div className="flex items-center justify-center w-full" style={{ width: '100%', height: 'auto' }}>
+              <Image
+                src={getImages(id)[currentImage]}
+                alt={`Product Image ${currentImage + 1}`}
+                width={1200}
+                height={800}
+                className="object-contain w-full h-auto"
+                priority
+              />
+              <div className="absolute bottom-3 right-3 bg-[#007e9e]/80 text-xs px-3 py-1 rounded-full border border-white">
+                {currentImage + 1} / {getImages(id).length}
+              </div>
+            </div>
+            {/* Right Arrow */}
+            <button
+              className="absolute right-[-32px] top-1/2 -translate-y-1/2 text-3xl text-white hover:text-[#0FAFCA] z-10 bg-transparent border-none shadow-none p-0 m-0"
+              onClick={() => changeImage(1)}
+              aria-label="Next image"
+            >
+              &#8250;
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-2 justify-center items-center pt-4 w-full">
+            {getImages(id).map((img, idx) => (
+              <div
+                key={img}
+                className={`${idx === currentImage ? "opacity-100" : "opacity-70"} rounded bg-[#133B5C] cursor-pointer transition-all`}
+                onClick={() => setImage(idx)}
+                style={{ border: '1px solid transparent', boxShadow: '0 0 0 0.5px #fff' }}
               >
-                {tab.label}
-              </button>
+                <Image src={img} alt="Thumbnail" width={60} height={40} className="object-cover w-12 h-9" />
+              </div>
             ))}
           </div>
         </div>
-        <div className="max-w-6xl mx-auto">
-          {/* Overview Section - Modern Intel-style layout */}
-          <div ref={overviewRef} id="overview" className="mb-10">
-            <div className="bg-white shadow-2xl p-0 md:p-4 flex flex-col md:flex-row gap-0 md:gap-8 items-stretch border-0">
-              {/* Left: Image Carousel */}
-              <div className="order-1 md:order-1 flex-1 flex items-center justify-center p-0 md:p-8 bg-white ">
-                <div className="w-full max-w-md">
-                  <Swiper
-                    modules={[Navigation, Pagination]}
-                    navigation
-                    pagination={{ clickable: true }}
-                    style={{ width: '100%', height: '100%' }}
-                    className="product-swiper"
-                  >
-                    {getImages(String(product.id)).map((src, idx) => (
-                      <SwiperSlide key={idx}>
-                        <Image src={src} alt={`Product Slide ${idx + 1}`} width={400} height={400} style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '1.5rem', background: '#fff' }} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-              </div>
-              {/* Right: Product Info Card */}
-              <div className="order-2 md:order-2 flex-1 flex flex-col justify-center gap-6 p-6 md:p-10 bg-white shadow-xl border-0 min-w-[320px] max-w-xl mx-auto">
-                <h1 className="text-3xl md:text-4xl font-extrabold text-[#007e9e] mb-2 leading-tight">{product.name}</h1>
-                <div className="text-lg text-gray-700 font-medium mb-2">{product.description}</div>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-block bg-[#e0f7fa] text-[#007e9e] font-semibold px-3 py-1 rounded-full text-xs">Intel N95</span>
-                  <span className="inline-block bg-[#f3e5f5] text-[#7b1fa2] font-semibold px-3 py-1 rounded-full text-xs">15.6" FHD IPS</span>
-                  <span className="inline-block bg-[#fffde7] text-[#fbc02d] font-semibold px-3 py-1 rounded-full text-xs">Windows 11 Pro</span>
-                  <span className="inline-block bg-[#e3f2fd] text-[#1976d2] font-semibold px-3 py-1 rounded-full text-xs">Office 365</span>
-                </div>
-                <div className="mb-2 flex flex-col gap-2">
-                  <label className="font-medium">RAM:
-                    <select className="ml-2 border rounded px-2 py-1" value={selectedRam} onChange={e => setSelectedRam(e.target.value)}>
-                      {specs.ramOptions.map(opt => <option key={opt}>{opt}</option>)}
-                    </select>
-                  </label>
-                  <label className="font-medium">SSD:
-                    <select className="ml-2 border rounded px-2 py-1" value={selectedStorage} onChange={e => setSelectedStorage(e.target.value)}>
-                      {specs.storageOptions.map(opt => <option key={opt}>{opt}</option>)}
-                    </select>
-                  </label>
-                  <label className="font-medium">Additional Warranty:
-                    <select className="ml-2 border rounded px-2 py-1" value={selectedWarranty} onChange={e => setSelectedWarranty(e.target.value)}>
-                      <option>No additional warranty</option>
-                      <option>6months</option>
-                      <option>1year</option>
-                    </select>
-                  </label>
-                </div>
-                <div className="mb-2 text-2xl font-extrabold text-[#007e9e]">₹{product.price.toLocaleString()}</div>
-                <div className="mb-2 flex items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="Enter coupon code"
-                    className="border rounded px-2 py-1"
-                    value={coupon}
-                    onChange={e => setCoupon(e.target.value)}
-                  />
-                  <button
-                    className="bg-[#007e9e] text-white rounded px-4 py-1 font-semibold hover:bg-[#01E9FE] hover:text-[#000f29] transition"
-                    onClick={handleApplyCoupon}
-                  >Apply</button>
-                  {couponApplied && <span className="text-green-600 font-semibold ml-2">Coupon Applied!</span>}
-                </div>
-                <div className="mb-2 text-lg font-bold">Offer Price: ₹{offerPrice.toLocaleString()}</div>
-                <button className="mt-4 bg-[#007e9e] hover:bg-[#01E9FE] text-white hover:text-[#000f29] font-bold rounded-3xl px-8 py-3 transition text-lg shadow-lg">Buy Now</button>
-                <div className="mt-6">
-                  <div className="font-bold mb-2 text-[#1976d2]">Included</div>
-                  <ul className="list-disc pl-5 text-sm text-gray-700">
-                    <li>18 months onsite warranty</li>
-                    <li>Laptop bag pack</li>
-                    <li>Window 11 pro</li>
-                    <li>Office 365</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+        {/* Divider */}
+        <div className="hidden md:block w-[2px] bg-white/20 mx-8 rounded"></div>
+        {/* Right: Product Info */}
+        <div className="flex-1 flex flex-col gap-6 bg-transparent p-0 items-start">
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-2">ENTION WORKBOOK SERIES E5</h1>
+          <div className="flex flex-nowrap justify-between items-center gap-x-3 w-full mb-2">
+            <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Made for Everyday Achievers</span>
+            <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">High Performance, Budget Friendly</span>
+            <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Full Control at Your Fingertips</span>
           </div>
-          {/* Tech Specs Section */}
-          <div ref={techRef} id="tech" className="bg-white  shadow-md p-8 mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-[#000f29]">Technical Specifications</h2>
-            <div className="border border-gray-300 rounded-lg overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                {/* First column */}
-                <div className="p-4 border-b md:border-b-0 md:border-r border-black text-sm">
-                  {[
-                    { label: 'Colour', value: 'sliver' },
-                    { label: 'Display', value: '15.6inch, Full HD 1920*1080 IPS 16:9 ratio' },
-                    { label: 'Processor', value: 'intel N95 up to 3.4GHz with Turbo boost' },
-                    { label: 'Core, threads, Cache', value: '4core, 4 threads, 6MB cache' },
-                    { label: 'Graphic', value: 'intel UHD graphics 1.20Ghz' },
-                    { label: 'Fingerprint reader', value: 'yes, on touch pad' },
-                    { label: 'Operating system', value: 'window 11' },
-                    { label: 'MS office', value: 'yes, 365' },
-                    { label: 'USB', value: '3 port of USB 3.0, type C(Data+DP)' },
-                    { label: 'HDMI', value: 'HDMI A type' },
-                    { label: 'Product Dimension and weight', value: '357.4*228*19 mm, 1.68kg' },
-                    { label: 'Covered in warranty', value: 'Manufacturing Defects, Physical Damage not covered.' },
-                  ].map((item, idx, arr) => (
-                    <div key={idx} className={`flex w-full ${idx !== arr.length - 1 ? 'border-b border-gray-200' : ''}`}>
-                      <div className="py-1 font-semibold min-w-[140px] w-1/2 border-r border-gray-300 pr-4">{item.label}</div>
-                      <div className="py-1 w-1/2 pl-4">{item.value}</div>
-                    </div>
+          {/* Customization */}
+          <div className="mt-4">
+            <h3 className="font-bold mb-2">Customize Your Laptop</h3>
+            <div className="flex flex-col gap-2 mb-3">
+              <div className="flex flex-row items-center gap-6 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold mr-1">RAM:</span>
+                  {ramOptions.map(opt => (
+                    <button
+                      key={opt}
+                      className={`px-4 py-2 rounded bg-[#133B5C] font-semibold ${selectedRam === opt ? "bg-[#007e9e] text-white" : "text-[#0FAFCA] hover:bg-[#0FAFCA]/20"}`}
+                      onClick={() => setSelectedRam(opt)}
+                      style={{ borderWidth: '0.5px', borderColor: '#fff', borderStyle: 'solid' }}
+                    >{opt}</button>
                   ))}
                 </div>
-                {/* Second column */}
-                <div className="p-4 text-sm">
-                  {[
-                    { label: 'Power', value: 'DC 12V' },
-                    { label: 'Battery', value: '5000mah' },
-                    { label: 'RJ45', value: 'yes' },
-                    { label: 'Memory card reader', value: 'yes, SD card upto 128Gb' },
-                    { label: 'Earphone port', value: '3.5mm standard headphone jack' },
-                    { label: 'Mic', value: 'Built in Analog microphone' },
-                    { label: 'Speaker', value: 'front facing Built in stereo speaker 1.0W*2' },
-                    { label: 'Webcam', value: '2.0Mega+DMIC, with Privcay sutter' },
-                    { label: 'Touchpad', value: 'Yes, extra large' },
-                    { label: 'Keyboard', value: 'US, Round with Backlight & Square with Backlight' },
-                    { label: 'Included in Box', value: 'Laptop, Power Cord, Adapter, User Manual' },
-                    { label: 'Manufactured by', value: 'Ention, Made in India.' },
-                  ].map((item, idx, arr) => (
-                    <div key={idx} className={`flex w-full ${idx !== arr.length - 1 ? 'border-b border-gray-200' : ''}`}>
-                      <div className="py-1 font-semibold min-w-[140px] w-1/2 border-r border-gray-300 pr-4">{item.label}</div>
-                      <div className="py-1 w-1/2 pl-4">{item.value}</div>
-                    </div>
+                <div className="flex items-center gap-2">
+                  <span className="font-semibold mr-1">SSD:</span>
+                  {ssdOptions.map(opt => (
+                    <button
+                      key={opt}
+                      className={`px-4 py-2 rounded bg-[#133B5C] font-semibold ${selectedSSD === opt ? "bg-[#007e9e] text-white" : "text-[#0FAFCA] hover:bg-[#0FAFCA]/20"}`}
+                      onClick={() => setSelectedSSD(opt)}
+                      style={{ borderWidth: '0.5px', borderColor: '#fff', borderStyle: 'solid' }}
+                    >{opt}</button>
                   ))}
                 </div>
               </div>
             </div>
           </div>
-          {/* Video Section */}
-          <div ref={videoRef} id="video" className="p-8 mb-10 flex flex-col items-center">
-            <video controls className="w-full h-auto shadow">
-              <source src="/assets/E3-video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+          {/* Warranty */}
+          <div className="mt-2">
+            <h3 className="font-bold mb-2">Warranty Options</h3>
+            <div className="flex gap-2 flex-wrap">
+              {warrantyOptions.map(opt => (
+                <button
+                  key={opt}
+                  className={`px-4 py-2 rounded bg-[#133B5C] font-semibold ${selectedWarranty === opt ? "bg-[#007e9e] text-white" : "text-[#0FAFCA] hover:bg-[#0FAFCA]/20"}`}
+                  onClick={() => setSelectedWarranty(opt)}
+                  style={{ borderWidth: '0.5px', borderColor: '#fff', borderStyle: 'solid' }}
+                >{opt}</button>
+              ))}
+            </div>
           </div>
-          {/* Features & Design Section */}
-          <div ref={featuresRef} id="features" className="mb-10">
-            <FeatureBentoGrid />
+          {/* Price & CTA */}
+          <div className="mt-8 flex flex-col items-start gap-3 w-full">
+            <div className="flex flex-row items-end gap-4">
+              {couponApplied && offerPrice ? (
+                <>
+                  <span className="text-3xl font-extrabold text-green-400 drop-shadow-lg">Offer Price: ₹{offerPrice.toLocaleString()}</span>
+                  <span className="text-2xl line-through text-gray-300 opacity-70">₹{originalPrice.toLocaleString()}</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-4xl font-extrabold text-white drop-shadow-lg">₹{originalPrice.toLocaleString()}</span>
+                  <span className="text-2xl line-through text-gray-300 opacity-70">₹35,000</span>
+                </>
+              )}
+            </div>
+            <button className="bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold px-8 py-2 rounded-2xl text-lg shadow-lg transition">Buy Now</button>
+            {/* Coupon Section */}
+            <div className="mt-4 w-full max-w-xs">
+              <label className="block text-white font-semibold mb-1">Have a coupon?</label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={coupon}
+                  onChange={e => setCoupon(e.target.value)}
+                  className="px-3 py-2 rounded bg-white/80 text-black w-full focus:outline-none"
+                  placeholder="Enter coupon code"
+                />
+                <button
+                  type="button"
+                  onClick={handleApplyCoupon}
+                  className="bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold px-4 py-2 rounded"
+                >Apply</button>
+              </div>
+              {couponError && <div className="text-red-400 text-sm mt-1">{couponError}</div>}
+              {couponApplied && offerPrice && (
+                <div className="text-green-400 text-sm mt-1">Coupon applied! You saved ₹{(originalPrice - offerPrice).toLocaleString()}.</div>
+              )}
+            </div>
           </div>
-          {/* Customer Reviews Section */}
-          <div ref={reviewsRef} id="reviews" className="bg-white shadow-md p-8 mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-[#000f29]">Customer Reviews</h2>
-            {/* Add Review Form */}
-            <AddReviewSection product={product} />
+          {/* Included */}
+          <div className="mt-6 bg-[#007e9e]/80 border border-[#0FAFCA] px-6 py-4 rounded-xl text-base font-semibold">
+            Included: Windows 11 Pro, Office 365, Laptop Bag Pack
           </div>
         </div>
       </div>
-      
-    </>
+      {/* Tech Specs */}
+      <section className="max-w-6xl mx-auto mt-12 px-4">
+        <h2 className="text-2xl font-bold mb-6">Technical Specifications</h2>
+        <div className="rounded-2xl bg-white/10 backdrop-blur-sm border border-[#0FAFCA] p-6 overflow-x-auto shadow-xl">
+          <table className="w-full text-white text-base border-separate border-spacing-0">
+            <tbody>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Colour</td>
+                <td className="border border-white/30 px-4 py-2">sliver</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Power</td>
+                <td className="border border-white/30 px-4 py-2">DC 12V</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Display</td>
+                <td className="border border-white/30 px-4 py-2">15.6inch, Full HD 1920*1080 IPS 16:9 ratio</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Battery</td>
+                <td className="border border-white/30 px-4 py-2">5000mah</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Processor</td>
+                <td className="border border-white/30 px-4 py-2">intel N95 up to 3.4GHz with Turbo boost</td>
+                <td className="font-bold border border-white/30 px-4 py-2">RJ45</td>
+                <td className="border border-white/30 px-4 py-2">yes</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Core, threads, Cache</td>
+                <td className="border border-white/30 px-4 py-2">4core, 4 threads, 6MB cache</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Memory card reader</td>
+                <td className="border border-white/30 px-4 py-2">yes, SD card upto 128Gb</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Graphic</td>
+                <td className="border border-white/30 px-4 py-2">intel UHD graphics 1.20Ghz</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Earphone port</td>
+                <td className="border border-white/30 px-4 py-2">3.5mm standard headphone jack</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Fingerprint reader</td>
+                <td className="border border-white/30 px-4 py-2">yes, on touch pad</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Mic</td>
+                <td className="border border-white/30 px-4 py-2">Built in Analog microphone</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Operating system</td>
+                <td className="border border-white/30 px-4 py-2">window 11</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Speaker</td>
+                <td className="border border-white/30 px-4 py-2">front facing Built in stereo speaker 1.0W*2</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">MS office</td>
+                <td className="border border-white/30 px-4 py-2">yes, 365</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Webcam</td>
+                <td className="border border-white/30 px-4 py-2">2.0Mega+DMIC, with Privcay sutter</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">USB</td>
+                <td className="border border-white/30 px-4 py-2">3 port of USB 3.0, type C(Data+DP)</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Touchpad</td>
+                <td className="border border-white/30 px-4 py-2">Yes, extra large</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">HDMI</td>
+                <td className="border border-white/30 px-4 py-2">HDMI A type</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Keyboard</td>
+                <td className="border border-white/30 px-4 py-2">US, Round with Backlight & Square with Backlight</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Product Dimension and weight</td>
+                <td className="border border-white/30 px-4 py-2">357.4*228*19 mm, 1.68kg</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Included in Box</td>
+                <td className="border border-white/30 px-4 py-2">Laptop, Power Cord, Adapter, User Manual</td>
+              </tr>
+              <tr>
+                <td className="font-bold border border-white/30 px-4 py-2">Covered in warranty</td>
+                <td className="border border-white/30 px-4 py-2">Manufacturing Defects, Physical Damage not covered.</td>
+                <td className="font-bold border border-white/30 px-4 py-2">Manufactured by</td>
+                <td className="border border-white/30 px-4 py-2">Ention, Made in India.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      {/* Video Section: Product Video */}
+      <section className="max-w-6xl mx-auto mt-12 px-4">
+        <div className="flex justify-center items-center w-full">
+          <video
+            src="/assets/product_/e5/feature_images/e5_video.mp4"
+            controls
+            className="rounded-xl shadow-lg w-full max-w-3xl bg-black"
+            style={{ minHeight: '320px' }}
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+      {/* Features & Design */}
+      <section className="max-w-6xl mx-auto mt-12 px-4">
+        <h2 className="text-2xl font-bold mb-6">Features & Design</h2>
+        {/* Row 1: Introduction Feature Row */}
+        <div className="flex flex-col lg:flex-row gap-0 mb-8 items-stretch">
+          <div className="flex-1 bg-[#18408b] text-white text-lg md:text-xl lg:text-[1.35rem] px-6 md:px-8 py-6 lg:py-8 flex flex-col justify-center rounded-l-xl rounded-r-none shadow-lg h-[300px] mt-24">
+            <p className="mb-4">
+              Experience high-quality computing without compromise. The Ention Workbook Series Laptop blends power, design, and affordability to deliver outstanding performance on a smart budget.
+            </p>
+            <p>
+              Powered by the Intel N95 processor with a maximum turbo frequency of up to 3.4GHz and 6MB cache, it's built to keep up with your everyday tasks seamlessly.
+            </p>
+          </div>
+          <div className="flex-1 flex items-center justify-center bg-white/10 rounded-l-none rounded-r-xl shadow-lg h-[500px]">
+            <img 
+              src="/assets/product_/e5/feature_images/1.png" 
+              alt="Your Working Companion" 
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+        {/* Row 2: Joined Image and Card Row */}
+        <div className="flex flex-row w-full md:w-auto items-stretch mt-[-170px]">
+          {/* Image Card - no margin, no padding, no background */}
+          <div
+            className="mt-10 rounded-r-none shadow-lg overflow-hidden"
+            style={{
+              width: '620px',
+              height: '420px',
+              minWidth: '320px',
+              minHeight: '220px',
+              display: 'flex',
+              alignItems: 'stretch',
+            }}
+          >
+            <Image
+              src="/assets/product_/e5/feature_images/Copy of Copy of 28,000 (1).png"
+              alt="Feature 1"
+              width={520}
+              height={420}
+              className="object-cover"
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+                width: '100%',
+                height: '100%',
+              }}
+            />
+          </div>
+          {/* Right Card - full control */}
+          <div className="bg-[#18408b] mt-[145px] rounded-l-none rounded-r-xl p-8 text-white max-w-2xl w-full md:w-1/2 flex items-center shadow-lg"
+               style={{ height: '315px' }}>
+            <div>
+              <div className="text-lg font-bold mb-2">Control at Your Fingertips</div>
+              <div>Experience a smarter way to interact with your device. Easily manage volume and brightness with intuitive finger gestures—no buttons, no hassle.</div>
+            </div>
+          </div>
+        </div>
+        {/* Row 3: Centered Text Row */}
+        <div className="w-full bg-[#18408b] rounded-xl p-8 text-center text-white text-3xl font-normal flex flex-col items-center justify-center mt-8">
+          Made for Power Users & Everyday Hustlers<br />A compact companion that blends performance with mobility, ideal for students and professionals on the go.
+        </div>
+        {/* Row 4: Image Left, Text and Image Right Row */}
+        <div className="flex flex-col mt-4 md:flex-row bg-[#18408b] rounded-xl overflow-hidden items-center" style={{ height: '320px' }}>
+          <div
+            className="flex-shrink-0"
+            style={{ flexBasis: '60%', width: '60%', height: '100%' }}
+          >
+            <Image
+              src="/assets/product_/e5/feature_images/copy uncut (4).png"
+              alt="Laptop Open"
+              width={400}
+              height={320}
+              className="object-cover w-full h-full"
+              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+            />
+          </div>
+          <div className="flex flex-col justify-start p-8 relative" style={{ height: '100%', width: '40%' }}>
+            <Image src={E5FeatureImages[2]} alt="Camera Privacy Shutter" width={210} height={90} className="object-contain absolute top-0 right-0" style={{margin:0,padding:0}} />
+            <div style={{marginTop: '200px'}}>Enjoy smooth performance at an affordable price, making high-quality computing accessible to everyone.</div>
+          </div>
+        </div>
+        {/* Row 5: Ports and Audio Row (the one you want to replace) */}
+        <div className="w-full bg-[#18408b] rounded-xl p-8 text-center mt-8">
+          <div className="text-2xl md:text-3xl font-bold text-white mb-2">Stunning 15.6–Inch Colour–Rich Display</div>
+          <div className="text-base md:text-lg text-white font-normal">Enjoy sharp visuals and vibrant colours on a compact 15.6inch full HD IPS screen,<br />perfect for immersive viewing and clear presentations.</div>
+        </div>
+        {/* Row 6: Ports and Slots Image Row */}
+        <div className="w-full bg-[#18408b] rounded-xl flex flex-row items-center justify-start mt-8 relative" style={{height: '600px'}}>
+          <div style={{width: '90%', height: '100%'}} className="h-full">
+            <Image
+              src="/assets/product_/e5/feature_images/copy uncut (5).png"
+              alt="Ports and slots"
+              width={1200}
+              height={600}
+              className="object-contain w-full h-full"
+              style={{height: '100%', width: '100%', objectFit: 'cover'}}
+            />
+          </div>
+          <div className="absolute right-0 top-0 h-full flex items-center pr-12">
+            <span className="text-white text-3xl font-bold" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Ports and slots</span>
+          </div>
+        </div>
+        {/* Row 7: TouchPad Feature Image Row */}
+        <div className="w-full bg-[#18408b] flex flex-row items-center justify-between mt-8" style={{height: '400px'}}>
+          <div style={{width: '50%', height: '100%'}} className="flex flex-col items-center justify-center text-white text-center gap-6">
+            <div className="text-4xl md:text-5xl font-extrabold mb-2 drop-shadow-lg" style={{textShadow: '0 2px 8px #0008'}}>Windows 11 Pro</div>
+            <div className="text-2xl md:text-3xl font-semibold mb-4 drop-shadow" style={{textShadow: '0 2px 8px #0008'}}>Do the Great thingh</div>
+            <div className="mt-4">
+              <span className="text-2xl md:text-3xl font-bold drop-shadow" style={{textShadow: '0 2px 8px #0008'}}>5000mAh Longer Battery</span>
+            </div>
+          </div>
+          <div style={{width: '50%', height: '100%'}}>
+            <Image
+              src="/assets/product_/e5/feature_images/Copy of Copy of 28,000 (1).png"
+              alt="Large TouchPad Feature"
+              width={800}
+              height={400}
+              className="object-cover w-full h-full"
+              style={{height: '100%', width: '100%', objectFit: 'cover'}}
+            />
+          </div>
+        </div>
+        {/* Row 8: Immersive Audio Feature Row */}
+        <div className="w-full bg-[#18408b] flex flex-row items-center justify-between mt-8" style={{height: '400px'}}>
+          <div style={{width: '50%', height: '100%'}}>
+            <Image
+              src="/assets/product_/e5/feature_images/IMG_99.png"
+              alt="Immersive Audio Feature"
+              width={800}
+              height={900}
+              className="object-cover w-full h-full"
+              style={{height: '100%', width: '100%', objectFit: 'cover'}}
+            />
+          </div>
+          <div style={{width: '50%', height: '100%'}} className="flex flex-col items-center justify-center text-white text-center p-8">
+            <div className="text-2xl md:text-3xl font-bold mb-4">Immersive Audio with Front-Facing Speakers</div>
+            <div className="text-base md:text-lg font-normal">Experience crystal–clear sound that's directed towards you — not away.</div>
+          </div>
+        </div>
+        {/* Row 6: Product Compliance Certification Row */}
+        <div className="w-full bg-[#007e9e]/80 border border-[#0FAFCA] px-6 py-8 rounded-xl text-center mt-8 flex flex-col items-center">
+          <h2 className="text-2xl font-bold mb-4">Product compliance certification</h2>
+          <div className="text-lg">
+            Ention ensures all its products comply with Indian regulatory standards. Devices are certified under BIS CRS for electrical safety and WPC–ETA for wireless communication compliance. Ention also follows global benchmarks for product safety, electromagnetic compatibility, ergonomics, and environmental responsibility. Every product is developed through certified processes to guarantee quality, legal distribution, and user safety.
+          </div>
+        </div>
+      </section>
+    </div>
   );
-};
-
-export default ProductDetails;
+}
 
 export async function getStaticPaths() {
   return {
@@ -590,7 +826,7 @@ function FeatureBentoGrid() {
         <div className="flex-1 flex items-center justify-center mt-6 md:mt-0">
           <div className="relative w-full flex justify-center md:justify-end">
             <Image 
-              src="/assets/product_/e5/20.png" 
+              src="/assets/product_/e5/feature_images/1.png" 
               alt="Ention E5" 
               width={420} 
               height={260} 
@@ -606,7 +842,7 @@ function FeatureBentoGrid() {
         <div className="flex-1 flex items-center justify-center md:justify-start">
           <div className="relative w-full flex justify-center md:justify-start">
             <Image 
-              src="/assets/product_/e5/15.png" 
+              src={E5FeatureImages[1]} 
               alt="Control at Your Fingertips" 
               width={350} 
               height={220} 
@@ -639,7 +875,7 @@ function FeatureBentoGrid() {
         <div className="flex-1 flex items-center justify-center md:justify-end">
           <div className="relative w-full flex justify-center md:justify-end">
             <Image 
-              src="/assets/product_/e3/IMG_9931.jpg" 
+              src={E5FeatureImages[2]} 
               alt="Powerful Yet Budget-Friendly" 
               width={350} 
               height={220} 
@@ -655,7 +891,7 @@ function FeatureBentoGrid() {
         <div className="flex-1 flex items-center justify-center md:justify-start mb-6 md:mb-0">
           <div className="relative w-full flex justify-center md:justify-start">
             <Image 
-              src="/assets/product_/e4/IMG_1107.JPG" 
+              src={E5FeatureImages[3]} 
               alt="Ention Workbook Series" 
               width={350} 
               height={220} 
@@ -675,22 +911,7 @@ function FeatureBentoGrid() {
           </span>
         </div>
       </div>
-      {/* Row 5: Ports and Slots Image Only, Bento Style */}
-      <div className="bento-card col-span-2 flex items-center justify-center bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8 relative">
-        <div className="relative w-full flex justify-center md:justify-start">
-          <img 
-            src="/assets/market-pc.png" 
-            alt="Ports and slots" 
-            className="object-contain w-full max-w-4xl h-auto -mt-8 -mb-8 md:-mt-12 md:-mb-12 md:-ml-12" 
-            style={{ zIndex: 2 }}
-          />
-        </div>
-        {/* Vertical label */}
-        <div className="absolute right-0 top-0 h-full flex items-center pr-2 z-20">
-          <span className="text-[#1976d2] text-2xl font-bold" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Ports and slots</span>
-        </div>
-      </div>
-      {/* Row 6: Windows, Battery, TouchPad Feature Row (Bento Style) */}
+      {/* Row 5: Windows, Battery, TouchPad Feature Row (Bento Style) */}
       <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8 gap-8" style={{ paddingBottom: '2rem' }}>
         {/* Left: Merged Feature Card with Highlighted Text */}
         <div className="flex-1 flex flex-col justify-center gap-6 min-w-[220px]">
@@ -713,7 +934,7 @@ function FeatureBentoGrid() {
           </div>
         </div>
       </div>
-      {/* Row 7: Immersive Audio Feature Row (Bento Style) */}
+      {/* Row 6: Immersive Audio Feature Row (Bento Style) */}
       <div className="bento-card col-span-2 flex flex-col md:flex-row items-center justify-between bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] p-8 gap-8">
         {/* Left: Offset Image */}
         <div className="flex-1 flex items-center justify-center md:justify-start w-full">
@@ -729,7 +950,7 @@ function FeatureBentoGrid() {
           </span>
         </div>
       </div>
-      {/* Row 8: Product Compliance Certification (Bento Style) */}
+      {/* Row 7: Product Compliance Certification (Bento Style) */}
       <div className="bento-card col-span-2 w-full bg-gradient-to-br from-[#e3f2fd] to-[#fff] shadow-xl border border-[#90caf9] py-12 px-4 flex flex-col items-center justify-center">
         <h2 className="text-[#1976d2] text-2xl font-extrabold text-center mb-6">Product compliance certification</h2>
         <p className="text-[#1976d2] text-base md:text-lg font-medium text-center max-w-5xl">
