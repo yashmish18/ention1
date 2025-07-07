@@ -165,7 +165,7 @@ const ProductCard = ({ product }) => (
     <div className="p-4 flex flex-col flex-1">
       <h3 className="text-lg font-semibold mb-2 text-[#000f29]">{product.name}</h3>
       <p className="text-[#007e9e] text-xl font-bold mb-4">{product.price}</p>
-      <Link href={`/ecommerce/product/${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</Link>
+      <Link href={`/ecommerce/product/e${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</Link>
     </div>
   </div>
 );
@@ -204,10 +204,10 @@ function WorkbookCard({ series }) {
             Starting from... <span className="text-2xl font-bold text-[#007e9e]">{series.price}</span>
           </div>
           <div className="mt-4 md:mt-0 flex gap-8 justifycenter mr-[70px]">
-            <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+            <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
               <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
             </Link>
-            <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+            <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
               <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Shop Now</a>
             </Link>
           </div>
@@ -258,10 +258,10 @@ function WorkbookCardMobile({ series }) {
           Starting from... <span className="font-bold text-[#007e9e]">{series.price}</span>
         </div>
         <div className="flex gap-2 mt-1">
-          <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+          <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
             <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
           </Link>
-          <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+          <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
             <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Shop Now</a>
           </Link>
         </div>

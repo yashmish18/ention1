@@ -50,12 +50,12 @@ export default function ProductListPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {paginated.map(product => (
-            <Link key={product.id} href={`/product/${product.id}`} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-200 border border-[#e5e7eb] cursor-pointer">
+            <Link key={product.id} href={`/ecommerce/product/e${product.id}`} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col hover:scale-105 transition-transform duration-200 border border-[#e5e7eb] cursor-pointer">
               <Image src={product.image} alt={product.name} width={400} height={192} className="w-full h-48 object-cover" />
               <div className="p-4 flex flex-col flex-1">
                 <h3 className="text-lg font-semibold mb-2 text-[#000f29]">{product.name}</h3>
                 <p className="text-[#007e9e] text-xl font-bold mb-4">₹{product.price.toLocaleString()}</p>
-                <Link href={`/product/${product.id}`} legacyBehavior>
+                <Link href={`/ecommerce/product/e${product.id}`} legacyBehavior>
                   <a className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</a>
                 </Link>
               </div>

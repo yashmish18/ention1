@@ -91,22 +91,19 @@ export default function Dashboard() {
   const userData = user || mockUser;
 
   return (
-    <div className="min-h-screen bg-[#f7fafc] pb-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] pb-10 pt-12">
       {/* Topbar */}
-      <div className="w-full bg-white shadow flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8 mt-8" style={{background: 'transparent'}}>
         <div className="flex items-center gap-4">
           <Image src={userData.image || userData.avatar} alt="avatar" width={64} height={64} className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
           <div>
-            <div className="text-2xl font-bold text-[#000f29]">Welcome, {userData.name}!</div>
-            <div className="text-gray-500">{userData.email}</div>
+            <div className="text-2xl font-bold text-white">Welcome, {userData.name}!</div>
+            <div className="text-white/70">{userData.email}</div>
           </div>
-        </div>
-        <div className="flex gap-4 mt-4 md:mt-0">
-          <button onClick={logout} className="flex items-center gap-2 px-4 py-2 rounded-3xl border border-red-500 text-red-500 font-semibold hover:bg-red-500 hover:text-white transition"><FaSignOutAlt /> Logout</button>
         </div>
       </div>
       {/* Main grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
         {/* Orders */}
         <div className="bg-white rounded-xl shadow p-6 flex flex-col">
           <div className="flex items-center gap-2 mb-4 text-xl font-bold text-[#007e9e]"><FaBoxOpen /> Recent Orders</div>
@@ -130,19 +127,6 @@ export default function Dashboard() {
             </div>
           ))}
           <Link href="/orders" className="mt-4 text-[#007e9e] hover:underline text-sm">View All Orders</Link>
-        </div>
-        {/* Wishlist */}
-        <div className="bg-white rounded-xl shadow p-6 flex flex-col">
-          <div className="flex items-center gap-2 mb-4 text-xl font-bold text-pink-600"><FaHeart /> Wishlist</div>
-          {wishlist.length === 0 && <div className="text-gray-400">No saved products.</div>}
-          {wishlist.map(item => (
-            <div key={item.id} className="flex items-center gap-4 border-b py-3 last:border-b-0">
-              <Image src={item.image} alt={item.product} width={64} height={64} className="w-16 h-16 rounded-lg object-cover" />
-              <div className="flex-1 font-semibold">{item.product}</div>
-              <button onClick={() => handleAddToCart(item.id)} className="text-[#007e9e] hover:underline flex items-center gap-1"><FaShoppingCart /> Add</button>
-              <button onClick={() => handleRemoveWishlist(item.id)} className="text-red-500 hover:underline ml-2">Remove</button>
-            </div>
-          ))}
         </div>
         {/* Support Tickets */}
         <div className="bg-white rounded-xl shadow p-6 flex flex-col">

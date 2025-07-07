@@ -56,23 +56,6 @@ const Header = () => {
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
 
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollY > 100 && window.scrollY > lastScrollY) {
-        setHidden(true); // Move navbar up on scroll down
-      } else {
-        setHidden(false); // Bring it back on scroll up
-      }
-      setLastScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
-
   useEffect(() => {
     if (router && router.prefetch) {
       router.prefetch("/about");
@@ -99,7 +82,7 @@ const Header = () => {
         backdropFilter: "blur(10px)",
       }}
       initial={{ y: 0 }}
-      animate={{ y: hidden ? "-100%" : "0%" }} // Move up instead of disappearing
+      animate={{ y: 0 }} // Always visible
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="h-20 fixed z-50 w-full flex items-center justify-between px-4 lg:px-10 top-0 mb-10"
     >

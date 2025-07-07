@@ -37,42 +37,28 @@ export default function CartPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f7fafc] py-10 px-4">
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8">
-        <h1 className="text-3xl font-bold text-[#000f29] mb-8 text-center">Your Cart</h1>
-        {cart.length === 0 ? (
-          <div className="text-center text-gray-500">Your cart is empty.</div>
-        ) : (
-          <>
-            <div className="flex flex-col gap-6 mb-8">
-              {cart.map(item => (
-                <div key={item.id} className="flex items-center gap-6 border-b pb-4">
-                  <Image src={item.image} alt={item.name} width={80} height={80} className="rounded-lg object-cover" />
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-[#000f29]">{item.name}</h3>
-                    <p className="text-[#007e9e] font-bold">₹{item.price.toLocaleString()}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button onClick={() => updateQty(item.id, -1)} className="w-8 h-8 rounded-full bg-[#e5e7eb] text-[#000f29] font-bold">-</button>
-                    <span className="px-2 font-bold">{item.quantity}</span>
-                    <button onClick={() => updateQty(item.id, 1)} className="w-8 h-8 rounded-full bg-[#e5e7eb] text-[#000f29] font-bold">+</button>
-                  </div>
-                  <button onClick={() => removeItem(item.id)} className="ml-4 text-red-500 font-bold">Remove</button>
+    <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] py-10 px-4">
+      <div className="max-w-2xl mx-auto bg-white/90 rounded-xl shadow-md p-8 mt-32">
+        <h1 className="text-3xl font-bold text-[#000f29] mb-8 text-center">Order Details</h1>
+        <div className="flex flex-col gap-6 mb-8">
+          {cart.map(item => (
+            <div key={item.id} className="flex items-center gap-6 border-b pb-4">
+              <div className="flex-shrink-0 flex items-center justify-center" style={{minWidth: '64px', minHeight: '64px'}}>
+                <Image src={item.image} alt={item.name} width={64} height={64} className="rounded-lg object-contain bg-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-[#000f29]">{item.name}</h3>
+                <p className="text-[#007e9e] font-bold">₹{item.price.toLocaleString()}</p>
+                <p className="text-gray-700">Quantity: {item.quantity}</p>
+                <p className="text-green-600 font-semibold mt-1">Status: Processing</p>
+                <div className="flex flex-row gap-3 mt-4">
+                  <button className="bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold px-4 py-1.5 rounded-xl text-sm shadow-lg transition">Track Order</button>
+                  <button className="bg-red-500 hover:bg-red-700 text-white font-bold px-4 py-1.5 rounded-xl text-sm shadow-lg transition">Cancel Order</button>
                 </div>
-              ))}
+              </div>
             </div>
-            <div className="flex justify-between items-center text-xl font-bold mb-8">
-              <span>Total:</span>
-              <span className="text-[#007e9e]">₹{total.toLocaleString()}</span>
-            </div>
-            <button
-              className="w-full bg-[#007e9e] text-white rounded-3xl py-3 px-8 text-lg font-bold hover:bg-[#01E9FE] hover:text-[#000f29] transition"
-              onClick={handleCheckout}
-            >
-              {isLoggedIn ? 'Checkout' : 'Login to Checkout'}
-            </button>
-          </>
-        )}
+          ))}
+        </div>
       </div>
     </div>
   );
