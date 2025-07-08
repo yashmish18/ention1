@@ -2,20 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { Navbar, Footer, Contact } from 'components'
 import Link from 'next/link'
 import Image from 'next/image'
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+
 import { RiWhatsappFill } from 'react-icons/ri'
 import { FaLinkedinIn } from 'react-icons/fa'
 import { HiMail } from 'react-icons/hi'
 import { IoClose } from "react-icons/io5";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useSearchParams } from 'next/navigation'
-import SingleQuestion from './Question'
-import data from '../lib/faq'
+
 import services from '../lib/business'
 
 const ServiceTemplate = ({ categories, title, info }) => {
 
-  const [questions, setQuestions] = useState(data)
+  const [questions, setQuestions] = useState([])
 
   const params = useSearchParams();
   const [expanded, setExpanded] = useState(false)

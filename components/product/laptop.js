@@ -4,10 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 import { useLocalStorage } from 'react-use';
-import comingsoon from 'assets/comingsoon.png';
 
 import { useRouter } from 'next/navigation';
-import { extractYouTubeVideoId } from 'utils/utilties';
+import { extractYouTubeVideoId } from 'utils/utilities';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -32,7 +31,7 @@ const ProductCard = ({ product }) => {
           className={`border border-[#007E9E] w-full mx-0 md:mx-5 group relative`}
         >
           <Image
-            src={comingsoon}
+            src={'/comingsoon.png'}
             width={80}
             height={80}
             className=" rounded-full absolute -top-4 -left-4"

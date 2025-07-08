@@ -1,5 +1,3 @@
-export { default as Footer } from './Footer';
-export { default as Navbar } from './Navbar';
 //export { default as hooks } from './hooks';
 export { default as Laptop } from './product/laptop';
 export { default as Product } from './Product';
