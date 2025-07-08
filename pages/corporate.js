@@ -3,10 +3,6 @@ import { Navbar, Footer } from '../components/index'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import cities from 'lib/cities'
-
-import arrow from 'assets/Arrow 14.png'
-import arrow1 from 'assets/Arrow 15.png'
 
 const products = [ 'Our Service', 'Laptops',]
 
@@ -59,22 +55,22 @@ const Corporate_Sale = () => {
       <ul id="list" className="w-full   mt-0 md:mt-20 text-sm lg:text-lg  ml-6 md:ml-0 lg:ml-0">
 
   <li><button className='  h-[57px] bg-[#007E9E] text-center rounded-md  text-white '>Fill up the Form  </button></li>
-  <li className="mt-3 mx-2 hidden md:block">       <Image src={arrow}  alt="Logo" /></li>
+  <li className="mt-3 mx-2 hidden md:block">       <Image src="/Arrow 14.png"  alt="Logo" /></li>
   <li> <button className=' h-[57px] bg-[#007E9E] text-center rounded-md  text-white '>We will get in touch	 </button></li>
- 	<li className=" mt-3 mx-2">       <Image src={arrow}  alt="Logo" /></li>
+ 	<li className=" mt-3 mx-2">       <Image src="/Arrow 14.png"  alt="Logo" /></li>
 	<li><button className='  md:w-52 lg:w-80 md:h-20  lg:h-[57px] bg-[#007E9E] text-center rounded-md  text-white  mt-0 lg:mt-0'> Receive laptops at company&apos;s doorstep	 </button>
  
-  <Image src={arrow}  alt="Logo" className="rotate-90 ml-10 lg:ml-28 mt-12"/> 
+  <Image src="/Arrow 14.png"  alt="Logo" className="rotate-90 ml-10 lg:ml-28 mt-12"/> 
 </li>
 
  
 	<li className=""><button className='w-28 md:w-40 h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-14 lg:mt-12 ml-56 lg:ml-60'>Return 	 </button></li>
-  <li className="mt-4 lg:mt-3 mr-2 ml-1">       <Image src={arrow}  alt="Logo" className="rotate-180 ml-0 mt-12" /></li>
+  <li className="mt-4 lg:mt-3 mr-2 ml-1">       <Image src="/Arrow 14.png"  alt="Logo" className="rotate-180 ml-0 mt-12" /></li>
 	<li><button className='w-48 lg:w-full  md:h-20 lg:h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-12 '> Experience 3
 days trial without any obligation </button>
-  <Image src={arrow}  alt="Logo" className="rotate-90 ml-10 lg:ml-32 mt-12"/> </li>
+  <Image src="/Arrow 14.png"  alt="Logo" className="rotate-90 ml-10 lg:ml-32 mt-12"/> </li>
   <li className=""><button className='w-40 md:w-52 px-8 h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-12 ml-40 lg:ml-60'>Become a Partner 	 </button></li>
-  <li className="mt-3 mr-2 ml-1">       <Image src={arrow}  alt="Logo" className="rotate-180 ml-0 mt-12" /></li>
+  <li className="mt-3 mr-2 ml-1">       <Image src="/Arrow 14.png"  alt="Logo" className="rotate-180 ml-0 mt-12" /></li>
 	<li><button className=' h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-12 '>Purchase with exclusive offers </button></li>
 
 </ul>
@@ -82,22 +78,22 @@ days trial without any obligation </button>
 <div className='block md:hidden mx-4 flex items-center justify-center'>
 <ul id="list" className=" mt-20 text-sm lg:text-lg  ">
 	<li> <button className='w-60 h-[57px] bg-[#007E9E] text-center rounded-md  text-white '>Fill up the Form 	 </button>
-  <Image src={arrow}  alt="Logo" className="rotate-90 w-10 mt-8 mx-auto"/></li>
+  <Image src="/Arrow 14.png"  alt="Logo" className="rotate-90 w-10 mt-8 mx-auto"/></li>
  	
   <li><button className=' w-60 h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-6'>We will get in touch	  </button>
-  <Image src={arrow}  alt="Logo" className="rotate-90 w-10 mt-8 mx-auto"/></li>
+  <Image src="/Arrow 14.png"  alt="Logo" className="rotate-90 w-10 mt-8 mx-auto"/></li>
 
 	<li><button className=' w-60 h-[57px] bg-[#007E9E] text-center rounded-md  text-white  mt-6'>Receive laptops at company&apos;s doorstep	 </button>
-  <Image src={arrow}  alt="Logo" className="rotate-90 w-10 mt-8 mx-auto"/></li>
+  <Image src="/Arrow 14.png"  alt="Logo" className="rotate-90 w-10 mt-8 mx-auto"/></li>
   <li><button className='w-60 h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-6 '> Experience 3days trial without any obligationn	 </button>
- <div className='flex mx-auto items-center justify-center gap-4'> <Image src={arrow1}  alt="Logo" className="rotate-45  h-14  "/>
-  <Image src={arrow1}  alt="Logo" className="-rotate-45 h-14  "/></div> </li>
+ <div className='flex mx-auto items-center justify-center gap-4'> <Image src="/Arrow 15.png"  alt="Logo" className="rotate-45  h-14  "/>
+  <Image src="/Arrow 15.png"  alt="Logo" className="-rotate-45 h-14  "/></div> </li>
 <li>
  <div className='w-full flex gap-6'>
 	<button className='px-4 w-28 h-[57px] bg-[#007E9E] text-center rounded-md  text-white mt-2'>Return 	 </button>
 <div>
   <button className='px-4 w-28  h-28 bg-[#007E9E] text-center rounded-md  text-white  ml-10'> Purchase with exclusive offers  </button>
-  <Image src={arrow}  alt="Logo" className="rotate-90 w-10 mt-8 ml-20"/></div>
+  <Image src="/Arrow 14.png"  alt="Logo" className="rotate-90 w-10 mt-8 ml-20"/></div>
 	</div> </li>
   <li className="ml-48 mt-4"><button className='px-4 w-28 h-[57px] bg-[#007E9E] text-center rounded-md  text-white '>Become a Partner 	 </button></li>
  
@@ -144,11 +140,11 @@ days trial without any obligation </button>
         <div className="w-full  border-b border-white my-4 md:my-14">
           <label htmlFor="city" className='text-white font-bold text-lg pt-4'>City </label>
           <select id="city" name="city"  className="w-full  bg-transparent text-white mt-4">
-            {cities.map((option) => (
-              <option className="text-black px-2" key={option} value={option}>
-                {option}
+            {/* cities.map((option) => ( */}
+              <option className="text-black px-2" key="INR" value="INR">
+                INR
               </option>
-            ))}
+            {/* ))} */}
         </select>
         </div>
         <div className="w-full border-b border-white my-4 text-white md:my-14 ">

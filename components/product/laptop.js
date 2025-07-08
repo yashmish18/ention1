@@ -6,7 +6,6 @@ import Slider from 'react-slick';
 import { useLocalStorage } from 'react-use';
 
 import { useRouter } from 'next/navigation';
-import { extractYouTubeVideoId } from 'utils/utilities';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -347,9 +346,7 @@ const Laptop = ({ product, relatedProducts }) => {
                   key={'product-video-'}
                   width="1200"
                   height="1000"
-                  src={`https://www.youtube.com/embed/${extractYouTubeVideoId(
-                    product?.featureVideoLink
-                  )}`}
+                  src={`https://www.youtube.com/embed/${product?.featureVideoLink}`}
                   title={`YouTube video player`}
                   frameBorder="0"
                   allow="accelerometer; autoPlay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
