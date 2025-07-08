@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Laptop from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
+import Laptop from "public/assets/Ention-Laptop-E3-Catalogue-design-2.png";
 import { TbCirclePlus } from "react-icons/tb";
 import corei5Img from "assets/i5.png";
 import corei7Img from "assets/i7.png";
 import amd5Img from "assets/amd-ryzen-5-logo.png";
-import amd7Img from "assets/AMD-Ryzen-7-Category.png";
+import amd7Img from "public/assets/AMD-Ryzen-7-Category.png";
 import { useRouter } from "next/router";
 import CustomDropdown from "components/CustomDropdown";
 import newProducts from "lib/newData";

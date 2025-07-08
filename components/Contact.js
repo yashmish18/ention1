@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import cities from 'lib/cities'
 import services from 'lib/services'
 import { toast } from 'react-toastify'
 // import { sendEmail } from 'utils/email'

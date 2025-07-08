@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
-import { FaMapMarkerAlt, FaCalendarAlt, FaCreditCard, FaBoxOpen, FaMoneyBillWave, FaMobileAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCalendarAlt, FaCreditCard, FaBoxOpen, FaMoneyBillWave, FaMobileAlt, FaArrowLeft } from 'react-icons/fa';
 import Image from 'next/image';
 
-export default function CheckoutSummary() {
+export default function CheckoutPage() {
   // Dummy addresses
-  const addresses = [
+  const savedAddresses = [
     {
       id: 1,
+      label: 'Home',
       name: 'John Doe',
       line1: '123 Main Street',
       line2: 'Apt 4B',
-      city: 'New Delhi',
-      state: 'Delhi',
-      zip: '110001',
-      phone: '+91 9876543210',
+      city: 'New York',
+      state: 'NY',
+      zip: '12345',
+      country: 'United States',
     },
     {
       id: 2,
-      name: 'Jane Smith',
+      label: 'Office',
+      name: 'John Doe',
       line1: '456 Park Avenue',
       line2: 'Suite 12',
-      city: 'Mumbai',
-      state: 'Maharashtra',
-      zip: '400001',
-      phone: '+91 9123456789',
+      city: 'New York',
+      state: 'NY',
+      zip: '10001',
+      country: 'United States',
     },
   ];
-  const [selectedAddress, setSelectedAddress] = useState(addresses[0]);
-  const [showAddressSelect, setShowAddressSelect] = useState(false);
+  const [step, setStep] = useState(1);
+  const [selectedAddressId, setSelectedAddressId] = useState(savedAddresses[0]?.id || null);
+  const [useSavedAddress, setUseSavedAddress] = useState(true);
+  const [paymentMode, setPaymentMode] = useState('card');
 
   // Dummy payment methods
   const paymentMethods = [
@@ -48,120 +52,219 @@ export default function CheckoutSummary() {
   const shipping = 0;
   const total = subtotal + shipping;
 
-  return (
-    <main className="min-h-screen w-full bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] flex flex-col items-center pt-32 pb-4 px-2">
-      {/* Order Summary Heading */}
-      <div className="w-full max-w-4xl flex flex-col items-center mb-4">
-        <h1 className="text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1">Order Summary</h1>
-        <div className="h-1 w-20 bg-cyan-400 rounded-full mb-1" />
-      </div>
-      <div className="w-full max-w-4xl flex flex-col md:flex-row gap-4 md:gap-6">
-        {/* Merged Left Card */}
-        <div className="flex-1 flex flex-col">
-          <div className="rounded-2xl bg-white shadow-2xl p-5 flex flex-col gap-4">
-            {/* Delivery Address */}
-            <section>
-              <div className="flex items-center gap-2 mb-1">
-                <FaMapMarkerAlt className="text-lg text-cyan-600" />
-                <h2 className="text-base font-bold text-[#133B5C]">Delivery Address</h2>
-              </div>
-              <div className="text-[#133B5C] mb-0.5 text-sm">{selectedAddress.name}</div>
-              <div className="text-[#133B5C] mb-0.5 text-sm">{selectedAddress.line1}, {selectedAddress.line2}</div>
-              <div className="text-[#133B5C] mb-0.5 text-sm">{selectedAddress.city}, {selectedAddress.state} {selectedAddress.zip}</div>
-              <div className="text-[#133B5C]/80 text-xs mb-0.5">Phone: {selectedAddress.phone}</div>
-              <button
-                className="mt-1 text-cyan-600 underline text-xs font-medium hover:text-cyan-800"
-                onClick={() => setShowAddressSelect(!showAddressSelect)}
+  // Stepper labels
+  const steps = [
+    'Shipping address',
+    'Payment details',
+    'Review your order',
+  ];
+
+  // Render step content
+  function renderStepContent() {
+    if (step === 1) {
+      return (
+        <div className="w-full">
+          {savedAddresses.length > 0 && (
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Saved addresses</label>
+              <select
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 mb-2"
+                value={useSavedAddress ? selectedAddressId : ''}
+                onChange={e => {
+                  setUseSavedAddress(true);
+                  setSelectedAddressId(Number(e.target.value));
+                }}
               >
-                Change Address
-              </button>
-              {showAddressSelect && (
-                <div className="mt-2 border-t border-cyan-200 pt-2">
-                  <div className="font-semibold text-[#133B5C] mb-1 text-sm">Select Address:</div>
-                  {addresses.map(addr => (
-                    <div key={addr.id} className="mb-1 flex items-center">
-                      <input
-                        type="radio"
-                        id={`address-${addr.id}`}
-                        name="address"
-                        checked={selectedAddress.id === addr.id}
-                        onChange={() => { setSelectedAddress(addr); setShowAddressSelect(false); }}
-                        className="mr-2 accent-cyan-600"
-                      />
-                      <label htmlFor={`address-${addr.id}`} className="text-[#133B5C] cursor-pointer text-xs">
-                        {addr.name}, {addr.line1}, {addr.city}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-            <hr className="my-2 border-cyan-100" />
-            {/* Estimated Delivery */}
-            <section>
-              <div className="flex items-center gap-2 mb-1">
-                <FaCalendarAlt className="text-lg text-cyan-600" />
-                <h2 className="text-base font-bold text-[#133B5C]">Estimated Delivery</h2>
-              </div>
-              <div className="text-[#133B5C] text-sm">{deliveryDate}</div>
-            </section>
-            <hr className="my-2 border-cyan-100" />
-            {/* Payment Method */}
-            <section>
-              <div className="flex items-center gap-2 mb-2">
-                <FaCreditCard className="text-lg text-cyan-600" />
-                <h2 className="text-base font-bold text-[#133B5C]">Payment Method</h2>
-              </div>
-              <div className="flex flex-col gap-2">
-                {paymentMethods.map(method => (
-                  <label key={method.id} className={`flex items-center cursor-pointer border-2 rounded-xl px-3 py-2 text-base font-semibold transition-all ${selectedPayment === method.id ? 'border-cyan-500 bg-cyan-50 shadow-lg' : 'border-gray-200 bg-white'}`}>
-                    <input
-                      type="radio"
-                      name="payment"
-                      value={method.id}
-                      checked={selectedPayment === method.id}
-                      onChange={() => setSelectedPayment(method.id)}
-                      className="mr-2 w-5 h-5 accent-cyan-600"
-                    />
-                    <span className="text-[#133B5C] text-base flex items-center">{method.icon}{method.label}</span>
-                  </label>
+                {savedAddresses.map(addr => (
+                  <option key={addr.id} value={addr.id}>
+                    {addr.label}: {addr.line1}, {addr.city}
+                  </option>
                 ))}
+                <option value="">Add new address</option>
+              </select>
+              <button
+                type="button"
+                className="text-cyan-600 underline text-xs font-medium hover:text-cyan-800"
+                onClick={() => { setUseSavedAddress(false); setSelectedAddressId(null); }}
+              >
+                + Add new address
+              </button>
+            </div>
+          )}
+          {(!useSavedAddress || savedAddresses.length === 0) && (
+            <form className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">First name *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="John" />
               </div>
-            </section>
-          </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Last name *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Snow" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Address line 1 *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Street name and number" />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Address line 2</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Apartment, suite, unit, etc. (optional)" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="New York" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">State *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="NY" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Zip / Postal code *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="12345" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Country *</label>
+                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="United States" />
+              </div>
+              <div className="md:col-span-2 flex items-center mt-2">
+                <input type="checkbox" className="mr-2" id="useForPayment" />
+                <label htmlFor="useForPayment" className="text-sm text-gray-700">Use this address for payment details</label>
+              </div>
+            </form>
+          )}
         </div>
-        {/* Order Summary Card */}
-        <aside className="w-full md:w-[320px] flex-shrink-0">
-          <div className="rounded-2xl bg-white shadow-2xl p-5 flex flex-col">
-            <div className="flex items-center gap-2 mb-3">
-              <FaBoxOpen className="text-lg text-cyan-600" />
-              <h2 className="text-base font-bold text-[#133B5C]">Order Summary</h2>
-            </div>
-            <div className="flex gap-3 mb-3">
-              <img src={product.image} alt={product.name} className="w-16 h-16 object-cover rounded-lg border border-cyan-100" />
-              <div className="flex-1">
-                <div className="font-bold text-[#133B5C] text-sm mb-0.5">{product.name}</div>
-                <div className="text-[#133B5C]/80 text-xs mb-0.5">Qty: {product.quantity}</div>
-                <div className="text-[#133B5C] font-semibold text-base">₹{product.price.toLocaleString()}</div>
+      );
+    }
+    if (step === 2) {
+      return (
+        <div className="w-full flex flex-col gap-8">
+          <div className="text-lg font-semibold text-gray-700 mb-4">Select payment method</div>
+          <div className="flex flex-col gap-4">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="paymentMode" value="card" checked={paymentMode === 'card'} onChange={() => setPaymentMode('card')} className="accent-cyan-600" />
+              <span className="font-medium text-gray-800">Credit/Debit Card</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="paymentMode" value="upi" checked={paymentMode === 'upi'} onChange={() => setPaymentMode('upi')} className="accent-cyan-600" />
+              <span className="font-medium text-gray-800">UPI</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input type="radio" name="paymentMode" value="cod" checked={paymentMode === 'cod'} onChange={() => setPaymentMode('cod')} className="accent-cyan-600" />
+              <span className="font-medium text-gray-800">Cash on Delivery</span>
+            </label>
+          </div>
+          {paymentMode === 'card' && (
+            <div className="flex flex-col gap-4 mt-4">
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Card number" />
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Name on card" />
+              <div className="flex gap-4">
+                <input type="text" className="w-1/2 border border-gray-300 rounded-lg px-4 py-3" placeholder="MM/YY" />
+                <input type="text" className="w-1/2 border border-gray-300 rounded-lg px-4 py-3" placeholder="CVC" />
               </div>
             </div>
-            <div className="border-t border-cyan-100 pt-3 mt-3">
-              <div className="flex justify-between mb-1 text-[#133B5C] text-sm">
-                <span>Subtotal</span>
-                <span>₹{subtotal.toLocaleString()}</span>
+          )}
+          {paymentMode === 'upi' && (
+            <div className="flex flex-col gap-4 mt-4">
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Enter your UPI ID" />
+              <div className="text-xs text-gray-500">We'll request payment via your UPI app after you place the order.</div>
+            </div>
+          )}
+          {paymentMode === 'cod' && (
+            <div className="mt-4 text-sm text-gray-700 bg-cyan-50 rounded-lg px-4 py-3">
+              You will pay in cash when your order is delivered.
+            </div>
+          )}
+        </div>
+      );
+    }
+    if (step === 3) {
+      return (
+        <div className="w-full flex flex-col gap-8">
+          <div className="text-lg font-semibold text-gray-700 mb-4">Review your order (placeholder)</div>
+          <div className="text-gray-600">Order details and confirmation UI goes here.</div>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  return (
+    <main className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e]">
+      <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row bg-white rounded-2xl shadow-2xl min-h-[70vh] my-16 overflow-hidden">
+        {/* Left: Stepper and Form (now on the left) */}
+        <section className="w-full md:w-3/5 flex flex-col items-start justify-start px-8 py-12">
+          <h2 className="text-2xl font-bold text-[#0FAFCA] mb-8">Checkout</h2>
+          {/* Stepper */}
+          <div className="flex items-center mb-10 w-full">
+            {steps.map((label, idx) => (
+              <div key={label} className="flex items-center">
+                <div className={`flex items-center justify-center w-9 h-9 rounded-full border-2 border-cyan-400 font-bold transition-all ${step === idx + 1 ? 'bg-cyan-400 text-white' : 'bg-white text-cyan-400'}`}>{idx + 1}</div>
+                <span className={`ml-2 font-semibold transition-all ${step === idx + 1 ? 'text-gray-900' : 'text-gray-500'}`}>{label}</span>
+                {idx < steps.length - 1 && <div className="flex-1 h-0.5 bg-cyan-200 mx-2" />}
               </div>
-              <div className="flex justify-between mb-1 text-[#133B5C] text-sm">
-                <span>Shipping</span>
-                <span>{shipping === 0 ? 'Free' : `₹${shipping.toLocaleString()}`}</span>
+            ))}
+          </div>
+          {/* Step Content */}
+          {renderStepContent()}
+        </section>
+        {/* Right: Order Summary (now on the right) */}
+        <aside className="w-full md:w-2/5 flex flex-col items-start justify-between px-8 py-12 border-l border-gray-200">
+          <div className="w-full">
+            {/* Back Arrow */}
+            {step > 1 && (
+              <button
+                className="mb-6 flex items-center gap-2 text-cyan-600 hover:text-cyan-800 font-medium text-base transition"
+                onClick={() => setStep(step - 1)}
+                type="button"
+              >
+                <FaArrowLeft className="h-4 w-4" />
+                <span>Back</span>
+              </button>
+            )}
+            <div className="mb-10 flex items-center gap-4">
+              <Image src="/assets/ention-logo.png" alt="Sitemark Logo" width={48} height={48} />
+              <span className="text-3xl font-extrabold text-[#0FAFCA] tracking-tight">Sitemark</span>
+            </div>
+            <div className="mb-10">
+              <div className="text-gray-500 text-lg">Total</div>
+              <div className="text-5xl font-extrabold text-gray-900 mb-4">$134.98</div>
+              <div className="flex flex-col gap-5">
+                <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
+                  <div>
+                    <div className="font-semibold text-gray-900">Professional plan</div>
+                    <div className="text-xs text-gray-500">Monthly subscription</div>
+                  </div>
+                  <div className="text-gray-900">$15.00</div>
+                </div>
+                <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
+                  <div>
+                    <div className="font-semibold text-gray-900">Dedicated support</div>
+                    <div className="text-xs text-gray-500">Included in the Professional plan</div>
+                  </div>
+                  <div className="text-green-600 font-semibold">Free</div>
+                </div>
+                <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
+                  <div>
+                    <div className="font-semibold text-gray-900">Hardware</div>
+                    <div className="text-xs text-gray-500">Devices needed for development</div>
+                  </div>
+                  <div className="text-gray-900">$69.99</div>
+                </div>
+                <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
+                  <div>
+                    <div className="font-semibold text-gray-900">Landing page template</div>
+                    <div className="text-xs text-gray-500">License</div>
+                  </div>
+                  <div className="text-gray-900">$49.99</div>
+                </div>
               </div>
-              <div className="flex justify-between font-bold text-base text-[#133B5C] mb-3">
-                <span>Total</span>
-                <span>₹{total.toLocaleString()}</span>
-              </div>
-              <button className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-2.5 rounded-xl shadow-lg text-base transition mb-1">Place Order</button>
-              <div className="text-xs text-cyan-600 text-center">By placing your order, you agree to ENTION's terms and conditions.</div>
             </div>
           </div>
+          <button
+            className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 rounded-xl shadow-lg text-lg transition mt-8"
+            onClick={() => setStep(step < 3 ? step + 1 : step)}
+          >
+            {step < 3 ? 'Next' : 'Place Order'}
+          </button>
         </aside>
       </div>
     </main>

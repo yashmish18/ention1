@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // Import background images
-import slide1Bg from "assets/aboutus_page/1.svg";
-import slide2Bg from "assets/aboutus_page/2.svg";
-import slide3Bg from "assets/aboutus_page/3.svg";
+import slide1Bg from "public/assets/aboutus_page/1.svg";
+import slide2Bg from "public/assets/aboutus_page/2.svg";
+import slide3Bg from "public/assets/aboutus_page/3.svg";
 
 const slides = [
   {

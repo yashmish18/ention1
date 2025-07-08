@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import computer1 from 'assets/Ention-Laptop-E3-Catalogue-design-2.png';
+import computer1 from 'public/assets/Ention-Laptop-E3-Catalogue-design-2.png';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const ImageSlider = () => {

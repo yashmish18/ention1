@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import logo from "assets/ention-logo.png";
+import logo from "public/assets/logo.png";
 import { IoMenu } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import { useRouter } from "next/router";
@@ -96,14 +96,15 @@ const Header = () => {
           <IoMenu />
         </button>
         {/* Centered logo */}
-        <Image
-          src={logo}
-          alt="ention-logo-mobile"
-          width={90}
-          height={90}
-          className="w-[90px] h-auto object-contain cursor-pointer"
-          onClick={() => router.push("/")}
-        />
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="ention-logo-mobile"
+            width={60}
+            height={60}
+            className="object-contain cursor-pointer"
+          />
+        </Link>
         {/* Cart icon on right */}
         <Link href="/ecommerce/cart" className="flex items-center">
           <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
@@ -130,14 +131,15 @@ const Header = () => {
         >
           Products
         </Link>
-        <Image
-          src={logo}
-          alt="ention-logo-desktop"
-          width={90}
-          height={90}
-          className="object-contain cursor-pointer"
-          onClick={() => router.push("/")}
-        />
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="ention-logo-desktop"
+            width={60}
+            height={60}
+            className="object-contain cursor-pointer"
+          />
+        </Link>
         <Link
           href="/about"
           className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
@@ -216,14 +218,15 @@ const Header = () => {
           <div className="fixed left-0 top-0 h-full min-h-screen w-[80vw] max-w-[340px] bg-white z-50 flex flex-col shadow-2xl rounded-r-2xl border-r border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out lg:hidden">
             {/* Header with logo and close button */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-              <Image
-                src={logo}
-                alt="ention-logo"
-                width={60}
-                height={40}
-                className="w-[60px] h-auto object-contain cursor-pointer text-black" style={{color: "black"}}
-                onClick={() => { setShowModal(false); router.push("/"); }}
-              />
+              <Link href="/">
+                <Image
+                  src={logo}
+                  alt="ention-logo"
+                  width={60}
+                  height={60}
+                  className="object-contain cursor-pointer"
+                />
+              </Link>
               <button
                 className="text-2xl text-gray-700 p-2 rounded-full hover:bg-gray-100 focus:outline-none"
                 onClick={() => setShowModal(false)}

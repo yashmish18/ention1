@@ -2,43 +2,39 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
-import logo from "assets/ention-logo.png";
+import logo from "public/assets/ention-logo.png";
 import Image from "next/image";
 
 const Footer = () => {
   const router = useRouter();
   return (
     <div
-      className="w-full lg:h-[350px] flex items-center p-6 min-[480px]:p-10"
+      className="w-full flex flex-col items-center p-6 min-[480px]:p-10 lg:h-[350px]"
       style={{ backgroundColor: "rgba(7, 13, 42, 1)" }}
     >
-      <div className="flex flex-col lg:flex-row items-center lg:items-start lg:h-full w-full gap-10 lg:gap-0 justify-between xl:justify-around">
-        <div className="flex flex-col justify-between items-center h-[160px] lg:h-[280px]">
-          <div className="flex flex-col items-center">
-            <Image
-              src={logo}
-              alt="ention-logo"
-              width={90}
-              height={40}
-              onClick={() => router.push("/")}
-              className="w-[90px] h-auto object-none cursor-pointer"
-            />
-            <div className="text-white font-bold text-lg">
-              Ention Technology and Services Pvt. Ltd.
-            </div>
-            <div className="text-white font-bold text-lg">
-              Ention Energy Pvt. Ltd.
-            </div>
+      <div className="flex flex-col w-full items-center lg:flex-row lg:items-start lg:justify-between xl:justify-around gap-8 lg:gap-0">
+        {/* Logo and Company Info */}
+        <div className="flex flex-col items-center gap-4 lg:justify-between lg:items-center lg:h-[280px]">
+          <Image
+            src={logo}
+            alt="ention-logo"
+            width={100}
+            height={100}
+            onClick={() => router.push("/")}
+            className="w-[100px] h-[100px] object-contain cursor-pointer mb-2"
+          />
+          <div className="text-white font-bold text-base text-center leading-tight">
+            Ention Technology and Services Pvt. Ltd.<br />
+            Ention Energy Pvt. Ltd.
           </div>
-
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-6 mt-2">
             <Link
               href="https://www.instagram.com/entiontech/"
               target="_blank"
               rel="noopenner noreferrer"
               className="select-none "
             >
-              <BsInstagram color="#FFFFFF" size={16} />
+              <BsInstagram color="#FFFFFF" size={18} />
             </Link>
             <Link
               href="https://x.com/EntionTech"
@@ -46,7 +42,7 @@ const Footer = () => {
               rel="noopenner noreferrer"
               className="select-none "
             >
-              <BsTwitter color="#FFFFFF" size={16} />
+              <BsTwitter color="#FFFFFF" size={18} />
             </Link>
             <Link
               href="https://www.linkedin.com/company/entiontechnology/"
@@ -54,110 +50,44 @@ const Footer = () => {
               rel="noopenner noreferrer"
               className="select-none "
             >
-              <BsLinkedin color="#FFFFFF" size={16} />
+              <BsLinkedin color="#FFFFFF" size={18} />
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-2 md:flex gap-16 xl:gap-24">
-          <div className="flex flex-col gap-4">
-            <p className="text-white text-base">Product</p>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Features
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Integrations
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Download
-            </Link>
+        {/* Divider for mobile */}
+        <div className="w-full h-px bg-white/10 my-6 block lg:hidden" />
+        {/* Links Section: On mobile, each section is stacked vertically with label above links; on desktop, columns */}
+        <div className="flex flex-col w-full items-center gap-4 lg:grid lg:grid-cols-3 lg:gap-16 xl:gap-24 lg:w-auto lg:items-start">
+          {/* Product Section */}
+          <div className="flex flex-col items-center w-full mb-2 lg:flex-col lg:items-center lg:gap-2">
+            <p className="text-white text-base font-bold mb-2 lg:mb-1 lg:text-center">Product</p>
+            <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-1 lg:flex-col lg:gap-0 lg:items-center">
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Features</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Integrations</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Pricing</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Download</Link>
+            </div>
           </div>
-          <div className="flex flex-col gap-4">
-            <p className="text-white text-base">Company</p>
-            <Link
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-              href="/about"
-            >
-              About us
-            </Link>
-            <Link
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-              href="/blogs"
-            >
-              Blog
-            </Link>
-            <Link
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              href="/career"
-            >
-              Career
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Brand
-            </Link>
+          {/* Company Section */}
+          <div className="flex flex-col items-center w-full mb-2 lg:flex-col lg:items-center lg:gap-2">
+            <p className="text-white text-base font-bold mb-2 lg:mb-1 lg:text-center">Company</p>
+            <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-1 lg:flex-col lg:gap-0 lg:items-center">
+              <Link className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5" href="/about">About us</Link>
+              <Link className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5" href="/blogs">Blog</Link>
+              <Link className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5" href="/career">Career</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Brand</Link>
+            </div>
           </div>
-
-          <div className="flex flex-col gap-4">
-            <p className="text-white text-base">Resources</p>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Startup Program
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Community
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Contact
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/"
-              className="text-[#969799] text-base select-none cursor-pointer hover:text-white whitespace-nowrap"
-              rel="noopenner noreferrer"
-            >
-              Terms of service
-            </Link>
+          {/* Resources Section */}
+          <div className="flex flex-col items-center w-full mb-2 lg:flex-col lg:items-center lg:gap-2">
+            <p className="text-white text-base font-bold mb-2 lg:mb-1 lg:text-center">Resources</p>
+            <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-1 lg:flex-col lg:gap-0 lg:items-center">
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Startup Program</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Community</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Contact</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Privacy Policy</Link>
+              <Link href="/" className="text-[#969799] text-base py-1 px-2 rounded select-none cursor-pointer hover:text-white whitespace-nowrap hover:bg-white/5 transition lg:w-full lg:text-left lg:hover:bg-white/5">Terms of service</Link>
+            </div>
           </div>
         </div>
       </div>

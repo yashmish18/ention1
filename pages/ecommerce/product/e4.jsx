@@ -6,7 +6,7 @@ import Footer from "components/layout/footer";
 import Header from "components/layout/header";
 import { Zoom } from "react-awesome-reveal";
 import dynamic from 'next/dynamic';
-import gradientbg1 from "assets/gradient-bg1.png";
+import gradientbg1 from "/public/assets/gradient-bg1.png";
 import ImageCaraousel from "components/ImageCaraousel";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
@@ -76,13 +76,65 @@ export default function E4ProductPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] text-white pt-24 md:pt-32 pb-24">
       {/* Tab Navigation Bar */}
-      <nav className="w-full flex justify-start items-center mb-4 mt-24 ml-10" style={{background: 'none'}}>
-        <div className="flex flex-row gap-6 max-w-4xl items-center" style={{width: '100%'}}>
-          <a href="#techspecs" className="text-white font-medium text-sm hover:underline transition" style={{background: 'none', border: 'none'}}>Technical Specifications</a>
-          <a href="#features" className="text-white font-medium text-sm hover:underline transition" style={{background: 'none', border: 'none'}}>Features & Design</a>
-          <a href="#video" className="text-white font-medium text-sm hover:underline transition" style={{background: 'none', border: 'none'}}>Product Video</a>
-          <a href="#compliance" className="text-white font-medium text-sm hover:underline transition" style={{background: 'none', border: 'none'}}>Regulatory Product Compliance</a>
-          <a href="#reviews" className="text-white font-medium text-sm hover:underline transition" style={{background: 'none', border: 'none'}}>Customer Review</a>
+      <nav className="w-full flex flex-col md:flex-row justify-start items-center ml-0 md:ml-4 mb-4 mt-24 gap-2">
+        {/* Mobile: Two separate rows with backgrounds */}
+        <div className="flex flex-col w-full md:hidden gap-2">
+          {/* First row: first three tabs */}
+          <div className="flex flex-row justify-between items-center bg-white/20 rounded-md px-2 py-2 shadow-lg w-full">
+            {[
+              { href: '#techspecs', label: 'Technical Specifications' },
+              { href: '#features', label: 'Features & Design' },
+              { href: '#video', label: 'Product Video' },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-white font-semibold text-base flex-1 text-center py-2 px-2 hover:text-cyan-300 transition-colors"
+                style={{ background: 'none', border: 'none' }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+          {/* Second row: last two tabs */}
+          <div className="flex flex-row justify-between items-center bg-white/20 rounded-md px-2 py-2 shadow-lg w-full">
+            {[
+              { href: '#compliance', label: 'Regulatory Product Compliance' },
+              { href: '#reviews', label: 'Customer Review' },
+            ].map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-white font-semibold text-base flex-1 text-center py-2 px-2 hover:text-cyan-300 transition-colors"
+                style={{ background: 'none', border: 'none' }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+        {/* Desktop: original layout */}
+        <div className="hidden md:flex flex-row justify-between items-center max-w-5xl w-full bg-white/20 rounded-md px-4 py-4 shadow-lg gap-x-0">
+          {[
+            { href: '#techspecs', label: 'Technical Specifications' },
+            { href: '#features', label: 'Features & Design' },
+            { href: '#video', label: 'Product Video' },
+            { href: '#compliance', label: 'Regulatory Product Compliance' },
+            { href: '#reviews', label: 'Customer Review' },
+          ].map((item, idx, arr) => (
+            <React.Fragment key={item.href}>
+              <a
+                href={item.href}
+                className="text-white font-semibold text-base flex-1 text-center py-2 px-4 hover:text-cyan-300 transition-colors"
+                style={{ background: 'none', border: 'none' }}
+              >
+                {item.label}
+              </a>
+              {idx < arr.length - 1 && (
+                <span className="inline-block w-[2px] h-8 bg-white/70 mx-6 align-middle"></span>
+              )}
+            </React.Fragment>
+          ))}
         </div>
       </nav>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 py-12 px-4">
@@ -239,101 +291,172 @@ export default function E4ProductPage() {
       {/* Tech Specs */}
       <section className="max-w-6xl mx-auto mt-12 px-4">
         <h2 className="text-2xl font-bold mb-6">Technical Specifications</h2>
-        <div className="rounded-2xl bg-white/10 backdrop-blur-sm border border-[#0FAFCA] p-6 overflow-x-auto shadow-xl">
+        {/* Mobile: 2-column grid */}
+        <div className="block md:hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white p-4 shadow-xl">
+          <div className="grid grid-cols-2 gap-0 border border-white/30 rounded overflow-hidden">
+            {/* Each pair: label/value */}
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Colour</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">sliver</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Power</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">DC 12V</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Display</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">15.6inch, Full HD 1920*1080 IPS 16:9 ratio</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Battery</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">5000mah</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Processor</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">intel N95 up to 3.4GHz with Turbo boost</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">RJ45</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">yes</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Core, threads, Cache</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">4core, 4 threads, 6MB cache</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Memory card reader</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">yes, SD card upto 128Gb</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Graphic</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">intel UHD graphics 1.20Ghz</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Earphone port</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">3.5mm standard headphone jack</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Fingerprint reader</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">yes, on touch pad</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Mic</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">Built in Analog microphone</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Operating system</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">window 11</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Speaker</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">front facing Built in stereo speaker 1.0W*2</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">MS office</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">yes, 365</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Webcam</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">2.0Mega+DMIC, with Privcay sutter</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">USB</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">3 port of USB 3.0, type C(Data+DP)</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Touchpad</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">Yes, extra large</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">HDMI</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">HDMI A type</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Keyboard</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">US, Round with Backlight & Square with Backlight</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Product Dimension and weight</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">357.4*228*19 mm, 1.68kg</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Included in Box</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">Laptop, Power Cord, Adapter, User Manual</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Covered in warranty</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">Manufacturing Defects, Physical Damage not covered.</div>
+            <div className="font-bold text-white bg-[#0FAFCA]/10 p-2 border-b border-r border-white/30">Manufactured by</div>
+            <div className="text-white bg-[#0FAFCA]/5 p-2 border-b border-white/30">Ention, Made in India.</div>
+          </div>
+        </div>
+        {/* Desktop: Table */}
+        <div className="hidden md:block rounded-2xl bg-white/10 backdrop-blur-sm border border-white p-6 overflow-x-auto shadow-xl">
           <table className="w-full text-white text-base border-separate border-spacing-0">
+            <colgroup>
+              <col />
+              <col />
+              <col className="vertical-divider" />
+              <col />
+            </colgroup>
             <tbody>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Colour</td>
                 <td className="border border-white/30 px-4 py-2">sliver</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Power</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Power</td>
                 <td className="border border-white/30 px-4 py-2">DC 12V</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Display</td>
                 <td className="border border-white/30 px-4 py-2">15.6inch, Full HD 1920*1080 IPS 16:9 ratio</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Battery</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Battery</td>
                 <td className="border border-white/30 px-4 py-2">5000mah</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Processor</td>
                 <td className="border border-white/30 px-4 py-2">intel N95 up to 3.4GHz with Turbo boost</td>
-                <td className="font-bold border border-white/30 px-4 py-2">RJ45</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">RJ45</td>
                 <td className="border border-white/30 px-4 py-2">yes</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Core, threads, Cache</td>
                 <td className="border border-white/30 px-4 py-2">4core, 4 threads, 6MB cache</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Memory card reader</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Memory card reader</td>
                 <td className="border border-white/30 px-4 py-2">yes, SD card upto 128Gb</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Graphic</td>
                 <td className="border border-white/30 px-4 py-2">intel UHD graphics 1.20Ghz</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Earphone port</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Earphone port</td>
                 <td className="border border-white/30 px-4 py-2">3.5mm standard headphone jack</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Fingerprint reader</td>
                 <td className="border border-white/30 px-4 py-2">yes, on touch pad</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Mic</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Mic</td>
                 <td className="border border-white/30 px-4 py-2">Built in Analog microphone</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Operating system</td>
                 <td className="border border-white/30 px-4 py-2">window 11</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Speaker</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Speaker</td>
                 <td className="border border-white/30 px-4 py-2">front facing Built in stereo speaker 1.0W*2</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">MS office</td>
                 <td className="border border-white/30 px-4 py-2">yes, 365</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Webcam</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Webcam</td>
                 <td className="border border-white/30 px-4 py-2">2.0Mega+DMIC, with Privcay sutter</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">USB</td>
                 <td className="border border-white/30 px-4 py-2">3 port of USB 3.0, type C(Data+DP)</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Touchpad</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Touchpad</td>
                 <td className="border border-white/30 px-4 py-2">Yes, extra large</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">HDMI</td>
                 <td className="border border-white/30 px-4 py-2">HDMI A type</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Keyboard</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Keyboard</td>
                 <td className="border border-white/30 px-4 py-2">US, Round with Backlight & Square with Backlight</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Product Dimension and weight</td>
                 <td className="border border-white/30 px-4 py-2">357.4*228*19 mm, 1.68kg</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Included in Box</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Included in Box</td>
                 <td className="border border-white/30 px-4 py-2">Laptop, Power Cord, Adapter, User Manual</td>
               </tr>
               <tr>
                 <td className="font-bold border border-white/30 px-4 py-2">Covered in warranty</td>
                 <td className="border border-white/30 px-4 py-2">Manufacturing Defects, Physical Damage not covered.</td>
-                <td className="font-bold border border-white/30 px-4 py-2">Manufactured by</td>
+                <td className="font-bold border border-white/30 vertical-divider px-4 py-2">Manufactured by</td>
                 <td className="border border-white/30 px-4 py-2">Ention, Made in India.</td>
               </tr>
             </tbody>
           </table>
         </div>
+        <style jsx>{`
+          .vertical-divider {
+            border-left: 2px solid rgba(255,255,255,0.6) !important;
+            position: relative;
+            z-index: 2;
+            background-clip: padding-box;
+          }
+        `}</style>
       </section>
       {/* Video Section: Product Video */}
-      <section className="max-w-6xl mx-auto mt-12 px-4">
+      <section className="max-w-7xl mx-auto mt-24 mb-24 px-4">
         <div className="flex justify-center items-center w-full">
-          <video
-            src="/assets/product_/e5/feature_images/e5_video.mp4"
-            controls
-            className="rounded-xl shadow-lg w-full max-w-3xl bg-black"
-            style={{ minHeight: '320px' }}
-          >
-            Your browser does not support the video tag.
-          </video>
+          <div className="w-full max-w-lg md:max-w-7xl aspect-video rounded-xl overflow-hidden bg-black">
+            <video
+              src="/assets/product_/e5/feature_images/e5_video.mp4"
+              controls
+              className="w-full h-full object-cover rounded-xl shadow-lg bg-black"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </section>
       {/* Features & Design */}
       <section className="max-w-6xl mx-auto mt-12 px-4">
-        <h2 className="text-2xl font-bold mb-6">Features & Design</h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-3 mt-20 text-white">Features & Design</h2>
+        <div className="w-80 h-1 bg-white rounded-full mb-8"></div>
         {/* Row 1: Image Left, Text and Image Right Row */}
         <div className="flex flex-col mt-4 md:flex-row bg-[#18408b] rounded-xl overflow-hidden items-center" style={{ height: '320px' }}>
           <div

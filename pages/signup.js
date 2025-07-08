@@ -1,16 +1,18 @@
 import React, { useRef, useState } from 'react'
-import { Navbar } from '../components/index'
+import Navbar from '../components/layout/header.js';
 import { signIn, useSession, getSession } from "next-auth/react";
 import styles from 'styles/Products.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import hero from 'assets/Group 2069.png'
-import hero1 from 'assets/Group 2070.png'
+import hero from 'public/assets/Group 2069.png'
+import hero1 from 'public/assets/Group 2070.png'
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import {FcGoogle} from 'react-icons/fc';
 import {FiEye, FiEyeOff} from 'react-icons/fi';
 import { FaLinkedinIn } from 'react-icons/fa';
+import bg1 from 'public/assets/Group 2069.png';
+import bg2 from 'public/assets/Group 2070.png';
 
 const Signup = () => {
 
@@ -67,14 +69,47 @@ const Signup = () => {
 
 
     return (
-        <main className={'main overflow-x-hidden relative'}>
-            
-            <div className='w-full lg:w-[90%] h-full mx-auto md:flex items-center justify-center pt-0 md:pt-20 px-6 md:px-10 md:px-0'>
-                <div className='hidden md:block w-[30%] '>
-                    <Image src={hero1} alt="/">
-                    </Image>
+        <main className={'main overflow-x-hidden relative min-h-screen flex items-center justify-center bg-[#0a192f] space-y-32'}>
+            {/* Background images */}
+            <Image src={bg1} alt="bg1" className="pointer-events-none select-none opacity-30 absolute top-0 left-0 w-1/2 max-w-[600px] z-0" style={{objectFit:'contain'}} />
+            <Image src={bg2} alt="bg2" className="pointer-events-none select-none opacity-30 absolute bottom-0 right-0 w-1/2 max-w-[600px] z-0" style={{objectFit:'contain'}} />
+            <div className='relative z-10 w-full max-w-4xl flex flex-col md:flex-row items-stretch justify-center bg-white rounded-3xl shadow-2xl overflow-hidden'>
+                {/* Feature/Marketing Panel (Left) */}
+                <div className='flex-1 flex flex-col justify-center items-start bg-transparent p-8 md:p-12 min-w-[260px]'>
+                    <h2 className='text-2xl font-bold text-cyan-600 mb-6'>Sitemark</h2>
+                    <div className='flex flex-col gap-6 text-[#222]'>
+                        <div className='flex items-start gap-3'>
+                            <span className='text-2xl mt-1'>⚙️</span>
+                            <div>
+                                <div className='font-bold text-lg'>Adaptable performance</div>
+                                <div className='text-base opacity-80'>Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.</div>
+                            </div>
+                        </div>
+                        <div className='flex items-start gap-3'>
+                            <span className='text-2xl mt-1'>🛠️</span>
+                            <div>
+                                <div className='font-bold text-lg'>Built to last</div>
+                                <div className='text-base opacity-80'>Experience unmatched durability that goes above and beyond with lasting investment.</div>
+                            </div>
+                        </div>
+                        <div className='flex items-start gap-3'>
+                            <span className='text-2xl mt-1'>👍</span>
+                            <div>
+                                <div className='font-bold text-lg'>Great user experience</div>
+                                <div className='text-base opacity-80'>Integrate our product into your routine with an intuitive and easy-to-use interface.</div>
+                            </div>
+                        </div>
+                        <div className='flex items-start gap-3'>
+                            <span className='text-2xl mt-1'>✏️</span>
+                            <div>
+                                <div className='font-bold text-lg'>Innovative functionality</div>
+                                <div className='text-base opacity-80'>Stay ahead with features that set new standards, addressing your evolving needs better than the rest.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className='w-full md:w-[50%] lg:w-[30%] flex justify-center items-center py-10 md:py-0'>
+                {/* Signup Form (Right) */}
+                <div className='flex-1 flex justify-center items-center bg-white p-8 md:p-12 min-w-[260px]'>
                     <form onSubmit={handleSubmit} ref={form} className='login-form w-full max-w-md bg-white backdrop-blur-md border border-[#007E9E] shadow-2xl rounded-3xl px-10 py-12 flex flex-col gap-7'>
                         <div className="flex w-full justify-between mb-2">
                             <Link href="/login">
@@ -154,12 +189,7 @@ const Signup = () => {
                         </div>
                     </form>
                 </div>
-                <div className='hidden md:block w-[30%] px-0 md:px-0'>
-                    <Image src={hero} alt="/">
-                    </Image>
-                </div>
             </div>
-            <hr className="w-[80%] text-[#D9D9D9] mx-auto  mt-2 mb-20"></hr>
         </main>
     )
 }

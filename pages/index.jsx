@@ -1,21 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
-import gradientbg1 from "assets/gradient-bg1.png";
-import gradientbg2 from "assets/gradient-bg2.png";
-import marketpc from "assets/market-pc.png";
-import ellipsemd from "assets/ellipse-gradient-md.png";
-import intelprocessor from "assets/Intel-Core-X-Series-2-Custom-1000x711-1.png";
-import amdprocessor from "assets/amd-1.png";
-import corei5 from "assets/i5.png";
-import corei7 from "assets/i7.png";
-import corei9 from "assets/i9.png";
-import nvidia from "assets/nvidia-3060-logo-lrg_2.jpg";
-import amd5 from "assets/amd-ryzen-5-logo.png";
-import amd7 from "assets/AMD-Ryzen-7-Category.png";
-import swapbook from "assets/swapbook.png";
-import lappy from "assets/lappy.png";
-import board from "assets/board.png";
-import warrantyimg from "assets/ds.png";
-import ProcessorCard from "components/ProcessorCard";
+import gradientbg1 from "/public/assets/gradient-bg1.png";
+import gradientbg2 from "/public/assets/gradient-bg2.png";
+import marketpc from "/public/assets/market-pc.png";
+import ellipsemd from "/public/assets/ellipse-gradient-md.png";
+
+import lappy from "/public/assets/lappy.png";
+
+import warrantyimg from "/public/assets/ds.png";
+
 import CheckIcon from "components/icons/check";
 import SimpleSlider from "./slider";
 import { Zoom } from "react-awesome-reveal";
@@ -29,7 +21,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { FiSettings, FiDollarSign, FiShield, FiZap } from 'react-icons/fi';
 import { BsFlag } from 'react-icons/bs';
-import CircularCardCarousel from "../components/CircularCardCarousel";
+import Link from "next/link";
+import ProductImageCarouselMobile from "components/ProductImageCarouselMobile";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+
 
 const IMAGES = [marketpc, marketpc, marketpc];
 
@@ -60,6 +56,7 @@ export default function Home() {
   const [direction, setDirection] = useState(null); // Track direction for smooth transition
   const [isTransitioning, setIsTransitioning] = useState(false); // Track if transition is in progress
   const router = useRouter();
+  const mobileSwiperRef = useRef(null);
 
   // Handle next image action
   const nextImage = () => {
@@ -103,7 +100,7 @@ export default function Home() {
     <>
       <main className={"main overflow-x-hidden relative z-0 w-full"}>
         <div
-          className=" flex flex-col -z-10"
+          className="flex flex-col -z-10"
           style={{
             backgroundImage: `url(${gradientbg1.src})`,
             backgroundSize: "100% 100%",
@@ -180,162 +177,77 @@ export default function Home() {
             </BlurInText>
           </div>
           <div className="h-[100px]"></div>
-          <div className="flex justify-center">
-            <div className="w-[95%]">
-              <IntelCarousel />
-            </div>
-          </div>
+          <div className="hidden md:block w-[95%] mx-auto"><IntelCarousel /></div>
+          <div className="block md:hidden w-full"><ProductImageCarouselMobile /></div>
           <div className="w-full flex justify-center mt-24">
-            <BlurInText>
+            <BlurInText className="hidden md:block">
               <p className="text-white text-2xl md:text-4xl lg:text-[32px] font-bold text-center max-w-4xl leading-snug">
                 Get ready to experience a mesmerizing journey of performance and style with the Ention Workbook series<br />
                 <span className="text-[#01E9FE] font-bold">proudly Made in India to empower.</span>
               </p>
             </BlurInText>
-          </div>
-
-          {/* For You Section */}
-          
-            <div className="flex flex-col md:flex-row gap-8 w-full justify-center mt-24">
-              {/* Card 1: For Students */}
-              <div className="bg-[#1A2233] flex flex-col justify-between w-full max-w-xl p-4 shadow-lg border border-[#2d3748] py-8">
-                <div className="text-white text-xl font-bold mb-2 text-left">For Students</div>
-                <div className="flex flex-row gap-4 items-center flex-1">
-                  <img src="/assets/0N1A1389.png" alt="For Students" className="w-52 h-48 object-contain" />
-                  <div className="text-white text-xl text-left opacity-90 flex-1">Affordable, Lightweight, durable, and built to support your learning on the go.</div>
-                </div>
-                <button className="bg-[#01E9FE] hover:bg-[#00bcd4] text-black font-semibold py-1 px-4 rounded transition-all duration-300 text-sm w-fit mt-4 self-start">
-                  Shop Now →
-                </button>
-              </div>
-              {/* Card 2: For Professionals & Techies */}
-              <div className="bg-[#1A2233] flex flex-col items-center w-full max-w-sm p-4 shadow-lg border border-[#2d3748]">
-                <div className="text-white text-xl font-bold mb-2 text-center">For Professionals & Techies</div>
-                <img src="/assets/0N1A1389.png" alt="For Professionals & Techies" className="w-52 h-48 object-contain mb-3" />
-                <div className="text-white text-lg mb-3 text-center opacity-90">Customizable, seamlessly switch from work tasks to meetings with reliable performance. A powerful and customizable machine ready to take on your code, design, or research.</div>
-                <button className="w-full bg-[#01E9FE] hover:bg-[#00bcd4] text-black font-semibold py-1 rounded transition-all duration-300 text-sm">
-                  Shop Now →
-                </button>
-              </div>
+            {/* Mobile Only: Hero Text */}
+            <div className="block md:hidden w-full flex justify-center mt-8 px-4">
+              <p className="text-white text-lg font-bold text-center leading-snug">
+                Get ready to experience a mesmerizing journey<br />
+                of performance and style with the<br />
+                Ention Workbook series<br />
+                <span className="text-[#01E9FE] font-bold block mt-2">
+                  proudly Made in India to empower.
+                </span>
+              </p>
             </div>
           </div>
 
-          {/* Why Choose Ention Workbook Series Section */}
-          <div className="w-full flex flex-col items-center mt-16 py-12">
+          {/* Why Choose Ention Workbook Series Section - Icons Above Text, Single Separator Line */}
+          <div className="w-full flex flex-col items-center mt-16 py-12 relative">
             <div className="w-full max-w-6xl px-4">
               <h2 className="text-white text-3xl md:text-4xl font-extrabold mb-2 text-center">Why Choose Ention Workbook Series?</h2>
-              <p className="text-white text-lg opacity-80 mb-8 text-center">From customization to performance, discover what makes Ention Workbook Series the right choice for you.</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
-                  <FiSettings className="text-cyan-400 mb-3" size={36} />
-                  <span className="text-white text-base font-semibold text-center">Customizable</span>
-                </div>
-                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
-                  <FiDollarSign className="text-cyan-400 mb-3" size={36} />
-                  <span className="text-white text-base font-semibold text-center">Affordable Without Compromise</span>
-                </div>
-                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
-                  <FiShield className="text-cyan-400 mb-3" size={36} />
-                  <span className="text-white text-base font-semibold text-center">18-Month On-Site Warranty</span>
-                </div>
-                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
-                  <BsFlag className="text-cyan-400 mb-3" size={36} />
-                  <span className="text-white text-base font-semibold text-center">Made in India. Made for You.</span>
-                </div>
-                <div className="bg-white/10 rounded-lg flex flex-col items-center justify-center p-6 min-h-[140px] border border-[#01E9FE]">
-                  <FiZap className="text-cyan-400 mb-3" size={36} />
-                  <span className="text-white text-base font-semibold text-center">Performance That Powers You</span>
-                </div>
-              </div>
-            </div>
-          
-
-          {/*
-          <FadeUpAnimate spaceToMove={50}>
-            <div className="w-full flex  justify-center mt-32">
-              <button
-                onClick={navigateToProductPage}
-                className="text-white rounded-[30px] text-[20px] xl:text-[25px] flex items-center justify-center w-[160px] h-[40px] md:w-[220px] md:h-[50px] xl:w-[253px] xl:h-[68px] bg-[#070D2A] hover:bg-[#273dac] transition-all duration-300 ease-in-out"
-              >
-                Buy Now
-              </button>
-            </div>
-          </FadeUpAnimate>
-
-          {/*
-            CPU Cards Section (High Performance Power house with Intel/AMD cards) commented out for future use
-            <div className="w-full flex justify-center">
-              <div className="flex flex-col items-center w-full mt-16">
-                <FadeUpAnimate spaceToMove={50} duration={1}>
-                  <div className="flex flex-col items-center">
-                    <p className="text-white text-2xl md:text-4xl lg:text-[56px] font-bold md:whitespace-nowrap text-center">
-                      High Performance Power house
-                    </p>
-                    <p className="text-white text-xl md:text-2xl lg:text-4xl mt-4 lg:mt-8 md:whitespace-nowrap text-center">
-                      Ention
-                      <span
-                        className="font-thin"
-                        style={{
-                          position: "relative",
-                          top: "-5px",
-                          fontSize: "25px",
-                        }}
-                      >
-                        &reg;
-                      </span>{" "}
-                      Laptop equipped with latest generation Processor
-                    </p>
-                  </div>
-                </FadeUpAnimate>
-                <div className="w-[80%] sm:w-full h-full lg:mt-5 relative z-[0]">
-                  <div
-                    className="w-full h-full absolute opacity-10"
-                    style={{
-                      backgroundImage: `url(${board.src})`,
-                      backgroundSize: "35%",
-                    }}
-                  ></div>
-
-                  <div className="mt-16 w-full h-full md:h-[700px] flex md:flex-row flex-col items-center md:items-start justify-center gap-6 md:gap-10 lg:gap-20 relative z-[1]">
-                    <FadeUpAnimate spaceToMove={200}>
-                      <ProcessorCard
-                        img={intelprocessor}
-                        title={
-                          <>
-                            <b>Intel</b> Family Processor
-                          </>
-                        }
-                        content={
-                          "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
-                        }
-                      />
-                    </FadeUpAnimate>
-                    <FadeUpAnimate spaceToMove={400} duration={0.7}>
-                      <ProcessorCard
-                        img={amdprocessor}
-                        title={
-                          <>
-                            <b>AMD</b> Series Processor
-                          </>
-                        }
-                        content={
-                          "The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs."
-                        }
-                      />
-                    </FadeUpAnimate>
-                  </div>
+              <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto mb-6"></div>
+              <p className="text-white text-lg opacity-80 mb-12 text-center">From customization to performance, discover what makes Ention Workbook Series the right choice for you.</p>
+              {/* Icon+Text Columns with Separator Line */}
+              <div className="relative w-full">
+                {/* Separator Line */}
+                <div className="absolute left-0 right-0 mx-auto w-full h-1 bg-gradient-to-r from-cyan-400/30 via-white/10 to-blue-500/30" style={{ top: '56px', zIndex: 1 }} />
+                <div className="grid grid-cols-2 md:flex md:flex-row items-start justify-center gap-8 md:gap-12 w-full">
+                  {[
+                    {
+                      icon: <Image src="/assets/banner/warranty icon.png" alt="Customizable" width={56} height={56} className="mx-auto" />, 
+                      title: "Customizable",
+                      desc: "Configure your device to match your needs."
+                    },
+                    {
+                      icon: <Image src="/assets/banner/affordable icon.webp" alt="Affordable Without Compromise" width={56} height={56} className="mx-auto" />, 
+                      title: "Affordable Without Compromise",
+                      desc: "Get premium features at a fair price."
+                    },
+                    {
+                      icon: <Image src="/assets/banner/warranty icon.png" alt="18-Month On-Site Warranty" width={56} height={56} className="mx-auto" />, 
+                      title: "18-Month On-Site Warranty",
+                      desc: "Enjoy peace of mind with extended support."
+                    },
+                    {
+                      icon: <Image src="/assets/banner/made in india icon.webp" alt="Made in India. Made for You." width={56} height={56} className="mx-auto" />, 
+                      title: "Made in India. Made for You.",
+                      desc: "Proudly designed and built in India."
+                    },
+                    {
+                      icon: <Image src="/assets/banner/c.webp" alt="Performance That Powers You" width={56} height={56} className="mx-auto" />, 
+                      title: "Performance That Powers You",
+                      desc: "Experience speed and reliability every day."
+                    },
+                  ].map((step, idx) => (
+                    <div key={idx} className="flex flex-col items-center w-full md:w-auto relative" style={{ zIndex: 2 }}>
+                      <div className="mb-4" style={{ marginBottom: 32 }}>{step.icon}</div>
+                      <div className="mt-8 text-white text-lg md:text-xl font-bold text-center max-w-[180px] leading-tight mb-2">{step.title}</div>
+                      <div className="text-cyan-100 text-base text-center max-w-[200px] leading-snug">{step.desc}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          */}
-        </div>
-        <div
-          className=" flex flex-col -z-10"
-          style={{
-            backgroundImage: `url(${gradientbg1.src})`,
-            backgroundSize: "100% 100%",
-          }}
-        >
+          </div>
+        
           {/* Warranty Card */}
           <FadeUpAnimate spaceToMove={100}>
             <div className="w-full flex justify-center mt-24">
@@ -388,58 +300,73 @@ export default function Home() {
               </div>
             </div>
           </Zoom>
-          {/* Workbook series  */}
-          <div className="w-full flex flex-col items-center relative mt-24">
-            <CircularCardCarousel />
-            {/* Modern 2-column hero section with neumorphism cards, no blobs or glows */}
-            <div className="relative w-full min-h-[520px] flex items-center justify-center py-12 px-2 md:px-8 overflow-hidden mt-24">
-              <div className="relative w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center z-10">
-                {/* Left: Logo only */}
-                <div className="flex flex-col items-center justify-center md:justify-center mt-24">
-                  <div className="relative flex items-center justify-center">
-                    <img src="/assets/ention-logo.png" alt="Ention Logo" className="object-contain w-[160px] h-[160px] z-10 relative" />
-                  </div>
-                </div>
-                {/* Right: Heading + Cards */}
-                <div className="flex flex-col items-center md:items-start gap-8 w-full">
-                  {/* Headline with accent */}
-                  <div className="text-center md:text-left mt-24">
-                    <h2 className="text-2xl md:text-4xl font-bold text-white leading-tight">
-                      We're not just present online, we're present across <span className="text-[#01E9FE] font-extrabold">India</span>.<br />
-                      Wherever you are, <span className="text-[#01E9FE] font-extrabold">Ention</span> is within reach.
-                    </h2>
-                    <div className="text-cyan-200 text-lg mt-2 font-medium opacity-80">Your trusted technology partner, everywhere you go.</div>
-                  </div>
-                  {/* Neumorphism Cards */}
-                  <div className="w-full grid grid-cols-1 gap-6 mt-2 sm:grid-cols-1">
-                    {/* Card 1 */}
-                    <div className="group bg-[#162032]/80 border border-[#01E9FE] text-white px-8 py-6 flex items-start gap-4 rounded-xl shadow-[8px_8px_24px_0_rgba(10,20,40,0.25),-8px_-8px_24px_0_rgba(60,120,180,0.08)] transition-all duration-200 hover:scale-[1.03] hover:border-cyan-300">
-                      <span className="text-3xl md:text-4xl mt-1">🛒</span>
-                      <div>
-                        <div className="text-lg md:text-xl font-bold">Available on leading e-commerce platforms</div>
-                        <div className="text-base text-cyan-100 mt-1">Find Ention products on top online marketplaces for your convenience and trust.</div>
-                      </div>
-                    </div>
-                    {/* Card 2 */}
-                    <div className="group bg-[#162032]/80 border border-[#01E9FE] text-white px-8 py-6 flex items-start gap-4 rounded-xl shadow-[8px_8px_24px_0_rgba(10,20,40,0.25),-8px_-8px_24px_0_rgba(60,120,180,0.08)] transition-all duration-200 hover:scale-[1.03] hover:border-cyan-300">
-                      <span className="text-3xl md:text-4xl mt-1">🌐</span>
-                      <div>
-                        <div className="text-lg md:text-xl font-bold">Buy directly from our official website</div>
-                        <div className="text-base text-cyan-100 mt-1">Order with confidence and enjoy exclusive deals and support from Ention.com.</div>
-                      </div>
-                    </div>
-                    {/* Card 3 */}
-                    <div className="group bg-[#162032]/80 border border-[#01E9FE] text-white px-8 py-6 flex items-start gap-4 rounded-xl shadow-[8px_8px_24px_0_rgba(10,20,40,0.25),-8px_-8px_24px_0_rgba(60,120,180,0.08)] transition-all duration-200 hover:scale-[1.03] hover:border-cyan-300">
-                      <span className="text-3xl md:text-4xl mt-1">🎓</span>
-                      <div>
-                        <div className="text-lg md:text-xl font-bold">Join us through exclusive University Campus Programs</div>
-                        <div className="text-base text-cyan-100 mt-1">Participate in our campus initiatives and get hands-on with Ention technology at your university.</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+          {/* Three Images, Center Image Overflow - Modern Static Layout */}
+          <div className="hidden md:flex w-full flex-col items-center justify-center py-24 relative">
+            <div className="flex flex-row items-end justify-center gap-4 md:gap-12 w-full max-w-5xl">
+              {/* Left Image */}
+              <img
+                src="/assets/0N1A1389.png"
+                alt="Ention Laptop Left"
+                className="w-[220px] md:w-[280px] xl:w-[320px] drop-shadow-2xl transition-all duration-500"
+                style={{ zIndex: 1, filter: 'drop-shadow(0 8px 32px #01e9fe88)' }}
+              />
+              {/* Center Image (overflow/pop out) */}
+              <img
+                src="/assets/0N1A1389.png"
+                alt="Ention Laptop Center"
+                className="w-[270px] md:w-[350px] xl:w-[420px] drop-shadow-2xl transition-all duration-500 scale-110 md:scale-125 relative -mb-8 md:-mb-16 z-20"
+                style={{ filter: 'drop-shadow(0 12px 48px #01e9fecc)' }}
+              />
+              {/* Right Image */}
+              <img
+                src="/assets/0N1A1389.png"
+                alt="Ention Laptop Right"
+                className="w-[220px] md:w-[280px] xl:w-[320px] drop-shadow-2xl transition-all duration-500"
+                style={{ zIndex: 1, filter: 'drop-shadow(0 8px 32px #01e9fe88)' }}
+              />
             </div>
+          </div>
+          {/* Mobile: Swipable Single Image */}
+          <div className="block md:hidden w-full py-12 relative">
+            <>
+              <Swiper
+                onSwiper={swiper => (mobileSwiperRef.current = swiper)}
+                slidesPerView={1}
+                spaceBetween={0}
+                loop={true}
+                autoplay={{ delay: 3500, disableOnInteraction: false }}
+                style={{ width: '100vw' }}
+              >
+                {["/assets/0N1A1389.png", "/assets/0N1A1389.png", "/assets/0N1A1389.png"].map((img, idx) => (
+                  <SwiperSlide key={idx}>
+                    <div className="flex justify-center items-center w-full">
+                      <img
+                        src={img}
+                        alt={`Ention Laptop ${idx + 1}`}
+                        className="w-[80vw] h-auto mx-auto drop-shadow-2xl"
+                        style={{ maxWidth: 400, filter: 'drop-shadow(0 12px 48px #01e9fecc)' }}
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              {/* Arrow Buttons */}
+              <button
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full w-8 h-8 flex items-center justify-center z-10"
+                onClick={() => mobileSwiperRef.current && mobileSwiperRef.current.slidePrev()}
+                style={{ outline: 'none', border: 'none' }}
+              >
+                &#8592;
+              </button>
+              <button
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full w-8 h-8 flex items-center justify-center z-10"
+                onClick={() => mobileSwiperRef.current && mobileSwiperRef.current.slideNext()}
+                style={{ outline: 'none', border: 'none' }}
+              >
+                &#8594;
+              </button>
+            </>
           </div>
         </div>
         <div

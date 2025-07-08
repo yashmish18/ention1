@@ -25,19 +25,19 @@ const products = [
 const showcaseSlides = [
   {
     key: 0,
-    image: require("assets/aboutus_page/1.svg"),
+    image: require("public/assets/aboutus_page/1.svg"),
     headline: "Ention E-Series: Power Meets Elegance",
     sub: "Your next laptop, reimagined."
   },
   {
     key: 1,
-    image: require("assets/aboutus_page/2.svg"),
+    image: require("public/assets/aboutus_page/2.svg"),
     headline: "Empowering Innovation",
     sub: "Built for students, professionals, and businesses."
   },
   {
     key: 2,
-    image: require("assets/aboutus_page/3.svg"),
+    image: require("public/assets/aboutus_page/3.svg"),
     headline: "Minimal. Modern. Made for You.",
     sub: "Experience the Ention difference."
   }
