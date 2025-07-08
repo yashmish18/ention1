@@ -1,10 +1,3 @@
-import AnalogImg from "assets/E1/analog.png";
-import Win11Img from "assets/E1/win11.png";
-import BezelsImg from "assets/E1/bezels.png";
-import FullHDImg from "assets/E1/full-hd.png";
-import IntelImg from "assets/E1/intel.png";
-import WifiImg from "assets/E1/wifi.png";
-import LightPcImg from "assets/E1/light-pc.jpg";
 import { Fade } from "react-awesome-reveal";
 import ItemImage from "./ItemImage";
 
@@ -14,7 +7,7 @@ const E5Feature = () => {
       <div className="flex flex-col gap-4">
         <Fade direction="left">
           <ItemImage
-            img={AnalogImg}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center text-[32px] min-[450px]:text-[42px] lg:text-[50px] xl:text-[55px] font-bold`}
@@ -26,7 +19,7 @@ const E5Feature = () => {
         </Fade>
         <Fade direction="left">
           <ItemImage
-            img={BezelsImg}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center text-[32px] min-[450px]:text-[36px] lg:text-[50px] font-bold`}
@@ -38,7 +31,7 @@ const E5Feature = () => {
         </Fade>
         <Fade direction="left">
           <ItemImage
-            img={FullHDImg}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center font-bold text-[32px] min-[450px]:text-[36px] lg:text-[50px] bottom-4`}
@@ -50,7 +43,7 @@ const E5Feature = () => {
         </Fade>
         <Fade direction="left">
           <ItemImage
-            img={IntelImg}
+            img="/assets/0N1A1389.png"
             label={
               <div className={`absolute text-center flex flex-col`}>
                 <p className="text-[42px] lg:text-[66px] font-bold">
@@ -67,7 +60,7 @@ const E5Feature = () => {
       <div className="flex flex-col gap-4">
         <Fade direction="right">
           <ItemImage
-            img={Win11Img}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center text-[42px] lg:text-[60px] font-medium`}
@@ -79,7 +72,7 @@ const E5Feature = () => {
         </Fade>
         <Fade direction="right">
           <ItemImage
-            img={FullHDImg}
+            img="/assets/0N1A1389.png"
             label={
               <div className={`absolute text-center bottom-4 flex flex-col`}>
                 <p className="font-bold text-[32px] min-[450px]:text-[42px] lg:text-[66px]">
@@ -94,7 +87,7 @@ const E5Feature = () => {
         </Fade>
         <Fade direction="right">
           <ItemImage
-            img={WifiImg}
+            img="/assets/0N1A1389.png"
             label={
               <div
                 className={`absolute left-8 flex flex-col text-[24px] min-[450px]:text-[28px] xl:text-[40px]`}
@@ -107,7 +100,7 @@ const E5Feature = () => {
         </Fade>
         <Fade direction="right">
           <ItemImage
-            img={LightPcImg}
+            img="/assets/0N1A1389.png"
             label={
               <p className="absolute text-white font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] top-3">
                 Thin and light{" "}

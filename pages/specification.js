@@ -6,7 +6,7 @@ import Slider from 'react-slick';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import img5 from 'assets/image 28.jpg';
+// import img5 from 'assets/image 28.jpg'; // Missing file
 
 // import watchImg1200 from "assets/Rectangle1052_new.jpg";
 // import watchImg300 from "assets/Rectangle1052_old.jpg";
@@ -382,7 +382,7 @@ const Specification = ({ product }) => {
                 className="w-full md:w-[30%]"
               /> */}
               <Image
-                src={img5}
+                src="/assets/0N1A1389.png"
                 height={500}
                 alt="specification"
                 className="w-full md:w-[30%]"
