@@ -22,7 +22,7 @@ export default function ProductImageCarouselMobile({ images }) {
         speed={600}
         slidesPerView={1}
         spaceBetween={0}
-        loop={true}
+        loop={imgs.length > 1}
         centeredSlides={true}
         autoplay={{ delay: 3500, disableOnInteraction: false }}
         style={{ width: '100vw', overflow: 'visible' }}
@@ -49,8 +49,10 @@ export default function ProductImageCarouselMobile({ images }) {
             >
               <img
                 src={img}
-                alt={`Product ${idx + 1}`}
-                style={{ width: '100vw', height: '100%', objectFit: 'cover', background: 'transparent', borderRadius: '0' }}
+                alt={`Ention Laptop ${idx + 1}`}
+                className="w-[80vw] h-auto mx-auto drop-shadow-2xl"
+                style={{ maxWidth: 400, filter: 'drop-shadow(0 12px 48px #01e9fecc)' }}
+                loading="lazy"
               />
             </div>
           </SwiperSlide>

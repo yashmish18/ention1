@@ -11,19 +11,18 @@ export default function TestCarousel() {
   const totalSlides = useRef(10);
   const [selectedImage, setSelectedImage] = useState(0);
   const imagesArray = [
-    "/assets/E1/e1_1.svg",
-    "/assets/E1/e1_2.svg",
-    "/assets/E1/e1_3.svg",
-    "/assets/E1/e1_4.svg",
-    "/assets/E1/e1_5.svg",
-    "/assets/E1/e1_6.svg",
-    "/assets/E1/e1_7.svg",
-    "/assets/E1/e1_8.svg",
-    "/assets/E1/e1_9.svg",
-    "/assets/E1/e1_10.svg",
-    "/assets/E1/e1_11.svg",
-    "/assets/E1/e1_12.svg",
-    "/assets/E1/e1_13.svg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
+    "/assets/product/e1/image1.jpg",
   ];
   useEffect(() => {
     console.log("middleSlide", middleSlide);
@@ -72,7 +71,7 @@ export default function TestCarousel() {
         speed={600}
         slidesPerView={1.6}
         spaceBetween={-120}
-        loop={true}
+        loop={imagesArray.length > 1}
         centeredSlides={true}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         style={{ width: '100vw', maxWidth: '100vw', overflow: 'visible' }}
@@ -100,34 +99,33 @@ export default function TestCarousel() {
                 }}
                 className="text-2xl font-bold"
               >
-                <Image src={image} alt="laptop image" width={1200} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover', background: 'transparent' }} />
+                <Image src={image} alt="laptop image" width={1200} height={600} style={{ width: '100%', height: '100%', objectFit: 'cover', background: 'transparent' }} loading="lazy" />
               </div>
             </SwiperSlide>
           );
         })}
       </Swiper>
       <div className="flex justify-center mt-5">
-        {imagesArray.map((image, index) => {
-          return (
-            <div
-              key={image}
-              onClick={() => {
-                setSelectedImage(index);
-                goToSlide(index);
-              }}
-            >
-              <Image
-                src={image}
-                alt="laptop image"
-                className={`w-16 h-16 object-cover border-gray-300 rounded m-3 cursor-pointer ${
-                  selectedImage === index ? "border-2" : "border"
-                }`}
-                width={64}
-                height={64}
-              />
-            </div>
-          );
-        })}
+        {[...Array(12)].map((_, index) => (
+          <div
+            key={index}
+            onClick={() => {
+              setSelectedImage(index);
+              goToSlide(index);
+            }}
+          >
+            <Image
+              src={"/assets/0N1A1389.png"}
+              alt="laptop image"
+              className={`w-16 h-16 object-cover border-gray-300 rounded m-3 cursor-pointer ${
+                selectedImage === index ? "border-2" : "border"
+              }`}
+              width={64}
+              height={64}
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

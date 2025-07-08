@@ -399,7 +399,7 @@ const Specification = ({ product }) => {
             <div className="flex items-center justify-center pt-10 md:pt-28">
               <video
                 className="border border-color:blue rounded-md"
-                src="/assets/e3_11gen.mp4"
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
                 width="800"
                 height="500"
                 controls="controls"

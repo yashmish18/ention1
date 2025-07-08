@@ -11,7 +11,7 @@ const Mission = () => {
       <div className="mb-10 md:mb-10 flex items-center justify-center relative pt-4 md:pt-0">
         <video
           className=" lg:full-screen rounded-md "
-          src="/assets/vision.mp4"
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
           /*controls="controls"*/
           autoPlay
           muted

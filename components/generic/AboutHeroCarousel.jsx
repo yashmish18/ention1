@@ -89,7 +89,7 @@ export default function AboutHeroCarousel({ showText = true }) {
   };
 
   return (
-    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-[85vh] md:min-h-[102vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Blur */}
       <div className="absolute inset-0 w-full h-full">
         <Image

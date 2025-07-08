@@ -73,39 +73,37 @@ export default function E4ProductPage() {
 
   const router = useRouter();
 
+  // Pricing logic
+  const basePrice = 59999;
+  let price = basePrice;
+  if (selectedRam === '16GB') price += 4000;
+  if (selectedRam === '32GB') price += 9000;
+  if (selectedSSD === '1TB SSD') price += 5000;
+  if (selectedSSD === '2TB SSD') price += 12000;
+  if (selectedWarranty === '+6 Months') price += 1500;
+  if (selectedWarranty === '+1 Year') price += 2500;
+  let displayPrice = price;
+  if (couponApplied && offerPrice) displayPrice = offerPrice;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] text-white pt-24 md:pt-32 pb-24">
       {/* Tab Navigation Bar */}
       <nav className="w-full flex flex-col md:flex-row justify-start items-center ml-0 md:ml-4 mb-4 mt-24 gap-2">
         {/* Mobile: Two separate rows with backgrounds */}
         <div className="flex flex-col w-full md:hidden gap-2">
-          {/* First row: first three tabs */}
-          <div className="flex flex-row justify-between items-center bg-white/20 rounded-md px-2 py-2 shadow-lg w-full">
+          {/* Single row for all tabs on mobile */}
+          <div className="flex flex-row gap-1 bg-white/20 rounded-md px-1 py-2 shadow-lg w-full">
             {[
               { href: '#techspecs', label: 'Technical Specifications' },
               { href: '#features', label: 'Features & Design' },
               { href: '#video', label: 'Product Video' },
-            ].map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-white font-semibold text-base flex-1 text-center py-2 px-2 hover:text-cyan-300 transition-colors"
-                style={{ background: 'none', border: 'none' }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-          {/* Second row: last two tabs */}
-          <div className="flex flex-row justify-between items-center bg-white/20 rounded-md px-2 py-2 shadow-lg w-full">
-            {[
               { href: '#compliance', label: 'Regulatory Product Compliance' },
               { href: '#reviews', label: 'Customer Review' },
             ].map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-white font-semibold text-base flex-1 text-center py-2 px-2 hover:text-cyan-300 transition-colors"
+                className="text-white font-semibold text-xs flex-1 text-center py-2 px-1 hover:text-cyan-300 transition-colors"
                 style={{ background: 'none', border: 'none' }}
               >
                 {item.label}
@@ -114,7 +112,7 @@ export default function E4ProductPage() {
           </div>
         </div>
         {/* Desktop: original layout */}
-        <div className="hidden md:flex flex-row justify-between items-center max-w-5xl w-full bg-white/20 rounded-md px-4 py-4 shadow-lg gap-x-0">
+        <div className="hidden md:flex flex-row justify-between items-center max-w-6xl w-full bg-white/20 rounded-md px-1 py-1 shadow-lg gap-x-0 whitespace-nowrap">
           {[
             { href: '#techspecs', label: 'Technical Specifications' },
             { href: '#features', label: 'Features & Design' },
@@ -125,13 +123,13 @@ export default function E4ProductPage() {
             <React.Fragment key={item.href}>
               <a
                 href={item.href}
-                className="text-white font-semibold text-base flex-1 text-center py-2 px-4 hover:text-cyan-300 transition-colors"
+                className="text-white font-semibold text-xs flex-1 text-center py-1 px-1 hover:text-cyan-300 transition-colors whitespace-nowrap"
                 style={{ background: 'none', border: 'none' }}
               >
                 {item.label}
               </a>
               {idx < arr.length - 1 && (
-                <span className="inline-block w-[2px] h-8 bg-white/70 mx-6 align-middle"></span>
+                <span className="inline-block w-px h-5 bg-white/70 mx-1 align-middle"></span>
               )}
             </React.Fragment>
           ))}
@@ -141,13 +139,20 @@ export default function E4ProductPage() {
         {/* Left: Carousel */}
         <div className="flex-1 flex flex-col items-end ml-auto">
           <div className="relative w-full mx-auto mt-24 flex items-center justify-center w-full">
-            {/* Left Arrow */}
+            {/* Mobile Arrows at left/right, vertically centered */}
             <button
-              className="absolute left-[-32px] top-1/2 -translate-y-1/2 text-3xl text-white hover:text-[#0FAFCA] z-10 bg-transparent border-none shadow-none p-0 m-0"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-[#133B5C] text-white rounded-full p-2 shadow-md"
               onClick={() => changeImage(-1)}
               aria-label="Previous image"
             >
               &#8249;
+            </button>
+            <button
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-[#133B5C] text-white rounded-full p-2 shadow-md"
+              onClick={() => changeImage(1)}
+              aria-label="Next image"
+            >
+              &#8250;
             </button>
             <div className="flex items-center justify-center w-full" style={{ width: '100%', height: 'auto' }}>
               <Image
@@ -157,19 +162,12 @@ export default function E4ProductPage() {
                 height={800}
                 className="object-contain w-full h-auto"
                 priority
+                style={{width: '100%', height: 'auto'}}
               />
               <div className="absolute bottom-3 right-3 bg-[#007e9e]/80 text-xs px-3 py-1 rounded-full border border-white">
                 {currentImage + 1} / {E4Images.length}
               </div>
             </div>
-            {/* Right Arrow */}
-            <button
-              className="absolute right-[-32px] top-1/2 -translate-y-1/2 text-3xl text-white hover:text-[#0FAFCA] z-10 bg-transparent border-none shadow-none p-0 m-0"
-              onClick={() => changeImage(1)}
-              aria-label="Next image"
-            >
-              &#8250;
-            </button>
           </div>
           <div className="flex flex-wrap gap-2 justify-center items-center pt-4 w-full">
             {E4Images.map((img, idx) => (
@@ -179,7 +177,7 @@ export default function E4ProductPage() {
                 onClick={() => setImage(idx)}
                 style={{ border: '1px solid transparent', boxShadow: '0 0 0 0.5px #fff' }}
               >
-                <Image src={img} alt="E4 Thumbnail" width={60} height={40} className="object-cover w-12 h-9" />
+                <Image src={img} alt="E4 Thumbnail" width={60} height={40} className="object-cover w-12 h-9" loading="lazy" style={{width: 60, height: 'auto'}} />
               </div>
             ))}
           </div>
@@ -189,10 +187,18 @@ export default function E4ProductPage() {
         {/* Right: Product Info */}
         <div className="flex-1 flex flex-col gap-6 bg-transparent p-0 items-start">
           <h1 className="text-3xl md:text-4xl font-extrabold mb-2">ENTION WORKBOOK SERIES E4</h1>
-          <div className="flex flex-nowrap justify-between items-center gap-x-3 w-full mb-2">
-          <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words"> Made for techy and Professional</span>
-            <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Powerful yet Budget Friendly</span>
-            <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Dual RAM and SSD slots 	&nbsp</span>
+          {/* Badges: 2 per row on mobile, all in a row on desktop */}
+          <div>
+            <div className="hidden md:flex flex-nowrap justify-between items-center gap-x-3 w-full mb-2">
+              <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Made for techy and Professional</span>
+              <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Powerful yet Budget Friendly</span>
+              <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm flex-shrink-0 w-[200px] text-center whitespace-normal break-words">Dual RAM and SSD slots  &nbsp</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 w-full mb-2 md:hidden">
+              <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm text-center whitespace-normal break-words min-w-0 w-full">Made for techy and Professional</span>
+              <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm text-center whitespace-normal break-words min-w-0 w-full">Powerful yet Budget Friendly</span>
+              <span className="bg-white/10 border border-[#0FAFCA]/40 backdrop-blur-md shadow-md px-3 py-1 rounded-xl text-white font-semibold text-sm text-center whitespace-normal break-words min-w-0 w-full">Dual RAM and SSD slots  &nbsp</span>
+            </div>
           </div>
           {/* Customization */}
           <div className="mt-4">
@@ -240,19 +246,8 @@ export default function E4ProductPage() {
           </div>
           {/* Price & CTA */}
           <div className="mt-8 flex flex-col items-start gap-3 w-full">
-            <div className="flex flex-row items-end gap-4">
-              {couponApplied && offerPrice ? (
-                <>
-                  <span className="text-3xl font-extrabold text-green-400 drop-shadow-lg">Offer Price: ₹{offerPrice.toLocaleString()}</span>
-                  <span className="text-2xl line-through text-gray-300 opacity-70">₹{originalPrice.toLocaleString()}</span>
-                </>
-              ) : (
-                <>
-                  <span className="text-4xl font-extrabold text-white drop-shadow-lg">₹{originalPrice.toLocaleString()}</span>
-                  <span className="text-2xl line-through text-gray-300 opacity-70">₹65,000</span>
-                </>
-              )}
-            </div>
+            <div className="text-3xl font-extrabold text-cyan-200 drop-shadow-lg">Coming Soon</div>
+            <div className="text-sm text-white font-bold mt-2 bg-white/10 px-3 py-1 rounded shadow drop-shadow-lg" style={{textShadow: '0 2px 8px #0008'}}>No cost EMI available. See options at checkout.</div>
             <button
               className="bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold px-8 py-2 rounded-2xl text-lg shadow-lg transition"
               onClick={() => router.push('/ecommerce/checkout')}
@@ -444,7 +439,7 @@ export default function E4ProductPage() {
         <div className="flex justify-center items-center w-full">
           <div className="w-full max-w-lg md:max-w-7xl aspect-video rounded-xl overflow-hidden bg-black">
             <video
-              src="/assets/product_/e5/feature_images/e5_video.mp4"
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
               controls
               className="w-full h-full object-cover rounded-xl shadow-lg bg-black"
             >
@@ -454,105 +449,163 @@ export default function E4ProductPage() {
         </div>
       </section>
       {/* Features & Design */}
-      <section className="max-w-6xl mx-auto mt-12 px-4">
+      <section className="max-w-6xl mx-auto mt-12 px-4 hidden md:block">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-3 mt-20 text-white">Features & Design</h2>
         <div className="w-80 h-1 bg-white rounded-full mb-8"></div>
-        {/* Row 1: Image Left, Text and Image Right Row */}
-        <div className="flex flex-col mt-4 md:flex-row bg-[#18408b] rounded-xl overflow-hidden items-center" style={{ height: '320px' }}>
-          <div
-            className="flex-shrink-0"
-            style={{ flexBasis: '60%', width: '60%', height: '100%' }}
-          >
-            <Image
-              src="/assets/product_/e5/feature_images/copy uncut (4).png"
-              alt="Laptop Open"
-              width={400}
-              height={320}
+        <div className="flex flex-col gap-8">
+          {/* Row 1: Image Left, Text and Image Right Row */}
+          <div className="flex flex-col md:flex-row bg-[#18408b] rounded-xl overflow-hidden items-center" style={{ height: '390px' }}>
+            <div
+              className="flex-shrink-0"
+              style={{ flexBasis: '60%', width: '60%', height: '100%' }}
+            >
+              <Image
+                src="/assets/product_/e5/feature_images/copy uncut (4).png"
+                alt="Laptop Open"
+                width={400}
+                height={320}
+                className="object-cover w-full h-full"
+                style={{height: '100%', width: '100%', objectFit: 'cover'}}
+              />
+            </div>
+            <div className="flex flex-col justify-center p-8 relative" style={{ height: '100%', width: '40%' }}>
+              <div className="text-white text-lg md:text-xl font-normal">Power Your Day with Your Ultimate Working Companion Ention Workbook Series E4.</div>
+            </div>
+          </div>
+         
+          {/* Row 2: Image Left, Text and Image Right Row */}
+          <div className="flex flex-col md:flex-row bg-[#18408b] rounded-xl overflow-hidden items-center" style={{ height: '320px' }}>
+            <div className="flex flex-col justify-center p-8" style={{ height: '100%', width: '40%' }}>
+              <div className="text-white text-lg md:text-xl font-normal text-left leading-relaxed">
+                Unleash seamless performance with the Intel® 13th Gen Core™ i7-13620H processors delivering speeds of up to 4.90 GHz, powered by 10 Cores, 16 Threads, and a generous 24MB Intel Smart Cache.<br />
+                Whether you're coding, designing, multitasking, or analysing complex data.
+              </div>
+            </div>
+            <div
+              className="flex-shrink-0"
+              style={{ flexBasis: '60%', width: '60%', height: '100%' }}
+            >
+              <Image
+                src="/assets/product_/e5/feature_images/copy uncut (4).png"
+                alt="Laptop Open"
+                width={400}
+                height={320}
+                className="object-cover w-full h-full"
+                style={{height: '100%', width: '100%', objectFit: 'cover'}}
+              />
+            </div>
+          </div>
+
+          {/* Row 3: Backlit Keyboard and Numeric Keypad */}
+          <div className="w-full bg-[#18408b] rounded-xl p-8">
+            <div className="flex flex-col md:flex-row items-stretch justify-between gap-8">
+              {/* Left: Backlit Keyboard */}
+              <div className="flex-1 flex flex-col items-center justify-center text-center md:text-left">
+                <div className="text-2xl font-semibold mb-4 text-white">Backlit Keyboard:</div>
+                <div className="text-lg text-white">Work efficiently in any lighting condition with a soft white backlight that ensures visibility during late–night sessions or dim environments.</div>
+              </div>
+              {/* Divider */}
+              <div className="hidden md:block w-px bg-white mx-8"></div>
+              {/* Right: Numeric Keypad */}
+              <div className="flex-1 flex flex-col items-center justify-center text-center md:text-left">
+                <div className="text-2xl font-semibold mb-4 text-white">Dedicated Numeric Keypad:</div>
+                <div className="text-lg text-white">Whether you're entering data, working on spreadsheets, or using design software, the separate number pad enhances speed and accuracy — making it ideal for professionals in finance, engineering, or analytics.</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 4: Single Image Only, no card */}
+          <div className="w-full flex items-center justify-center py-8 mt-[-130px]" style={{height: '900px'}}>
+            <img
+              src="/assets/product_/e4/feature_image/Copy of copy uncut (11).png"
+              alt="Spacious Storage Feature"
               className="object-cover w-full h-full"
-              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+              style={{height: '100%', width: '100%', objectFit: 'contain'}}
+              loading="lazy"
             />
           </div>
-          <div className="flex flex-col justify-center p-8 relative mt-[-150px]" style={{ height: '100%', width: '40%' }}>
-            <div className="text-white text-lg md:text-xl font-normal">Power Your Day with Your Ultimate Working Companion Ention Workbook Series E4.</div>
-          </div>
-        </div>
-       
-        {/* Row 2: Image Left, Text and Image Right Row */}
-        <div className="flex flex-col mt-4 md:flex-row bg-[#18408b] rounded-xl overflow-hidden items-center" style={{ height: '320px' }}>
-          <div className="flex flex-col justify-center p-8" style={{ height: '100%', width: '40%' }}>
-            <div className="text-white text-lg md:text-xl font-normal text-left leading-relaxed">
-              Unleash seamless performance with the Intel® 13th Gen Core™ i7-13620H processors delivering speeds of up to 4.90 GHz, powered by 10 Cores, 16 Threads, and a generous 24MB Intel Smart Cache.<br />
-              Whether you're coding, designing, multitasking, or analysing complex data.
-            </div>
-          </div>
-          <div
-            className="flex-shrink-0"
-            style={{ flexBasis: '60%', width: '60%', height: '100%' }}
-          >
-            <Image
-              src="/assets/product_/e5/feature_images/copy uncut (4).png"
-              alt="Laptop Open"
-              width={400}
-              height={320}
-              className="object-cover w-full h-full"
-              style={{ height: '100%', width: '100%', objectFit: 'cover' }}
+
+          {/* Row 5: Single Image Only */}
+          <div className="w-full flex items-center justify-center py-8 mt-[-256px]" style={{height: '900px', width: '100%'}}>
+            <img
+              src="/assets/product_/e4/feature_image/Copy of copy uncut (16).png"
+              alt="Feature"
+              className="object-contain w-full h-full"
+              style={{height: '100%', width: '100%', objectFit: 'contain'}}
+              loading="lazy"
             />
           </div>
-        </div>
 
-        {/* Row 3: Backlit Keyboard and Numeric Keypad */}
-        <div className="w-full bg-[#18408b] rounded-xl p-8 mt-8">
-          <div className="flex flex-col md:flex-row items-stretch justify-between gap-8">
-            {/* Left: Backlit Keyboard */}
-            <div className="flex-1 flex flex-col items-center justify-center text-center md:text-left">
-              <div className="text-2xl font-semibold mb-4 text-white">Backlit Keyboard:</div>
-              <div className="text-lg text-white">Work efficiently in any lighting condition with a soft white backlight that ensures visibility during late–night sessions or dim environments.</div>
-            </div>
-            {/* Divider */}
-            <div className="hidden md:block w-px bg-white mx-8"></div>
-            {/* Right: Numeric Keypad */}
-            <div className="flex-1 flex flex-col items-center justify-center text-center md:text-left">
-              <div className="text-2xl font-semibold mb-4 text-white">Dedicated Numeric Keypad:</div>
-              <div className="text-lg text-white">Whether you're entering data, working on spreadsheets, or using design software, the separate number pad enhances speed and accuracy — making it ideal for professionals in finance, engineering, or analytics.</div>
+          {/* Row 6: insipired by innovation */}
+          <div className="w-full bg-[#18408b] rounded-xl p-8 text-center mt-[-130px]">
+            <div className="text-2xl md:text-3xl font-bold text-white mb-2"> Inspired by Innovation, Assembled with Integrity </div>
+            <div className="text-3XL md:text-lg text-white font-bold mt-4">Proudly Made in India.</div>
+          </div>
+
+          {/* Row 7: Privacy Shutter Only Row */}
+          <div className="w-full bg-[#18408b] rounded-xl flex items-center justify-center p-12" style={{minHeight: '300px'}}>
+            <div className="text-white text-3xl md:text-4xl font-extrabold text-center w-full">Privacy Shutter on Webcam adds peace of mind during off–camera moments</div>
+          </div>
+          {/* Row 8: Product Compliance Certification Row */}
+          <div className="w-full bg-[#007e9e]/80 border border-[#0FAFCA] px-6 py-8 rounded-xl text-center flex flex-col items-center">
+            <h2 className="text-2xl font-bold mb-4">Product compliance certification</h2>
+            <div className="text-lg">
+              Ention ensures all its products comply with Indian regulatory standards. Devices are certified under BIS CRS for electrical safety and WPC–ETA for wireless communication compliance. Ention also follows global benchmarks for product safety, electromagnetic compatibility, ergonomics, and environmental responsibility. Every product is developed through certified processes to guarantee quality, legal distribution, and user safety.
             </div>
           </div>
         </div>
-
-        {/* Row 4: Single Image Card */}
-        <div className="w-full bg-[#18408b] flex items-center justify-center mt-8 rounded-xl" style={{height: '700px'}}>
-          <img
-            src="/assets/product_/e4/feature_image/Copy of copy uncut (11).png"
-            alt="Spacious Storage Feature"
-            className="object-cover w-full h-full rounded-xl"
-            style={{height: '100%', width: '100%', objectFit: 'cover'}}
-          />
-        </div>
-
-        {/* Row 5: Single Image Only */}
-        <div className="w-full flex items-center justify-center mt-[-100px]" style={{height: '900px', width: '100%'}}>
-          <img
-            src="/assets/product_/e4/feature_image/Copy of copy uncut (16).png"
-            alt="Feature"
-            className="object-contain w-full h-full"
-            style={{height: '100%', width: '100%', objectFit: 'contain'}}
-          />
-        </div>
-
-        {/* Row 6: Ports and Audio Row (the one you want to replace) */}
-        <div className="w-full bg-[#18408b] rounded-xl p-8 text-center mt-[-110px]">
-          <div className="text-2xl md:text-3xl font-bold text-white mb-2"> Inspired by Innovation, Assembled with Integrity </div>
-          <div className="text-3XL md:text-lg text-white font-bold mt-4">Proudly Made in India.</div>
-        </div>
-
-        {/* Row 7: Privacy Shutter Only Row */}
-        <div className="w-full bg-[#18408b] rounded-xl flex items-center justify-center mt-8 p-12" style={{minHeight: '300px'}}>
-          <div className="text-white text-3xl md:text-4xl font-extrabold text-center w-full">Privacy Shutter on Webcam adds peace of mind during off–camera moments</div>
-        </div>
-        {/* Row 6: Product Compliance Certification Row */}
-        <div className="w-full bg-[#007e9e]/80 border border-[#0FAFCA] px-6 py-8 rounded-xl text-center mt-8 flex flex-col items-center">
-          <h2 className="text-2xl font-bold mb-4">Product compliance certification</h2>
-          <div className="text-lg">
-            Ention ensures all its products comply with Indian regulatory standards. Devices are certified under BIS CRS for electrical safety and WPC–ETA for wireless communication compliance. Ention also follows global benchmarks for product safety, electromagnetic compatibility, ergonomics, and environmental responsibility. Every product is developed through certified processes to guarantee quality, legal distribution, and user safety.
+      </section>
+      {/* Mobile Features & Design */}
+      <section className="max-w-6xl mx-auto mt-12 px-2 block md:hidden">
+        <h2 className="text-2xl font-extrabold mb-3 mt-10 text-white w-fit mx-auto">Features & Design</h2>
+        <div className="h-1 bg-white rounded-full mb-6 mx-auto" style={{width:'100%',maxWidth:'100%',marginTop:'-8px'}}></div>
+        <div className="flex flex-col gap-6">
+          {/* Row 1: Image Left, Text and Image Right Row */}
+          <div className="bg-[#18408b] rounded-xl flex flex-col items-center p-0">
+            <img src="/assets/product_/e5/feature_images/copy uncut (4).png" alt="Laptop Open" className="w-full h-56 object-cover rounded-t-xl" loading="lazy" />
+            <div className="w-full p-4 text-white text-base text-center">Power Your Day with Your Ultimate Working Companion Ention Workbook Series E4.</div>
+          </div>
+          {/* Row 2: Image Left, Text and Image Right Row */}
+          <div className="bg-[#18408b] rounded-xl flex flex-col items-center p-0">
+            <div className="w-full p-4 text-white text-base text-center">
+              Unleash seamless performance with the Intel® 13th Gen Core™ i7-13620H processors delivering speeds of up to 4.90 GHz, powered by 10 Cores, 16 Threads, and a generous 24MB Intel Smart Cache.<br />Whether you're coding, designing, multitasking, or analysing complex data.
+            </div>
+            <img src="/assets/product_/e5/feature_images/copy uncut (4).png" alt="Laptop Open" className="w-full h-56 object-cover rounded-b-xl" loading="lazy" />
+          </div>
+          {/* Row 3: Backlit Keyboard and Numeric Keypad */}
+          <div className="bg-[#18408b] rounded-xl flex flex-col items-center p-4 text-white text-center gap-4">
+            <div>
+              <div className="text-xl font-semibold mb-2">Backlit Keyboard:</div>
+              <div className="text-base mb-4">Work efficiently in any lighting condition with a soft white backlight that ensures visibility during late–night sessions or dim environments.</div>
+            </div>
+            <div>
+              <div className="text-xl font-semibold mb-2">Dedicated Numeric Keypad:</div>
+              <div className="text-base">Whether you're entering data, working on spreadsheets, or using design software, the separate number pad enhances speed and accuracy — making it ideal for professionals in finance, engineering, or analytics.</div>
+            </div>
+          </div>
+          {/* Row 4: Single Image Card */}
+          <div className="bg-[#18408b] flex items-center justify-center rounded-xl" style={{height:'320px'}}>
+            <img src="/assets/product_/e4/feature_image/Copy of copy uncut (11).png" alt="Spacious Storage Feature" className="object-cover w-full h-full rounded-xl" loading="lazy" />
+          </div>
+          {/* Row 5: Single Image Only */}
+          <div className="flex items-center justify-center" style={{height:'320px', width:'100%'}}>
+            <img src="/assets/product_/e4/feature_image/Copy of copy uncut (16).png" alt="Feature" className="object-contain w-full h-full" loading="lazy" />
+          </div>
+          {/* Row 6: Ports and Audio Row (the one you want to replace) */}
+          <div className="bg-[#18408b] rounded-xl p-4 text-center">
+            <div className="text-xl font-bold text-white mb-2">Inspired by Innovation, Assembled with Integrity</div>
+            <div className="text-base text-white font-bold mt-2">Proudly Made in India.</div>
+          </div>
+          {/* Row 7: Privacy Shutter Only Row */}
+          <div className="bg-[#18408b] rounded-xl flex items-center justify-center p-6" style={{minHeight:'180px'}}>
+            <div className="text-white text-xl font-extrabold text-center w-full">Privacy Shutter on Webcam adds peace of mind during off–camera moments</div>
+          </div>
+          {/* Row 8: Product Compliance Certification Row */}
+          <div className="w-full bg-[#007e9e]/80 border border-[#0FAFCA] px-4 py-6 rounded-xl text-center flex flex-col items-center">
+            <h2 className="text-xl font-bold mb-2">Product compliance certification</h2>
+            <div className="text-base">
+              Ention ensures all its products comply with Indian regulatory standards. Devices are certified under BIS CRS for electrical safety and WPC–ETA for wireless communication compliance. Ention also follows global benchmarks for product safety, electromagnetic compatibility, ergonomics, and environmental responsibility. Every product is developed through certified processes to guarantee quality, legal distribution, and user safety.
+            </div>
           </div>
         </div>
       </section>

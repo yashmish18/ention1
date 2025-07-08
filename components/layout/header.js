@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname, useSearchParams } from "next/navigation";
 import logo from "public/assets/logo.png";
 import { IoMenu } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import { FaShoppingCart, FaUserCircle, FaBoxOpen } from "react-icons/fa";
 import Image from "next/image";
 import { getUserFromToken, logout } from "utils/auth";
 
@@ -76,6 +77,10 @@ const Header = () => {
     router.prefetch("/signup");
   };
 
+  // Prefetch AboutHeroCarousel on hover
+  const prefetchAboutHeroCarousel = () => {
+    import('components/generic/AboutHeroCarousel');
+  };
   return (
     <motion.div
       style={{
@@ -95,19 +100,22 @@ const Header = () => {
         >
           <IoMenu />
         </button>
-        {/* Centered logo */}
-        <Link href="/">
-          <Image
-            src={logo}
-            alt="ention-logo-mobile"
-            width={60}
-            height={60}
-            className="object-contain cursor-pointer"
-          />
-        </Link>
-        {/* Cart icon on right */}
-        <Link href="/ecommerce/cart" className="flex items-center">
+        {/* Logo slightly to the right */}
+        <div className="flex-1 flex justify-center ml-10">
+          <Link href="/">
+            <Image
+              src={logo}
+              alt="ention-logo-mobile"
+              width={60}
+              height={60}
+              className="object-contain cursor-pointer"
+            />
+          </Link>
+        </div>
+        {/* Cart icon and Orders text on right */}
+        <Link href="/ecommerce/cart" className="flex items-center" aria-label="Orders" title="Orders">
           <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+          <span className="ml-2 text-white font-semibold text-lg">Orders</span>
         </Link>
       </div>
 
@@ -142,7 +150,9 @@ const Header = () => {
         </Link>
         <Link
           href="/about"
+          prefetch={true}
           className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
+          onMouseEnter={prefetchAboutHeroCarousel}
         >
           About Us
         </Link>
@@ -153,8 +163,8 @@ const Header = () => {
           Support
         </Link>
         
-        <Link href="/ecommerce/cart" className="flex items-center">
-          <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+        <Link href="/ecommerce/cart" className="flex items-center" aria-label="Orders" title="Orders">
+          <span className="text-white font-semibold text-lg">Orders</span>
         </Link>
        
       </div>

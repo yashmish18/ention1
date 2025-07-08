@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -12,11 +12,16 @@ import ellipseBg from "/public/assets/ellipse-gradient-half.png";
 import consultancyImage from "/public/assets/serviceimg.png";
 
 const AboutHeroCarousel = dynamic(() => import("components/generic/AboutHeroCarousel"), {
-  loading: () => <div className="w-full text-center py-8">Loading...</div>,
-  ssr: false,
+  loading: () => <div className="w-full text-center py-8">Loading...</div>
 });
 
 const About = () => {
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    setShowVideo(true);
+  }, []);
+
   return (
     <main className=" min-h-screen  relative overflow-hidden">
       {/* Hero Section */}
@@ -42,14 +47,14 @@ const About = () => {
       {/* Video Section */}
       <div className="bg-[#0FAFCA] py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="relative w-full  h-full flex justify-center">
-            <video
-              src="/assets/E1_video.mp4"
-              controls
-              loading="lazy"
-              poster="/assets/about-video-poster.jpg"
-              className="w-full max-w-6xl rounded-lg shadow-lg"
-            ></video>
+          <div className="relative w-full h-full flex justify-center">
+            {showVideo && (
+              <video
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                controls
+                className="w-full max-w-6xl rounded-lg shadow-lg"
+              ></video>
+            )}
           </div>
         </div>
       </div>

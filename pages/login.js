@@ -98,37 +98,14 @@ const Login = () => {
             <div className='relative z-10 w-full max-w-4xl flex flex-col md:flex-row items-stretch justify-center bg-white rounded-3xl shadow-2xl overflow-hidden'>
                 {/* Feature/Marketing Panel (Left) */}
                 <div className='flex-1 flex flex-col justify-center items-start bg-transparent p-8 md:p-12 min-w-[260px]'>
-                    <h2 className='text-2xl font-bold text-cyan-600 mb-6'>Sitemark</h2>
-                    <div className='flex flex-col gap-6 text-[#222]'>
-                        <div className='flex items-start gap-3'>
-                            <span className='text-2xl mt-1'>⚙️</span>
-                            <div>
-                                <div className='font-bold text-lg'>Adaptable performance</div>
-                                <div className='text-base opacity-80'>Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.</div>
-                            </div>
-                        </div>
-                        <div className='flex items-start gap-3'>
-                            <span className='text-2xl mt-1'>🛠️</span>
-                            <div>
-                                <div className='font-bold text-lg'>Built to last</div>
-                                <div className='text-base opacity-80'>Experience unmatched durability that goes above and beyond with lasting investment.</div>
-                            </div>
-                        </div>
-                        <div className='flex items-start gap-3'>
-                            <span className='text-2xl mt-1'>👍</span>
-                            <div>
-                                <div className='font-bold text-lg'>Great user experience</div>
-                                <div className='text-base opacity-80'>Integrate our product into your routine with an intuitive and easy-to-use interface.</div>
-                            </div>
-                        </div>
-                        <div className='flex items-start gap-3'>
-                            <span className='text-2xl mt-1'>✏️</span>
-                            <div>
-                                <div className='font-bold text-lg'>Innovative functionality</div>
-                                <div className='text-base opacity-80'>Stay ahead with features that set new standards, addressing your evolving needs better than the rest.</div>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 className='text-2xl font-bold text-cyan-600 mb-6'>Welcome to Ention</h2>
+                    <ul className='list-disc pl-6 space-y-4 text-[#222]'>
+                        <li><span className='font-bold'>Secure cloud-based account</span><br/>Your data and preferences are always safe and accessible.</li>
+                        <li><span className='font-bold'>Track your orders and warranty</span><br/>View your purchase history and warranty status in one place.</li>
+                        <li><span className='font-bold'>Access exclusive member offers</span><br/>Get special discounts and early access to new products.</li>
+                        <li><span className='font-bold'>Fast, personalized support</span><br/>Reach our team quickly for any help you need.</li>
+                        <li><span className='font-bold'>Easy returns and service requests</span><br/>Initiate returns or service requests with just a few clicks.</li>
+                    </ul>
                 </div>
                 {/* Login Form (Right) */}
                 <div className='flex-1 flex justify-center items-center bg-white p-8 md:p-12 min-w-[260px]'>
