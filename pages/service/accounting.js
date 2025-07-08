@@ -4,7 +4,7 @@ import styles from 'styles/Products.module.css'
 import Image from 'next/image'
 
 // import benefits from 'assets/Benefits.jpg' // Missing file
-import data from 'lib/data'
+// import data from 'lib/data' // Missing file
 import SingleQuestion from '../../components/Question'
 import Link from 'next/link'
 import { RiWhatsappFill } from 'react-icons/ri'
@@ -13,7 +13,7 @@ import { HiMail } from 'react-icons/hi'
 
 
 const Accounting = () => {
-  const [questions, setQuestions] = useState(data)
+  const [questions, setQuestions] = useState([])
 
 
 

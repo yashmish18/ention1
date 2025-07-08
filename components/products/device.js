@@ -13,10 +13,10 @@ import { useLocalStorage } from 'react-use';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { FaCartArrowDown, FaCircle } from 'react-icons/fa';
-import lappy1 from 'assets/section1bg.png';
-import comingsoon from 'assets/comingsoon.png';
+// import lappy1 from 'assets/section1bg.png'; // Missing file
+// import comingsoon from 'assets/comingsoon.png'; // Missing file
 
-import lappy2 from 'assets/lappy.png';
+// import lappy2 from 'assets/lappy.png'; // Missing file
 
 const settings = () => ({
   dots: true,
@@ -90,14 +90,14 @@ const ProductCard = ({ product }) => {
           className={`border border-[#007E9E] w-full mx-0 md:mx-5 group relative  group-hover:bg-teal-500/10`}
         >
           <Image
-            src={comingsoon}
+            src="/assets/0N1A1389.png"
             width={80}
             height={80}
             className="hidden md:block rounded-full absolute -top-4 -left-4"
           />
 
           <Image
-            src={comingsoon}
+            src="/assets/0N1A1389.png"
             width={50}
             height={50}
             className="block md:hidden rounded-full absolute -top-4 -left-4"
@@ -225,11 +225,11 @@ const Products = ({ products, data }) => {
           </div>
           <div className="  relative w-full min-h-[25vh] md:min-h-[40vh] ">
             {' '}
-            <Image src={lappy1} fill alt="Header" />
+            <Image src="/assets/0N1A1389.png" fill alt="Header" />
           </div>
           <div className="  relative w-full min-h-[25vh] md:min-h-[40vh] ">
             {' '}
-            <Image src={lappy2} fill alt="Header" />
+            <Image src="/assets/0N1A1389.png" fill alt="Header" />
           </div>
         </Slider>
       </div>

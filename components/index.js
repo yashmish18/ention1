@@ -1,4 +1,6 @@
 //export { default as hooks } from './hooks';
+export { default as Navbar } from './layout/header';
+export { default as Footer } from './layout/footer';
 export { default as Laptop } from './product/laptop';
 export { default as Product } from './Product';
 export { default as Contact } from './Contact';

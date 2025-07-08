@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 
 
-import { FeaturedPosts, LifestylePosts, TrendingPosts, PopularPosts } from "../../sections/index"
+import { FeaturedPosts, PopularPosts } from "../../sections/index"
+// import { LifestylePosts, TrendingPosts } from "../../sections/index" // Missing components
 
 import { Footer, Navbar } from 'components'
 
@@ -66,8 +67,8 @@ export default function Blog () {
                  <Categories />
                 </div>
 
-              <TrendingPosts />
-              <LifestylePosts />
+              {/* <TrendingPosts /> */}
+              {/* <LifestylePosts /> */}
               
 
 

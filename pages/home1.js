@@ -4,22 +4,22 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { Navbar, Footer, hooks } from 'components'
 import { useAnimation, motion } from "framer-motion";
-import lappy from 'assets/section1bg.png'
-import lappy1 from 'assets/lappy.png'
-import lappy2 from '../public/assets/Products/E1/e1_9.svg'
+// import lappy from 'assets/section1bg.png' // Missing file
+// import lappy1 from 'assets/lappy.png' // Missing file
+// import lappy2 from '../public/assets/Products/E1/e1_9.svg' // Missing file
 
-import intelLogo from 'assets/intelcore.png'
-import amdLogo from 'assets/amdimg.png'
-import win11Logo from 'assets/window.png'
-import business from 'assets/1.svg'
-import highEndUser from 'assets/2.svg'
-import general from 'assets/3.svg'
-import student from 'assets/4.svg'
-import service from 'assets/serviceimg.png'
+// import intelLogo from 'assets/intelcore.png' // Missing file
+// import amdLogo from 'assets/amdimg.png' // Missing file
+// import win11Logo from 'assets/window.png' // Missing file
+// import business from 'assets/1.svg' // Missing file
+// import highEndUser from 'assets/2.svg' // Missing file
+// import general from 'assets/3.svg' // Missing file
+// import student from 'assets/4.svg' // Missing file
+// import service from 'assets/serviceimg.png' // Missing file
 import PopUpForm from "../components/PopUpForm"
 import { IoClose } from "react-icons/io5"
 import Typewriter from 'typewriter-effect';
-import warranty from 'assets/warlog.png'
+// import warranty from 'assets/warlog.png' // Missing file
 const squareVariants = {
   visible: { opacity: 1, scale: 4, transition: { duration: 1 }, },
   hidden: { opacity: 0, scale: 0 }
@@ -104,7 +104,7 @@ export default function Home() {
         </div>
 
         <Navbar />
-        <div ref={section1} className="lg:full-screen max-h-[50vh]  lg:min-h-[85vh] flex justify-center items-center" id='section1' style={{ backgroundImage: `url(${lappy.src})`, backgroundSize: '100% 100%' }}>
+        <div ref={section1} className="lg:full-screen max-h-[50vh]  lg:min-h-[85vh] flex justify-center items-center" id='section1' style={{ backgroundImage: `url('/assets/0N1A1389.png')`, backgroundSize: '100% 100%' }}>
 
           <div className="w-[90%] md:w-[80%] h-[100%]  ">
             <div className="right ">
@@ -142,7 +142,7 @@ export default function Home() {
           </div>
         </div>
         <div className=''>
-          <div ref={section2} className="lg:full-screen relative max-h-[85vh]  lg:min-h-[75vh] bg-[#09101e] flex justify-center items-center" id='section2' style={{ backgroundImage: `url(${lappy2.src})`, backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundBlendMode: 'overlay' }}>
+          <div ref={section2} className="lg:full-screen relative max-h-[85vh]  lg:min-h-[75vh] bg-[#09101e] flex justify-center items-center" id='section2' style={{ backgroundImage: `url('/assets/0N1A1389.png')`, backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center', backgroundBlendMode: 'overlay' }}>
 
             <div className="  w-full md:w-[85%] lg:w-[80%] max-h-auto mx-auto  text-white  pt-6 md:pt-10 pl-0 lg:pl-10 " >
               <div className=' '>
@@ -159,8 +159,8 @@ export default function Home() {
                   <div className='w-[90%]  lg:w-full grid grid-cols-2  mx-auto md:grid-cols-4 gap-2 lg:gap-6 '>
                     <div className="flex flex-col   md:w-full ">
                       <h2 className="text-lg lg:text-3xl font-semibold text-center my-2 md:my-8">Business</h2>
-                      <div className='w-full flex  items-center justify-center  '><Image src={business} width={40} height={40} alt="High End User" className='block md:hidden' />
-                        <Image src={business} width={70} height={70} alt="Business" className='hidden md:block ' />
+                      <div className='w-full flex  items-center justify-center  '><Image src="/assets/0N1A1389.png" width={40} height={40} alt="High End User" className='block md:hidden' />
+                        <Image src="/assets/0N1A1389.png" width={70} height={70} alt="Business" className='hidden md:block ' />
                       </div>
 
                       {/* <p className="grow flex-1 mt-3 text-sm md:text-xl lg:text-lg">Suppling laptop products with features that give users the ability to remain in touch with the latest trend in technology. </p> */}
@@ -168,8 +168,8 @@ export default function Home() {
                     <div className="flex flex-col   md:w-full  mx-auto  ">
                       <h2 className="text-lg lg:text-3xl font-semibold  text-center my-2 md:my-8">High End User</h2>
                       <div className=' w-full flex  items-center justify-center'>
-                        <Image src={highEndUser} width={70} height={70} alt="Business" className='hidden md:block ' />
-                        <Image src={highEndUser} width={40} height={40} alt="High End User" className='block md:hidden' /></div>
+                        <Image src="/assets/0N1A1389.png" width={70} height={70} alt="Business" className='hidden md:block ' />
+                        <Image src="/assets/0N1A1389.png" width={40} height={40} alt="High End User" className='block md:hidden' /></div>
 
                       {/* <p className="grow flex-1 mt-3 text-sm md:text-xl lg:text-lg">To meet demand for top-tier products and services, often seeking cutting-edge technology and exceptional performance.</p> */}
                     </div>
@@ -178,8 +178,8 @@ export default function Home() {
                     <div className="flex flex-col   md:w-full  mx-auto  ">
                       <h2 className="text-xl lg:text-3xl font-semibold   text-center my-2 md:my-8">General</h2>
                       <div className='w-full flex  items-center justify-center'>
-                        <Image src={general} width={40} height={40} alt="General" className='block md:hidden' />
-                        <Image src={general} width={70} height={70} alt="General" className='hidden md:block' /></div>
+                        <Image src="/assets/0N1A1389.png" width={40} height={40} alt="General" className='block md:hidden' />
+                        <Image src="/assets/0N1A1389.png" width={70} height={70} alt="General" className='hidden md:block' /></div>
 
 
                       {/* <p className="grow flex-1 mt-3 text-sm md:text-xl lg:text-lg">The stunning laptop range stole the show and made a distinct mark in the industry with higher-end processors.</p> */}
@@ -187,8 +187,8 @@ export default function Home() {
                     <div className="flex flex-col   md:w-full  mx-auto ">
                       <h2 className="text-xl lg:text-3xl font-semibold  text-center my-2 md:my-8">Student</h2>
                       <div className='w-full flex  items-center justify-center'>
-                        <Image src={student} width={40} height={40} alt="Student" className='md:hidden block' />
-                        <Image src={student} width={70} height={70} alt="Student" className='hidden md:block ' /></div>
+                        <Image src="/assets/0N1A1389.png" width={40} height={40} alt="Student" className='md:hidden block' />
+                        <Image src="/assets/0N1A1389.png" width={70} height={70} alt="Student" className='hidden md:block ' /></div>
 
                       {/* <p className="grow flex-1 mt-3 text-sm md:text-xl lg:text-lg">Specialized in offering future-ready solutions to the requirements of all students who are quality determined.</p> */}
                     </div>
@@ -211,7 +211,7 @@ export default function Home() {
 
                     <h2 className="text-xl lg:text-2xl font-semibold mt-0 md:mt-0">Intel family processor</h2>
                     <div className=" mb-4 flex mt-4">
-                      <Image src={intelLogo} className='w-[20%] md:w-[30%] md:h-[30%] h-[20%]' alt="Intel" />
+                      <Image src="/assets/0N1A1389.png" className='w-[20%] md:w-[30%] md:h-[30%] h-[20%]' alt="Intel" />
                     </div>
                     <p className='text-sm md:text-xl lg:text-lg pt-2'>
                       The lineup of Core processors includes the Intel Core i3, Intel Core i5, Intel Core i7, and Intel Core i9, along with the X-series of Intel Core CPUs.
@@ -221,7 +221,7 @@ export default function Home() {
 
                     <h2 className="text-xl lg:text-2xl font-semibold mt-0 md:mt-0 ">AMD series processor</h2>
                     <div className="grow mb-4 flex mt-4">
-                      <Image src={amdLogo} className='w-[20%] md:w-[30%] md:h-[30%] h-[20%]' alt="Intel" />
+                      <Image src="/assets/0N1A1389.png" className='w-[20%] md:w-[30%] md:h-[30%] h-[20%]' alt="Intel" />
                     </div>
                     <p className='text-sm md:text-xl lg:text-lg pt-1'>
                       From small businesses to enterprises, AMD Ryzen™ Processors with PRO technologies provide work-anywhere flexibility for the modern workforce.
@@ -233,7 +233,7 @@ export default function Home() {
 
                     <h2 className="text-xl lg:text-2xl font-semibold mt-0 md:mt-0">Microsoft Window </h2>
                     <div className="grow mb-4 flex pt-2 ">
-                      <Image src={win11Logo} className='w-[20%] md:w-[28%] md:h-[20%] h-[20%]' alt="Windows" />
+                      <Image src="/assets/0N1A1389.png" className='w-[20%] md:w-[28%] md:h-[20%] h-[20%]' alt="Windows" />
                     </div>
                     <p className='text-sm md:text-lg pt-0'>
                       It is Designed for the world of hybrid work, Windows 11 can help you work more simply and seamlessly from anywhere you want.
@@ -250,8 +250,8 @@ export default function Home() {
               <div className='w-full md:w-[80%] '> <h2 className="text-xl md:text-4xl tracking-wide font-semibold text-center  capitalize ">We also provide business services consultancy services and solution for your
                 business need.
               </h2>
-                <Image src={service} width={600} height={400} className='hidden md:block mx-auto pt-6' alt="Intel" />
-                <Image src={service} width={300} height={100} className=' block md:hidden pt-4' alt="Intel" />
+                <Image src="/assets/0N1A1389.png" width={600} height={400} className='hidden md:block mx-auto pt-6' alt="Intel" />
+                <Image src="/assets/0N1A1389.png" width={300} height={100} className=' block md:hidden pt-4' alt="Intel" />
                 <div className='flex item-center justify-center pl-0 md:pl-0 pb-0 md:pb-10'> <Link href="/service/start-a-business"><button className=' text-[12px] md:text-lg font-semibold bg-[#007E9E] px-4 md:px-6 py-2 md:py-3 rounded-full mt-4 md:mt-6 text-white mb-10 md:mb-10 lg:mb-0 transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out'> Learn More </button></Link>
                 </div>
               </div>
@@ -267,13 +267,13 @@ export default function Home() {
                       18 months warranty
                     </p> */}
                 <div className='flex justify-center pt-2'>
-                  <Image src={warranty} width={100} height={100} className='block md:hidden' alt="Intel" />
+                  <Image src="/assets/0N1A1389.png" width={100} height={100} className='block md:hidden' alt="Intel" />
                 </div>
                 <div className='flex item-center justify-center '> <Link href="/warranty"><button className=' text-[12px] md:text-lg font-semibold bg-[#007E9E] px-4 md:px-6 py-2 md:py-3 rounded-full mt-4  text-white mb-10 md:mb-20 lg:mb-0 transform hover:bg-primary hover:border-primary hover:scale-105  transition-all duration-300 ease-in-out'> Learn More </button></Link>
                 </div>
               </div>
               <div className=' w-full md:w-[30%] lg:w-[50%] flex items-center justify-center'>
-                <Image src={warranty} className=' w-full lg:w-[30%] hidden md:block' alt="Intel" />
+                <Image src="/assets/0N1A1389.png" className=' w-full lg:w-[30%] hidden md:block' alt="Intel" />
 
               </div>
             </div>
@@ -282,7 +282,7 @@ export default function Home() {
 
             <div className="w-[90%] mx-auto flex flex-col md:flex-row gap-2 justify-center items-center mt-10 md:mt-0 lg:mt-14 mb-0 md:mb-20"  >
               <div className="w-[60%] md:w-[50%] flex items-center justify-center" >
-                <Image src={lappy1} className='' alt="Ention" />
+                <Image src="/assets/0N1A1389.png" className='' alt="Ention" />
               </div>
               <div className="w-full md:w-[50%] pr-4 pl-10 md:pl-10 ">
                 <div className="right ">
