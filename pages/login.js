@@ -4,8 +4,8 @@ import { signIn, useSession, } from "next-auth/react";
 // import styles from 'styles/Products.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import hero from 'assets/Group 2069.png'
-import hero1 from 'assets/Group 2070.png'
+import bg1 from 'public/assets/Group 2069.png'
+import bg2 from 'public/assets/Group 2070.png'
 import {FaGoogle, FaLinkedin} from 'react-icons/fa';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify'
@@ -57,29 +57,58 @@ const Login = () => {
         if (Object.keys(validationErrors).length > 0) return;
         const {email, password} = formValues;
         const id = toast.loading('Processing', {type: 'info', theme: 'colored'})
-        await new Promise(res => setTimeout(res, 2000))
-        signIn('credentials', {redirect: false, email, password})
-        .then(({err, status, ok, url}) => {
-            if(ok) {
+        
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    accept: 'application/json'
+                },
+                body: JSON.stringify({email, password})
+            });
+            
+            if(res.status === 200) {
+                const data = await res.json();
+                // Store token in localStorage or sessionStorage
+                localStorage.setItem('token', data.token);
+                // Decode JWT and store userName for Navbar
+                try {
+                  const payload = JSON.parse(atob(data.token.split('.')[1]));
+                  if (payload.name) localStorage.setItem('userName', payload.name);
+                } catch (e) {}
+                window.dispatchEvent(new Event('authChanged'));
+                toast.update(id, {render: 'Login successful!', type: 'success', isLoading: false, autoClose: 2000});
                 router.push(searchParams.get('redirect') || '/')
-                toast.dismiss()
-            }else {
-                toast.update(id, {render: 'Invalid username or password', type: 'error', isLoading: false, autoClose: 3000});
+            } else {
+                const data = await res.json();
+                toast.update(id, {render: data.message || 'Invalid credentials', type: 'error', isLoading: false, autoClose: 3000});
             }
-        })
+        } catch (error) {
+            toast.update(id, {render: 'Login failed. Please try again.', type: 'error', isLoading: false, autoClose: 3000});
+        }
     }
 
 
     return (
-        <main className={'main overflow-x-hidden relative'}>
-            
-            <div className='w-full lg:w-[90%] h-full mx-auto md:flex items-center justify-center pt-0 md:pt-20 px-6 md:px-10 md:px-0'>
-                <div className='hidden md:block w-[30%] '>
-                    <Image src={hero1} alt="/">
-                    </Image>
-
+        <main className={'main overflow-x-hidden relative min-h-screen flex items-center justify-center bg-[#0a192f] space-y-32'}>
+            {/* Background images */}
+            <Image src={bg1} alt="bg1" className="pointer-events-none select-none opacity-30 absolute top-0 left-0 w-1/2 max-w-[600px] z-0" style={{objectFit:'contain'}} />
+            <Image src={bg2} alt="bg2" className="pointer-events-none select-none opacity-30 absolute bottom-0 right-0 w-1/2 max-w-[600px] z-0" style={{objectFit:'contain'}} />
+            <div className='relative z-10 w-full max-w-4xl flex flex-col md:flex-row items-stretch justify-center bg-white rounded-3xl shadow-2xl overflow-hidden'>
+                {/* Feature/Marketing Panel (Left) */}
+                <div className='flex-1 flex flex-col justify-center items-start bg-transparent p-8 md:p-12 min-w-[260px]'>
+                    <h2 className='text-2xl font-bold text-cyan-600 mb-6'>Welcome to Ention</h2>
+                    <ul className='list-disc pl-6 space-y-4 text-[#222]'>
+                        <li><span className='font-bold'>Secure cloud-based account</span><br/>Your data and preferences are always safe and accessible.</li>
+                        <li><span className='font-bold'>Track your orders and warranty</span><br/>View your purchase history and warranty status in one place.</li>
+                        <li><span className='font-bold'>Access exclusive member offers</span><br/>Get special discounts and early access to new products.</li>
+                        <li><span className='font-bold'>Fast, personalized support</span><br/>Reach our team quickly for any help you need.</li>
+                        <li><span className='font-bold'>Easy returns and service requests</span><br/>Initiate returns or service requests with just a few clicks.</li>
+                    </ul>
                 </div>
-                <div className='w-full md:w-[50%] lg:w-[30%] flex justify-center items-center py-10 md:py-0'>
+                {/* Login Form (Right) */}
+                <div className='flex-1 flex justify-center items-center bg-white p-8 md:p-12 min-w-[260px]'>
                     <form onSubmit={handleSubmit} className='login-form w-full max-w-md bg-white backdrop-blur-md border border-[#007E9E] shadow-2xl rounded-3xl px-10 py-12 flex flex-col gap-7'>
                         <div className="flex w-full justify-between mb-2">
                             <h2 className='cursor-pointer text-3xl text-center text-[#007E9E] font-bold border-b-4 border-b-[#007E9E] pb-2'>Login</h2>
@@ -157,15 +186,7 @@ const Login = () => {
                         </div>
                     </form>
                 </div>
-                <div className='hidden md:block w-full md:w-[20%] lg:w-[30%] px-0 md:px-0'>
-                    <Image src={hero} alt="/">
-                    </Image>
-                </div>
             </div>
-            <hr className="w-[80%] text-[#D9D9D9] mx-auto  mt-2 mb-20"></hr>
-
-
-            
         </main>
     )
 }

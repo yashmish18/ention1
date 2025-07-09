@@ -4,10 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Slider from 'react-slick';
 import { useLocalStorage } from 'react-use';
-import comingsoon from 'assets/comingsoon.png';
 
 import { useRouter } from 'next/navigation';
-import { extractYouTubeVideoId } from 'utils/utilties';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -32,7 +30,7 @@ const ProductCard = ({ product }) => {
           className={`border border-[#007E9E] w-full mx-0 md:mx-5 group relative`}
         >
           <Image
-            src={comingsoon}
+            src={'/comingsoon.png'}
             width={80}
             height={80}
             className=" rounded-full absolute -top-4 -left-4"
@@ -348,9 +346,7 @@ const Laptop = ({ product, relatedProducts }) => {
                   key={'product-video-'}
                   width="1200"
                   height="1000"
-                  src={`https://www.youtube.com/embed/${extractYouTubeVideoId(
-                    product?.featureVideoLink
-                  )}`}
+                  src={`https://www.youtube.com/embed/${product?.featureVideoLink}`}
                   title={`YouTube video player`}
                   frameBorder="0"
                   allow="accelerometer; autoPlay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

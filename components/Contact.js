@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import cities from 'lib/cities'
 import services from 'lib/services'
 import { toast } from 'react-toastify'
 // import { sendEmail } from 'utils/email'
+// import cities from 'lib/cities' // Missing file
 
 const Contact = ({title}) => {
 
@@ -52,11 +52,15 @@ const Contact = ({title}) => {
             <input className='mt-6  w-full h-10 px-2 rounded-md bg-[#F0F1F3]' type="email" placeholder="Email ID" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input className='mt-4 w-full h-10 px-2 rounded-md bg-[#F0F1F3]' type="text" placeholder="Mobile Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
             <select id="city" name="city" variant="standard" className="mt-4 w-full h-10 px-2 rounded-md bg-[#F0F1F3] outline-none text-black" onChange={(e) => setCity(e.target.value)} >
-                {cities.map((option) => (
-                    <option key={option} value={option}>
-                        {option}
-                    </option>
-                ))}
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Other">Other</option>
             </select>
             <select id="service" name="service" variant="standard" className="mt-4 w-full h-10 px-2 rounded-md bg-[#F0F1F3] outline-none text-black" onChange={(e) => setService(e.target.value)} >
                 {services.map((option) => (

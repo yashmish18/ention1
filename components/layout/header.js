@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname, useSearchParams } from "next/navigation";
-import logo from "assets/ention-logo.png";
+import logo from "public/assets/logo.png";
 import { IoMenu } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import { FaShoppingCart, FaUserCircle, FaBoxOpen } from "react-icons/fa";
 import Image from "next/image";
+import { getUserFromToken, logout } from "utils/auth";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -15,6 +17,31 @@ const Header = () => {
   const searchParams = useSearchParams();
   const [bgColor, setBgColor] = useState();
   const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check authentication state
+  useEffect(() => {
+    const checkAuth = () => {
+      const userFromToken = getUserFromToken();
+      setIsLoggedIn(!!userFromToken);
+      setUser(userFromToken);
+    };
+
+    checkAuth();
+    window.addEventListener('storage', checkAuth);
+    window.addEventListener('focus', checkAuth);
+    window.addEventListener('authChanged', checkAuth);
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+      window.removeEventListener('focus', checkAuth);
+      window.removeEventListener('authChanged', checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    logout();
+  };
 
   useEffect(() => {
     const updatePosition = () => {
@@ -29,23 +56,6 @@ const Header = () => {
 
     return () => window.removeEventListener("scroll", updatePosition);
   }, []);
-
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollY > 100 && window.scrollY > lastScrollY) {
-        setHidden(true); // Move navbar up on scroll down
-      } else {
-        setHidden(false); // Bring it back on scroll up
-      }
-      setLastScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
 
   useEffect(() => {
     if (router && router.prefetch) {
@@ -67,13 +77,17 @@ const Header = () => {
     router.prefetch("/signup");
   };
 
+  // Prefetch AboutHeroCarousel on hover
+  const prefetchAboutHeroCarousel = () => {
+    import('components/generic/AboutHeroCarousel');
+  };
   return (
     <motion.div
       style={{
         backdropFilter: "blur(10px)",
       }}
       initial={{ y: 0 }}
-      animate={{ y: hidden ? "-100%" : "0%" }} // Move up instead of disappearing
+      animate={{ y: 0 }} // Always visible
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="h-20 fixed z-50 w-full flex items-center justify-between px-4 lg:px-10 top-0 mb-10"
     >
@@ -86,18 +100,22 @@ const Header = () => {
         >
           <IoMenu />
         </button>
-        {/* Centered logo */}
-        <Image
-          src={logo}
-          alt="ention-logo-mobile"
-          width={90}
-          height={90}
-          className="w-[90px] h-auto object-contain cursor-pointer"
-          onClick={() => router.push("/")}
-        />
-        {/* Cart icon on right */}
-        <Link href="/ecommerce/cart" className="flex items-center">
+        {/* Logo slightly to the right */}
+        <div className="flex-1 flex justify-center ml-10">
+          <Link href="/">
+            <Image
+              src={logo}
+              alt="ention-logo-mobile"
+              width={60}
+              height={60}
+              className="object-contain cursor-pointer"
+            />
+          </Link>
+        </div>
+        {/* Cart icon and Orders text on right */}
+        <Link href="/ecommerce/cart" className="flex items-center" aria-label="Orders" title="Orders">
           <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+          <span className="ml-2 text-white font-semibold text-lg">Orders</span>
         </Link>
       </div>
 
@@ -121,17 +139,20 @@ const Header = () => {
         >
           Products
         </Link>
-        <Image
-          src={logo}
-          alt="ention-logo-desktop"
-          width={90}
-          height={90}
-          className="object-contain cursor-pointer"
-          onClick={() => router.push("/")}
-        />
+        <Link href="/">
+          <Image
+            src={logo}
+            alt="ention-logo-desktop"
+            width={60}
+            height={60}
+            className="object-contain cursor-pointer"
+          />
+        </Link>
         <Link
           href="/about"
+          prefetch={true}
           className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
+          onMouseEnter={prefetchAboutHeroCarousel}
         >
           About Us
         </Link>
@@ -142,41 +163,58 @@ const Header = () => {
           Support
         </Link>
         
-        <Link href="/ecommerce/cart" className="flex items-center">
-          <FaShoppingCart className="text-white text-2xl hover:text-[#01E9FE] transition" />
+        <Link href="/ecommerce/cart" className="flex items-center" aria-label="Orders" title="Orders">
+          <span className="text-white font-semibold text-lg">Orders</span>
         </Link>
        
       </div>
 
-      {/* Dashboard nav link absolute left (desktop only) */}
-      <Link
-        href="/dashboard"
-        className="hidden lg:block absolute left-10 text-white hover:text-[#01E9FE] transition"
-        style={{ zIndex: 60 }}
-        title="Dashboard"
-      >
-        <FaUserCircle className="text-3xl" />
-      </Link>
+      {/* Dashboard and Admin nav links absolute left (desktop only) */}
+      <div className="hidden lg:flex absolute left-10 items-center gap-4" style={{ zIndex: 60 }}>
+        <Link
+          href="/dashboard"
+          className="text-white hover:text-[#01E9FE] transition flex items-center gap-2"
+          title="Dashboard"
+        >
+          <FaUserCircle className="text-3xl" />
+          {isLoggedIn && user?.name && (
+            <span className="text-white text-base font-semibold ml-2">Welcome, {user.name}</span>
+          )}
+        </Link>
+      </div>
 
       {/* Desktop auth buttons - positioned absolutely on right */}
       <div className="absolute hidden lg:flex items-center gap-2 right-10">
-        <Link
-          href={{
-            pathname: "/login",
-            query: {
-              redirect: `/${pathname}?${searchParams?.toString()}`,
-            },
-          }}
-        >
-          <button className="w-24 h-8 bg-transparent border rounded-3xl border-white flex center text-white text-sm hover:scale-105  transition-all duration-300 ease-in-out">
-            Login
-          </button>
-        </Link>
-        <Link href={"/signup"}>
-          <button className="px-8 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
-            Register
-          </button>
-        </Link>
+        {isLoggedIn ? (
+          <>
+            <button 
+              onClick={handleLogout}
+              className="w-24 h-8 bg-red-600 border-none rounded-3xl flex center text-white text-sm font-semibold hover:bg-red-700 transition-all duration-300 ease-in-out mr-20"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              href={{
+                pathname: "/login",
+                query: {
+                  redirect: `/${pathname}?${searchParams?.toString()}`,
+                },
+              }}
+            >
+              <button className="w-24 h-8 bg-transparent border rounded-3xl border-white flex center text-white text-sm hover:scale-105  transition-all duration-300 ease-in-out">
+                Login
+              </button>
+            </Link>
+            <Link href={"/signup"}>
+              <button className="px-8 h-8 bg-white border rounded-3xl border-white flex center text-black text-sm hover:scale-105  transition-all duration-300 ease-in-out">
+                Register
+              </button>
+            </Link>
+          </>
+        )}
       </div>
 
       {isShowModal ? (
@@ -190,14 +228,15 @@ const Header = () => {
           <div className="fixed left-0 top-0 h-full min-h-screen w-[80vw] max-w-[340px] bg-white z-50 flex flex-col shadow-2xl rounded-r-2xl border-r border-gray-200 overflow-y-auto transition-all duration-300 ease-in-out lg:hidden">
             {/* Header with logo and close button */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-              <Image
-                src={logo}
-                alt="ention-logo"
-                width={60}
-                height={40}
-                className="w-[60px] h-auto object-contain cursor-pointer text-black" style={{color: "black"}}
-                onClick={() => { setShowModal(false); router.push("/"); }}
-              />
+              <Link href="/">
+                <Image
+                  src={logo}
+                  alt="ention-logo"
+                  width={60}
+                  height={60}
+                  className="object-contain cursor-pointer"
+                />
+              </Link>
               <button
                 className="text-2xl text-gray-700 p-2 rounded-full hover:bg-gray-100 focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -229,18 +268,34 @@ const Header = () => {
             </nav>
             {/* Auth buttons at bottom */}
             <div className="flex flex-col gap-2 px-4 pb-6 mb-8">
-              <button
-                className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
-                onClick={() => { setShowModal(false); router.push("/login"); }}
-              >
-                Login
-              </button>
-              <button
-                className="w-full bg-black text-white rounded-3xl py-2 font-semibold text-base hover:bg-gray-900 transition"
-                onClick={() => { setShowModal(false); router.push("/signup"); }}
-              >
-                Register
-              </button>
+              {isLoggedIn ? (
+                <>
+                  <div className="text-center text-gray-700 font-medium mb-2">
+                    Welcome, {user?.name}
+                  </div>
+                  <button
+                    className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
+                    onClick={() => { setShowModal(false); handleLogout(); }}
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    className="w-full border border-black text-black rounded-3xl py-2 font-semibold text-base hover:bg-gray-100 transition"
+                    onClick={() => { setShowModal(false); router.push("/login"); }}
+                  >
+                    Login
+                  </button>
+                  <button
+                    className="w-full bg-black text-white rounded-3xl py-2 font-semibold text-base hover:bg-gray-900 transition"
+                    onClick={() => { setShowModal(false); router.push("/signup"); }}
+                  >
+                    Register
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </>

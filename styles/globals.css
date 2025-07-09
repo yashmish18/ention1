@@ -9,8 +9,9 @@
   padding: 0;
 }
 
-html {
+html, body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 img {
@@ -417,4 +418,21 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 }
 input[type="password"]::-webkit-input-decoration-container {
   display: none !important;
+}
+
+/* Prevent any blur on carousel images and their containers */
+.carousel-no-blur,
+.carousel-no-blur * {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
+
+@media (min-width: 1024px) {
+  html, body {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+  }
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
+  }
 }

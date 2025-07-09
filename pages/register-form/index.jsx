@@ -1,5 +1,5 @@
 import Header from "components/layout/header";
-import gradientbg1 from "assets/gradient-bg1.png";
+// import gradientbg1 from "assets/gradient-bg1.png"; // Missing file
 import { TypingEffect } from "components/generic/TypingEffect";
 import { BlurInText } from "components/generic/BlurInText";
 import Footer from "components/layout/footer";
@@ -35,7 +35,7 @@ const RegisterForm = () => {
         <div
           className=" flex flex-col -z-10"
           style={{
-            backgroundImage: `url(${gradientbg1.src})`,
+            backgroundImage: `url('/assets/0N1A1389.png')`,
           }}
         >
           <div className="flex justify-center">

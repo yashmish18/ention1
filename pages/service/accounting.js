@@ -3,8 +3,8 @@ import { Navbar, Footer, Contact } from '../../components/index'
 import styles from 'styles/Products.module.css'
 import Image from 'next/image'
 
-import benefits from 'assets/Benefits.jpg'
-import data from 'lib/data'
+// import benefits from 'assets/Benefits.jpg' // Missing file
+// import data from 'lib/data' // Missing file
 import SingleQuestion from '../../components/Question'
 import Link from 'next/link'
 import { RiWhatsappFill } from 'react-icons/ri'
@@ -13,7 +13,7 @@ import { HiMail } from 'react-icons/hi'
 
 
 const Accounting = () => {
-  const [questions, setQuestions] = useState(data)
+  const [questions, setQuestions] = useState([])
 
 
 
@@ -75,7 +75,7 @@ The owners can record the registration with the Indian customs and prevent impor
 </p>
       </div>
       <div className='w-[80%] lg:w-full flex items-center justify-center py-6 mx-auto'>
-        <Image src={benefits} alt="/" />
+                        <Image src="/assets/0N1A1389.png" alt="/" />
       </div>
       <div id="faq" className='w-[80%] mx-auto  text-center text-white bg-[#7FBECE] mt-0  p-6 px-6 lg:px-40'>
         <h2 className='text-2xl md:text-4xl '>FAQ</h2>

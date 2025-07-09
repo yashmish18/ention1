@@ -5,13 +5,11 @@ import { Loader } from "components/Utils";
 import { useLocalStorage } from "react-use";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { fetchProducts } from "utils/dbFunctions";
 import makePayment from "utils/razorpay";
 
 const Checkout = () => {
-  const { data: sessionData, status } = useSession();
   const router = useRouter();
   const [count, setCount] = useState(1);
   const [coupon, setCoupon] = useState({ status: "pending" });
@@ -22,7 +20,35 @@ const Checkout = () => {
   const [isEditing, setEditing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState("prepaid");
   const [address, setAddress] = useState("Mumbai India");
-  const user = sessionData?.user || {};
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.push("/login?redirect=/ecommerce/checkout1");
+        return;
+      }
+      
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setUser({
+          name: payload.name,
+          email: payload.email
+        });
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        localStorage.removeItem('token');
+        router.push("/login?redirect=/ecommerce/checkout1");
+        return;
+      }
+      setAuthLoading(false);
+    };
+    
+    checkAuth();
+  }, [router]);
 
   useEffect(() => {
     let temp =
@@ -52,17 +78,15 @@ const Checkout = () => {
     }
   }, [loading, cart.length]);
 
-  if (status === "loading") {
-    if (status === "authenticated") {
-    } else {
-      return (
-        <main className="h-screen w-screen center">
-          <Loader />
-        </main>
-      );
-    }
-  } else if (status !== "loading" && status === "unauthenticated") {
-    router.push("/login?redirect=/checkout1");
+  if (authLoading) {
+    return (
+      <main className="h-screen w-screen center">
+        <Loader />
+      </main>
+    );
+  }
+
+  if (!user) {
     return (
       <main className="h-screen w-screen center">
         <h1 className="text-5xl text-white"> Unauthenticated </h1>

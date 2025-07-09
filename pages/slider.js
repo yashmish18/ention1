@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import computer1 from 'assets/Ention-Laptop-E3-Catalogue-design-2.png';
+import computer1 from 'public/assets/Ention-Laptop-E3-Catalogue-design-2.png';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const ImageSlider = () => {
@@ -12,17 +12,17 @@ const ImageSlider = () => {
     {
       img: computer1,
       ref: video1Ref,
-      video: '/assets/E1-video.mp4',
+      video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     },
     {
       img: computer1,
       ref: video2Ref,
-      video: '/assets/E2-video.mp4',
+      video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     },
     {
       img: computer1,
       ref: video3Ref,
-      video: '/assets/E3-video.mp4',
+      video: 'https://www.w3schools.com/html/mov_bbb.mp4',
     },
   ];
 

@@ -8,6 +8,22 @@ import Head from "next/head";
 import Header from "components/layout/header";
 import Footer from "components/layout/footer";
 
+// Patch to suppress deprecated DOMNodeInserted warning from react-simple-chatbot
+if (typeof window !== 'undefined' && window.MutationObserver) {
+  const origObserve = window.MutationObserver.prototype.observe;
+  window.MutationObserver.prototype.observe = function(target, options) {
+    if (options && options.subtree && options.childList && options.attributes) {
+      // Remove deprecated event listeners if present
+      if (target && target.removeEventListener) {
+        try {
+          target.removeEventListener('DOMNodeInserted', () => {});
+        } catch (e) {}
+      }
+    }
+    return origObserve.apply(this, arguments);
+  };
+}
+
 export default function App({
   Component,
   pageProps: { session, ...pageProps },

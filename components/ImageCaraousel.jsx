@@ -9,7 +9,7 @@ export default function ImageCaraousel({ images }) {
         autoplay={{
           delay: 2000,
         }}
-        loop={true}
+        loop={images.length > 1}
         modules={[Autoplay]}
         pagination={{
           clickable: true,

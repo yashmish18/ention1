@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Footer } from 'components';
 import Image from 'next/image';
-import about2 from '../public/assets/E1/e1_9.svg';
+// import about2 from '../public/assets/E1/e1_9.svg'; // Missing file
 
 const Mission = () => {
   return (
@@ -11,7 +11,7 @@ const Mission = () => {
       <div className="mb-10 md:mb-10 flex items-center justify-center relative pt-4 md:pt-0">
         <video
           className=" lg:full-screen rounded-md "
-          src="/assets/vision.mp4"
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
           /*controls="controls"*/
           autoPlay
           muted
@@ -47,7 +47,7 @@ const Mission = () => {
                     </div>
                     <div className='hidden lg:block relative w-full mt-0   '>
                         <div className=' relative -mt-64'>
-                            <Image src={require('assets/img1.png')} width={1200} height={600} />
+                            <Image src="/assets/0N1A1389.png" width={1200} height={600} />
                         </div>
                        
                         <div className=' ml-28 ' >
@@ -187,7 +187,7 @@ const Mission = () => {
           <div className="w-full flex flex-col md:flex-row px-0 md:px-0 gap-4 md:gap-10">
             <div className="w-full md:w-[50%]">
               <Image
-                src={about2}
+                src="/assets/0N1A1389.png"
                 width={400}
                 height={300}
                 alt="About Us"

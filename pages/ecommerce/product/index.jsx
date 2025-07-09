@@ -25,19 +25,19 @@ const products = [
 const showcaseSlides = [
   {
     key: 0,
-    image: require("assets/aboutus_page/1.svg"),
+    image: require("public/assets/aboutus_page/1.svg"),
     headline: "Ention E-Series: Power Meets Elegance",
     sub: "Your next laptop, reimagined."
   },
   {
     key: 1,
-    image: require("assets/aboutus_page/2.svg"),
+    image: require("public/assets/aboutus_page/2.svg"),
     headline: "Empowering Innovation",
     sub: "Built for students, professionals, and businesses."
   },
   {
     key: 2,
-    image: require("assets/aboutus_page/3.svg"),
+    image: require("public/assets/aboutus_page/3.svg"),
     headline: "Minimal. Modern. Made for You.",
     sub: "Experience the Ention difference."
   }
@@ -73,21 +73,6 @@ const workbookSeries = [
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 50000),
     image: '/assets/product_/e4/IMG_1107.JPG',
-  },
-  {
-    key: 'E3',
-    name: 'Workbook series E3',
-    features: [
-      'Made for rough use',
-      'dual heating system',
-      'With a full-metal body,',
-      'Intel i5-13500H has 18 MB of L3 cache 2.6 boost up to 4.7 GHz',
-      'Window 11',
-      'Display 15.6inch, full HD IPS',
-    ],
-    bag: 'Laptop bag worth 1500',
-    price: '₹' + (Math.floor(Math.random() * 10000) + 30000),
-    image: '/assets/product_/e3/1.png',
   },
   {
     key: 'E3',
@@ -165,7 +150,7 @@ const ProductCard = ({ product }) => (
     <div className="p-4 flex flex-col flex-1">
       <h3 className="text-lg font-semibold mb-2 text-[#000f29]">{product.name}</h3>
       <p className="text-[#007e9e] text-xl font-bold mb-4">{product.price}</p>
-      <Link href={`/ecommerce/product/${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</Link>
+      <Link href={`/ecommerce/product/e${product.id}`} className="mt-auto bg-[#007e9e] text-white rounded-3xl py-2 px-6 hover:bg-[#01E9FE] hover:text-[#000f29] transition-all text-center">Buy Now</Link>
     </div>
   </div>
 );
@@ -201,11 +186,14 @@ function WorkbookCard({ series }) {
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between border-t pt-2 mt-2">
           <div className="text-lg font-semibold text-[#0d223a]">
-            Starting from... <span className="text-2xl font-bold text-[#007e9e]">{series.price}</span>
+            <span className="text-3xl font-extrabold text-[#007e9e] block mt-2 mb-1">Coming Soon</span>
           </div>
-          <div className="mt-4 md:mt-0 flex gap-4 justifycenter mr-[150px]">
-            <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
+          <div className="mt-4 md:mt-0 flex gap-8 justifycenter mr-[70px]">
+            <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
               <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
+            </Link>
+            <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
+              <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Shop Now</a>
             </Link>
           </div>
         </div>
@@ -230,7 +218,7 @@ function WorkbookCardMobile({ series }) {
   const idMap = { E5: 5, E4: 4, E3: 3 };
   const productId = idMap[series.key];
   return (
-    <div className="bg-[#b9d2df] shadow flex flex-col p-2 my-6 w-full max-w-[80vw] justify-content-center mr-14">
+    <div className="bg-[#b9d2df] shadow flex flex-col p-2 my-6 w-full max-w-xs mx-auto">
       {/* Image at the very top, full width, no rounded corners, larger height */}
       <div className="w-full">
         <Image
@@ -251,13 +239,18 @@ function WorkbookCardMobile({ series }) {
       </ul>
       <div className="text-xs text-[#007e9e] mb-1">{series.bag}</div>
       <div className="flex flex-col gap-1 border-t pt-1 mt-1 text-xs">
-        <div className="font-semibold text-[#0d223a]">
-          Starting from... <span className="font-bold text-[#007e9e]">{series.price}</span>
+        <div className="w-full text-center">
+          <span className="text-2xl font-extrabold text-[#007e9e] block mt-2 mb-1">Coming Soon</span>
         </div>
-        <div>
-          <Link href={`/ecommerce/product/${productId}`} legacyBehavior>
-            <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
-          </Link>
+        <div className="flex gap-2 mt-1">
+          <div className="flex w-4/5 mx-auto justify-between">
+            <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
+              <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Learn more</a>
+            </Link>
+            <Link href={`/ecommerce/product/e${productId}`} legacyBehavior>
+              <a className="text-[#007e9e] underline font-medium hover:text-[#01E9FE] transition">Shop Now</a>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
@@ -308,7 +301,7 @@ export default function ProductLandingPage() {
     : products.filter((p) => p.type === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA]">
+    <div className="min-h-screen bg-gradient-to-b from-[#070D2A] via-[#133B5C] to-[#0FAFCA] overflow-x-hidden">
       {/* Super smooth transparent carousel */}
       <div className="w-full flex justify-center items-center pb-4 py-[150px]">
         <TestCarousel />

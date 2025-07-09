@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { getSession, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import { FaUserCircle, FaEdit, FaSignOutAlt, FaBoxOpen, FaHeart, FaTicketAlt, FaCog, FaEnvelope, FaPlus, FaShoppingCart, FaFileInvoiceDollar, FaMapMarkerAlt, FaHistory } from "react-icons/fa";
 import Image from "next/image";
+import { getUserFromToken, logout } from "utils/auth";
 
 const mockUser = {
   name: "John Doe",
@@ -31,12 +32,30 @@ const mockActivity = [
   { id: 4, action: "Submitted a support ticket", date: "2024-05-08 11:10" },
 ];
 
-export default function Dashboard({ session }) {
+export default function Dashboard() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [wishlist, setWishlist] = useState(mockWishlist);
   const [tickets, setTickets] = useState(mockTickets);
   const [newTicket, setNewTicket] = useState("");
   const [newsletter, setNewsletter] = useState(true);
   const [trackOrderId, setTrackOrderId] = useState(null);
+
+  // Check authentication on mount
+  useEffect(() => {
+    const checkAuth = () => {
+      const userFromToken = getUserFromToken();
+      if (!userFromToken) {
+        router.push('/login?redirect=/dashboard');
+        return;
+      }
+      setUser(userFromToken);
+      setAuthLoading(false);
+    };
+    
+    checkAuth();
+  }, [router]);
 
   const handleRemoveWishlist = (id) => setWishlist(wishlist.filter(w => w.id !== id));
   const handleAddToCart = (id) => alert("Added to cart!");
@@ -50,26 +69,41 @@ export default function Dashboard({ session }) {
   const handleTrackOrder = (id) => setTrackOrderId(trackOrderId === id ? null : id);
   const handleDownloadInvoice = (id) => alert("Invoice downloaded for order #" + id);
 
-  // Use session user if available
-  const user = session?.user || mockUser;
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-2xl text-gray-600">Loading Dashboard...</div>
+      </div>
+    );
+  }
+
+  // Show unauthorized message if not authenticated
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-[#f7fafc] flex items-center justify-center">
+        <div className="text-2xl text-gray-600">Please log in to access the dashboard.</div>
+      </div>
+    );
+  }
+
+  // Use user from JWT token
+  const userData = user || mockUser;
 
   return (
-    <div className="min-h-screen bg-[#f7fafc] pb-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] pb-10 pt-12">
       {/* Topbar */}
-      <div className="w-full bg-white shadow flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8">
+      <div className="w-full flex flex-col md:flex-row items-center justify-between px-6 py-6 mb-8 mt-8" style={{background: 'transparent'}}>
         <div className="flex items-center gap-4">
-          <Image src={user.image || user.avatar} alt="avatar" width={64} height={64} className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
+          <Image src={userData.image || userData.avatar} alt="avatar" width={64} height={64} className="w-16 h-16 rounded-full border-2 border-[#007e9e]" />
           <div>
-            <div className="text-2xl font-bold text-[#000f29]">Welcome, {user.name}!</div>
-            <div className="text-gray-500">{user.email}</div>
+            <div className="text-2xl font-bold text-white">Welcome, {userData.name}!</div>
+            <div className="text-white/70">{userData.email}</div>
           </div>
-        </div>
-        <div className="flex gap-4 mt-4 md:mt-0">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-3xl border border-red-500 text-red-500 font-semibold hover:bg-red-500 hover:text-white transition"><FaSignOutAlt /> Logout</button>
         </div>
       </div>
       {/* Main grid */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
         {/* Orders */}
         <div className="bg-white rounded-xl shadow p-6 flex flex-col">
           <div className="flex items-center gap-2 mb-4 text-xl font-bold text-[#007e9e]"><FaBoxOpen /> Recent Orders</div>
@@ -93,19 +127,6 @@ export default function Dashboard({ session }) {
             </div>
           ))}
           <Link href="/orders" className="mt-4 text-[#007e9e] hover:underline text-sm">View All Orders</Link>
-        </div>
-        {/* Wishlist */}
-        <div className="bg-white rounded-xl shadow p-6 flex flex-col">
-          <div className="flex items-center gap-2 mb-4 text-xl font-bold text-pink-600"><FaHeart /> Wishlist</div>
-          {wishlist.length === 0 && <div className="text-gray-400">No saved products.</div>}
-          {wishlist.map(item => (
-            <div key={item.id} className="flex items-center gap-4 border-b py-3 last:border-b-0">
-              <Image src={item.image} alt={item.product} width={64} height={64} className="w-16 h-16 rounded-lg object-cover" />
-              <div className="flex-1 font-semibold">{item.product}</div>
-              <button onClick={() => handleAddToCart(item.id)} className="text-[#007e9e] hover:underline flex items-center gap-1"><FaShoppingCart /> Add</button>
-              <button onClick={() => handleRemoveWishlist(item.id)} className="text-red-500 hover:underline ml-2">Remove</button>
-            </div>
-          ))}
         </div>
         {/* Support Tickets */}
         <div className="bg-white rounded-xl shadow p-6 flex flex-col">
@@ -153,20 +174,4 @@ export default function Dashboard({ session }) {
       </div>
     </div>
   );
-}
-
-// Auth protection for dashboard
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { session },
-  };
 } 

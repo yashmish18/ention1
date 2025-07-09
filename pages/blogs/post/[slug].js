@@ -99,26 +99,23 @@ const PostDetails = ({ post }) => {
 };
 export default PostDetails;
 
-// Switched to SSR: getServerSideProps is used instead of getStaticProps so that getStaticPaths is not required.
-// If you want to use SSG in the future, restore getStaticProps and getStaticPaths, and ensure your API endpoint is available.
-// export async function getStaticPaths() {
-//   const { getPosts } = await import('../../../services');
-//   const posts = await getPosts();
-//   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
-//   return { paths, fallback: false };
-// }
+// getStaticPaths is used by Next.js to pre-render dynamic post pages at build time based on available posts from the CMS.
+export async function getStaticPaths() {
+  // Disabled GraphQL calls due to missing endpoint
+  return { paths: [], fallback: 'blocking' };
+}
 
-export async function getServerSideProps({ params }) {
-  const { getPostDetails } = await import('../../../services');
-  const data = await getPostDetails(params.slug);
-  if (!data) {
-    return {
-      notFound: true,
-    };
-  }
+export async function getStaticProps({ params }) {
+  // Disabled GraphQL calls due to missing endpoint
   return {
     props: {
-      post: data,
+      post: {
+        title: 'Sample Post',
+        excerpt: 'Sample excerpt',
+        keywords: '',
+        author: { name: 'Author', bio: '', photo: { url: '' } },
+        categories: []
+      },
     },
   };
 }

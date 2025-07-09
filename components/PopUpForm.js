@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import cities from 'lib/cities'
-
-import arrow from 'assets/Arrow 14.png'
-import arrow1 from 'assets/Arrow 15.png'
 
 
 const products = ['Interested Field','As investment partner', 'As OEM manufacturer of component', 'As dealer', 'As warranty service provider', 'As freelancer' ]

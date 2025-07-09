@@ -1,10 +1,3 @@
-import AnalogImg from "assets/E1/analog.png";
-import Win11Img from "assets/E1/win11.png";
-import BezelsImg from "assets/E1/bezels.png";
-import FullHDImg from "assets/E1/full-hd.png";
-import IntelImg from "assets/E1/intel.png";
-import WifiImg from "assets/E1/wifi.png";
-import LightPcImg from "assets/E1/light-pc.jpg";
 import { Fade } from "react-awesome-reveal";
 import ItemImage from "./ItemImage";
 
@@ -14,7 +7,7 @@ const E4Feature = () => {
       <div className="flex flex-col gap-4">
         <Fade direction="left">
           <ItemImage
-            img={AnalogImg}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center text-[24px] min-[450px]:text-[42px] lg:text-[40px] xl:text-[50px] font-bold`}
@@ -26,7 +19,7 @@ const E4Feature = () => {
         </Fade>
         <Fade direction="left">
           <ItemImage
-            img={BezelsImg}
+            img="/assets/0N1A1389.png"
             label={
               <div className={`absolute text-center flex flex-col`}>
                 <p className="text-[42px] lg:text-[66px] font-bold">
@@ -41,7 +34,7 @@ const E4Feature = () => {
         </Fade>
         <Fade direction="left">
           <ItemImage
-            img={FullHDImg}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center font-bold text-[32px] min-[450px]:text-[36px] lg:text-[50px] bottom-4`}
@@ -53,7 +46,7 @@ const E4Feature = () => {
         </Fade>
         <Fade direction="left">
           <ItemImage
-            img={IntelImg}
+            img="/assets/0N1A1389.png"
             label={
               <div
                 className={`absolute text-center flex flex-row items-center justify-between gap-4`}
@@ -79,7 +72,7 @@ const E4Feature = () => {
       <div className="flex flex-col gap-4">
         <Fade direction="right">
           <ItemImage
-            img={Win11Img}
+            img="/assets/0N1A1389.png"
             label={
               <p
                 className={`absolute text-center text-[42px] lg:text-[60px] font-medium`}
@@ -91,13 +84,13 @@ const E4Feature = () => {
         </Fade>
         <Fade direction="right">
           <ItemImage
-            img={FullHDImg}
+            img="/assets/0N1A1389.png"
             label={
               <div className={`absolute text-center bottom-4 flex flex-col`}>
-                <p className="font-bold text-[32px] min-[450px]:text-[42px] lg:text-[66px]">
+                <p className="text-[32px] min-[450px]:text-[42px] lg:text-[66px] font-bold">
                   5000mah -19V, 65W
                 </p>
-                <p className="font-bold text-[18px] min-[450px]:text-[24px] lg:text-[31px]">
+                <p className="text-[18px] min-[450px]:text-[24px] lg:text-[31px] font-bold">
                   Lathium-ion polymer battery
                 </p>
               </div>
@@ -106,7 +99,7 @@ const E4Feature = () => {
         </Fade>
         <Fade direction="right">
           <ItemImage
-            img={WifiImg}
+            img="/assets/0N1A1389.png"
             label={
               <div
                 className={`absolute left-8 flex flex-col text-[24px] min-[450px]:text-[28px] xl:text-[40px]`}
@@ -119,7 +112,7 @@ const E4Feature = () => {
         </Fade>
         <Fade direction="right">
           <ItemImage
-            img={LightPcImg}
+            img="/assets/0N1A1389.png"
             label={
               <p className="absolute text-white font-bold text-[28px] min-[450px]:text-[32px] xl:text-[44px] top-3">
                 Thin and light{" "}

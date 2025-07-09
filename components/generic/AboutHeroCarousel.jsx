@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // Import background images
-import slide1Bg from "assets/aboutus_page/1.svg";
-import slide2Bg from "assets/aboutus_page/2.svg";
-import slide3Bg from "assets/aboutus_page/3.svg";
+import slide1Bg from "public/assets/aboutus_page/1.svg";
+import slide2Bg from "public/assets/aboutus_page/2.svg";
+import slide3Bg from "public/assets/aboutus_page/3.svg";
 
 const slides = [
   {
@@ -89,7 +89,7 @@ export default function AboutHeroCarousel({ showText = true }) {
   };
 
   return (
-    <section className="relative w-full min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-[85vh] md:min-h-[102vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Blur */}
       <div className="absolute inset-0 w-full h-full">
         <Image

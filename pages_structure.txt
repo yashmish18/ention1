@@ -1,0 +1,110 @@
+Folder PATH listing
+Volume serial number is 8080-D631
+D:\ENTION1\PAGES
+¦   .DS_Store
+¦   about.js
+¦   admin.jsx
+¦   associate.js
+¦   career.js
+¦   chatbot.js
+¦   corporate.js
+¦   dashboard.jsx
+¦   home1.js
+¦   index.jsx
+¦   login.js
+¦   news-events.js
+¦   signup.js
+¦   slider.js
+¦   specification.js
+¦   technical-support.js
+¦   vision.js
+¦   warranty.js
+¦   _app.js
+¦   _document.js
+¦   
++---api
+¦   ¦   checkout-session.js
+¦   ¦   contact.js
+¦   ¦   coupon.js
+¦   ¦   hello.js
+¦   ¦   products.js
+¦   ¦   reviews.js
+¦   ¦   
+¦   +---admin
+¦   ¦   ¦   orders.js
+¦   ¦   ¦   reviews.js
+¦   ¦   ¦   stats.js
+¦   ¦   ¦   
+¦   ¦   +---orders
+¦   ¦   ¦       [id].js
+¦   ¦   ¦       
+¦   ¦   +---reviews
+¦   ¦           [id].js
+¦   ¦           
+¦   +---auth
+¦   ¦       login.js
+¦   ¦       register.js
+¦   ¦       [...nextauth].js
+¦   ¦       
+¦   +---orders
+¦   ¦       complete.js
+¦   ¦       create.js
+¦   ¦       
+¦   +---reviews
+¦           index.js
+¦           
++---blogs
+¦   ¦   index.js
+¦   ¦   
+¦   +---category
+¦   ¦       [slug].js
+¦   ¦       
+¦   +---post
+¦           [slug].js
+¦           
++---collaborate
+¦       index.jsx
+¦       
++---ecommerce
+¦   ¦   checkout1.js
+¦   ¦   
+¦   +---cart
+¦   ¦       index.jsx
+¦   ¦       
+¦   +---checkout
+¦   ¦       index.jsx
+¦   ¦       
+¦   +---product
+¦       ¦   e3.jsx
+¦       ¦   e4.jsx
+¦       ¦   e5.jsx
+¦       ¦   index.jsx
+¦       ¦   list.jsx
+¦       ¦   ProductCard.js
+¦       ¦   swapbook.jsx
+¦       ¦   workbook.jsx
+¦       ¦   
+¦       +---features
+¦               E3Feature.jsx
+¦               E4Feature.jsx
+¦               E5Feature.jsx
+¦               ItemImage.jsx
+¦               
++---register-form
+¦       index.jsx
+¦       
++---service
+        accounting.js
+        annual-compilance.js
+        businessName.js
+        cert-register.js
+        certification-registration.js
+        conversion.js
+        eveIT-services.js
+        ngo-service.js
+        patent-copyright.js
+        report.js
+        start-a-business.js
+        tax-complain.js
+        trademark.js
+        

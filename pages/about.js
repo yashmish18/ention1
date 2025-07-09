@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import ProductImageCarouselMobile from "components/ProductImageCarouselMobile";
 
 // Import images
-import storyImage from "assets/0N1A1389.png";
-import peopleImage from "assets/market-pc.png";
-import productImage from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
-import ellipseBg from "assets/ellipse-gradient-half.png";
-import consultancyImage from "assets/serviceimg.png";
+import storyImage from "/public/assets/0N1A1389.png";
+import peopleImage from "/public/assets/market-pc.png";
+import productImage from "public/assets/Ention-Laptop-E3-Catalogue-design-2.png";
+import ellipseBg from "/public/assets/ellipse-gradient-half.png";
+import consultancyImage from "/public/assets/serviceimg.png";
 
 const AboutHeroCarousel = dynamic(() => import("components/generic/AboutHeroCarousel"), {
-  loading: () => <div className="w-full text-center py-8">Loading...</div>,
-  ssr: false,
+  loading: () => <div className="w-full text-center py-8">Loading...</div>
 });
 
 const About = () => {
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    setShowVideo(true);
+  }, []);
+
   return (
     <main className=" min-h-screen  relative overflow-hidden">
       {/* Hero Section */}
@@ -25,7 +31,12 @@ const About = () => {
           alt="Background Decoration"
           className="absolute top-0 left-1/2 -translate-x-1/2 z-0 w-[500px] h-auto pointer-events-none"
         /> 
-        <AboutHeroCarousel />
+        <div className="hidden md:block w-full">
+          <AboutHeroCarousel />
+        </div>
+        <div className="block md:hidden w-full my-8">
+          <ProductImageCarouselMobile images={['/assets/aboutus_page/1.svg','/assets/aboutus_page/2.svg','/assets/aboutus_page/3.svg']} />
+        </div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
          
           </div>
@@ -36,14 +47,14 @@ const About = () => {
       {/* Video Section */}
       <div className="bg-[#0FAFCA] py-20">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="relative w-full  h-full flex justify-center">
-            <video
-              src="/assets/E1_video.mp4"
-              controls
-              loading="lazy"
-              poster="/assets/about-video-poster.jpg"
-              className="w-full max-w-6xl rounded-lg shadow-lg"
-            ></video>
+          <div className="relative w-full h-full flex justify-center">
+            {showVideo && (
+              <video
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                controls
+                className="w-full max-w-6xl rounded-lg shadow-lg"
+              ></video>
+            )}
           </div>
         </div>
       </div>

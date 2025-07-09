@@ -131,47 +131,33 @@ export default function TechnicalSupport() {
         <h2 className="text-center text-2xl font-extrabold underline underline-offset-8 mb-10 text-white ">Quick Support Options</h2>
         <div className="flex flex-wrap justify-center gap-8 mb-8">
           {/* Card 1 */}
-          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0 flex-1 justify-between">
             <Image src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Drivers & Downloads" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
-            <div className="flex flex-col items-center p-4 w-full flex-1">
-              <div className="text-3xl text-gray-800 mb-2"><FiDownload /></div>
-              <div className="font-bold text-lg mb-1">Drivers & Downloads</div>
-              <div className="text-gray-600 text-base mb-2">Get the latest drivers and software</div>
-              <div className="flex-1" />
-              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Download Now</a>
+            <div className="flex flex-col items-center p-4 w-full flex-1 justify-between">
+              <div className="font-bold text-lg mb-1">Request a Callback</div>
+              <div className="text-gray-600 text-base mb-2 font-semibold">We’re here to help!</div>
+              <div className="text-gray-600 text-base mb-4">Got a question about our laptops, pre-booking, service, or anything else? Just fill out this form, and one of our team members will call you back at your convenience.</div>
+              <button className="text-[#0091D1] font-bold text-base hover:underline transition text-center p-0 bg-transparent border-none shadow-none mt-auto">Request Callback</button>
             </div>
           </div>
           {/* Card 2 */}
-          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0 flex-1 justify-between">
             <Image src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Live Chat" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
-            <div className="flex flex-col items-center p-4 w-full flex-1">
-              <div className="text-3xl text-gray-800 mb-2"><FiHeadphones /></div>
-              <div className="font-bold text-lg mb-1">Live Chat</div>
-              <div className="text-gray-600 text-base mb-2">Chat with our support team</div>
-              <div className="flex-1" />
-              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Start Chat</a>
+            <div className="flex flex-col items-center p-4 w-full flex-1 justify-between">
+              <div className="font-bold text-lg mb-1">Service Request Booking</div>
+              <div className="text-gray-600 text-base mb-2 font-semibold">Need help with your Ention device?</div>
+              <div className="text-gray-600 text-base mb-4">We’re committed to providing quick and hassle–free support. Fill out the form below, and our service team will get in touch with you shortly.</div>
+              <button className="text-[#0091D1] font-bold text-base hover:underline transition text-center p-0 bg-transparent border-none shadow-none mt-auto">Book Service</button>
             </div>
           </div>
           {/* Card 3 */}
-          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
+          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0 flex-1 justify-between">
             <Image src="https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80" alt="Phone Support" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
-            <div className="flex flex-col items-center p-4 w-full flex-1">
-              <div className="text-3xl text-gray-800 mb-2"><FiPhone /></div>
-              <div className="font-bold text-lg mb-1">Phone Support</div>
-              <div className="text-gray-600 text-base mb-2">Call our technical support</div>
-              <div className="flex-1" />
-              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Get Number</a>
-            </div>
-          </div>
-          {/* Card 4 */}
-          <div className="bg-white rounded-2xl shadow-md flex flex-col items-center w-72 max-w-xs p-0">
-            <Image src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Service Request" width={400} height={150} className="rounded-t-2xl w-full h-[150px] object-cover" />
-            <div className="flex flex-col items-center p-4 w-full flex-1">
-              <div className="text-3xl text-gray-800 mb-2"><FiTool /></div>
-              <div className="font-bold text-lg mb-1">Service Request</div>
-              <div className="text-gray-600 text-base mb-2">Book a repair or maintenance service for your device</div>
-              <div className="flex-1" />
-              <a href="#" className="text-sky-600 font-bold text-base hover:underline mt-2">Book Service</a>
+            <div className="flex flex-col items-center p-4 w-full flex-1 justify-between">
+              <div className="font-bold text-lg mb-1">Required Extended Warranty</div>
+              <div className="text-gray-600 text-base mb-2 font-semibold">Peace of Mind. Extended.</div>
+              <div className="text-gray-600 text-base mb-4">Our Extended Warranty Plans, you can continue to enjoy uninterrupted service and comprehensive protection for your Ention devices—beyond the standard warranty period.</div>
+              <button className="text-[#0091D1] font-bold text-base hover:underline transition text-center p-0 bg-transparent border-none shadow-none mt-auto">Buy Extended Warranty</button>
             </div>
           </div>
         </div>
@@ -181,7 +167,7 @@ export default function TechnicalSupport() {
       <section className="py-12 w-full">
         <h2 className="text-center text-2xl font-extrabold underline underline-offset-8  mb-10 text-white">Support Downloads & Resources</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {resourceLinks.map(link => (
+          {resourceLinks.filter(link => !['Drivers & Downloads', 'Warranty Services', 'Order Parts'].includes(link.title)).map(link => (
             <a href={link.href} key={link.title} tabIndex={0} aria-label={link.title} className="bg-white rounded-xl shadow-md p-8 flex flex-col hover:shadow-lg transition-all cursor-pointer">
               <div className="font-bold text-lg text-sky-700 mb-2">{link.title}</div>
               <div className="text-gray-600 text-base">{link.desc}</div>
@@ -199,13 +185,13 @@ export default function TechnicalSupport() {
               <div className="flex items-center text-sky-700 font-bold text-lg mb-4 gap-2">
                 <IconWrapper icon={cat.icon} /> {cat.title}
               </div>
-              <ul className="text-gray-800 text-base space-y-2">
-                {cat.items.map((item, index) => (
-                  <li key={index}>
-                    <Link href={`/support/${cat.key}/${item.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-sky-600 font-medium transition-colors">
-                      {item}
-                    </Link>
-                  </li>
+              <ul className="text-gray-800 text-base font-medium flex-1 flex flex-col gap-2">
+                {cat.items.filter(item => {
+                  if (cat.key === 'software') return !['Driver Updates', 'BIOS Updates'].includes(item);
+                  if (cat.key === 'warranty') return item !== 'Check Warranty Status';
+                  return true;
+                }).map((item, idx) => (
+                  <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>
@@ -224,24 +210,6 @@ export default function TechnicalSupport() {
         <div className="text-center text-sky-600 mt-2 text-base">Don't know your service tag? <a href="#" className="underline">Learn how to find it</a></div>
       </section>
 
-      {/* Popular Support Articles */}
-      <section className="py-12 w-full">
-        <h2 className="text-center text-2xl font-extrabold underline underline-offset-8  mb-10 text-white">Popular Support Articles</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {articleData.map((a, i) => (
-            <div key={i} className="bg-white rounded-xl shadow-md flex flex-col overflow-hidden">
-              <Image src={a.img} alt={a.title} width={400} height={140} className="w-full h-[140px] object-cover" />
-              <div className="flex flex-col flex-1 p-4">
-                <div className="flex items-center gap-2 font-bold text-lg mb-2 text-gray-800"><IconWrapper icon={a.icon} /> {a.title}</div>
-                <div className="text-gray-600 text-base mb-2">{a.desc}</div>
-                <div className="flex-1" />
-                <a href={a.link} className="text-sky-600 font-bold text-base hover:underline mt-2">Read More</a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Service Tools & Features */}
       <section className="py-12 w-full">
         <h2 className="text-center text-2xl font-extrabold underline underline-offset-8 mb-10 text-white">Service Tools & Features</h2>
@@ -250,33 +218,6 @@ export default function TechnicalSupport() {
             <div className="flex items-center text-green-700 font-bold text-lg mb-4 gap-2"><FiBookOpen /> Track Service Status</div>
             <div className="text-gray-800 text-base mb-6">Monitor your repair progress in real-time and get updates on your service request.</div>
             <button className="w-full bg-green-700 text-white font-bold py-3 rounded-md hover:bg-green-800 transition">Track Your Service</button>
-          </div>
-        </div>
-      </section>
-
-      {/* Knowledge Base Articles */}
-      <section className="py-12 w-full">
-        <h3 className="text-center text-xl font-extrabold underline underline-offset-8  mb-10 text-white">Knowledge Base Articles</h3>
-        <div className="flex flex-wrap justify-center gap-8 mb-8">
-          <div className="min-w-[260px] max-w-xs flex-1">
-            <div className="bg-gray-100 rounded-xl shadow p-6 mb-6">
-              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">First Time Setup Guide <FiChevronRight /></a>
-              <div className="text-gray-500 text-sm mb-2">Complete setup instructions for new Ention laptops</div>
-              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">System Recovery Options <FiChevronRight /></a>
-              <div className="text-gray-500 text-sm mb-2">How to restore your system to factory settings</div>
-              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">BIOS Settings Guide <FiChevronRight /></a>
-              <div className="text-gray-500 text-sm">Navigate and configure BIOS settings</div>
-            </div>
-          </div>
-          <div className="min-w-[260px] max-w-xs flex-1">
-            <div className="bg-gray-100 rounded-xl shadow p-6 mb-6">
-              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">Boot Issues Resolution <FiChevronRight /></a>
-              <div className="text-gray-500 text-sm mb-2">Fix startup and boot-related problems</div>
-              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">Performance Optimization <FiChevronRight /></a>
-              <div className="text-gray-500 text-sm mb-2">Speed up your laptop and improve performance</div>
-              <a href="#" className="flex justify-between items-center font-bold text-base text-gray-800 hover:text-sky-600 transition-colors mb-2">Audio & Video Issues <FiChevronRight /></a>
-              <div className="text-gray-500 text-sm">Resolve multimedia and device problems</div>
-            </div>
           </div>
         </div>
       </section>

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import Laptop from "assets/Ention-Laptop-E3-Catalogue-design-2.png";
+import Laptop from "public/assets/Ention-Laptop-E3-Catalogue-design-2.png";
 import { TbCirclePlus } from "react-icons/tb";
-import corei5Img from "assets/i5.png";
-import corei7Img from "assets/i7.png";
-import amd5Img from "assets/amd-ryzen-5-logo.png";
-import amd7Img from "assets/AMD-Ryzen-7-Category.png";
 import { useRouter } from "next/router";
 import CustomDropdown from "components/CustomDropdown";
 import newProducts from "lib/newData";
@@ -49,10 +45,7 @@ const ProductCard = (props) => {
           </a>
         </div>
         <div className="flex items-center gap-4 mt-5">
-          <Image src={corei5Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
-          <Image src={corei7Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
-          <Image src={amd5Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
-          <Image src={amd7Img} alt="cpu-img" className="w-[52px] h-full" width={52} height={52} />
+          {/* CPU images removed due to missing files */}
         </div>
         <div className="w-[250px] flex flex-col gap-6 mt-10">
           <h3 className="text-2xl text-black font-semibold">

@@ -1,6 +1,6 @@
-export { default as Footer } from './Footer';
-export { default as Navbar } from './Navbar';
 //export { default as hooks } from './hooks';
+export { default as Navbar } from './layout/header';
+export { default as Footer } from './layout/footer';
 export { default as Laptop } from './product/laptop';
 export { default as Product } from './Product';
 export { default as Contact } from './Contact';
@@ -18,3 +18,6 @@ export { default as FeaturedPostCard } from './FeaturedPostCard';
 export { default as PopularPostCard } from './PopularPostCard';
 export { default as CategoriesPostCard } from './CategoriesPostCard';
 export { default as Comments } from './Comments';
+
+// Admin Components
+export * from './admin';
