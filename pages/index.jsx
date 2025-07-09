@@ -212,7 +212,7 @@ export default function Home() {
                     <div>
                       <div className="text-white text-xl font-bold mb-4">For Students</div>
                       <div className="flex flex-row items-center gap-6">
-                        <Image src="/assets/0N1A1389.png" alt="Student Laptop" width={100} height={80} />
+                        <Image src="/assets/landing_page/e5.webp" alt="Student Laptop" width={170} height={150} />
                         <div className="text-white text-base font-normal leading-relaxed">
                           Affordable, Lightweight, durable, and built to support your learning on the go.
                         </div>
@@ -232,7 +232,7 @@ export default function Home() {
                     <div>
                       <div className="text-white text-xl font-bold mb-4">For Professionals & Techies</div>
                       <div className="flex flex-row items-center gap-6">
-                        <Image src="/assets/0N1A1389.png" alt="Pro Laptop" width={100} height={80} />
+                        <Image src="/assets/landing_page/e4.webp" alt="Pro Laptop" width={170} height={150} />
                         <div className="text-white text-base font-normal leading-relaxed">
                           Customizable, seamlessly switch from work tasks to meetings with reliable performance. A powerful and customizable machine ready to take on your code, design, or research.
                         </div>
@@ -253,7 +253,7 @@ export default function Home() {
                   <div className="w-full text-center">
                     <div className="text-white text-lg font-bold mb-2">For Students</div>
                   </div>
-                  <Image src="/assets/0N1A1389.png" alt="Student Laptop" width={90} height={72} className="mx-auto" />
+                  <Image src="/assets/product_/e5/IMG_1107.webp" alt="Student Laptop" width={150} height={120} className="mx-auto" />
                   <div className="text-white text-sm font-normal leading-relaxed text-center">
                     Affordable, Lightweight, durable, and built to support your learning on the go.
                   </div>
@@ -266,7 +266,7 @@ export default function Home() {
                   <div className="w-full text-center">
                     <div className="text-white text-lg font-bold mb-2">For Professionals & Techies</div>
                   </div>
-                  <Image src="/assets/0N1A1389.png" alt="Pro Laptop" width={90} height={72} className="mx-auto" />
+                  <Image src="/assets/product_/e4/IMG_1122.webp" alt="Pro Laptop" width={150} height={120} className="mx-auto" />
                   <div className="text-white text-sm font-normal leading-relaxed text-center">
                     Customizable, seamlessly switch from work tasks to meetings with reliable performance. A powerful and customizable machine ready to take on your code, design, or research.
                   </div>
@@ -277,37 +277,35 @@ export default function Home() {
           </div>
           {/* Why Choose Ention Workbook Series Section - Icons Above Text, Single Separator Line */}
           <div className="w-full flex flex-col items-center mt-16 py-12 relative">
-            <div className="w-full max-w-6xl px-4 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg py-10 md:py-16 md:px-10">
+            <div className="w-full max-w-6xl px-4 bg-white/20 backdrop-blur-xl border border-white/60 shadow-2xl py-10 md:py-16 md:px-10" style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.18)' }}>
               <h2 className="text-white text-3xl md:text-4xl font-extrabold mb-2 text-center">Why Choose Ention Workbook Series?</h2>
               <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full mx-auto mb-6"></div>
               <p className="text-white text-base md:text-lg opacity-80 mb-10 text-center">From customization to performance, <span className='underline text-cyan-200'>discover</span> what makes Ention Workbook Series the right choice for you.</p>
               {/* Desktop: Icons Row Above, Text Below */}
               <div className="hidden md:block">
-                <div className="flex flex-row items-center justify-center gap-16 w-full mb-10">
-                  <Image src="/assets/banner/warranty icon_prev_ui.png" alt="Customizable" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
-                  <Image src="/assets/banner/affordable icon_prev_ui.png" alt="Affordable Without Compromise" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
-                  <Image src="/assets/banner/warranty icon_prev_ui.png" alt="18-Month On-Site Warranty" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
-                  <Image src="/assets/banner/made in india icon.png" alt="Made in India. Made for You." width={70} height={60} className="w-[70px] h-[60px] mx-auto" />
-                  <Image src="/assets/banner/c.png" alt="Performance That Powers You" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
-                </div>
                 <div className="flex flex-row items-start justify-center gap-16 w-full">
                   <div className="flex flex-col items-center w-auto">
+                    <Image src="/assets/banner/c.png" alt="Customizable" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
                     <div className="text-white text-xl font-bold text-center max-w-[220px] leading-tight mb-2 mt-8">Customizable</div>
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Configure your device to match your needs.</div>
                   </div>
                   <div className="flex flex-col items-center w-auto">
+                    <Image src="/assets/banner/affordable icon_prev_ui.png" alt="Affordable Without Compromise" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
                     <div className="text-white text-xl font-bold text-center max-w-[220px] leading-tight mb-2 mt-8">Affordable Without Compromise</div>
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Get premium features at a fair price.</div>
                   </div>
                   <div className="flex flex-col items-center w-auto">
+                    <Image src="/assets/banner/warranty icon_prev_ui.png" alt="18-Month On-Site Warranty" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
                     <div className="text-white text-xl font-bold text-center max-w-[220px] leading-tight mb-2 mt-8">18-Month On-Site Warranty</div>
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Enjoy peace of mind with extended support.</div>
                   </div>
                   <div className="flex flex-col items-center w-auto">
+                    <Image src="/assets/banner/made in india icon.png" alt="Made in India. Made for You." width={70} height={60} className="w-[70px] h-[60px] mx-auto" />
                     <div className="text-white text-xl font-bold text-center max-w-[220px] leading-tight mb-2 mt-8">Made in India. Made for You.</div>
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Proudly designed and built in India.</div>
                   </div>
                   <div className="flex flex-col items-center w-auto">
+                    <Image src="/assets/banner/battery icon.png" alt="Performance That Powers You" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
                     <div className="text-white text-xl font-bold text-center max-w-[220px] leading-tight mb-2 mt-8">Performance That Powers You</div>
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Experience speed and reliability every day.</div>
                   </div>
@@ -317,7 +315,7 @@ export default function Home() {
               <div className="block md:hidden w-full">
                 {[
                   {
-                    icon: <Image src="/assets/banner/warranty icon_prev_ui.png" alt="Customizable" width={60} height={60} className="w-[48px] h-[48px]" key="icon1" />, title: "Customizable", desc: "Configure your device to match your needs."
+                    icon: <Image src="/assets/banner/c.png" alt="Customizable" width={60} height={60} className="w-[48px] h-[48px]" key="icon1" />, title: "Customizable", desc: "Configure your device to match your needs."
                   },
                   {
                     icon: <Image src="/assets/banner/affordable icon_prev_ui.png" alt="Affordable Without Compromise" width={60} height={60} className="w-[48px] h-[48px]" key="icon2" />, title: "Affordable Without Compromise", desc: "Get premium features at a fair price."
@@ -329,7 +327,7 @@ export default function Home() {
                     icon: <Image src="/assets/banner/made in india icon.png" alt="Made in India. Made for You." width={70} height={60} className="w-[56px] h-[48px]" key="icon4" />, title: "Made in India. Made for You.", desc: "Proudly designed and built in India."
                   },
                   {
-                    icon: <Image src="/assets/banner/c.png" alt="Performance That Powers You" width={60} height={60} className="w-[48px] h-[48px]" key="icon5" />, title: "Performance That Powers You", desc: "Experience speed and reliability every day."
+                    icon: <Image src="/assets/banner/battery icon.png" alt="Performance That Powers You" width={60} height={60} className="w-[48px] h-[48px]" key="icon5" />, title: "Performance That Powers You", desc: "Experience speed and reliability every day."
                   },
                 ].map((step, idx) => (
                   <div key={idx} className="flex flex-row items-center gap-6 w-full mb-8 py-2">
@@ -402,23 +400,16 @@ export default function Home() {
             <div className="flex flex-row items-end justify-center gap-4 md:gap-12 w-full max-w-5xl">
               {/* Left Image */}
               <img
-                src="/assets/0N1A1389.png"
-                alt="Ention Laptop Left"
-                className="w-[220px] md:w-[280px] xl:w-[320px] drop-shadow-2xl transition-all duration-500"
+                src="/assets/landing_page/img_e5.webp"
+                alt="Ention Laptop E5"
+                className="w-[340px] md:w-[420px] xl:w-[520px] drop-shadow-2xl transition-all duration-500"
                 style={{ zIndex: 1, filter: 'drop-shadow(0 8px 32px #01e9fe88)' }}
-              />
-              {/* Center Image (overflow/pop out) */}
-              <img
-                src="/assets/0N1A1389.png"
-                alt="Ention Laptop Center"
-                className="w-[270px] md:w-[350px] xl:w-[420px] drop-shadow-2xl transition-all duration-500 scale-110 md:scale-125 relative -mb-8 md:-mb-16 z-20"
-                style={{ filter: 'drop-shadow(0 12px 48px #01e9fecc)' }}
               />
               {/* Right Image */}
               <img
-                src="/assets/0N1A1389.png"
-                alt="Ention Laptop Right"
-                className="w-[220px] md:w-[280px] xl:w-[320px] drop-shadow-2xl transition-all duration-500"
+                src="/assets/landing_page/img_e4.webp"
+                alt="Ention Laptop E4"
+                className="w-[340px] md:w-[420px] xl:w-[520px] drop-shadow-2xl transition-all duration-500"
                 style={{ zIndex: 1, filter: 'drop-shadow(0 8px 32px #01e9fe88)' }}
               />
             </div>
@@ -496,13 +487,13 @@ export default function Home() {
             </div>
           </div>
           {/* Desktop: Original layout */}
-          <div className="hidden md:flex flex-row justify-end items-center mt-44 mb-12 min-h-[70vh]">
+          <div className="hidden md:flex flex-row justify-center items-center mt-44 mb-12 min-h-[70vh]">
             {/* Left: Logo, vertically centered */}
-            <div className="flex flex-col justify-center items-center h-full ml-60 mt-48">
+            <div className="flex flex-col justify-center items-center h-full mt-48 mr-40">
               <Image src="/assets/ention-logo.png" alt="Ention Logo" width={120} height={120} />
             </div>
             {/* Right: Hero + Cards block */}
-            <div className="flex flex-col items-start w-full max-w-3xl ml-auto">
+            <div className="flex flex-col items-start w-full max-w-2xl ml-24">
               <h1 className="text-white text-4xl md:text-5xl lg:text-4xl font-extrabold leading-tight mb-4 text-left w-full">
                 We're not just present online, we're<br />
                 present across <span className="text-[#01E9FE]">India</span>.<br />
@@ -585,7 +576,7 @@ export default function Home() {
               <motion.div
                 className="w-full min-[940px]:w-[560px] h-auto min-[940px]:h-[540px] xl:h-[620px] bg-[length:90%] mx-auto"
                 style={{
-                  backgroundImage: `url(${lappy.src})`,
+                  backgroundImage: `url(/assets/landing_page/exp.webp)`,
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                 }}

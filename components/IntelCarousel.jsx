@@ -127,7 +127,7 @@ export default function IntelCarousel() {
                   : idx === 1
                   ? "clamp(16rem,60vh,28rem)"
                   : "clamp(18rem,60vh,32rem)",
-              backgroundImage: `url(${slide})`,
+              backgroundImage: `url(${slide.src})`,
               transition: "transform 0.2s cubic-bezier(.23,1.01,.32,1)",
               transform: parallax[idx]
                 ? `translate3d(${parallax[idx].x || 0}px, ${parallax[idx].y || 0}px, 0)`

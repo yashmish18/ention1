@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { FaShoppingCart, FaUserCircle, FaBoxOpen } from "react-icons/fa";
 import Image from "next/image";
 import { getUserFromToken, logout } from "utils/auth";
+import hindiLogo from "public/assets/HINDI_LOGO.webp";
 
 const Header = () => {
   const [isShowModal, setShowModal] = useState(false);
@@ -120,13 +121,7 @@ const Header = () => {
       </div>
 
       {/* DESKTOP HEADER: Only visible on lg and above */}
-      <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-10 mr-[90px] ">
-        <Link
-          href="/collaborate"
-          className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
-        >
-          Collaborate
-        </Link>
+      <div className="hidden lg:flex w-full items-center justify-center gap-6 xl:gap-10 min-[1320px]:gap-10 mr-[90px] ml-[90px] ">
         <Link
           href="/"
           className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
@@ -139,6 +134,14 @@ const Header = () => {
         >
           Products
         </Link>
+        <Link
+          href="/about"
+          prefetch={true}
+          className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
+          onMouseEnter={prefetchAboutHeroCarousel}
+        >
+          About Us
+        </Link>
         <Link href="/">
           <Image
             src={logo}
@@ -149,12 +152,10 @@ const Header = () => {
           />
         </Link>
         <Link
-          href="/about"
-          prefetch={true}
+          href="/collaborate"
           className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4"
-          onMouseEnter={prefetchAboutHeroCarousel}
         >
-          About Us
+          Collaborate
         </Link>
         <Link
           href="/technical-support"
@@ -162,11 +163,9 @@ const Header = () => {
         >
           Support
         </Link>
-        
         <Link href="/ecommerce/cart" className="flex items-center" aria-label="Orders" title="Orders">
-          <span className="text-white font-semibold text-lg">Orders</span>
+          <span className="font-semibold text-xl text-white hover:underline underline-offset-8 decoration-[#007E9E] decoration-4">Orders</span>
         </Link>
-       
       </div>
 
       {/* Dashboard and Admin nav links absolute left (desktop only) */}
@@ -177,10 +176,14 @@ const Header = () => {
           title="Dashboard"
         >
           <FaUserCircle className="text-3xl" />
-          {isLoggedIn && user?.name && (
-            <span className="text-white text-base font-semibold ml-2">Welcome, {user.name}</span>
-          )}
         </Link>
+        <Image
+          src={hindiLogo}
+          alt="Hindi Logo"
+          width={70}
+          height={70}
+          className="object-contain ml-20"
+        />
       </div>
 
       {/* Desktop auth buttons - positioned absolutely on right */}

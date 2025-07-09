@@ -18,22 +18,12 @@ import { FaShoppingCart, FaBolt, FaCamera, FaBatteryFull, FaMicrochip } from "re
 import { BentoGrid, BentoGridItem } from "./index";
 
 const E5Images = [
- 
-  "/assets/product_/e5/1.webp",
-  "/assets/product_/e5/2.webp",
-  "/assets/product_/e5/3.webp",
-  "/assets/product_/e5/4.webp",
-  "/assets/product_/e5/5.webp",
-  "/assets/product_/e5/6.webp",
-  "/assets/product_/e5/7.webp",
-  "/assets/product_/e5/8.webp",
-  "/assets/product_/e5/9.webp",
-  "/assets/product_/e5/10.webp",
-  "/assets/product_/e5/11.webp",
-  "/assets/product_/e5/12.webp",
-  "/assets/product_/e5/13.webp",
-  "/assets/product_/e5/14.webp",
-  
+  require("components/icons/chat.js"),
+  require("components/icons/check.js"),
+  require("components/icons/github.js"),
+  require("components/icons/slack.js"),
+  require("components/icons/twitter.js"),
+  require("components/icons/youtube.js"),
 ];
 
 const E5FeatureImages = [

@@ -38,7 +38,7 @@ const workbookSeries = [
     ],
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 40000),
-    image: '/assets/all_product_page/all product page E5 photo.webp',
+    image: '/assets/all_product_page/e5.webp',
   },
   {
     key: 'E4',
@@ -53,7 +53,7 @@ const workbookSeries = [
     ],
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 50000),
-    image: '/assets/all_product_page/all product page E4 photo.webp',
+    image: '/assets/all_product_page/e4.webp',
   },
   // {
   //   key: 'E3',
@@ -205,8 +205,8 @@ function WorkbookCard({ series }) {
           alt={series.name}
           width={400}
           height={380}
-          className="w-full h-[980%] object-cover shadow-lg"
-          style={{ background: 'transparent' }}
+          className="w-full h-[980%] object-contain shadow-lg"
+          style={{ background: 'transparent', objectFit: 'contain' }}
         />
       </div>
     </div>
@@ -226,8 +226,8 @@ function WorkbookCardMobile({ series }) {
           alt={series.name}
           width={600}
           height={360}
-          className="object-cover w-full h-80"
-          style={{ background: 'transparent' }}
+          className="object-contain w-full h-80"
+          style={{ background: 'transparent', objectFit: 'contain' }}
         />
       </div>
       {/* All text content below the image */}

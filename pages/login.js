@@ -79,7 +79,12 @@ const Login = () => {
                 } catch (e) {}
                 window.dispatchEvent(new Event('authChanged'));
                 toast.update(id, {render: 'Login successful!', type: 'success', isLoading: false, autoClose: 2000});
-                router.push(searchParams.get('redirect') || '/')
+                // Use backend-provided redirect if present
+                if (data.redirectTo) {
+                  router.push(data.redirectTo);
+                } else {
+                  router.push(searchParams.get('redirect') || '/');
+                }
             } else {
                 const data = await res.json();
                 toast.update(id, {render: data.message || 'Invalid credentials', type: 'error', isLoading: false, autoClose: 3000});
@@ -98,13 +103,17 @@ const Login = () => {
             <div className='relative z-10 w-full max-w-4xl flex flex-col md:flex-row items-stretch justify-center bg-white rounded-3xl shadow-2xl overflow-hidden'>
                 {/* Feature/Marketing Panel (Left) */}
                 <div className='flex-1 flex flex-col justify-center items-start bg-transparent p-8 md:p-12 min-w-[260px]'>
-                    <h2 className='text-2xl font-bold text-cyan-600 mb-6'>Welcome to Ention</h2>
-                    <ul className='list-disc pl-6 space-y-4 text-[#222]'>
-                        <li><span className='font-bold'>Secure cloud-based account</span><br/>Your data and preferences are always safe and accessible.</li>
-                        <li><span className='font-bold'>Track your orders and warranty</span><br/>View your purchase history and warranty status in one place.</li>
-                        <li><span className='font-bold'>Access exclusive member offers</span><br/>Get special discounts and early access to new products.</li>
-                        <li><span className='font-bold'>Fast, personalized support</span><br/>Reach our team quickly for any help you need.</li>
-                        <li><span className='font-bold'>Easy returns and service requests</span><br/>Initiate returns or service requests with just a few clicks.</li>
+                    <h2 className='text-3xl font-extrabold text-cyan-600 mb-4'>Welcome to Ention</h2>
+                    <p className='text-lg text-[#0d223a] mb-6 max-w-md'>
+                        Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.<br/>
+                        <span className='text-[#007E9E] font-semibold'>Proudly Made in India.</span> Experience performance, customization, and support—built for you.
+                    </p>
+                    <ul className='list-disc pl-6 space-y-3 text-[#222] text-base'>
+                        <li><b>Customization:</b> Tailor your laptop to your needs.</li>
+                        <li><b>Performance:</b> Intel® & AMD chipsets, built for work and play.</li>
+                        <li><b>Affordability:</b> Premium features at a fair price.</li>
+                        <li><b>18-Month Onsite Warranty:</b> At your doorstep, anywhere in India.</li>
+                        <li><b>Expert Support:</b> Fast, reliable help when you need it.</li>
                     </ul>
                 </div>
                 {/* Login Form (Right) */}
