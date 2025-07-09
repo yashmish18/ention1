@@ -4,9 +4,10 @@ import "swiper/css";
 import { useState, useRef } from "react";
 
 const defaultImages = [
-  "/assets/landingpage_carsouel/4.svg",
-  "/assets/landingpage_carsouel/5.svg",
-  "/assets/landingpage_carsouel/6.svg"
+  "/assets/landing_page/1A.webp",
+  "/assets/landing_page/2A.webp",
+  "/assets/landing_page/3A.webp",
+  "/assets/landing_page/4A.webp",
 ];
 
 export default function ProductImageCarouselMobile({ images }) {
@@ -43,7 +44,7 @@ export default function ProductImageCarouselMobile({ images }) {
                 background: 'none',
                 transform: middleSlide === idx ? 'scale(1.08)' : 'scale(1)',
                 transition: 'transform 0.5s, box-shadow 0.5s',
-                boxShadow: middleSlide === idx ? '0 8px 32px #01e9fe88' : 'none',
+               
                 borderRadius: '0',
               }}
             >

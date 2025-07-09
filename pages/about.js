@@ -35,7 +35,7 @@ const About = () => {
           <AboutHeroCarousel />
         </div>
         <div className="block md:hidden w-full my-8">
-          <ProductImageCarouselMobile images={['/assets/aboutus_page/1.svg','/assets/aboutus_page/2.svg','/assets/aboutus_page/3.svg']} />
+          <ProductImageCarouselMobile images={['/assets/aboutus_page/1.webp','/assets/aboutus_page/3.webp','/assets/aboutus_page/4.webp', '/assets/aboutus_page/5.webp', '/assets/aboutus_page/6.webp']} />
         </div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
          

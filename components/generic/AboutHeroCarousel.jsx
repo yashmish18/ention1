@@ -4,39 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // Import background images
-import slide1Bg from "public/assets/aboutus_page/1.svg";
-import slide2Bg from "public/assets/aboutus_page/2.svg";
-import slide3Bg from "public/assets/aboutus_page/3.svg";
+import slide1Bg from "public/assets/aboutus_page/1.webp";
+import slide2Bg from "public/assets/aboutus_page/2.webp";
+import slide3Bg from "public/assets/aboutus_page/3.webp";
+import slide4Bg from "public/assets/aboutus_page/4.webp";
+// Add any additional carousel images here
+import slide5Bg from "public/assets/aboutus_page/5.webp";
+import slide6Bg from "public/assets/aboutus_page/6.webp";
 
-const slides = [
-  {
-    key: 0,
-    // heading: "Ention Is Not a Brand.",
-    // subheading: "It's your working companion.",
-    background: slide1Bg,
-  },
-  {
-    key: 1,
-    // description: (
-    //   <>
-    //     <div className="backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/20 shadow-2xl">
-    //       <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto text-center font-medium leading-relaxed font-inter">
-    //         Ention is more than a label; it's a philosophy. Inspired by the humble phrase <b className="text-gray-200">"mention not"</b>, Ention was thoughtfully crafted to represent our core values. Each letter in Ention stands for: <span className="font-bold text-white bg-white/10 px-2 py-1 rounded">Empowering Nations through Technology, Innovation, Opportunity, and New Ideas.</span>
-    //       </p>
-    //     </div>
-    //   </>
-    // ),
-    background: slide2Bg,
-  },
-  {
-    key: 2,
-    // description: (
-    //   <>
-    //   </>
-    // ),
-    background: slide3Bg,
-  },
-];
+const slideImages = [slide1Bg, slide2Bg, slide3Bg, slide4Bg, slide5Bg, slide6Bg].filter(Boolean);
+const slides = slideImages.map((img, idx) => ({ key: idx, background: img }));
 
 export default function AboutHeroCarousel({ showText = true }) {
   const [active, setActive] = useState(0);

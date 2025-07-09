@@ -22,26 +22,7 @@ const products = [
 ];
 
 // Minimal, modern carousel for the product homepage
-const showcaseSlides = [
-  {
-    key: 0,
-    image: require("public/assets/aboutus_page/1.svg"),
-    headline: "Ention E-Series: Power Meets Elegance",
-    sub: "Your next laptop, reimagined."
-  },
-  {
-    key: 1,
-    image: require("public/assets/aboutus_page/2.svg"),
-    headline: "Empowering Innovation",
-    sub: "Built for students, professionals, and businesses."
-  },
-  {
-    key: 2,
-    image: require("public/assets/aboutus_page/3.svg"),
-    headline: "Minimal. Modern. Made for You.",
-    sub: "Experience the Ention difference."
-  }
-];
+
 
 const workbookSeries = [
   {
@@ -57,7 +38,7 @@ const workbookSeries = [
     ],
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 40000),
-    image: '/assets/product_/e5/15.png',
+    image: '/assets/all_product_page/all product page E5 photo.webp',
   },
   {
     key: 'E4',
@@ -72,23 +53,23 @@ const workbookSeries = [
     ],
     bag: 'Laptop bag worth 1500',
     price: '₹' + (Math.floor(Math.random() * 10000) + 50000),
-    image: '/assets/product_/e4/IMG_1107.JPG',
+    image: '/assets/all_product_page/all product page E4 photo.webp',
   },
-  {
-    key: 'E3',
-    name: 'Workbook series E3',
-    features: [
-      'Made for rough use',
-      'dual heating system',
-      'With a full-metal body,',
-      'Intel i5-13500H has 18 MB of L3 cache 2.6 boost up to 4.7 GHz',
-      'Window 11',
-      'Display 15.6inch, full HD IPS',
-    ],
-    bag: 'Laptop bag worth 1500',
-    price: '₹' + (Math.floor(Math.random() * 10000) + 30000),
-    image: '/assets/product_/e3/1.png',
-  },
+  // {
+  //   key: 'E3',
+  //   name: 'Workbook series E3',
+  //   features: [
+  //     'Made for rough use',
+  //     'dual heating system',
+  //     'With a full-metal body,',
+  //     'Intel i5-13500H has 18 MB of L3 cache 2.6 boost up to 4.7 GHz',
+  //     'Window 11',
+  //     'Display 15.6inch, full HD IPS',
+  //   ],
+  //   bag: 'Laptop bag worth 1500',
+  //   price: '₹' + (Math.floor(Math.random() * 10000) + 30000),
+  //   image: '/assets/product_/e3/1.png',
+  // },
 ];
 
 function HeroCarousel() {
@@ -171,6 +152,25 @@ function WorkbookCard({ series }) {
   // Map series.key to product id
   const idMap = { E5: 5, E4: 4, E3: 3 };
   const productId = idMap[series.key];
+  // Special handling for E3: show blurred card with 'Launching Soon'
+  if (series.key === 'E3') {
+    return (
+      <div className="bg-[#b9d2df] shadow-2xl flex flex-col md:flex-row overflow-hidden border-0 h-[380px] my-6">
+        <div className="flex-1 flex flex-col justify-between p-4 relative z">
+          <div>
+            <h2 className="text-2xl font-bold mb-4 text-[#0d223a]">Workbook series E3</h2>
+            <ul className="list-disc pl-6 mb-4 text-base text-[#222] space-y-1">
+              <li>Launching Soon</li>
+            </ul>
+          </div>
+        </div>
+        <div className="md:w-1/2 w-full h-full flex items-center justify-center relative">
+          <div className="w-full h-full flex items-center justify-center bg-[#b9d2df] blur-sm absolute inset-0 z-0" />
+          <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-[#007e9e] z-10">Launching Soon</span>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="bg-[#b9d2df] shadow-2xl flex flex-col md:flex-row overflow-hidden border-0 h-[380px] my-6">
       {/* Left: Details */}
