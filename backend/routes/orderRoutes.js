@@ -56,7 +56,7 @@ router.post('/',
 
 /**
  * @swagger
- * /orders:
+ * /orders/all:
  *   get:
  *     summary: Get all orders (Admin only)
  *     tags: [Orders]
@@ -89,11 +89,11 @@ router.post('/',
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/', protect, isAdmin, getAllOrders);
+router.get('/all', protect, isAdmin, getAllOrders);
 
 /**
  * @swagger
- * /orders/myorders:
+ * /orders/my-orders:
  *   get:
  *     summary: Get logged-in user's orders
  *     tags: [Orders]
@@ -120,11 +120,11 @@ router.get('/', protect, isAdmin, getAllOrders);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.get('/myorders', protect, getUserOrders);
+router.get('/my-orders', protect, getUserOrders);
 
 /**
  * @swagger
- * /orders/{id}:
+ * /orders/{id}/status:
  *   put:
  *     summary: Update order status (Admin only)
  *     tags: [Orders]
@@ -153,7 +153,12 @@ router.get('/myorders', protect, getUserOrders);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Order'
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 order:
+ *                   $ref: '#/components/schemas/Order'
  *       401:
  *         description: Unauthorized
  *         content:
@@ -173,7 +178,7 @@ router.get('/myorders', protect, getUserOrders);
  *             schema:
  *               $ref: '#/components/schemas/Error'
  */
-router.put('/:id', protect, isAdmin, updateOrderStatus);
+router.put('/:id/status', protect, isAdmin, updateOrderStatus);
 
 /**
  * @swagger

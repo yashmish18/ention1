@@ -119,3 +119,56 @@ exports.cancelOrder = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+/**
+ * @desc   Admin-only: Get all orders, with user info, sorted by latest first
+ * @route  GET /orders
+ * @access Admin
+ */
+exports.getAllOrders = async (req, res) => {
+  try {
+    const orders = await Order.find()
+      .populate('user', 'name email')
+      .sort({ createdAt: -1 });
+    res.status(200).json({ success: true, orders });
+  } catch (err) {
+    console.error('getAllOrders error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+/**
+ * @desc   Get orders for the currently authenticated user
+ * @route  GET /orders/myorders
+ * @access Private
+ */
+exports.getUserOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.user.id }).sort({ createdAt: -1 });
+    res.status(200).json({ success: true, orders });
+  } catch (err) {
+    console.error('getUserOrders error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+/**
+ * @desc   Admin-only: Update the status of a specific order
+ * @route  PUT /orders/:id
+ * @access Admin
+ */
+exports.updateOrderStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const order = await Order.findById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ error: 'Order not found' });
+    }
+    order.status = status;
+    await order.save();
+    res.status(200).json({ success: true, order });
+  } catch (err) {
+    console.error('updateOrderStatus error:', err.message);
+    res.status(500).json({ error: err.message });
+  }
+};

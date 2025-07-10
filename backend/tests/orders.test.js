@@ -2,6 +2,9 @@ const request = require('supertest');
 const app = require('../server');
 const User = require('../models/User');
 const Order = require('../models/Order');
+const orderController = require('../controllers/orderController');
+const httpMocks = require('node-mocks-http');
+jest.mock('../models/Order');
 
 describe('Order Endpoints', () => {
   let testUser;
@@ -337,6 +340,85 @@ describe('Order Endpoints', () => {
         .expect(404);
 
       expect(response.body).toHaveProperty('error', 'Order not found');
+    });
+  });
+}); 
+
+describe('Order Controller Unit Tests', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = httpMocks.createRequest();
+    res = httpMocks.createResponse();
+    res.status = jest.fn().mockReturnValue(res);
+    res.json = jest.fn().mockReturnValue(res);
+    jest.clearAllMocks();
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  describe('getAllOrders', () => {
+    it('should return all orders (success)', async () => {
+      const mockOrders = [{ _id: '1' }, { _id: '2' }];
+      Order.find.mockReturnValue({ populate: () => ({ sort: () => Promise.resolve(mockOrders) }) });
+      await orderController.getAllOrders(req, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ success: true, orders: mockOrders });
+    });
+    it('should handle server error', async () => {
+      Order.find.mockImplementation(() => { throw new Error('DB error'); });
+      await orderController.getAllOrders(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ error: 'DB error' }));
+    });
+  });
+
+  describe('getUserOrders', () => {
+    it('should return user orders (success)', async () => {
+      const mockOrders = [{ _id: '1', user: 'u1' }];
+      req.user = { id: 'u1' };
+      Order.find.mockReturnValue({ sort: () => Promise.resolve(mockOrders) });
+      await orderController.getUserOrders(req, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ success: true, orders: mockOrders });
+    });
+    it('should handle server error', async () => {
+      req.user = { id: 'u1' };
+      Order.find.mockImplementation(() => { throw new Error('DB error'); });
+      await orderController.getUserOrders(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ error: 'DB error' }));
+    });
+  });
+
+  describe('updateOrderStatus', () => {
+    it('should update order status (success)', async () => {
+      req.params = { id: 'order1' };
+      req.body = { status: 'Shipped' };
+      const mockOrder = { status: 'Pending', save: jest.fn().mockResolvedValue(true) };
+      Order.findById.mockResolvedValue(mockOrder);
+      await orderController.updateOrderStatus(req, res);
+      expect(mockOrder.status).toBe('Shipped');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ success: true, order: mockOrder });
+    });
+    it('should return 404 if order not found', async () => {
+      req.params = { id: 'order1' };
+      req.body = { status: 'Shipped' };
+      Order.findById.mockResolvedValue(null);
+      await orderController.updateOrderStatus(req, res);
+      expect(res.status).toHaveBeenCalledWith(404);
+      expect(res.json).toHaveBeenCalledWith({ error: 'Order not found' });
+    });
+    it('should handle server error', async () => {
+      req.params = { id: 'order1' };
+      req.body = { status: 'Shipped' };
+      Order.findById.mockRejectedValue(new Error('DB error'));
+      await orderController.updateOrderStatus(req, res);
+      expect(res.status).toHaveBeenCalledWith(500);
+      expect(res.json).toHaveBeenCalledWith(expect.objectContaining({ error: 'DB error' }));
     });
   });
 }); 

@@ -1,3 +1,6 @@
+process.env.NODE_ENV = 'test';
+// Add any global setup here, e.g. jest-extended, custom matchers, etc.
+
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
 

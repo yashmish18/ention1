@@ -18,12 +18,11 @@ import { FaShoppingCart, FaBolt, FaCamera, FaBatteryFull, FaMicrochip } from "re
 import { BentoGrid, BentoGridItem } from "./index";
 
 const E5Images = [
-  require("components/icons/chat.js"),
-  require("components/icons/check.js"),
-  require("components/icons/github.js"),
-  require("components/icons/slack.js"),
-  require("components/icons/twitter.js"),
-  require("components/icons/youtube.js"),
+  "/assets/product_/e5/1.webp",
+  "/assets/product_/e5/2.webp",
+  "/assets/product_/e5/3.webp",
+  "/assets/product_/e5/4.webp",
+  "/assets/product_/e5/5.webp",
 ];
 
 const E5FeatureImages = [
