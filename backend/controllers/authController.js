@@ -3,11 +3,20 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User'); // Adjust the path as necessary
 require('dotenv').config(); // Make sure this is at the top
 
-// Function to create token
-const createToken = (user) => {
+// Function to create access token
+const createAccessToken = (user) => {
   return jwt.sign(
     { id: user._id, name: user.name, email: user.email },
     process.env.JWT_SECRET,
+    { expiresIn: '15m' }
+  );
+};
+
+// Function to create refresh token
+const createRefreshToken = (user) => {
+  return jwt.sign(
+    { id: user._id },
+    process.env.JWT_REFRESH_SECRET,
     { expiresIn: '7d' }
   );
 };
@@ -57,9 +66,65 @@ const loginUser = async (req, res) => {
     return res.status(400).json({ message: 'Invalid credentials' });
   }
 
-  const token = createToken(user);
+  const accessToken = createAccessToken(user);
+  const refreshToken = createRefreshToken(user);
 
-  res.status(200).json({ message: 'Login successful', token });
+  // Set refresh token as httpOnly cookie
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+  });
+
+  res.status(200).json({ 
+    message: 'Login successful', 
+    accessToken,
+    user: {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role
+    }
+  });
+};
+
+// Refresh token endpoint
+const refreshToken = async (req, res) => {
+  const { refreshToken } = req.cookies;
+
+  if (!refreshToken) {
+    return res.status(401).json({ message: 'Refresh token not found' });
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const user = await User.findById(decoded.id).select('-password');
+    
+    if (!user) {
+      return res.status(401).json({ message: 'User not found' });
+    }
+
+    const accessToken = createAccessToken(user);
+    
+    res.status(200).json({ 
+      accessToken,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    return res.status(401).json({ message: 'Invalid refresh token' });
+  }
+};
+
+// Logout endpoint
+const logout = async (req, res) => {
+  res.clearCookie('refreshToken');
+  res.status(200).json({ message: 'Logged out successfully' });
 };
 
 const googleRedirect = async (req, res) => {
@@ -114,6 +179,8 @@ const logoutUser = (req, res) => {
 module.exports = {
   signupUser,
   loginUser,
+  refreshToken,
+  logout,
   googleRedirect,
   loginSuccess,
   logoutUser
