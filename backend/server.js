@@ -14,7 +14,13 @@ const errorHandler = require('./middlewares/errorMiddleware');
 const corsConfig = require('./config/cors');
 const cookieParser = require('cookie-parser');
 
-const apiRoutes = require('./routes');
+// Import all routes
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const contactRoutes = require('./routes/contact');
+const cardsRoutes = require('./routes/cards');
+const associateRoutes = require('./routes/associate');
 
 const app = express();
 
@@ -26,8 +32,19 @@ app.use(mongoSanitize());
 app.use(morgan('combined'));
 app.use(cookieParser());
 
+// Apply rate limiting
+app.use('/api/', generalLimiter);
+app.use('/api/auth/', sensitiveLimiter);
+
 // Routes
-app.use('/api', apiRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/cards', cardsRoutes);
+app.use('/api/associate', associateRoutes);
+
+// Error handling middleware
 app.use(errorHandler);
 
 // Connect to DB and start server

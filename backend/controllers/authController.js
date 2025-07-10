@@ -6,7 +6,7 @@ require('dotenv').config(); // Make sure this is at the top
 // Function to create access token
 const createAccessToken = (user) => {
   return jwt.sign(
-    { id: user._id, name: user.name, email: user.email },
+    { id: user._id, name: user.name, email: user.email, role: user.role },
     process.env.JWT_SECRET,
     { expiresIn: '15m' }
   );
@@ -21,72 +21,70 @@ const createRefreshToken = (user) => {
   );
 };
 
-const signupUser = async (req, res) => {
-  const { name, email, phone, password } = req.body;
-
-  if (!name || !email || !phone || !password) {
-    return res.status(400).json({ message: 'All fields are required' });
-  }
-
-  const existingUser = await User.findOne({ email });
-  if (existingUser) {
-    return res.status(400).json({ message: 'User already exists' });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const user = new User({
-    name,
-    email,
-    phone,
-    password: hashedPassword
-  });
-
-  await user.save();
-
-  const token = createToken(user);
-
-  res.status(201).json({ message: 'User registered successfully', token });
+// Function to create token (for backward compatibility)
+const createToken = (user) => {
+  return jwt.sign(
+    { id: user._id, name: user.name, email: user.email, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: '24h' }
+  );
 };
 
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
+exports.register = async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    const token = createToken(user);
+    res.status(201).json({ user, token });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
+};
 
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(400).json({ message: 'Invalid credentials' });
-  }
-
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    return res.status(400).json({ message: 'Invalid credentials' });
-  }
-
-  const accessToken = createAccessToken(user);
-  const refreshToken = createRefreshToken(user);
-
-  // Set refresh token as httpOnly cookie
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-  });
-
-  res.status(200).json({ 
-    message: 'Login successful', 
-    accessToken,
-    user: {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
-  });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid credentials' });
+    }
+
+    const accessToken = createAccessToken(user);
+    const refreshToken = createRefreshToken(user);
+
+    // Set refresh token as httpOnly cookie
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+    });
+
+    // Secure admin redirect logic
+    let redirectTo = undefined;
+    if (email === 'business@ention.in' && await bcrypt.compare(password, user.password)) {
+      redirectTo = '/admin';
+    }
+
+    res.status(200).json({ 
+      message: 'Login successful', 
+      accessToken,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      },
+      redirectTo
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 };
 
 // Refresh token endpoint
@@ -177,8 +175,8 @@ const logoutUser = (req, res) => {
 };
 
 module.exports = {
-  signupUser,
-  loginUser,
+  register: exports.register,
+  login: exports.login,
   refreshToken,
   logout,
   googleRedirect,

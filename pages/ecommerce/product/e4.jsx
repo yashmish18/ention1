@@ -17,18 +17,19 @@ import { FaShoppingCart, FaBolt, FaCamera, FaBatteryFull, FaMicrochip } from "re
 import { BentoGrid, BentoGridItem } from "./index";
 
 const E4Images = [
-  "/assets/product_/e4/IMG_1122.JPG",
-  "/assets/product_/e4/IMG_9893.jpg",
-  "/assets/product_/e4/IMG_9879.jpg",
-  "/assets/product_/e4/IMG_9878.jpg",
-  "/assets/product_/e4/IMG_9877.jpg",
-  "/assets/product_/e4/IMG_9873.jpg",
-  "/assets/product_/e4/IMG_9872.jpg",
-  "/assets/product_/e4/IMG_9867.jpg",
-  "/assets/product_/e4/IMG_9860.jpg",
-  "/assets/product_/e4/IMG_1125.JPG",
-  "/assets/product_/e4/IMG_1124.JPG",
-  "/assets/product_/e4/IMG_1123.JPG",
+  "/assets/product_/e4/IMG_9893.webp",
+  "/assets/product_/e4/IMG_9879 (1).webp",
+  "/assets/product_/e4/IMG_9878.webp",
+  "/assets/product_/e4/IMG_9877.webp",
+  "/assets/product_/e4/IMG_9873 (1).webp",
+  "/assets/product_/e4/IMG_9873.webp",
+  "/assets/product_/e4/IMG_9872.webp",
+  "/assets/product_/e4/IMG_9867 (1).webp",
+  "/assets/product_/e4/IMG_9860.webp",
+  "/assets/product_/e4/IMG_1125.webp",
+  "/assets/product_/e4/IMG_1124.webp",
+  "/assets/product_/e4/IMG_1123.webp",
+  "/assets/product_/e4/IMG_1122.webp",
 ];
 
 const E5FeatureImages = [

@@ -11,18 +11,14 @@ export default function TestCarousel() {
   const totalSlides = useRef(10);
   const [selectedImage, setSelectedImage] = useState(0);
   const imagesArray = [
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
-    "/assets/product/e1/image1.jpg",
+    "/assets/all_product_page/all product carousal 6.webp",
+    "/assets/all_product_page/all product carousal photo1.webp",
+    "/assets/all_product_page/all product carousal photo2.webp",
+    "/assets/all_product_page/all product carousal photo3.webp",
+    "/assets/all_product_page/all product carousal photo4.webp",
+    "/assets/all_product_page/all product carousal photo5.webp",
+    "/assets/all_product_page/all product carousal photo6.webp",
+    "/assets/all_product_page/Copy of copy uncut (22).webp",
   ];
   useEffect(() => {
     console.log("middleSlide", middleSlide);
@@ -106,7 +102,7 @@ export default function TestCarousel() {
         })}
       </Swiper>
       <div className="flex justify-center mt-5">
-        {[...Array(12)].map((_, index) => (
+        {imagesArray.map((image, index) => (
           <div
             key={index}
             onClick={() => {
@@ -115,7 +111,7 @@ export default function TestCarousel() {
             }}
           >
             <Image
-              src={"/assets/0N1A1389.png"}
+              src={image}
               alt="laptop image"
               className={`w-16 h-16 object-cover border-gray-300 rounded m-3 cursor-pointer ${
                 selectedImage === index ? "border-2" : "border"
