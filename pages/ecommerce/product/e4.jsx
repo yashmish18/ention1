@@ -15,6 +15,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { FaShoppingCart, FaBolt, FaCamera, FaBatteryFull, FaMicrochip } from "react-icons/fa";
 import { BentoGrid, BentoGridItem } from "./index";
+import ReviewSection from 'components/ReviewSection';
 
 const E4Images = [
   "/assets/product_/e4/IMG_9893.webp",
@@ -157,7 +158,7 @@ export default function E4ProductPage() {
             </button>
             <div className="flex items-center justify-center w-full" style={{ width: '100%', height: 'auto' }}>
               <Image
-                src={E4Images[currentImage]}
+                src={E4Images[currentImage] || '/assets/0N1A1389.png'}
                 alt={`E4 Product Image ${currentImage + 1}`}
                 width={1200}
                 height={800}
@@ -440,7 +441,7 @@ export default function E4ProductPage() {
         <div className="flex justify-center items-center w-full">
           <div className="w-full max-w-lg md:max-w-7xl aspect-video rounded-xl overflow-hidden bg-black">
             <video
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              src="/assets/product_/e4/Building (2).mp4.mp4"
               controls
               className="w-full h-full object-cover rounded-xl shadow-lg bg-black"
             >
@@ -610,6 +611,7 @@ export default function E4ProductPage() {
           </div>
         </div>
       </section>
+      <ReviewSection productId="e4" />
     </div>
   );
 } 

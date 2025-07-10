@@ -50,7 +50,7 @@ const About = () => {
           <div className="relative w-full h-full flex justify-center">
             {showVideo && (
               <video
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                src="/assets/aboutus_page/0709 (1)(1).mp4"
                 controls
                 className="w-full max-w-6xl rounded-lg shadow-lg"
               ></video>

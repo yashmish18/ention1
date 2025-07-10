@@ -16,14 +16,23 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { FaShoppingCart, FaBolt, FaCamera, FaBatteryFull, FaMicrochip } from "react-icons/fa";
 import { BentoGrid, BentoGridItem } from "./index";
+import ReviewSection from 'components/ReviewSection';
 
 const E5Images = [
-  require("components/icons/chat.js"),
-  require("components/icons/check.js"),
-  require("components/icons/github.js"),
-  require("components/icons/slack.js"),
-  require("components/icons/twitter.js"),
-  require("components/icons/youtube.js"),
+  "/assets/product_/e5/1.webp",
+  "/assets/product_/e5/2.webp",
+  "/assets/product_/e5/3.webp",
+  "/assets/product_/e5/4.webp",
+  "/assets/product_/e5/5.webp",
+  "/assets/product_/e5/6.webp",
+  "/assets/product_/e5/7.webp",
+  "/assets/product_/e5/8.webp",
+  "/assets/product_/e5/9.webp",
+  "/assets/product_/e5/10.webp",
+  "/assets/product_/e5/11.webp",
+  "/assets/product_/e5/12.webp",
+  "/assets/product_/e5/13.webp",
+  "/assets/product_/e5/14.webp"
 ];
 
 const E5FeatureImages = [
@@ -147,7 +156,7 @@ export default function E5ProductPage() {
             </button>
             <div className="flex items-center justify-center w-full" style={{ width: '100%', height: 'auto' }}>
               <Image
-                src={E5Images[currentImage]}
+                src={E5Images[currentImage] || '/assets/0N1A1389.png'}
                 alt={`Product Image ${currentImage + 1}`}
                 width={1200}
                 height={800}
@@ -162,12 +171,12 @@ export default function E5ProductPage() {
           <div className="flex flex-wrap gap-2 justify-center items-center pt-4 w-full">
             {E5Images.map((img, idx) => (
               <div
-                key={img}
+                key={typeof img === 'string' ? img : idx}
                 className={`${idx === currentImage ? "opacity-100" : "opacity-70"} rounded bg-[#133B5C] cursor-pointer transition-all`}
                 onClick={() => setImage(idx)}
                 style={{ border: '1px solid transparent', boxShadow: '0 0 0 0.5px #fff' }}
               >
-                <Image src={img} alt="Thumbnail" width={60} height={40} className="object-cover w-12 h-9" loading="lazy" />
+                <Image src={img || '/assets/0N1A1389.png'} alt="Thumbnail" width={60} height={40} className="object-cover w-12 h-9" loading="lazy" />
               </div>
             ))}
           </div>
@@ -429,7 +438,7 @@ export default function E5ProductPage() {
         <div className="flex justify-center items-center w-full">
           <div className="w-full max-w-lg md:max-w-7xl aspect-video rounded-xl overflow-hidden bg-black">
             <video
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              src="/assets/product_/e5/0709 (1)(3).mp4"
               controls
               className="w-full h-full object-cover rounded-xl shadow-lg bg-black"
             >
@@ -653,6 +662,7 @@ export default function E5ProductPage() {
           </div>
         </div>
       </section>
+      <ReviewSection productId="e5" />
     </div>
   );
 } 

@@ -12,11 +12,10 @@ const CategoriesPostCard = ({ post }) => (
        
        <Image
          unoptimized
-      
          width={500}
          height={500}
          className="rounded h-80"
-         src={post.featuredImage.url}
+         src={post.featuredImage?.url || '/assets/0N1A1389.png'}
        />
    
    </Link>

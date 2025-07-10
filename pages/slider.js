@@ -12,17 +12,17 @@ const ImageSlider = () => {
     {
       img: computer1,
       ref: video1Ref,
-      video: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      video: '/assets/landing_page/0709 (1)(1).mp4',
     },
     {
       img: computer1,
       ref: video2Ref,
-      video: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      video: '/assets/landing_page/0709 (1)(1).mp4',
     },
     {
       img: computer1,
       ref: video3Ref,
-      video: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      video: '/assets/landing_page/0709 (1)(1).mp4',
     },
   ];
 

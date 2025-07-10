@@ -12,8 +12,7 @@ const PostDetail = ({ post }) => {
          alt={post.title}
          width={800}
          height={500}
-      
-         src={post.featuredImage.url} className=" h-full w-full object-cover  shadow-lg rounded-t-lg lg:rounded-lg" />
+         src={post.featuredImage?.url || '/assets/0N1A1389.png'} className=" h-full w-full object-cover  shadow-lg rounded-t-lg lg:rounded-lg" />
    </div>
         <div className="px-4 lg:px-0">
           <div className="flex items-center mb-8 w-full">

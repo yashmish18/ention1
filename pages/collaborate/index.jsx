@@ -145,7 +145,7 @@ export default function CollaboratePage() {
           <a href="#" className="inline-block text-cyan-300 underline text-lg font-medium hover:text-cyan-200 transition"><FaChartLine className="inline mr-2" />Explore Our Product Catalog</a>
         </div>
         <div className="flex-1 flex justify-center">
-          <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=500&q=80" alt="Product Line" className="rounded-2xl shadow-2xl w-full max-w-xs object-cover" />
+          <img src="assets/landing_page/e5.webp" alt="Product Line" className=" w-full max-w-xs object-cover" />
         </div>
       </section>
 

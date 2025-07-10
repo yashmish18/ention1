@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import ReviewSection from 'components/ReviewSection';
 
 
 const E3Images = [
@@ -144,7 +145,7 @@ export default function E5ProductPage() {
            </button>
            <div className="flex items-center justify-center w-full" style={{ width: '100%', height: 'auto' }}>
              <Image
-               src={E3Images[currentImage]}
+               src={E3Images[currentImage] || '/assets/0N1A1389.png'}
                alt={`Product Image ${currentImage + 1}`}
                width={1200}
                height={800}
@@ -655,6 +656,7 @@ export default function E5ProductPage() {
          </div>
        </div>
      </section>
+     <ReviewSection productId="e3" />
    </div>
  );
 } 

@@ -17,7 +17,7 @@ const FeaturedPostCard = ({ post }) => {
          width={500}
          height={400}
          className="rounded h-60"
-         src={post.featuredImage.url}
+         src={post.featuredImage?.url || '/assets/0N1A1389.png'}
        />
    
    </Link>

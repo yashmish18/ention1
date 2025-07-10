@@ -112,18 +112,10 @@ export default function Home() {
           <div className="w-full flex justify-center">
             <div className="w-[100%] bg-[#007E9E] text-white py-2 rounded-ls shadow-lg overflow-hidden relative z-40">
               <div className="whitespace-nowrap overflow-hidden w-full">
-                <div className="animate-marquee flex items-center gap-12 text-lg font-semibold">
-                  <span> Summer Sale: Up to 20% off on select laptops!</span>
-                  <span> Free shipping on orders above ₹50,000</span>
-                  <span> Buy 1 Get 1 Free on Accessories</span>
-                  <span> No Cost EMI Available</span>
-                  <span> 2 Years Extended Warranty on E3 Series</span>
-                  {/* Duplicate for seamless infinite scroll */}
-                  <span> Summer Sale: Up to 20% off on select laptops!</span>
-                  <span> Free shipping on orders above ₹50,000</span>
-                  <span> Buy 1 Get 1 Free on Accessories</span>
-                  <span> No Cost EMI Available</span>
-                  <span> 2 Years Extended Warranty on E3 Series</span>
+                <div className="animate-marquee flex items-center gap-24 text-lg font-semibold">
+                  {Array(8).fill(null).map((_, i) => (
+                    <span key={i}>18 Months Warranty | Now Launching E4 and E5 | Made for Students, Made for Professionals | Proudly Made in India</span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -253,7 +245,7 @@ export default function Home() {
                   <div className="w-full text-center">
                     <div className="text-white text-lg font-bold mb-2">For Students</div>
                   </div>
-                  <Image src="/assets/product_/e5/IMG_1107.webp" alt="Student Laptop" width={150} height={120} className="mx-auto" />
+                  <Image src="/assets/landing_page/e5.webp" alt="Student Laptop" width={150} height={120} className="mx-auto" />
                   <div className="text-white text-sm font-normal leading-relaxed text-center">
                     Affordable, Lightweight, durable, and built to support your learning on the go.
                   </div>
@@ -266,7 +258,7 @@ export default function Home() {
                   <div className="w-full text-center">
                     <div className="text-white text-lg font-bold mb-2">For Professionals & Techies</div>
                   </div>
-                  <Image src="/assets/product_/e4/IMG_1122.webp" alt="Pro Laptop" width={150} height={120} className="mx-auto" />
+                  <Image src="/assets/landing_page/e4.webp" alt="Pro Laptop" width={150} height={120} className="mx-auto" />
                   <div className="text-white text-sm font-normal leading-relaxed text-center">
                     Customizable, seamlessly switch from work tasks to meetings with reliable performance. A powerful and customizable machine ready to take on your code, design, or research.
                   </div>
@@ -400,16 +392,16 @@ export default function Home() {
             <div className="flex flex-row items-end justify-center gap-4 md:gap-12 w-full max-w-5xl">
               {/* Left Image */}
               <img
-                src="/assets/landing_page/img_e5.webp"
-                alt="Ention Laptop E5"
-                className="w-[340px] md:w-[420px] xl:w-[520px] drop-shadow-2xl transition-all duration-500"
+                src="/assets/landing_page/Remove background project-3.png"
+                alt="Ention Laptop E4"
+                className="w-[400px] md:w-[520px] xl:w-[640px] drop-shadow-2xl transition-all duration-500"
                 style={{ zIndex: 1, filter: 'drop-shadow(0 8px 32px #01e9fe88)' }}
               />
               {/* Right Image */}
               <img
-                src="/assets/landing_page/img_e4.webp"
-                alt="Ention Laptop E4"
-                className="w-[340px] md:w-[420px] xl:w-[520px] drop-shadow-2xl transition-all duration-500"
+                src="/assets/landing_page/Remove background project-2.png"
+                alt="Ention Laptop E5"
+                className="w-[400px] md:w-[520px] xl:w-[640px] drop-shadow-2xl transition-all duration-500"
                 style={{ zIndex: 1, filter: 'drop-shadow(0 8px 32px #01e9fe88)' }}
               />
             </div>
@@ -425,7 +417,7 @@ export default function Home() {
                 autoplay={{ delay: 3500, disableOnInteraction: false }}
                 style={{ width: '100vw' }}
               >
-                {["/assets/0N1A1389.png", "/assets/0N1A1389.png", "/assets/0N1A1389.png"].map((img, idx) => (
+                {["/assets/landing_page/Remove background project-3.png", "/assets/landing_page/Remove background project-2.png"].map((img, idx) => (
                   <SwiperSlide key={idx}>
                     <div className="flex justify-center items-center w-full">
                       <img
@@ -576,7 +568,7 @@ export default function Home() {
               <motion.div
                 className="w-full min-[940px]:w-[560px] h-auto min-[940px]:h-[540px] xl:h-[620px] bg-[length:90%] mx-auto"
                 style={{
-                  backgroundImage: `url(/assets/landing_page/exp.webp)`,
+                  backgroundImage: `url(/assets/landing_page/1.png)`,
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                 }}

@@ -21,6 +21,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const contactRoutes = require('./routes/contact');
 const cardsRoutes = require('./routes/cards');
 const associateRoutes = require('./routes/associate');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/cards', cardsRoutes);
 app.use('/api/associate', associateRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

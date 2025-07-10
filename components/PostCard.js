@@ -14,8 +14,7 @@ const PostCard = ({ post }) => (
         width={800}
         height={500}
         className="shadow-lg rounded-t-lg lg:rounded-lg"
-        
-        src={post.featuredImage.url}
+        src={post.featuredImage?.url || '/assets/0N1A1389.png'}
       />
     </div>
     {/* <div className="relative overflow-hidden shadow-md pb-80 mb-6">
