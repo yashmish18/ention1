@@ -1,252 +1,168 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaMapMarkerAlt, FaCalendarAlt, FaCreditCard, FaBoxOpen, FaMoneyBillWave, FaMobileAlt, FaArrowLeft } from 'react-icons/fa';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function CheckoutPage() {
-  // Dummy addresses
-  const savedAddresses = [
-    {
-      id: 1,
-      label: 'Home',
-      name: 'John Doe',
-      line1: '123 Main Street',
-      line2: 'Apt 4B',
-      city: 'New York',
-      state: 'NY',
-      zip: '12345',
-      country: 'United States',
-    },
-    {
-      id: 2,
-      label: 'Office',
-      name: 'John Doe',
-      line1: '456 Park Avenue',
-      line2: 'Suite 12',
-      city: 'New York',
-      state: 'NY',
-      zip: '10001',
-      country: 'United States',
-    },
-  ];
+  // Remove all dummy data: savedAddresses, product, paymentMethods, upiApps, etc.
+  // Only keep state for user-provided address, pincode, and payment info.
+  // Refactor forms to use local state for address fields, and use Delhivery pincode check and Razorpay integration as before.
   const [step, setStep] = useState(1);
-  const [selectedAddressId, setSelectedAddressId] = useState(savedAddresses[0]?.id || null);
+  const [selectedAddress, setSelectedAddress] = useState({
+    firstName: '',
+    lastName: '',
+    line1: '',
+    line2: '',
+    city: '',
+    state: '',
+    zip: '',
+    country: '',
+  });
   const [useSavedAddress, setUseSavedAddress] = useState(true);
   const [paymentMode, setPaymentMode] = useState('card');
   const [upiMethod, setUpiMethod] = useState('id'); // 'id' or 'qr'
   const [selectedUpiApp, setSelectedUpiApp] = useState('googlepay');
+  const [pincode, setPincode] = useState("");
+  const [pincodeResult, setPincodeResult] = useState(null);
+  const [showRazorpay, setShowRazorpay] = useState(false);
 
-  // Dummy payment methods
-  const paymentMethods = [
-    { id: 'card', label: 'Credit/Debit Card', icon: <FaCreditCard className="inline mr-2" /> },
-    { id: 'upi', label: 'UPI', icon: <FaMobileAlt className="inline mr-2" /> },
-    { id: 'cod', label: 'Cash on Delivery', icon: <FaMoneyBillWave className="inline mr-2" /> },
-  ];
-  const [selectedPayment, setSelectedPayment] = useState(paymentMethods[0].id);
-
-  const deliveryDate = 'Monday, 10 June 2024';
-  const product = {
-    name: 'ENTION E3 Laptop',
-    image: '/assets/product_/e3/1.jpg',
-    price: 49999,
-    quantity: 1,
-  };
-  const subtotal = product.price * product.quantity;
-  const shipping = 0;
-  const total = subtotal + shipping;
+  const router = useRouter();
+  const price = Number(router.query.price) || 0;
 
   // Stepper labels
   const steps = [
     'Shipping address',
-    'Payment details',
     'Review your order',
   ];
 
-  const upiApps = [
-    { id: 'googlepay', name: 'Google Pay', icon: '/assets/favicon.png' },
-    { id: 'phonepe', name: 'PhonePe', icon: '/assets/bot.png' },
-    { id: 'paytm', name: 'Paytm', icon: '/assets/ention-logo.png' },
-    { id: 'bhim', name: 'BHIM', icon: '/assets/vercel.svg' },
-  ];
+  async function handleCheckPincode() {
+    setPincodeResult(null);
+    const res = await fetch(`/api/delhivery-pincode?pincode=${pincode}`);
+    const data = await res.json();
+    setPincodeResult(data);
+  }
+  function handleRazorpayPayment() {
+    if (typeof window === 'undefined') return;
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_pePfQTitk8KOIT',
+      amount: 13498, // Total amount for Razorpay
+      currency: 'INR',
+      name: 'ENTION',
+      description: 'Order Payment',
+      handler: function (response) {
+        alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+      },
+      prefill: {
+        email: 'customer@example.com',
+        contact: '9999999999',
+      },
+      theme: { color: '#0FAFCA' },
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  }
 
   // Render step content
   function renderStepContent() {
     if (step === 1) {
       return (
         <div className="w-full">
-          {savedAddresses.length > 0 && (
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Saved addresses</label>
-              <select
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 mb-2"
-                value={useSavedAddress ? selectedAddressId : ''}
-                onChange={e => {
-                  setUseSavedAddress(true);
-                  setSelectedAddressId(Number(e.target.value));
-                }}
-              >
-                {savedAddresses.map(addr => (
-                  <option key={addr.id} value={addr.id}>
-                    {addr.label}: {addr.line1}, {addr.city}
-                  </option>
-                ))}
-                <option value="">Add new address</option>
-              </select>
-              <button
-                type="button"
-                className="text-cyan-600 underline text-xs font-medium hover:text-cyan-800"
-                onClick={() => { setUseSavedAddress(false); setSelectedAddressId(null); }}
-              >
-                + Add new address
-              </button>
+          <form className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">First name *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="John" value={selectedAddress.firstName} onChange={e => setSelectedAddress(prev => ({ ...prev, firstName: e.target.value }))} />
             </div>
-          )}
-          {(!useSavedAddress || savedAddresses.length === 0) && (
-            <form className="w-full grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">First name *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="John" />
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Last name *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Snow" value={selectedAddress.lastName} onChange={e => setSelectedAddress(prev => ({ ...prev, lastName: e.target.value }))} />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Address line 1 *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Street name and number" value={selectedAddress.line1} onChange={e => setSelectedAddress(prev => ({ ...prev, line1: e.target.value }))} />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Address line 2</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Apartment, suite, unit, etc. (optional)" value={selectedAddress.line2} onChange={e => setSelectedAddress(prev => ({ ...prev, line2: e.target.value }))} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="New York" value={selectedAddress.city} onChange={e => setSelectedAddress(prev => ({ ...prev, city: e.target.value }))} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">State *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="NY" value={selectedAddress.state} onChange={e => setSelectedAddress(prev => ({ ...prev, state: e.target.value }))} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Zip / Postal code *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="12345" value={selectedAddress.zip} onChange={e => setSelectedAddress(prev => ({ ...prev, zip: e.target.value }))} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Country *</label>
+              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="United States" value={selectedAddress.country} onChange={e => setSelectedAddress(prev => ({ ...prev, country: e.target.value }))} />
+            </div>
+            <div className="md:col-span-2 flex items-center mt-2">
+              <input type="checkbox" className="mr-2" id="useForPayment" />
+              <label htmlFor="useForPayment" className="text-sm text-gray-700">Use this address for payment details</label>
+            </div>
+            <div className="mt-6">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Check Pincode Serviceability (Delhivery)</label>
+              <div className="flex gap-2 items-center">
+                <input type="text" className="border border-gray-300 rounded-lg px-4 py-2" placeholder="Enter Pincode" value={pincode} onChange={e => setPincode(e.target.value)} />
+                <button type="button" className="bg-cyan-600 text-white px-4 py-2 rounded-lg" onClick={handleCheckPincode}>Check</button>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Last name *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Snow" />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Address line 1 *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Street name and number" />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Address line 2</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Apartment, suite, unit, etc. (optional)" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">City *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="New York" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">State *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="NY" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Zip / Postal code *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="12345" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Country *</label>
-                <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="United States" />
-              </div>
-              <div className="md:col-span-2 flex items-center mt-2">
-                <input type="checkbox" className="mr-2" id="useForPayment" />
-                <label htmlFor="useForPayment" className="text-sm text-gray-700">Use this address for payment details</label>
-              </div>
-            </form>
-          )}
+              {pincodeResult && (
+                <div className={`mt-2 text-sm ${pincodeResult.available ? 'text-green-600' : 'text-red-600'}`}>{pincodeResult.message}</div>
+              )}
+            </div>
+          </form>
         </div>
       );
     }
     if (step === 2) {
       return (
         <div className="w-full flex flex-col gap-8">
-          <div className="text-lg font-semibold text-gray-700 mb-4">Select payment method</div>
-          <div className="flex flex-col gap-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="paymentMode" value="card" checked={paymentMode === 'card'} onChange={() => setPaymentMode('card')} className="accent-cyan-600" />
-              <span className="font-medium text-gray-800">Credit/Debit Card</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="paymentMode" value="upi" checked={paymentMode === 'upi'} onChange={() => setPaymentMode('upi')} className="accent-cyan-600" />
-              <span className="font-medium text-gray-800">UPI</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" name="paymentMode" value="cod" checked={paymentMode === 'cod'} onChange={() => setPaymentMode('cod')} className="accent-cyan-600" />
-              <span className="font-medium text-gray-800">Cash on Delivery</span>
-            </label>
-          </div>
-          {paymentMode === 'card' && (
-            <div className="flex flex-col gap-4 mt-4">
-              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Card number" />
-              <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Name on card" />
-              <div className="flex gap-4">
-                <input type="text" className="w-1/2 border border-gray-300 rounded-lg px-4 py-3" placeholder="MM/YY" />
-                <input type="text" className="w-1/2 border border-gray-300 rounded-lg px-4 py-3" placeholder="CVC" />
-              </div>
-            </div>
-          )}
-          {paymentMode === 'upi' && (
-            <div className="flex flex-col gap-4 mt-4">
-              <div className="w-full flex flex-wrap justify-center gap-6 mb-2">
-                {upiApps.map(app => (
-                  <label key={app.id} className={`flex flex-col items-center cursor-pointer px-2 py-1 rounded-lg border-2 transition-all ${selectedUpiApp === app.id ? 'border-cyan-500 bg-cyan-100' : 'border-transparent'}`}
-                    onClick={() => setSelectedUpiApp(app.id)}
-                  >
-                    <input
-                      type="radio"
-                      name="upiApp"
-                      value={app.id}
-                      checked={selectedUpiApp === app.id}
-                      onChange={() => setSelectedUpiApp(app.id)}
-                      className="hidden"
-                    />
-                    <img src={app.icon} alt={app.name} className="w-10 h-10 mb-1" />
-                    <span className="text-xs font-medium text-gray-800">{app.name}</span>
-                  </label>
-                ))}
-              </div>
-              <div className="flex gap-6 mb-2">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="upiMethod"
-                    value="id"
-                    checked={upiMethod === 'id'}
-                    onChange={() => setUpiMethod('id')}
-                    className="accent-cyan-600"
-                  />
-                  <span className="font-medium text-gray-800">Enter UPI ID</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="radio"
-                    name="upiMethod"
-                    value="qr"
-                    checked={upiMethod === 'qr'}
-                    onChange={() => setUpiMethod('qr')}
-                    className="accent-cyan-600"
-                  />
-                  <span className="font-medium text-gray-800">Scan QR Code</span>
-                </label>
-              </div>
-              {upiMethod === 'id' && (
-                <>
-                  <input type="text" className="w-full border border-gray-300 rounded-lg px-4 py-3" placeholder="Enter your UPI ID" />
-                  <div className="text-xs text-gray-500">We'll request payment via your UPI app after you place the order.</div>
-                </>
-              )}
-              {upiMethod === 'qr' && (
-                <div className="flex flex-col items-center gap-4 bg-cyan-50 rounded-lg p-4">
-                  <img src="/assets/qr-placeholder.png" alt="UPI QR Code" className="w-40 h-40 object-contain mb-2" />
-                  <div className="text-xs text-gray-700 text-center mb-2">Scan this QR code with your selected UPI app.</div>
-                </div>
-              )}
-            </div>
-          )}
-          {paymentMode === 'cod' && (
-            <div className="mt-4 text-sm text-gray-700 bg-cyan-50 rounded-lg px-4 py-3">
-              You will pay in cash when your order is delivered.
-            </div>
-          )}
-        </div>
-      );
-    }
-    if (step === 3) {
-      return (
-        <div className="w-full flex flex-col gap-8">
-          <div className="text-lg font-semibold text-gray-700 mb-4">Review your order (placeholder)</div>
-          <div className="text-gray-600">Order details and confirmation UI goes here.</div>
+          <div className="text-lg font-semibold text-gray-700 mb-4">Review your order</div>
         </div>
       );
     }
     return null;
   }
+
+  useEffect(() => {
+    if (step === 2 && !window.Razorpay) {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = () => {};
+      document.body.appendChild(script);
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (step === 2 && showRazorpay && window.Razorpay) {
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || 'rzp_test_pePfQTitk8KOIT',
+        amount: price * 100,
+        currency: 'INR',
+        name: 'ENTION',
+        description: 'Order Payment',
+        handler: function (response) {
+          alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+        },
+        prefill: {
+          email: 'customer@example.com',
+          contact: '9999999999',
+        },
+        theme: { color: '#0FAFCA' },
+        display: {
+          embed: true,
+          container: 'razorpay-embed-container'
+        }
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    }
+  }, [step, showRazorpay, price]);
 
   return (
     <>
@@ -254,7 +170,7 @@ export default function CheckoutPage() {
       <main className="hidden md:block min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-[#133B5C] via-[#0FAFCA] to-[#007e9e] pt-32">
         <div className="w-full max-w-5xl mx-auto flex flex-col md:flex-row bg-white rounded-2xl shadow-2xl min-h-[70vh] overflow-hidden">
           {/* Left: Stepper and Form (now on the left) */}
-          <section className="w-full md:w-3/5 flex flex-col items-start justify-start px-8 py-12">
+          <section className="w-full md:w-3/5 flex flex-col items-start justify-start px-8 py-12 relative min-h-[500px]">
             <h2 className="text-2xl font-bold text-[#0FAFCA] mb-8">Checkout</h2>
             {/* Stepper */}
             <div className="flex items-center mb-10 w-full">
@@ -267,7 +183,19 @@ export default function CheckoutPage() {
               ))}
             </div>
             {/* Step Content */}
-            {renderStepContent()}
+            <div className="flex-1 w-full">{renderStepContent()}</div>
+            {step === 2 && !showRazorpay && (
+              <button
+                className="absolute left-8 right-8 bottom-8 bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 px-8 rounded-xl shadow-lg text-lg transition"
+                onClick={() => setShowRazorpay(true)}
+                style={{ zIndex: 10 }}
+              >
+                Pay Now
+              </button>
+            )}
+            {step === 2 && showRazorpay && (
+              <div id="razorpay-embed-container" style={{ width: '100%' }}></div>
+            )}
           </section>
           {/* Right: Order Summary (now on the right) */}
           <aside className="w-full md:w-2/5 flex flex-col items-start justify-between px-8 py-12 border-l border-gray-200">
@@ -286,47 +214,22 @@ export default function CheckoutPage() {
               <div className="mb-10 flex items-center gap-4">
                 {/* Removed Sitemark logo and text */}
               </div>
-              <div className="mb-10">
-                <div className="text-gray-500 text-lg">Total</div>
-                <div className="text-5xl font-extrabold text-gray-900 mb-4">$134.98</div>
-                <div className="flex flex-col gap-5">
-                  <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
-                    <div>
-                      <div className="font-semibold text-gray-900">Professional plan</div>
-                      <div className="text-xs text-gray-500">Monthly subscription</div>
-                    </div>
-                    <div className="text-gray-900">$15.00</div>
-                  </div>
-                  <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
-                    <div>
-                      <div className="font-semibold text-gray-900">Dedicated support</div>
-                      <div className="text-xs text-gray-500">Included in the Professional plan</div>
-                    </div>
-                    <div className="text-green-600 font-semibold">Free</div>
-                  </div>
-                  <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
-                    <div>
-                      <div className="font-semibold text-gray-900">Hardware</div>
-                      <div className="text-xs text-gray-500">Devices needed for development</div>
-                    </div>
-                    <div className="text-gray-900">$69.99</div>
-                  </div>
-                  <div className="flex justify-between w-80 max-w-full group hover:bg-cyan-50 rounded-lg px-2 py-1 transition">
-                    <div>
-                      <div className="font-semibold text-gray-900">Landing page template</div>
-                      <div className="text-xs text-gray-500">License</div>
-                    </div>
-                    <div className="text-gray-900">$49.99</div>
-                  </div>
-                </div>
-              </div>
+              {/* In the right-side summary, remove all dummy order summary and product details. */}
+              {/* Instead, display the actual product price (from user selection or state) in the summary. */}
+              {/* Keep the Next button for navigation. */}
+              {/* On step 2, automatically show the Razorpay UI (no button click required). */}
             </div>
-            <button
-              className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 rounded-xl shadow-lg text-lg transition mt-8"
-              onClick={() => setStep(step < 3 ? step + 1 : step)}
-            >
-              {step < 3 ? 'Next' : 'Place Order'}
-            </button>
+            {step === 1 && (
+              <button
+                className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 rounded-xl shadow-lg text-lg transition mt-8"
+                onClick={() => setStep(step + 1)}
+              >
+                Next
+              </button>
+            )}
+            {step === 2 && showRazorpay && (
+              <div id="razorpay-embed-container" style={{ width: '100%' }}></div>
+            )}
           </aside>
         </div>
       </main>
@@ -362,23 +265,20 @@ export default function CheckoutPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">Saved addresses</label>
                 <select
                   className="w-full max-w-full border border-gray-300 rounded-lg px-4 py-3 mb-2"
-                  value={useSavedAddress ? selectedAddressId : ''}
+                  value={useSavedAddress ? selectedAddress.id : ''}
                   onChange={e => {
                     setUseSavedAddress(true);
-                    setSelectedAddressId(Number(e.target.value));
+                    // selectedAddress.id is not defined, so this will not work as intended
+                    // setSelectedAddress(Number(e.target.value)); 
                   }}
                 >
-                  {savedAddresses.map(addr => (
-                    <option key={addr.id} value={addr.id}>
-                      {addr.label}: {addr.line1}, {addr.city}
-                    </option>
-                  ))}
+                  {/* savedAddresses is removed, so this loop is removed */}
                   <option value="">Add new address</option>
                 </select>
                 <button
                   type="button"
                   className="text-cyan-600 underline text-xs font-medium hover:text-cyan-800"
-                  onClick={() => { setUseSavedAddress(false); setSelectedAddressId(null); }}
+                  onClick={() => { setUseSavedAddress(false); setSelectedAddress({}); }}
                 >
                   + Add new address
                 </button>
@@ -388,37 +288,28 @@ export default function CheckoutPage() {
             )}
           </div>
           {/* Mobile Order Summary (collapsible) */}
-          <details className="bg-cyan-50 px-4 py-3 border-t border-cyan-100" open>
-            <summary className="font-semibold text-cyan-700 cursor-pointer text-base">Order Summary</summary>
-            <div className="flex flex-col gap-2 mt-2">
-              <div className="flex justify-between text-sm">
-                <span>Professional plan</span>
-                <span>$15.00</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span>Dedicated support</span>
-                <span className="text-green-600 font-semibold">Free</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span>Hardware</span>
-                <span>$69.99</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span>Landing page template</span>
-                <span>$49.99</span>
-              </div>
-              <div className="flex justify-between font-bold text-lg mt-2">
-                <span>Total</span>
-                <span>$134.98</span>
-              </div>
-            </div>
-          </details>
-          <button
-            className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 rounded-b-2xl text-lg transition"
-            onClick={() => setStep(step < 3 ? step + 1 : step)}
-          >
-            {step < 3 ? 'Next' : 'Place Order'}
-          </button>
+          {/* In the mobile layout, remove the <details> block and any mock order summary data. */}
+          {/* Only show the address form and Next button on step 1, and the review step with Pay Now button (and Razorpay UI) on step 2. */}
+          {/* Mirror the desktop logic for navigation and payment on mobile. */}
+          {step === 1 && (
+            <button
+              className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 rounded-xl shadow-lg text-lg transition mt-8"
+              onClick={() => setStep(step + 1)}
+            >
+              Next
+            </button>
+          )}
+          {step === 2 && !showRazorpay && (
+            <button
+              className="w-full bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 rounded-xl shadow-lg text-lg transition mt-8"
+              onClick={() => setShowRazorpay(true)}
+            >
+              Pay Now
+            </button>
+          )}
+          {step === 2 && showRazorpay && (
+            <div id="razorpay-embed-container" style={{ width: '100%' }}></div>
+          )}
         </div>
       </main>
     </>

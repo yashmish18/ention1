@@ -18,12 +18,20 @@ import { FaShoppingCart, FaBolt, FaCamera, FaBatteryFull, FaMicrochip } from "re
 import { BentoGrid, BentoGridItem } from "./index";
 
 const E5Images = [
-  require("components/icons/chat.js"),
-  require("components/icons/check.js"),
-  require("components/icons/github.js"),
-  require("components/icons/slack.js"),
-  require("components/icons/twitter.js"),
-  require("components/icons/youtube.js"),
+  "/assets/product_/e5/1.webp",
+  "/assets/product_/e5/2.webp",
+  "/assets/product_/e5/3.webp",
+  "/assets/product_/e5/4.webp",
+  "/assets/product_/e5/5.webp",
+  "/assets/product_/e5/6.webp",
+  "/assets/product_/e5/7.webp",
+  "/assets/product_/e5/8.webp",
+  "/assets/product_/e5/9.webp",
+  "/assets/product_/e5/10.webp",
+  "/assets/product_/e5/11.webp",
+  "/assets/product_/e5/12.webp",
+  "/assets/product_/e5/13.webp",
+  "/assets/product_/e5/14.webp",
 ];
 
 const E5FeatureImages = [
@@ -239,8 +247,8 @@ export default function E5ProductPage() {
             <div className="text-3xl font-extrabold text-cyan-200 drop-shadow-lg">Coming Soon</div>
             <div className="text-sm text-white font-bold mt-2 bg-white/10 px-3 py-1 rounded shadow drop-shadow-lg" style={{textShadow: '0 2px 8px #0008'}}>No cost EMI available. See options at checkout.</div>
             <button
-              className="bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold px-8 py-2 rounded-2xl text-lg shadow-lg transition"
-              onClick={() => router.push('/ecommerce/checkout')}
+              className="bg-[#0FAFCA] hover:bg-[#007e9e] text-white font-bold py-3 px-8 rounded-xl shadow-lg text-lg transition mt-8"
+              onClick={() => router.push(`/ecommerce/checkout?price=${displayPrice}`)}
             >
               Buy Now
             </button>

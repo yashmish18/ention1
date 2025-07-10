@@ -305,7 +305,7 @@ export default function Home() {
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Proudly designed and built in India.</div>
                   </div>
                   <div className="flex flex-col items-center w-auto">
-                    <Image src="/assets/banner/battery icon.png" alt="Performance That Powers You" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
+                    <Image src="/assets/banner/battery _icon.png" alt="Performance That Powers You" width={60} height={60} className="w-[60px] h-[60px] mx-auto" />
                     <div className="text-white text-xl font-bold text-center max-w-[220px] leading-tight mb-2 mt-8">Performance That Powers You</div>
                     <div className="text-cyan-100 text-base text-center max-w-[240px] leading-snug">Experience speed and reliability every day.</div>
                   </div>
@@ -327,7 +327,7 @@ export default function Home() {
                     icon: <Image src="/assets/banner/made in india icon.png" alt="Made in India. Made for You." width={70} height={60} className="w-[56px] h-[48px]" key="icon4" />, title: "Made in India. Made for You.", desc: "Proudly designed and built in India."
                   },
                   {
-                    icon: <Image src="/assets/banner/battery icon.png" alt="Performance That Powers You" width={60} height={60} className="w-[48px] h-[48px]" key="icon5" />, title: "Performance That Powers You", desc: "Experience speed and reliability every day."
+                    icon: <Image src="/assets/banner/battery _icon.png" alt="Performance That Powers You" width={60} height={60} className="w-[48px] h-[48px]" key="icon5" />, title: "Performance That Powers You", desc: "Experience speed and reliability every day."
                   },
                 ].map((step, idx) => (
                   <div key={idx} className="flex flex-row items-center gap-6 w-full mb-8 py-2">
@@ -350,7 +350,7 @@ export default function Home() {
                   className="px-8 py-4 border rounded-3xl w-full flex flex-col sm:flex-row justify-center items-center relative"
                   style={{ borderColor: "rgba(34, 209, 238, 1" }}
                 >
-                  <Image src={warrantyimg} alt="warranty-img" width={320} height={80} className="w-[420px] h-auto z-[2] mx-auto" />
+                  <Image src={warrantyimg.src} alt="warranty-img" width={320} height={80} className="w-[420px] h-auto z-[2] mx-auto" />
                   <FloatingBlob
                     className="absolute z-[1] top-10 sm:top-[150px] left-16 w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px]"
                     style={{ backgroundImage: `url(${ellipsemd.src})`, backgroundSize: "100% 100%" }}
